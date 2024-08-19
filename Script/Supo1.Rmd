@@ -1,0 +1,143 @@
+# Tripos IIA Paper 3 Supervision 1
+
+## Question 2
+
+The STATA file Wagefull.dta contains data on hourly wages and other variables.
+
+
+Load the libraries:
+```{r}
+libraries <- c("haven",
+               "tidyverse",
+               "ggplot2",
+               "gridExtra")
+invisible(lapply(libraries, library, character.only=TRUE))
+```
+
+Now load the data:
+```{r}
+wagefull_df <- read_dta("../Data/wagefull.dta")
+head(wagefull_df)
+```
+
+
+*(a)* Draw a histogram of wages for the whole population. What kind of distribution do you find? Do the same exercise for logarithm of wages. How do the two histograms compare? Why is that the case?
+
+```{r}
+#We will display the two graphs side by side.
+# Histogram of wage
+p1 <- ggplot(wagefull_df,
+      aes(x = wage)) +
+  geom_histogram(bins = 25)
+#Histogram of ln wage
+p2 <- ggplot(wagefull_df,
+      aes(x = log(wage))) +
+  geom_histogram(bins = 25)
+
+#we arrange the charts in a grid:
+grid.arrange(p1, p2, nrow = 1)
+```
+
+
+*(b)* Use these data to calculate mean and standard deviation of the logarithm of wages for males.
+```{r}
+wagefull_df %>%
+  filter(male==1) %>%
+  summarize(mean = mean(log(wage)), st.dev. = sd(log(wage)))
+
+```
+
+*(c)* What is the standard deviation of the mean of log-wage for males? How does it compare with the standard deviation of log-wage for males?
+
+```{r}
+logwage_male_df <- wagefull_df %>%
+  filter(male == 1) %>%
+  mutate(logwage = log(wage))
+
+sqrt(var(logwage_male_df$logwage)/nrow(logwage_male_df))
+```
+
+*(d)* State clearly the sampling distribution of the estimated mean, and test the hypothesis that the mean of log wages for males is equal to 1.7 versus not 1.7. Under what assumption does this hold?
+
+So we have the following null and alternative hypotheses:
+
+$H_0:$ The mean log wage for males is equal to 1.7 $(\mu = 1.7)$. 
+$H_1:$ The mean log wage for males is not equal to 20mm $(\mu \neq 1.7)$. 
+
+To test this we will use a one-sample, two tailed t-test to see if we should reject the null hypothesis or not. We use two-tailed t-test because we are not testing whether the mean is greater than or less than 1.7. We are only testing if it is different from 1.7.
+
+First lets get the data, summarize and visualize it:
+```{r}
+summary(logwage_male_df$logwage)
+```
+
+From the summary output we can see that mean and median of the 'wage' variable are very close at 1.693 and 1.734, respectively.
+
+we can use the boxplot to see how the data is spread out:
+```{r}
+ggplot(logwage_male_df,
+       aes(y = logwage)) +
+  geom_boxplot()
+```
+
+The data do not appear to contain any obvious errors. Although mean and median are different from 1.7, it is not absolutely certain that the sample mean is sufficiently different from this value to be "statistically significant".
+
+*Assumptions*
+When it comes to one-sample tests, we have two options: t-test and Wilcoxon signed-rank test.
+
+To use a t-test we have to make two assumptions: parent distribution from which the sample is taken is normally distributed, and data in the sample are independent.
+The first assumption can be checked. There are three ways of checking for normality. In order of rigor, these are:
+a) Histogram
+b) Quantile-Quantile (Q-Q) plot
+c) Shapiro-Wilk test
+
+From the histogram in part (a) above we already saw that the distribution is unimodal and symmetric, so we can't clearly conclude that it is non-normal. But there are a lot of distributions that have these properties but not normal. So this is not very rigorous.
+
+Q-Q Plot: 
+Sometimes referred to as Diagnostic plot, Q-Q plot is a way of comparing two distributions: one of the data and one of the theoretical normal distribution
+```{r}
+ggplot(logwage_male_df,
+       aes(sample = logwage)) +
+  stat_qq() +
+  stat_qq_line(color = "blue")
+```
+If the data were normally distributed then all of the points should lie on, or close to, the diagonal line. Here, the tails of the distribution are below and above the line so they are a bit more spread out than normal. There is not a simple unambiguous answer when interpreting these in terms of whether the assumption of normality has been met or not. It often boils down to experience. It is a very rare situation where the assumptions necessary for a test will be met unequivocally and a certain degree of interpretation is needed to decide if the data are normal enough to be confident in the validity of the test.
+
+Shapiro-Wilk test:
+This is one of a number of formal statistical test that assesses whether a given sample of numbers come from a normal distribution. It calculates the prob. of getting the sample data if the underlying distribution is in fact normal. 
+```{r}
+shapiro.test(logwage_male_df$logwage)
+```
+
+3rd line output contains two key outputs from the test: The calculated W-statistic is 0.9414, and the p-value is very close to 0.
+
+Since the p-value is smaller than say 0.05, we can say that there is sufficient evidence to reject the null hypothesis that the sample came from a normal distribution.
+
+It is important to note the limitations of Shapiro-Wilk test, in that it is sensitive to the sample sizes. In general, for small sample sizes, the test is very relaxed about normality and nearly all data sets are considered normal; while for large sample sizes the test can be overly strict, and it can fail to recognize data sets that are very nearly normal indeed. Given that n=1727, here, it is likely that this test was overly strict. 
+
+IN this example, the graphical Q-Q plot analysis was not especially conclusive as there were some suggestion of snaking in the plots. However, Shapiro-Wilk test gave a significant p-value, though it was likely to be overly strict. These, along with the histogram and the recognition that there were 1727 data points in the sample, I probably would be happy that the assumptions of the t-test were met well enough to trust the result of the t-test.
+
+If not happy, though, we could consider an alternative test that has less stringent assumptions but also less powerful: the one-sample Wilcoxon signed-rank test.
+
+Also see the hand written notes for the theoretical assumptions (asymptotic approximation) as to why we are using a t-test
+
+Now we are ready to run the t-test.
+
+```{r}
+t.test(logwage_male_df$logwage,
+       mu = 1.7,
+       alternative = "two.sided")
+```
+In the output:
+1st line gives the name of the test and the 2nd line reminds you on what data the test is applied
+3rd line contains three key outputs from the test: calculated t-value which is needed for reporting, degrees of freedom which is also needed for reporting, and the p-value.
+4th line states the alternative hypothesis
+5th and 6th line gives the 95% confidence interval. If you want to change the this, you can put in the argument conf.level = 0.99
+7th, 8th, and 9th lines give the sample mean
+
+In this case the confidence interval includes our 1.7 and the p-value is much higher than 0.05 so we cannot reject the null hypothesis and state the following:
+"A one-sample t-test indicated that the mean logarithm of wages of males (1.693) does not differ significantly from 1.7 (t=-0.48, p=0.6314, CI=[1.664,1.722])
+
+
+
+
