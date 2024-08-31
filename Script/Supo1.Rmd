@@ -1,4 +1,137 @@
-# Tripos IIA Paper 3 Supervision 1
+---
+title: "2023-24 Tripos IIA Paper 3"
+subtitle: "Supervision 1"
+author: "Emre Usenmez"
+html_document:
+  number_sections: true
+pdf_document:
+  number_sections: true
+---
+
+$$\\[0.25in]$$
+ 
+
+**QUESTION 1**
+<br>
+Fifteen male economists are in a life raft with a maximum carrying capacity of 2850 pounds. If the distribution of weights of male economists is normal with a mean of 178 pounds and with a standard deviation of 17 pounds.
+
+
+**(a)** Find the probability that all the economists weigh less than 189 pounds
+
+
+|   **Answer:** Given that the distribution of weights is normal we can use the standard normal. For this, we need to first standardize the random variable $X_i$; i.e transform it into the standard normal random variable $Z_i \sim N(0,1)$ with cdf $\Phi (\cdot)$.
+<br>
+To standardize a random variable: $z=\frac{X - \mu}{\sigma}$
+<br>
+If we denote $a=\frac{1}{\sigma}$ and $b=-\frac{\mu}{\sigma}$ then we can rewrite this as $z=a\mathbb{E}(X)+b$. 
+<br>
+Then,
+
+<center>
+$\mathbb{E}(Z) = \mathbb{E}(X)+b = \frac{1}{\sigma}\mu - \frac{\mu}{\sigma} = 0$
+
+
+$Var(Z) = a^2Var(X) = \frac{1}{\sigma^2}\sigma^2 = 1.$
+</center>
+
+Hence, $Z \sim N(0,1).$
+
+
+For this question we are asked to find $\mathbb{P}(X_i \leq 189)$ which we will need to standardize. Note that $\mu = 178$ and $\sigma = 17$.
+
+<center>
+$\mathbb{P}(X_i \leq 189) = \mathbb{P}\left(\frac{X_i - 178}{17} \leq \frac{189 - 178}{17}\right) = \mathbb{P}\left(Z_i \leq \frac{11}{17} = \Phi\big(\frac{11}{17}\big)\right).$
+</center>
+
+
+We can then find the probability as follows:
+```{r}
+pnorm(11/17)
+```
+
+
+
+This is the probability of one random economist weighing less than 189 lbs. Since the weight of the economists are independent, we can write:
+
+<center>
+$\displaystyle\bigcap_{i=1}^{15}\mathbb{P}(X_i \leq 189) = \displaystyle\prod_{i=1}^{15}\mathbb{P}(X_i \leq 189) = (\mathbb{P}(X_i)\leq 189)^{15} = 0.741^{15}.$
+</center>
+
+
+
+Which is:
+```{r}
+pnorm(11/17)^15
+```
+
+***
+<br><br>
+
+**(b)** Find the probability that the raft is overloaded and will sink.
+
+
+|   **Answer:** Since we are looking for the probability of total weight exceeding the maximum carrying capacity of 2850 lbs, we will again use the standard normal table to obtain the probability. But what are we standardizing?
+
+
+Denote the sum of weights as $W_{15} = \sum\limits_{i=1}^{15}X_i$. Then we are looking for:
+
+<center>
+$\mathbb{P}\left(\frac{W_{15} - \mathbb{E}(W_{15})}{\sqrt{Var(W_{15})}} > \frac{2850 - \mathbb{E}(W_{15})}{\sqrt{Var(W_{15})}}  \right).$
+</center>
+
+<br>
+
+Next, we need to find what $\mathbb{E}(W_{15})$ and $Var(W_{15})$ are:
+
+<center>
+$\mathbb{E}(W_{15}) = \mathbb{E}\left(\displaystyle\sum_{i=1}^{15}X_i\right) = \displaystyle\sum_{i=1}^{15}\mathbb{E}(X_i) = 15 \times 178$
+</center>
+
+which is
+```{r}
+15*178
+```
+
+
+
+<center>
+$Var(W_{15}) = Var\left(\displaystyle\sum_{i=1}^{15}X_i\right) = \displaystyle\sum_{i=1}^{15}Var(X_i) = Var(X_1 + ... +X_{15}) =\displaystyle\sum_{i=1}^{15}Var(X_i) + 2\displaystyle\sum_{i\neq j}Cov(X_i, X_j)  = 15 \times 17^2 + 2\times 0$
+</center>
+
+which is
+```{r}
+15*17^2
+```
+
+
+Notice that here we used the independence of $X_i$ and $X_j$ for all $i\neq j$. This implies $Cov(X_i, X_j) = 0.$
+
+
+So we established that $W_{15} \sim N(2670, 4335).$ Now we can plug these in:
+
+<center>
+$\mathbb{P}(W_{15} > 2850) = \mathbb{P}\left(\frac{W_{15} - \mathbb{E}(W_{15})}{\sqrt{Var(W_{15})}} > \frac{2850 - \mathbb{E}(W_{15})}{\sqrt{Var(W_{15})}}  \right) = \mathbb{P}\left(\frac{W_{15} - 2670}{\sqrt{4335}} > \frac{2850 - 2670}{\sqrt{4335}}  \right).$
+</center>
+
+That is:
+```{r}
+(2850-2670)/sqrt(4335)
+```
+
+So, $\mathbb{P}(W_{15} > 2850) = \mathbb{P}(Z > 2.7339) = 1 - \Phi(2.7339)$ which is
+```{r}
+#two ways to calculate this.
+#Option 1:
+1-pnorm(2.7339)
+#Option 2:
+pnorm(2.7339, lower.tail=FALSE)
+```
+
+
+Therefore, the probability of the raft is overloaded is 0.0031.
+
+
+
 
 ## Question 2
 
@@ -138,6 +271,9 @@ In the output:
 In this case the confidence interval includes our 1.7 and the p-value is much higher than 0.05 so we cannot reject the null hypothesis and state the following:
 "A one-sample t-test indicated that the mean logarithm of wages of males (1.693) does not differ significantly from 1.7 (t=-0.48, p=0.6314, CI=[1.664,1.722])
 
+
+
+*(e)* Explain how you wold conduct a test of the hypothesis that the mean of log wages is the same for males and females, stating the sampling distribution of the relevant statistic, and conduct such a test.
 
 
 
