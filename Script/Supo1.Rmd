@@ -11,7 +11,7 @@ pdf_document:
 $$\\[0.25in]$$
  
 
-**QUESTION 1**
+<center>**QUESTION 1**</center>
 <br>
 Fifteen male economists are in a life raft with a maximum carrying capacity of 2850 pounds. If the distribution of weights of male economists is normal with a mean of 178 pounds and with a standard deviation of 17 pounds.
 
@@ -95,7 +95,7 @@ which is
 
 
 <center>
-$Var(W_{15}) = Var\left(\displaystyle\sum_{i=1}^{15}X_i\right) = \displaystyle\sum_{i=1}^{15}Var(X_i) = Var(X_1 + ... +X_{15}) =\displaystyle\sum_{i=1}^{15}Var(X_i) + 2\displaystyle\sum_{i\neq j}Cov(X_i, X_j)  = 15 \times 17^2 + 2\times 0$
+$Var(W_{15}) = Var\left(\displaystyle\sum_{i=1}^{15}X_i\right) = \displaystyle\sum_{i=1}^{15}Var(X_i) = Var(X_1 + ... +X_{15})=\displaystyle\sum_{i=1}^{15}Var(X_i) + 2\displaystyle\sum_{i\neq j}Cov(X_i, X_j)$ <br> $= 15 \times 17^2 + 2\times 0$
 </center>
 
 which is
@@ -131,21 +131,82 @@ pnorm(2.7339, lower.tail=FALSE)
 Therefore, the probability of the raft is overloaded is 0.0031.
 
 
+***
+
+<br><br>
+
+**(c)** Find the maximum number of economists that should enter the raft if the probability of overloading is not to exceed 0.0001.
+
+  **Answer:** The approach we take is similar to part (b). Let the total weight of $n$ number of economists that should enter the raft as $W_n=\displaystyle\sum_{i=1}^{n}X_i$. As before, $W_n \sim (\mu n,\sigma^2 n)$.
+  
+  We know from the question that $\mu=178$ and $\sigma^2=17^2$. So, $W_n \sim N(178n, 17^2n)$
+  
+  We want to find $n$ that is at the threshold of the probability 0.0001:
+  
+  <center>
+  $\mathbb{P}(W_n > 2850) = 0.0001$ or
+  $\mathbb{P}(W_n \leq 2850) = 1 - 0.0001 = 0.9999.$
+  </center>
 
 
-## Question 2
+Next we ask what standardized z-value corresponds to 0.9999 probability? That is what $\Phi(z)=\alpha$ where $\alpha = 0.9999$
+```{r}
+# qnorm() function gives the inverse of CDF 
+qnorm(0.9999)
+```
+
+So, $\Phi(3.719) = 0.9999$. Now we need to standardize $W_n$ and equate to 3.719. 
+
+<center>
+$\mathbb{P}(W_n \leq 2850) = \mathbb{P}\left(\frac{W_n - 178n}{17\sqrt{n}} \leq \frac{2850 - 178n}{17\sqrt{n}}\right) = \Phi\left(\frac{2850-178n}{17\sqrt{n}}\right) = \Phi(3.719) = 0.9999$
+</center>
+
+This means, $\frac{2850-178n}{17\sqrt{n}} = 3.719$ or $178n + 3.719 \times 17\sqrt{n} - 2850 = 0.$
+
+This is a quadratic function. To solve it, lets build a function in R and apply to this equation:
+```{r}
+#build our function
+quad_solve <- function(a, b, c)
+{
+  a <- as.complex(a)
+  answer <- c((-b + sqrt(b^2 - 4*a*c))/(2*a),
+              (-b + sqrt(b^2 - 4*a*c))/(2*a))
+  if(all(Im(answer) == 0)) answer <- Re(answer)
+  if(answer[1] == answer[2]) return(answer[1])
+  answer
+}
+
+# solve our equation
+(quad_solve(a = 178, b=3.719*17, c=-2850))^2
+```
+
+Notice that we squared the the solution. This is because the quadratic equation is $\sqrt{n}$ and we are interested in $n$. So, the raft will not sink with 14 economists on the raft with probability of at least 0.9999.
+
+
+
+
+
+$$\\[0.25in]$$
+
+<center>**QUESTION 2**</center>
+
 
 The STATA file Wagefull.dta contains data on hourly wages and other variables.
 
 
 Load the libraries:
 ```{r}
-libraries <- c("haven",
-               "tidyverse",
-               "ggplot2",
-               "gridExtra")
+libraries <- c("haven",       # to import/export SPSS, STATA, SAS files
+               "tidyverse",   # for tidy data
+               "ggplot2",     # for visualization
+               "gridExtra")   # to plot graphs in grids
+# invisible(lapply(libraries, library, character.only=TRUE)) will load the libraries
+```
+
+```{r include = FALSE}
 invisible(lapply(libraries, library, character.only=TRUE))
 ```
+
 
 Now load the data:
 ```{r}
@@ -153,8 +214,8 @@ wagefull_df <- read_dta("../Data/wagefull.dta")
 head(wagefull_df)
 ```
 
-
-*(a)* Draw a histogram of wages for the whole population. What kind of distribution do you find? Do the same exercise for logarithm of wages. How do the two histograms compare? Why is that the case?
+<br><br>
+**(a)** Draw a histogram of wages for the whole population. What kind of distribution do you find? Do the same exercise for logarithm of wages. How do the two histograms compare? Why is that the case?
 
 ```{r}
 #We will display the two graphs side by side.
@@ -171,7 +232,8 @@ p2 <- ggplot(wagefull_df,
 grid.arrange(p1, p2, nrow = 1)
 ```
 
-
+***
+<br><br>
 *(b)* Use these data to calculate mean and standard deviation of the logarithm of wages for males.
 ```{r}
 wagefull_df %>%
@@ -180,6 +242,9 @@ wagefull_df %>%
 
 ```
 
+
+***
+<br><br>
 *(c)* What is the standard deviation of the mean of log-wage for males? How does it compare with the standard deviation of log-wage for males?
 
 ```{r}
@@ -190,6 +255,9 @@ logwage_male_df <- wagefull_df %>%
 sqrt(var(logwage_male_df$logwage)/nrow(logwage_male_df))
 ```
 
+
+***
+<br><br>
 *(d)* State clearly the sampling distribution of the estimated mean, and test the hypothesis that the mean of log wages for males is equal to 1.7 versus not 1.7. Under what assumption does this hold?
 
 So we have the following null and alternative hypotheses:
