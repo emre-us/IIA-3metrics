@@ -8,11 +8,23 @@ pdf_document:
   number_sections: true
 ---
 
+<!-- This comment will not be displayed in the output. Below change to CSS style is to ensure the blocktexts are in the same form size as the rest of the text.-->
+
+```{css style settings, echo = FALSE} 
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 14px;
+    border-left: 5px solid #eee;
+}
+```
+
+
 $$\\[0.25in]$$
  
 
 <center>**QUESTION 1**</center>
-<br>
+
 Fifteen male economists are in a life raft with a maximum carrying capacity of 2850 pounds. If the distribution of weights of male economists is normal with a mean of 178 pounds and with a standard deviation of 17 pounds.
 
 
@@ -20,20 +32,19 @@ Fifteen male economists are in a life raft with a maximum carrying capacity of 2
 
 
 |   **Answer:** Given that the distribution of weights is normal we can use the standard normal. For this, we need to first standardize the random variable $X_i$; i.e transform it into the standard normal random variable $Z_i \sim N(0,1)$ with cdf $\Phi (\cdot)$.
-<br>
+
+
 To standardize a random variable: $z=\frac{X - \mu}{\sigma}$
-<br>
+
+
 If we denote $a=\frac{1}{\sigma}$ and $b=-\frac{\mu}{\sigma}$ then we can rewrite this as $z=a\mathbb{E}(X)+b$. 
-<br>
+
+
 Then,
 
-
 $$
-\mathbb{E}(Z) = \mathbb{E}(X)+b = \frac{1}{\sigma}\mu - \frac{\mu}{\sigma} = 0
-$$
-
-
-$$
+\mathbb{E}(Z) = \mathbb{E}(X)+b = \frac{1}{\sigma}\mu - \frac{\mu}{\sigma} = 0 
+\\
 Var(Z) = a^2Var(X) = \frac{1}{\sigma^2}\sigma^2 = 1.
 $$
 
@@ -41,7 +52,7 @@ $$
 Hence, $Z \sim N(0,1).$
 
 
-For this question we are asked to find $\mathbb{P}(X_i \leq 189)$ which we will need to standardize. Note that $\mu = 178$ and $\sigma = 17$.
+For this question we are told that $\mu = 178$ and $\sigma = 17$ and asked to find $\mathbb{P}(X_i \leq 189)$ which we will need to standardize.
 
 
 $$
@@ -106,10 +117,10 @@ which is
 
 
 $$
-Var(W_{15}) = Var\left(\displaystyle\sum_{i=1}^{15}X_i\right) = \displaystyle\sum_{i=1}^{15}Var(X_i) = Var(X_1 + ... +X_{15})=\displaystyle\sum_{i=1}^{15}Var(X_i) + 2\displaystyle\sum_{i\neq j}Cov(X_i, X_j)
-$$ 
-
-$$
+Var(W_{15}) = Var\left(\displaystyle\sum_{i=1}^{15}X_i\right) = \displaystyle\sum_{i=1}^{15}Var(X_i) = Var(X_1 + ... +X_{15})
+\\
+=\displaystyle\sum_{i=1}^{15}Var(X_i) + 2\displaystyle\sum_{i\neq j}Cov(X_i, X_j) 
+\\
 = 15 \times 17^2 + 2\times 0
 $$
 
@@ -118,7 +129,7 @@ which is
 15*17^2
 ```
 
-
+<br>
 Notice that here we used the independence of $X_i$ and $X_j$ for all $i\neq j$. This implies $Cov(X_i, X_j) = 0.$
 
 
@@ -135,6 +146,7 @@ That is:
 (2850-2670)/sqrt(4335)
 ```
 
+<br>
 So, $\mathbb{P}(W_{15} > 2850) = \mathbb{P}(Z > 2.7339) = 1 - \Phi(2.7339)$ which is
 ```{r}
 #two ways to calculate this.
@@ -144,8 +156,8 @@ So, $\mathbb{P}(W_{15} > 2850) = \mathbb{P}(Z > 2.7339) = 1 - \Phi(2.7339)$ whic
 pnorm(2.7339, lower.tail=FALSE)
 ```
 
-
-Therefore, the probability of the raft is overloaded is 0.0031.
+<br>
+Therefore, the probability of the raft being overloaded is 0.0031.
 
 
 ***
@@ -154,40 +166,40 @@ Therefore, the probability of the raft is overloaded is 0.0031.
 
 **(c)** Find the maximum number of economists that should enter the raft if the probability of overloading is not to exceed 0.0001.
 
-  **Answer:** The approach we take is similar to part (b). Let the total weight of $n$ number of economists that should enter the raft as $W_n=\displaystyle\sum_{i=1}^{n}X_i$. As before, $W_n \sim (\mu n,\sigma^2 n)$.
+|  **Answer:** The approach we take is similar to part (b). Let the total weight of $n$ number of economists that should enter the raft as $W_n=\displaystyle\sum_{i=1}^{n}X_i$. As before, $W_n \sim (\mu n,\sigma^2 n)$.
   
-  We know from the question that $\mu=178$ and $\sigma^2=17^2$. So, $W_n \sim N(178n, 17^2n)$
-  
+  <br>
+  We know from the question that $\mu=178$ and $\sigma^2=17^2$ and so $W_n \sim N(178n, 17^2n).$
+  <br><br>
   We want to find $n$ that is at the threshold of the probability 0.0001:
-  
   
   $$
   \mathbb{P}(W_n > 2850) = 0.0001
-  $$ 
+  \\
   or
-  $$
+  \\
   \mathbb{P}(W_n \leq 2850) = 1 - 0.0001 = 0.9999.
   $$
-  
-
-
-Next we ask what standardized z-value corresponds to 0.9999 probability? That is what $\Phi(z)=\alpha$ where $\alpha = 0.9999$
+<br>
+Next we ask what standardized z-value corresponds to 0.9999 probability? That is, what is $z$ in $\Phi(z)=\alpha$ where $\alpha = 0.9999$?
 ```{r}
 # qnorm() function gives the inverse of CDF 
 qnorm(0.9999)
 ```
 
-So, $\Phi(3.719) = 0.9999$. Now we need to standardize $W_n$ and equate to 3.719. 
+So, $z = 3.719$ and $\Phi(3.719) = 0.9999$.
+<br><br>
+Now we need to standardize $W_n$ and equate to 3.719. 
 
-<center>
-$\mathbb{P}(W_n \leq 2850) = \mathbb{P}\left(\frac{W_n - 178n}{17\sqrt{n}} \leq \frac{2850 - 178n}{17\sqrt{n}}\right) = \Phi\left(\frac{2850-178n}{17\sqrt{n}}\right) = \Phi(3.719) = 0.9999$
-</center>
+$$
+\mathbb{P}(W_n \leq 2850) = \mathbb{P}\left(\frac{W_n - 178n}{17\sqrt{n}} \leq \frac{2850 - 178n}{17\sqrt{n}}\right) = \Phi\left(\frac{2850-178n}{17\sqrt{n}}\right) = \Phi(3.719) = 0.9999
+$$
 
 This means, $\frac{2850-178n}{17\sqrt{n}} = 3.719$ or $178n + 3.719 \times 17\sqrt{n} - 2850 = 0.$
 
 This is a quadratic function. To solve it, lets build a function in R and apply to this equation:
 ```{r}
-#build our function
+#build function to solve quadratic equation
 quad_solve <- function(a, b, c)
 {
   a <- as.complex(a)
@@ -202,7 +214,7 @@ quad_solve <- function(a, b, c)
 (quad_solve(a = 178, b=3.719*17, c=-2850))^2
 ```
 
-Notice that we squared the the solution. This is because the quadratic equation is $\sqrt{n}$ and we are interested in $n$. So, the raft will not sink with 14 economists on the raft with probability of at least 0.9999.
+Notice that we squared the solution. This is because the quadratic equation is $\sqrt{n}$ and we are interested in $n$. So, the raft will not sink with 14 economists on the raft with probability of at least 0.9999.
 
 
 
@@ -239,7 +251,7 @@ head(wagefull_df)
 <br><br>
 **(a)** Draw a histogram of wages for the whole population. What kind of distribution do you find? Do the same exercise for logarithm of wages. How do the two histograms compare? Why is that the case?
 
-  **Answer:**
+|  **Answer:**
 
 ```{r}
 #We will display the two graphs side by side.
@@ -256,43 +268,48 @@ p2 <- ggplot(wagefull_df,
 grid.arrange(p1, p2, nrow = 1)
 ```
 
+
+<br>
+While the wages for the whole population is skewed, the distribution for logwages has a more symmetric, closer to normal distribution. Because logarithmic function is concave, that concavity brings $log(y)$ and $log(x)$ closer than $y$ and $x$ otherwise would.
+
+
+
 ***
 <br><br>
-*(b)* Use these data to calculate mean and standard deviation of the logarithm of wages for males.
+**(b)** Use these data to calculate mean and standard deviation of the logarithm of wages for males.
 
   **Answer:**
 ```{r}
 wagefull_df %>%
   filter(male==1) %>%
-  summarize(mean = mean(log(wage)), st.dev. = sd(log(wage)), var = (sd(log(wage)))^2)
+  summarize(mean = mean(log(wage)), st.dev. = sd(log(wage)), var = var(log(wage))) 
+
+# sd() and var() use n-1 in the denominator
 
 ```
 
-
+<br>
 If we denote the logarithm of wages for males as $X_i \sim iid N(\mu_X, \sigma_X^2)$ for $i=1,...,n_X$, then the corresponding sample mean and variance are:
 
 $$
 \bar X = \frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i = 1.69
-$$
-$$
-s_X^2 = \frac{1}{n_{X-1}}\displaystyle\sum_{i=1}^{n_X}(X_i - \bar X)^2 = 0.605^2 = 0.366
+\\
+s_X^2 = \frac{1}{n_{X}-1}\displaystyle\sum_{i=1}^{n_X}(X_i - \bar X)^2 = 0.605^2 = 0.366
 $$
 
 
 
 ***
 <br><br>
-*(c)* What is the standard deviation of the mean of log-wage for males? How does it compare with the standard deviation of log-wage for males?
+**(c)** What is the standard deviation of the mean of log-wage for males? How does it compare with the standard deviation of log-wage for males?
 
   **Answer:** The standard deviation of the mean of log-wage is the square root of its variance, which is:
   
   $$
   Var(\bar X) = Var\left(\frac{1}{n}\displaystyle\sum_{i=1}^nX_i\right) = \frac{1}{n^2}Var\left(\displaystyle\sum_{i=1}^{n}X_i\right) = \frac{1}{n^2}Var(X_1 + ... +X_{n})
-  $$
-  $$
+ \\
   =\frac{1}{n^2}\left(\displaystyle\sum_{i=1}^{n}Var(X_i) + 2\displaystyle\sum_{i\neq j}Cov(X_i, X_j)\right) = \frac{1}{n^2}\displaystyle\sum_{i=1}^{n}Var(X_i) + \frac{1}{n^2}0
-  $$ 
-  $$
+  \\
   = \frac{1}{n^2}\displaystyle\sum_{i=1}^{n}\sigma^2 = \frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n}
   $$
   and
@@ -310,7 +327,7 @@ sqrt(var(logwage_male_df$logwage)/nrow(logwage_male_df))
 
 ```
 
-
+<br>
 Thus we can see that at 0.0146, the standard deviation of the mean of log-wage is significantly smaller than the standard deviation of of log-wage for males which is 0.605 as expected.
 
 
@@ -318,7 +335,7 @@ Thus we can see that at 0.0146, the standard deviation of the mean of log-wage i
 <br><br>
 **(d)** State clearly the sampling distribution of the estimated mean, and test the hypothesis that the mean of log wages for males is equal to 1.7 versus not 1.7. Under what assumption does this hold?
 
-  **Answer** Recall from Central Limit Theorem that if the mean and variance of a distribution exists and finite, then the sample mean of independent draws from that distribution converges in distribution to a normal distribution. That is, if $X_i$ are iid with $\mathbb{E}(X_i)=\mu < \infty$ and $Var(X_i) = \sigma^2 < \infty$ then the sample mean $\bar X = \frac{1}{n}\displaystyle\sum_{i=1}^{n}X_i$ has the following property:
+|  **Answer** Recall from Central Limit Theorem that if the mean and variance of a distribution exists and finite, then the sample mean of independent draws from that distribution converges in distribution to a normal distribution. That is, if $X_i$ are iid with $\mathbb{E}(X_i)=\mu < \infty$ and $Var(X_i) = \sigma^2 < \infty$ then the sample mean $\bar X = \frac{1}{n}\displaystyle\sum_{i=1}^{n}X_i$ has the following property:
   $$
   \bar X_n \overset{a}{\sim} N\left(\mu_X, \frac{\sigma^2_X}{n_X}\right) \iff \frac{\bar X_n - \mu}{\sqrt{\frac{\sigma^2_X}{n}}} \overset{a}{\sim} N(0,1).
   $$
@@ -357,29 +374,30 @@ ggplot(logwage_male_df,
 
 The data do not appear to contain any obvious errors. Although mean and median are marginally different from 1.7, it is not absolutely certain that the sample mean is sufficiently different from this value to be "statistically significant".
 
-**Assumptions:**
+<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:10px 0; margin-top:10px">
+>**_Assumptions:_**
 <br>
 When it comes to one-sample tests, we have two options: *t-test* and *Wilcoxon signed-rank* test.
-
 To use a t-test we have to make two assumptions:
-
-  *1)* parent distribution from which the sample is taken is normally distributed, and 
-  <br>
-  *2)* data in the sample are independent.
-
-
+<br>
+  1. parent distribution from which the sample is taken is normally distributed, and 
+<br>
+  2. data in the sample are independent.
+<br><br>
 The first assumption can be checked. There are three ways of checking for normality. In order of rigor these are:
-
-a) Histogram
 <br>
-b) Quantile-Quantile (Q-Q) plot
+  a. Histogram
 <br>
-c) Shapiro-Wilk test
-
+  b. Quantile-Quantile (Q-Q) plot
+<br>
+  c. Shapiro-Wilk test
+<br><br>
 From the histogram in part (a) above we already saw that the distribution is unimodal and symmetric, so we can't clearly conclude that it is non-normal. But there are a lot of distributions that have these properties but not normal. So this is not very rigorous.
+<br><br>
+*Q-Q Plot*:
+<br>
+Sometimes also referred to as *Diagnostic Plot*, Q-Q plot is a way of comparing two distributions: one of the data and one of the theoretical normal distribution:
 
-Q-Q Plot: 
-Sometimes referred to as Diagnostic plot, Q-Q plot is a way of comparing two distributions: one of the data and one of the theoretical normal distribution
 ```{r}
 ggplot(logwage_male_df,
        aes(sample = logwage)) +
@@ -388,31 +406,39 @@ ggplot(logwage_male_df,
 ```
 
 
-If the data were normally distributed then all of the points should lie on, or close to, the diagonal line. Here, the tails of the distribution are below and above the line so they are a bit more spread out than normal. There is not a simple unambiguous answer when interpreting these in terms of whether the assumption of normality has been met or not. It often boils down to experience. It is a very rare situation where the assumptions necessary for a test will be met unequivocally and a certain degree of interpretation is needed to decide if the data are normal enough to be confident in the validity of the test.
+> If the data were normally distributed then all of the points should lie on, or close to, the diagonal line. 
+<br><br>
+Here, the tails of the distribution are below and above the line so they are a bit more spread out than normal. There is not a simple unambiguous answer when interpreting these in terms of whether the assumption of normality has been met or not. It often boils down to experience. It is a very rare situation where the assumptions necessary for a test will be met unequivocally and a certain degree of interpretation is needed to decide if the data are normal enough to be confident in the validity of the test.
+<br><br>
+*Shapiro-Wilk test:*
+<br>
+This is one of a number of formal statistical tests that assesses whether a given sample of numbers come from a normal distribution. It calculates the probability of getting the sample data if the underlying distribution is in fact normal. 
 
-Shapiro-Wilk test:
-This is one of a number of formal statistical test that assesses whether a given sample of numbers come from a normal distribution. It calculates the prob. of getting the sample data if the underlying distribution is in fact normal. 
 ```{r}
 shapiro.test(logwage_male_df$logwage)
 ```
 
-3rd line output contains two key outputs from the test: The calculated W-statistic is 0.9414, and the p-value is very close to 0.
-
+> 3rd line output contains two key outputs from the test: The calculated W-statistic is 0.9414, and the p-value is very close to 0.
+<br><br>
 Since the p-value is smaller than say 0.05, we can say that there is sufficient evidence to reject the null hypothesis that the sample came from a normal distribution.
-
+<br><br>
 It is important to note the limitations of Shapiro-Wilk test, in that it is sensitive to the sample sizes. In general, for small sample sizes, the test is very relaxed about normality and nearly all data sets are considered normal; while for large sample sizes the test can be overly strict, and it can fail to recognize data sets that are very nearly normal indeed. Given that n=1727, here, it is likely that this test was overly strict. 
-
+<br><br>
 In this example, the graphical Q-Q plot analysis is not especially conclusive as there are some suggestions of snaking in the plot. Shapiro-Wilk test gives a significant p-value, though it is likely to be overly strict. These, along with the histogram and the recognition that there are 1727 data points in the sample, one can probably conclude that the assumptions of the t-test are met well enough to trust the result of the t-test.
+<br><br>
+> **_Note:_** If not happy, though, we could consider an alternative test, he one-sample Wilcoxon signed-rank test, that has less stringent assumptions but also less powerful.
 
-**Note:** If not happy, though, we could consider an alternative test that has less stringent assumptions but also less powerful: the one-sample Wilcoxon signed-rank test.
+</div>
 
+<br>
 Recall that under the assumption that the null is true, $\bar X$ has the following sampling distribution:
 
 $$
 T_{\mu_X} = \frac{\bar X - \mu_X}{\sqrt{\frac{s^2_X}{n_X}}} \overset{a}{\sim} N(0,1)
 $$
 
-The decision rule is to reject $\mathbb{H_0}$ if observed sample test statistics is $|t_\mu| > z_{0.995} = 2.576$ when $\Phi(z_{0.995}) = 0.995$
+The decision rule is to reject $\mathbb{H_0}$ if observed sample test statistics is $|t_\mu| > z_{0.995} = 2.576$ when $\Phi(z_{0.995}) = 0.995$.
+
 
 Now we are ready to run the t-test and obtain the test statistic:
 
@@ -438,12 +464,133 @@ In this case the test statistic is -0.48. So $|t_\mu| < z_{0.995}$ and we cannot
 
 Similarly, the confidence interval includes our 1.7 and the p-value is much higher than 0.05 so we cannot reject the null hypothesis, We therefore state the following:
 
-"*A one-sample t-test indicated that the mean logarithm of wages of males (1.69) does not differ significantly from 1.7 (t=-0.48, p=0.6314, CI=[1.664,1.722])*"
-
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:10px 0; margin-top:10px">
+"*A one-sample t-test indicated that the mean logarithm of wages of males (1.69) does not differ significantly from 1.7 (t=-0.48, p=0.6314, CI=[1.664,1.722]).*"
+</div>
 
 ***
 <br><br>
 **(e)** Explain how you wold conduct a test of the hypothesis that the mean of log wages is the same for males and females, stating the sampling distribution of the relevant statistic, and conduct such a test.
 
+|  **Answer:** We are going to assume the wages for males and females are independent. We want to test whether the means of these two populations are equal. That is, we are testing $\mathbb{H}_0: \mu_X = \mu_Y$ against $\mathbb{H}_0: \mu_X \neq \mu_Y$. We can also express this as $\mathbb{H}_0: \mu_X - \mu_Y = 0$ against $\mathbb{H}_0: \mu_X - \mu_Y \neq 0$.
+  
+  That is, for inference, we can use the difference between the sample means $\bar D = \bar X - \bar Y$ with distributions $\bar X \sim N(\mu_X, \frac{\sigma^2_X}{n_X})$ and $\bar Y \sim N(\mu_Y,\frac{\sigma^2_Y}{n_Y})$ according to the CLT. Then $\mathbb{E}(\bar X - \bar Y) = \mu_X - \mu_Y.$
+  
+  Recall in part (b) we said that if the logarithm of wages for males are distributed as $X_i \sim iid N(\mu_X, \sigma_X^2)$ for $i=1,...,n_X$, then the corresponding sample mean and variance are:
+
+$$
+\bar X = \frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i
+\\
+S_X^2 = \frac{1}{n_X-1}\displaystyle\sum_{i=1}^{n_X}(X_i - \bar X)^2
+$$
+  
+Similarly, if the logarithm of wages for females as $Y_i \sim iid N(\mu_Y, \sigma_Y^2)$ for $i=1,...,n_Y$, then the corresponding sample mean and variance are:
+
+$$
+\bar Y = \frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i
+\\
+S_Y^2 = \frac{1}{n_{Y}-1}\displaystyle\sum_{i=1}^{n_Y}(Y_i - \bar Y)^2
+$$
+ 
+ Notice that we do not know the population variances, so:
+  
+  $$
+  \bar D = \bar X - \bar Y \overset{a}{\sim} N\left(\mu_X - \mu_Y, \frac{S^2_X}{n_X} + \frac{S^2_Y}{n_Y}\right)
+  $$
+  
+  
+  The variance of $\bar D$ is $\frac{S^2_X}{n_X} + \frac{S^2_Y}{n_Y}$, which may not look as expected in the first glance. Let's see how we derived it:
+  
+  $$
+  Var(\bar D) = Var(\bar X - \bar Y) = Var\left(\frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i + \frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i\right) 
+  \\
+  = Var\left(\frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i\right) + Var\left(\frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i\right)+2\left(\frac{1}{n_X}\frac{1}{n_Y}\right)Cov\left(\displaystyle\sum_{i=1}^{n_X}X_i , \displaystyle\sum_{i=1}^{n_Y}Y_i\right)
+  $$
+ 
+  Note that because $X_i$ and $Y_i$ are independent, covariance is 0. So this then becomes:
+  
+  $$
+  =\left(\frac{1}{n_X}\right)^2 Var\left(\displaystyle\sum_{i=1}^{n_X}X_i\right) + \left(\frac{1}{n_Y}\right)^2 Var\left(\displaystyle\sum_{i=1}^{n_Y}Y_i\right).
+  $$
+  
+Since $X_i$ are iid and $Y_i$ are iid, we can rewrite this as:
+
+$$
+=\left(\frac{1}{n_X}\right)^2\displaystyle\sum_{i=1}^{n_X}Var(X_i) + \left(\frac{1}{n_Y}\right)^2\displaystyle\sum_{i=1}^{n_Y}Var(Y_i) = \frac{\sigma^2}{n_X}+\frac{\sigma^2}{n_Y}.
+$$
+
+However, because we do not know the population variances, we use the sample variances instead.
+
+Now we are ready to discuss how we would conduct a test of the hypothesis. The test statistic for $\mathbb{H}_0$ is:
+
+$$
+T_D = \frac{\bar X - \bar Y}{\sqrt{\frac{S^2_X}{n_X}+\frac{S^2_Y}{n_Y}}} \overset{a}{\sim} N(0,1).
+$$
+
+Let's calculate this:
+
+```{r}
+# In part (c) we created logwage_male dataframe that introduced a new row called logwage. Lets first do the same for females:
+logwage_female_df <- wagefull_df %>%
+  filter(male == 0) %>%
+  mutate(logwage = log(wage))
+
+# Now we can create our variables:
+X_bar <- mean(logwage_male_df$logwage)
+Y_bar <- mean(logwage_female_df$logwage)
+var_X <- var(logwage_male_df$logwage)  # like sd() var() uses denominator n-1.
+var_Y <- var(logwage_female_df$logwage)
+n_X <- nrow(logwage_male_df)
+n_Y <- nrow(logwage_female_df)
+st_err <- sqrt(var_X/n_X + var_Y/n_Y)
+
+# calculate the test statistic:
+
+t_D <- (X_bar - Y_bar)/st_err
+
+#display the variables in a table
+data.frame(t_D, X_bar, Y_bar, var_X, var_Y, n_X, n_Y, st_err)
+```
 
 
+Our decision would be to reject the null at significance level $\alpha$ if the observed sample test statistic is $|t| > z_{1-\frac{\alpha}{2}}$. Here, $z_{1-\frac{\alpha}{2}} = \Phi^{-1}(1-\frac{\alpha}{2})$ is the critical value from the standard normal distribution.
+
+
+```{r}
+# let's obtain the critical value for 1% significance level from standard normal:
+
+qnorm(0.995)
+```
+
+
+Since, $t_D = 10.11 > z_{0.995} = 2.576$ we reject the null and conclude that: 
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:10px 0; margin-top:10px">
+"*The mean logarithm wage for men ($\bar x = 1.693$) differs from the mean logarithm wage for women ($\bar y = 1.475$) at $\alpha = 1$% significance level.*"
+</div>
+
+
+
+***
+<br><br>
+**(f)** Is the hypothesis of question (e) the same as the hypothesis the men and women have the same wage on average?
+
+|   **Answer:** Although both are looking at the mean differences between two populations, in part (e) the hypothesis was the difference between the mean logarithm of wages between men and women is 0. In there we denoted mean of logarithm of male wages $X_i$ and mean of logarithm of female wages $Y_i$. The hypothesis was that $\mathbb{H}_0: \bar D = \bar X - \bar Y = 0$ against $\neq 0$.
+<br>
+This is different than the hypothesis that the men and women have the same wage on average. Denote the wage of men - not the logarithm - as $M_i$ and of women as $W_i$. The hypothesis is then $\mathbb{H}_0: \overset{\sim}{D} = \bar M - \bar F = 0$ against $\neq 0$.
+<br><br>
+The key thing to notice here is that $X_i = log(M_i)$ and $Y_i = log(F_i)$. From Jensen's inequality we have $ \mathbb{E}(X_i = log(wage)) \neq log(\mathbb{E}(M_i = wage))$. 
+<br><br>
+That is, for any concave function $h(\cdot)$ and a random variable $V$, 
+$$
+\mathbb{E}(h(V)) \leq h(\mathbb{E}(V)).
+$$
+
+
+Since $log(\cdot)$ is a concave function and we have random variable $wage_i$, we conclude that
+$$
+\mathbb{E}(X_i = log(wage)) \leq log(\mathbb{E}(M_i = wage)).
+$$
+
+
+Thus, testing $\mathbb{H}_0: log(\mathbb{E}(wage)) = \mu_0$ is not equivalent to testing $\mathbb{H}_0: \mathbb{E}(log(wage)) = \mu_0$. By the same logic, testing $\mathbb{H}_0: \bar D = 0$ is not equivalent to testing $\mathbb{H}_0: \overset{\sim}{D}=0$.
