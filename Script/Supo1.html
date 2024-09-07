@@ -538,7 +538,8 @@ variables.</p>
 <pre class="r"><code>libraries &lt;- c(&quot;haven&quot;,       # to import/export SPSS, STATA, SAS files
                &quot;tidyverse&quot;,   # for tidy data
                &quot;ggplot2&quot;,     # for visualization
-               &quot;gridExtra&quot;)   # to plot graphs in grids
+               &quot;gridExtra&quot;,   # to plot graphs in grids
+               &quot;rstatix&quot;)     # converts stats functions to a tidyverse-friendly format, and can use levene_test()
 # invisible(lapply(libraries, library, character.only=TRUE)) will load the libraries</code></pre>
 <p>Now load the data:</p>
 <pre class="r"><code>wagefull_df &lt;- read_dta(&quot;../Data/wagefull.dta&quot;)
@@ -733,17 +734,20 @@ sample sizes. In general, for small sample sizes, the test is very
 relaxed about normality and nearly all data sets are considered normal;
 while for large sample sizes the test can be overly strict, and it can
 fail to recognize data sets that are very nearly normal indeed. Given
-that n=1727, here, it is likely that this test was overly strict.
+that n=1727, here, it is possible that this test was overly strict.
 <br><br> In this example, the graphical Q-Q plot analysis is not
 especially conclusive as there are some suggestions of snaking in the
-plot. Shapiro-Wilk test gives a significant p-value, though it is likely
-to be overly strict. These, along with the histogram and the recognition
-that there are 1727 data points in the sample, one can probably conclude
-that the assumptions of the t-test are met well enough to trust the
-result of the t-test. <br><br> <strong><em>Note:</em></strong> If not
-happy, though, we could consider an alternative test, he one-sample
-Wilcoxon signed-rank test, that has less stringent assumptions but also
-less powerful.</p>
+plot. Shapiro-Wilk test gives a significant p-value, so it is unlikely
+to be normally distributed. However, this test may be overly strict.
+These, along with the histogram and the recognition that there are 1727
+data points in the sample, one can possibly conclude that the
+assumptions of the t-test are met well enough to trust the result of the
+t-test. That is, we could technically ignore that the data is not
+normally distributed enough according the Q-Q and Shapiro because the
+sample size is large and the t-test is likely to be robust in this case.
+<br><br> <strong><em>Note:</em></strong> If not happy, though, we could
+consider an alternative test, he one-sample Wilcoxon signed-rank test,
+that has less stringent assumptions but also less powerful.</p>
 </blockquote>
 </div>
 <p><br> Recall that under the assumption that the null is true, <span class="math inline">\(\bar X\)</span> has the following sampling
@@ -761,6 +765,15 @@ statistics is <span class="math inline">\(|t_\mu| &gt; z_{0.995} =
 t_{\mu_X} = \frac{\bar x - \mu_X}{\sqrt{\frac{s^2_X}{n_X}}} = \frac{1.69
 - 1.7}{\sqrt{\frac{0.366}{1727}}}
 \]</span></p>
+<p><br> We can do this the long way by creating the variables first:</p>
+<pre class="r"><code>x_bar &lt;- mean(logwage_male_df$logwage)
+sample_var_x &lt;- var(logwage_male_df$logwage)
+st_err_x &lt;- sqrt(sample_var_x/nrow(logwage_male_df))
+
+t_mu_x &lt;- (x_bar - 1.7)/st_err_x
+t_mu_x</code></pre>
+<pre><code>## [1] -0.4797975</code></pre>
+<p><br> or, alternatively, use the t.test() function:</p>
 <pre class="r"><code>t.test(logwage_male_df$logwage,
        mu = 1.7,
        alternative = &quot;two.sided&quot;)</code></pre>
@@ -904,8 +917,66 @@ standard normal distribution.</p>
 
 qnorm(0.995)</code></pre>
 <pre><code>## [1] 2.575829</code></pre>
-<p>Since, <span class="math inline">\(t_D = 10.11 &gt; z_{0.995} =
-2.576\)</span> we reject the null and conclude that:</p>
+<p>Alternatively, as before, we can run the <code>t.test()</code>
+function instead of creating the variables individually:</p>
+<pre class="r"><code>logwagefull_df &lt;- wagefull_df %&gt;%
+  mutate(logwage = log(wage)) 
+
+t.test(logwage ~ male,
+       alternative = &quot;two.sided&quot;,
+       conf.level = 0.99,
+       var.equal = TRUE,
+       data = logwagefull_df)</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  logwage by male
+## t = -10.133, df = 3294, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+## 99 percent confidence interval:
+##  -0.2737726 -0.1627480
+## sample estimates:
+## mean in group 0 mean in group 1 
+##        1.474751        1.693011</code></pre>
+<p>In the output:</p>
+<ul>
+<li>1st line gives the name of the test and the 2nd line reminds you on
+which columns the test is applied</li>
+<li>3rd line contains three key outputs from the test: calculated
+t-value which is needed for reporting, degrees of freedom which is also
+needed for reporting, and the p-value.</li>
+<li>4th line states the alternative hypothesis</li>
+<li>5th and 6th line gives the 99% confidence interval.</li>
+<li>7th, 8th, and 9th lines give the sample mean</li>
+</ul>
+<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:10px 0; margin-top:10px">
+<blockquote>
+<p><strong><em>Note:</em></strong> Recall that here we are assuming both
+<span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span> are normally distributed. Moreover,
+and this is captured by the argument <code>var.equal = TRUE</code>, we
+assume homoskedasticity. We can test if komoskedasticity assumption is
+true using <code>levene_test()</code> function from <code>rstatix</code>
+library.</p>
+</blockquote>
+<pre class="r"><code>#First convert the male column into categorical data
+logwagefull_df$male &lt;- as.factor(logwagefull_df$male)
+levene_test(data = logwagefull_df,
+            formula = logwage ~ male)</code></pre>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1     1  3294      1.40 0.236</code></pre>
+<blockquote>
+<p>The key information in this output is the p-value. Here p-value of
+0.2365 tells us the probability of observing these two samples if they
+come from distributions with the same variance. Since this probability
+is higher than the arbitrarily chosen significance level of 0.05, then
+we can be somewhat confident that the assumptions needed to carry out
+the t-test on these two samples do hold.</p>
+</blockquote>
+</div>
+<p><br> Since, <span class="math inline">\(|t_D| = 10.11 &gt; z_{0.995}
+= 2.576\)</span> we reject the null and conclude that:</p>
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:10px 0; margin-top:10px">
 <p>“<em>The mean logarithm wage for men (<span class="math inline">\(\bar x = 1.693\)</span>) differs from the mean
 logarithm wage for women (<span class="math inline">\(\bar y =
@@ -945,7 +1016,19 @@ log(\mathbb{E}(wage)) = \mu_0\)</span> is not equivalent to testing
 <span class="math inline">\(\mathbb{H}_0: \mathbb{E}(log(wage)) =
 \mu_0\)</span>. By the same logic, testing <span class="math inline">\(\mathbb{H}_0: \bar D = 0\)</span> is not
 equivalent to testing <span class="math inline">\(\mathbb{H}_0:
-\overset{\sim}{D}=0\)</span>.</p>
+\overset{\sim}{D}\)</span>.</p>
+<span class="math display">\[\\[0.25in]\]</span>
+<center>
+<strong>QUESTION 3</strong>
+</center>
+<p><strong>(a)</strong> Now, use the same data to calculate the
+estimates of the variance of the logarithm of wages for females.</p>
+<div class="line-block">  <strong>Answer:</strong> We calculated this in
+Question 2(e)</div>
+<pre class="r"><code>var_Y</code></pre>
+<pre><code>## [1] 0.3978769</code></pre>
+<hr />
+<p><br><br> <strong>(b)</strong></p>
 
 
 

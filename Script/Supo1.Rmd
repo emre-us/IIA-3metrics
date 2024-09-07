@@ -233,7 +233,8 @@ Load the libraries:
 libraries <- c("haven",       # to import/export SPSS, STATA, SAS files
                "tidyverse",   # for tidy data
                "ggplot2",     # for visualization
-               "gridExtra")   # to plot graphs in grids
+               "gridExtra",   # to plot graphs in grids
+               "rstatix")     # converts stats functions to a tidyverse-friendly format, and can use levene_test()
 # invisible(lapply(libraries, library, character.only=TRUE)) will load the libraries
 ```
 
@@ -422,9 +423,9 @@ shapiro.test(logwage_male_df$logwage)
 <br><br>
 Since the p-value is smaller than say 0.05, we can say that there is sufficient evidence to reject the null hypothesis that the sample came from a normal distribution.
 <br><br>
-It is important to note the limitations of Shapiro-Wilk test, in that it is sensitive to the sample sizes. In general, for small sample sizes, the test is very relaxed about normality and nearly all data sets are considered normal; while for large sample sizes the test can be overly strict, and it can fail to recognize data sets that are very nearly normal indeed. Given that n=1727, here, it is likely that this test was overly strict. 
+It is important to note the limitations of Shapiro-Wilk test, in that it is sensitive to the sample sizes. In general, for small sample sizes, the test is very relaxed about normality and nearly all data sets are considered normal; while for large sample sizes the test can be overly strict, and it can fail to recognize data sets that are very nearly normal indeed. Given that n=1727, here, it is possible that this test was overly strict. 
 <br><br>
-In this example, the graphical Q-Q plot analysis is not especially conclusive as there are some suggestions of snaking in the plot. Shapiro-Wilk test gives a significant p-value, though it is likely to be overly strict. These, along with the histogram and the recognition that there are 1727 data points in the sample, one can probably conclude that the assumptions of the t-test are met well enough to trust the result of the t-test.
+In this example, the graphical Q-Q plot analysis is not especially conclusive as there are some suggestions of snaking in the plot. Shapiro-Wilk test gives a significant p-value, so it is unlikely to be normally distributed. However, this test may be overly strict. These, along with the histogram and the recognition that there are 1727 data points in the sample, one can possibly conclude that the assumptions of the t-test are met well enough to trust the result of the t-test. That is, we could technically ignore that the data is not normally distributed enough according the Q-Q and Shapiro because the sample size is large and the t-test is likely to be robust in this case.
 <br><br>
 > **_Note:_** If not happy, though, we could consider an alternative test, he one-sample Wilcoxon signed-rank test, that has less stringent assumptions but also less powerful.
 
@@ -445,6 +446,20 @@ Now we are ready to run the t-test and obtain the test statistic:
 $$
 t_{\mu_X} = \frac{\bar x - \mu_X}{\sqrt{\frac{s^2_X}{n_X}}} = \frac{1.69 - 1.7}{\sqrt{\frac{0.366}{1727}}}
 $$
+
+<br>
+We can do this the long way by creating the variables first:
+```{r}
+x_bar <- mean(logwage_male_df$logwage)
+sample_var_x <- var(logwage_male_df$logwage)
+st_err_x <- sqrt(sample_var_x/nrow(logwage_male_df))
+
+t_mu_x <- (x_bar - 1.7)/st_err_x
+t_mu_x
+```
+
+<br>
+or, alternatively, use the t.test() function:
 
 ```{r}
 t.test(logwage_male_df$logwage,
@@ -552,7 +567,6 @@ t_D <- (X_bar - Y_bar)/st_err
 data.frame(t_D, X_bar, Y_bar, var_X, var_Y, n_X, n_Y, st_err)
 ```
 
-
 Our decision would be to reject the null at significance level $\alpha$ if the observed sample test statistic is $|t| > z_{1-\frac{\alpha}{2}}$. Here, $z_{1-\frac{\alpha}{2}} = \Phi^{-1}(1-\frac{\alpha}{2})$ is the critical value from the standard normal distribution.
 
 
@@ -563,7 +577,44 @@ qnorm(0.995)
 ```
 
 
-Since, $t_D = 10.11 > z_{0.995} = 2.576$ we reject the null and conclude that: 
+
+Alternatively, as before, we can run the `t.test()` function instead of creating the variables individually:
+
+```{r}
+logwagefull_df <- wagefull_df %>%
+  mutate(logwage = log(wage)) 
+
+t.test(logwage ~ male,
+       alternative = "two.sided",
+       conf.level = 0.99,
+       var.equal = TRUE,
+       data = logwagefull_df)
+```
+
+In the output:
+
+  - 1st line gives the name of the test and the 2nd line reminds you on which columns the test is applied
+  - 3rd line contains three key outputs from the test: calculated t-value which is needed for reporting, degrees of freedom which is also needed for reporting, and the p-value.
+  - 4th line states the alternative hypothesis
+  - 5th and 6th line gives the 99% confidence interval.
+  - 7th, 8th, and 9th lines give the sample mean
+
+<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:10px 0; margin-top:10px">
+> **_Note:_** Recall that here we are assuming both $X_i$ and $Y_i$ are normally distributed. Moreover, and this is captured by the argument `var.equal = TRUE`, we assume homoskedasticity. We can test if komoskedasticity assumption is true using `levene_test()` function from `rstatix` library.
+
+```{r}
+#First convert the male column into categorical data
+logwagefull_df$male <- as.factor(logwagefull_df$male)
+levene_test(data = logwagefull_df,
+            formula = logwage ~ male)
+```
+
+>The key information in this output is the p-value. Here p-value of 0.2365 tells us the probability of observing these two samples if they come from distributions with the same variance. Since this probability is higher than the arbitrarily chosen significance level of 0.05, then we can be somewhat confident that the assumptions needed to carry out the t-test on these two samples do hold.
+
+</div>
+
+<br>
+Since, $|t_D| = 10.11 > z_{0.995} = 2.576$ we reject the null and conclude that: 
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:10px 0; margin-top:10px">
 "*The mean logarithm wage for men ($\bar x = 1.693$) differs from the mean logarithm wage for women ($\bar y = 1.475$) at $\alpha = 1$% significance level.*"
@@ -593,4 +644,28 @@ $$
 $$
 
 
-Thus, testing $\mathbb{H}_0: log(\mathbb{E}(wage)) = \mu_0$ is not equivalent to testing $\mathbb{H}_0: \mathbb{E}(log(wage)) = \mu_0$. By the same logic, testing $\mathbb{H}_0: \bar D = 0$ is not equivalent to testing $\mathbb{H}_0: \overset{\sim}{D}=0$.
+Thus, testing $\mathbb{H}_0: log(\mathbb{E}(wage)) = \mu_0$ is not equivalent to testing $\mathbb{H}_0: \mathbb{E}(log(wage)) = \mu_0$. By the same logic, testing $\mathbb{H}_0: \bar D = 0$ is not equivalent to testing $\mathbb{H}_0: \overset{\sim}{D}$.
+
+
+
+
+
+
+$$\\[0.25in]$$
+\newpage
+<center>**QUESTION 3**</center>
+
+**(a)** Now, use the same data to calculate the estimates of the variance of the logarithm of wages for females.
+
+|   **Answer:** We calculated this in Question 2(e)
+
+```{r}
+var_Y
+```
+
+
+
+
+***
+<br><br>
+**(b)**
