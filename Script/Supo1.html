@@ -387,10 +387,12 @@ and <span class="math inline">\(b=-\frac{\mu}{\sigma}\)</span> then we
 can rewrite this as <span class="math inline">\(z=a\mathbb{E}(X)+b\)</span>.</p>
 <p>Then,</p>
 <p><span class="math display">\[
-\mathbb{E}(Z) = \mathbb{E}(X)+b = \frac{1}{\sigma}\mu -
+\begin{aligned}
+\mathbb{E}(Z)&amp; = \mathbb{E}(X)+b = \frac{1}{\sigma}\mu -
 \frac{\mu}{\sigma} = 0
 \\
-Var(Z) = a^2Var(X) = \frac{1}{\sigma^2}\sigma^2 = 1.
+Var(Z)&amp; = a^2Var(X) = \frac{1}{\sigma^2}\sigma^2 = 1.
+\end{aligned}
 \]</span></p>
 <p>Hence, <span class="math inline">\(Z \sim N(0,1).\)</span></p>
 <p>For this question we are told that <span class="math inline">\(\mu =
@@ -441,13 +443,15 @@ obtain the probability. But what are we standardizing?</div>
 <pre class="r"><code>15*178</code></pre>
 <pre><code>## [1] 2670</code></pre>
 <p><span class="math display">\[
-Var(W_{15}) = Var\left(\displaystyle\sum_{i=1}^{15}X_i\right) =
+\begin{aligned}
+Var(W_{15})&amp; = Var\left(\displaystyle\sum_{i=1}^{15}X_i\right) =
 \displaystyle\sum_{i=1}^{15}Var(X_i) = Var(X_1 + ... +X_{15})
 \\
-=\displaystyle\sum_{i=1}^{15}Var(X_i) + 2\displaystyle\sum_{i\neq
+&amp; =\displaystyle\sum_{i=1}^{15}Var(X_i) + 2\displaystyle\sum_{i\neq
 j}Cov(X_i, X_j)
 \\
-= 15 \times 17^2 + 2\times 0
+&amp; = 15 \times 17^2 + 2\times 0
+\end{aligned}
 \]</span></p>
 <p>which is</p>
 <pre class="r"><code>15*17^2</code></pre>
@@ -487,9 +491,9 @@ the raft as <span class="math inline">\(W_n=\displaystyle\sum_{i=1}^{n}X_i\)</sp
 before, <span class="math inline">\(W_n \sim (\mu n,\sigma^2
 n)\)</span>. <br> We know from the question that <span class="math inline">\(\mu=178\)</span> and <span class="math inline">\(\sigma^2=17^2\)</span> and so <span class="math inline">\(W_n \sim N(178n, 17^2n).\)</span> <br><br> We want
 to find <span class="math inline">\(n\)</span> that is at the threshold
-of the probability 0.0001: <span class="math display">\[  \mathbb{P}(W_n
-&gt; 2850) = 0.0001  \\  or  \\  \mathbb{P}(W_n \leq 2850) = 1 - 0.0001
-= 0.9999.  \]</span></div>
+of the probability 0.0001: <span class="math display">\[  \begin{aligned}  \mathbb{P}(W_n &gt; 2850)
+&amp;= 0.0001  \\  or  \\  \mathbb{P}(W_n \leq 2850) &amp;= 1 - 0.0001 =
+0.9999.  \end{aligned}  \]</span></div>
 <p><br> Next we ask what standardized z-value corresponds to 0.9999
 probability? That is, what is <span class="math inline">\(z\)</span> in
 <span class="math inline">\(\Phi(z)=\alpha\)</span> where <span class="math inline">\(\alpha = 0.9999\)</span>?</p>
@@ -591,10 +595,12 @@ standard deviation of the logarithm of wages for males.</p>
 <span class="math inline">\(i=1,...,n_X\)</span>, then the corresponding
 sample mean and variance are:</p>
 <p><span class="math display">\[
-\bar X = \frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i = 1.69
+\begin{aligned}
+\bar X &amp;= \frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i = 1.69
 \\
-s_X^2 = \frac{1}{n_{X}-1}\displaystyle\sum_{i=1}^{n_X}(X_i - \bar X)^2 =
-0.605^2 = 0.366
+S_X^2 &amp;= \frac{1}{n_{X}-1}\displaystyle\sum_{i=1}^{n_X}(X_i - \bar
+X)^2 = 0.605^2 = 0.366
+\end{aligned}
 \]</span></p>
 <hr />
 <p><br><br> <strong>(c)</strong> What is the standard deviation of the
@@ -603,18 +609,22 @@ deviation of log-wage for males?</p>
 <p><strong>Answer:</strong> The standard deviation of the mean of
 log-wage is the square root of its variance, which is:</p>
 <p><span class="math display">\[
-  Var(\bar X) = Var\left(\frac{1}{n}\displaystyle\sum_{i=1}^nX_i\right)
-= \frac{1}{n^2}Var\left(\displaystyle\sum_{i=1}^{n}X_i\right) =
+  \begin{aligned}
+  Var(\bar X) &amp;=
+Var\left(\frac{1}{n}\displaystyle\sum_{i=1}^nX_i\right) =
+\frac{1}{n^2}Var\left(\displaystyle\sum_{i=1}^{n}X_i\right) =
 \frac{1}{n^2}Var(X_1 + ... +X_{n})
 \\
-  =\frac{1}{n^2}\left(\displaystyle\sum_{i=1}^{n}Var(X_i) +
+  &amp;=\frac{1}{n^2}\left(\displaystyle\sum_{i=1}^{n}Var(X_i) +
 2\displaystyle\sum_{i\neq j}Cov(X_i, X_j)\right) =
 \frac{1}{n^2}\displaystyle\sum_{i=1}^{n}Var(X_i) + \frac{1}{n^2}0
   \\
-  = \frac{1}{n^2}\displaystyle\sum_{i=1}^{n}\sigma^2 =
+  &amp;= \frac{1}{n^2}\displaystyle\sum_{i=1}^{n}\sigma^2 =
 \frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n}
-  \]</span> and <span class="math display">\[
-  st.dev.(\bar X)= \sqrt{\frac{\sigma^2}{n}}
+    \end{aligned}
+\]</span></p>
+<p>and <span class="math display">\[
+  st.dev.(\bar X) &amp;= \sqrt{\frac{\sigma^2}{n}}
   \]</span></p>
 <p>So:</p>
 <pre class="r"><code>logwage_male_df &lt;- wagefull_df %&gt;%
@@ -823,28 +833,36 @@ the means of these two populations are equal. That is, we are testing
 <span class="math inline">\(\mathbb{H}_0: \mu_X \neq \mu_Y\)</span>. We
 can also express this as <span class="math inline">\(\mathbb{H}_0: \mu_X
 - \mu_Y = 0\)</span> against <span class="math inline">\(\mathbb{H}_0:
-\mu_X - \mu_Y \neq 0\)</span>. That is, for inference, we can use the
-difference between the sample means <span class="math inline">\(\bar D =
-\bar X - \bar Y\)</span> with distributions <span class="math inline">\(\bar X \sim N(\mu_X,
+\mu_X - \mu_Y \neq 0.\)</span></div>
+<p>That is, for inference, we can use the difference between the sample
+means <span class="math inline">\(\bar D = \bar X - \bar Y\)</span> with
+distributions <span class="math inline">\(\bar X \sim N(\mu_X,
 \frac{\sigma^2_X}{n_X})\)</span> and <span class="math inline">\(\bar Y
 \sim N(\mu_Y,\frac{\sigma^2_Y}{n_Y})\)</span> according to the CLT. Then
 <span class="math inline">\(\mathbb{E}(\bar X - \bar Y) = \mu_X -
-\mu_Y.\)</span> Recall in part (b) we said that if the logarithm of
-wages for males are distributed as <span class="math inline">\(X_i \sim
-iid N(\mu_X, \sigma_X^2)\)</span> for <span class="math inline">\(i=1,...,n_X\)</span>, then the corresponding
-sample mean and variance are:</div>
+\mu_Y.\)</span></p>
+<p>Recall in part (b) we said that if the logarithm of wages for males
+are distributed as <span class="math inline">\(X_i \sim iid N(\mu_X,
+\sigma_X^2)\)</span> for <span class="math inline">\(i=1,...,n_X\)</span>, then the corresponding
+sample mean and variance are:</p>
 <p><span class="math display">\[
-\bar X = \frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i
+\begin{aligned}
+\bar X &amp;= \frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i
 \\
-S_X^2 = \frac{1}{n_X-1}\displaystyle\sum_{i=1}^{n_X}(X_i - \bar X)^2
+S_X^2 &amp;= \frac{1}{n_X-1}\displaystyle\sum_{i=1}^{n_X}(X_i - \bar
+X)^2
+\end{aligned}
 \]</span></p>
 <p>Similarly, if the logarithm of wages for females as <span class="math inline">\(Y_i \sim iid N(\mu_Y, \sigma_Y^2)\)</span> for
 <span class="math inline">\(i=1,...,n_Y\)</span>, then the corresponding
 sample mean and variance are:</p>
 <p><span class="math display">\[
-\bar Y = \frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i
+\begin{aligned}
+\bar Y &amp;= \frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i
 \\
-S_Y^2 = \frac{1}{n_{Y}-1}\displaystyle\sum_{i=1}^{n_Y}(Y_i - \bar Y)^2
+S_Y^2 &amp;= \frac{1}{n_{Y}-1}\displaystyle\sum_{i=1}^{n_Y}(Y_i - \bar
+Y)^2
+\end{aligned}
 \]</span></p>
 <p>Notice that we do not know the population variances, so:</p>
 <p><span class="math display">\[
@@ -855,18 +873,20 @@ S_Y^2 = \frac{1}{n_{Y}-1}\displaystyle\sum_{i=1}^{n_Y}(Y_i - \bar Y)^2
 which may not look as expected in the first glance. Let’s see how we
 derived it:</p>
 <p><span class="math display">\[
-  Var(\bar D) = Var(\bar X - \bar Y) =
+\begin{aligned}
+Var(\bar D) &amp;= Var(\bar X - \bar Y) =
 Var\left(\frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i +
 \frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i\right)
-  \\
-  = Var\left(\frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i\right) +
+\\
+&amp;= Var\left(\frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i\right) +
 Var\left(\frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i\right)+2\left(\frac{1}{n_X}\frac{1}{n_Y}\right)Cov\left(\displaystyle\sum_{i=1}^{n_X}X_i
 , \displaystyle\sum_{i=1}^{n_Y}Y_i\right)
+\end{aligned}
   \]</span></p>
 <p>Note that because <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span> are independent, covariance is 0. So
 this then becomes:</p>
 <p><span class="math display">\[
-  =\left(\frac{1}{n_X}\right)^2
+=\left(\frac{1}{n_X}\right)^2
 Var\left(\displaystyle\sum_{i=1}^{n_X}X_i\right) +
 \left(\frac{1}{n_Y}\right)^2
 Var\left(\displaystyle\sum_{i=1}^{n_Y}Y_i\right).
@@ -1028,7 +1048,62 @@ Question 2(e)</div>
 <pre class="r"><code>var_Y</code></pre>
 <pre><code>## [1] 0.3978769</code></pre>
 <hr />
-<p><br><br> <strong>(b)</strong></p>
+<p><br><br> <strong>(b)</strong> State clearly the sampling distribution
+of the estimated variance.</p>
+<div class="line-block">  <strong>Answer:</strong> The short answer
+is:</div>
+<p><span class="math display">\[
+\frac{(n_X - 1)S^2_X}{\sigma^2_0} \sim \chi ^2_{n_{X-1}} \ , \
+\frac{(n_Y - 1)S^2_Y}{\sigma^2_0} \sim \chi ^2_{n_{Y-1}}
+\]</span></p>
+<p>Let’s see how we reach this answer. Recall the “bias-corrected
+variance estimator”: <span class="math inline">\(S^2 = \frac{1}{n-1}
+\displaystyle\sum_{i=1}^n (X_i - \bar X_n)^2\)</span>.</p>
+<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:10px 0; margin-top:10px">
+<blockquote>
+<p>
+<strong><em>Why subtract 1 from n for bias correction?</em></strong>
+</p>
+<p>
+The expected value of <span class="math inline">\(X\)</span> is the mean
+so if <span class="math inline">\(\theta = \mathbb{E}(g(X))\)</span>
+where <span class="math inline">\(g(X)\)</span> is a transformation of
+the random variable X, and <span class="math inline">\(\theta\)</span>
+is the expectation of that transformation, then the analog estimator of
+<span class="math inline">\(\theta\)</span> is the sample mean of <span class="math inline">\(g(X)\)</span>. That is, <span class="math inline">\(\widehat{\theta} = \widehat{\mathbb{E}(g(X))} =
+\frac{1}{n}\sum_{i=1}^n g(X_i).\)</span>
+</p>
+<p>
+The population variance can then be written as <span class="math inline">\(\sigma^2 = \mathbb{E}[(X-\mathbb{E}(X))^2] =
+\mathbb{E}(X^2) - (\mathbb{E}(X))^2 = h(\mathbb{E}[g(X)])\)</span> where
+<span class="math inline">\(h(a,b) = a-b^2\)</span> and <span class="math inline">\(g(X) = (x^2, x).\)</span>
+</p>
+<p>
+The plug-in estimator is then <span class="math inline">\(h(\widehat{\theta}) =
+h(\widehat{\mathbb{E}(g(X))}) = h\left(\frac{1}{n}\sum_{i=1}^n g(X_i)
+\right).\)</span>
+</p>
+<p style="margin-left: 40px">
+<em>Note:</em> It is called “plug-in estimator” because we plug-in the
+estimator <span class="math inline">\(\widehat{\theta}\)</span> into the
+formula <span class="math inline">\(h(\theta)\)</span>.
+</p>
+<p>
+Therefore, the plug-in estimator for <span class="math inline">\(\sigma^2\)</span> is:
+</p>
+<span class="math display">\[
+\widehat{\sigma}^2=\frac{1}{n}\displaystyle\sum_{i=1}^n X_i^2 -
+\left(\frac{1}{n}\displaystyle\sum_{i=1}^n X_i \right)^2 = \frac{1}{n}
+\displaystyle\sum_{i=1}^n (X_i - \bar{X}_n)^2.
+\]</span> We can calculate whether $^2 is unbiased for <span class="math inline">\(\sigma^2.\)</span> To do that, it would be useful
+to consider an idealized estimator first.
+<p style="margin-left: 40px">
+<em>Idealized estimator:</em> If we knew the population mean <span class="math inline">\(\mu\)</span> then we’d use the estimator <span class="math inline">\(\widetilde{\sigma} =
+\frac{1}{n}\sum_{i=1}^n(X_i-\mu)^2\)</span>, which is the sample average
+of iid variables <span class="math inline">\((X_i - \mu)^2\)</span>.
+</p>
+</blockquote>
+</div>
 
 
 

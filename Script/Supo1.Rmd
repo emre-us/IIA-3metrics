@@ -43,9 +43,11 @@ If we denote $a=\frac{1}{\sigma}$ and $b=-\frac{\mu}{\sigma}$ then we can rewrit
 Then,
 
 $$
-\mathbb{E}(Z) = \mathbb{E}(X)+b = \frac{1}{\sigma}\mu - \frac{\mu}{\sigma} = 0 
+\begin{aligned}
+\mathbb{E}(Z)& = \mathbb{E}(X)+b = \frac{1}{\sigma}\mu - \frac{\mu}{\sigma} = 0 
 \\
-Var(Z) = a^2Var(X) = \frac{1}{\sigma^2}\sigma^2 = 1.
+Var(Z)& = a^2Var(X) = \frac{1}{\sigma^2}\sigma^2 = 1.
+\end{aligned}
 $$
 
 
@@ -117,11 +119,13 @@ which is
 
 
 $$
-Var(W_{15}) = Var\left(\displaystyle\sum_{i=1}^{15}X_i\right) = \displaystyle\sum_{i=1}^{15}Var(X_i) = Var(X_1 + ... +X_{15})
+\begin{aligned}
+Var(W_{15})& = Var\left(\displaystyle\sum_{i=1}^{15}X_i\right) = \displaystyle\sum_{i=1}^{15}Var(X_i) = Var(X_1 + ... +X_{15})
 \\
-=\displaystyle\sum_{i=1}^{15}Var(X_i) + 2\displaystyle\sum_{i\neq j}Cov(X_i, X_j) 
+& =\displaystyle\sum_{i=1}^{15}Var(X_i) + 2\displaystyle\sum_{i\neq j}Cov(X_i, X_j) 
 \\
-= 15 \times 17^2 + 2\times 0
+& = 15 \times 17^2 + 2\times 0
+\end{aligned}
 $$
 
 which is
@@ -174,11 +178,13 @@ Therefore, the probability of the raft being overloaded is 0.0031.
   We want to find $n$ that is at the threshold of the probability 0.0001:
   
   $$
-  \mathbb{P}(W_n > 2850) = 0.0001
+  \begin{aligned}
+  \mathbb{P}(W_n > 2850) &= 0.0001
   \\
   or
   \\
-  \mathbb{P}(W_n \leq 2850) = 1 - 0.0001 = 0.9999.
+  \mathbb{P}(W_n \leq 2850) &= 1 - 0.0001 = 0.9999.
+  \end{aligned}
   $$
 <br>
 Next we ask what standardized z-value corresponds to 0.9999 probability? That is, what is $z$ in $\Phi(z)=\alpha$ where $\alpha = 0.9999$?
@@ -293,9 +299,11 @@ wagefull_df %>%
 If we denote the logarithm of wages for males as $X_i \sim iid N(\mu_X, \sigma_X^2)$ for $i=1,...,n_X$, then the corresponding sample mean and variance are:
 
 $$
-\bar X = \frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i = 1.69
+\begin{aligned}
+\bar X &= \frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i = 1.69
 \\
-s_X^2 = \frac{1}{n_{X}-1}\displaystyle\sum_{i=1}^{n_X}(X_i - \bar X)^2 = 0.605^2 = 0.366
+S_X^2 &= \frac{1}{n_{X}-1}\displaystyle\sum_{i=1}^{n_X}(X_i - \bar X)^2 = 0.605^2 = 0.366
+\end{aligned}
 $$
 
 
@@ -307,15 +315,18 @@ $$
   **Answer:** The standard deviation of the mean of log-wage is the square root of its variance, which is:
   
   $$
-  Var(\bar X) = Var\left(\frac{1}{n}\displaystyle\sum_{i=1}^nX_i\right) = \frac{1}{n^2}Var\left(\displaystyle\sum_{i=1}^{n}X_i\right) = \frac{1}{n^2}Var(X_1 + ... +X_{n})
+  \begin{aligned}
+  Var(\bar X) &= Var\left(\frac{1}{n}\displaystyle\sum_{i=1}^nX_i\right) = \frac{1}{n^2}Var\left(\displaystyle\sum_{i=1}^{n}X_i\right) = \frac{1}{n^2}Var(X_1 + ... +X_{n})
  \\
-  =\frac{1}{n^2}\left(\displaystyle\sum_{i=1}^{n}Var(X_i) + 2\displaystyle\sum_{i\neq j}Cov(X_i, X_j)\right) = \frac{1}{n^2}\displaystyle\sum_{i=1}^{n}Var(X_i) + \frac{1}{n^2}0
+  &=\frac{1}{n^2}\left(\displaystyle\sum_{i=1}^{n}Var(X_i) + 2\displaystyle\sum_{i\neq j}Cov(X_i, X_j)\right) = \frac{1}{n^2}\displaystyle\sum_{i=1}^{n}Var(X_i) + \frac{1}{n^2}0
   \\
-  = \frac{1}{n^2}\displaystyle\sum_{i=1}^{n}\sigma^2 = \frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n}
+  &= \frac{1}{n^2}\displaystyle\sum_{i=1}^{n}\sigma^2 = \frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n}
+    \end{aligned}
+$$
+
+and
   $$
-  and
-  $$
-  st.dev.(\bar X)= \sqrt{\frac{\sigma^2}{n}}
+  st.dev.(\bar X) &= \sqrt{\frac{\sigma^2}{n}}
   $$
 
 So:
@@ -487,24 +498,30 @@ Similarly, the confidence interval includes our 1.7 and the p-value is much high
 <br><br>
 **(e)** Explain how you wold conduct a test of the hypothesis that the mean of log wages is the same for males and females, stating the sampling distribution of the relevant statistic, and conduct such a test.
 
-|  **Answer:** We are going to assume the wages for males and females are independent. We want to test whether the means of these two populations are equal. That is, we are testing $\mathbb{H}_0: \mu_X = \mu_Y$ against $\mathbb{H}_0: \mu_X \neq \mu_Y$. We can also express this as $\mathbb{H}_0: \mu_X - \mu_Y = 0$ against $\mathbb{H}_0: \mu_X - \mu_Y \neq 0$.
-  
+|  **Answer:** We are going to assume the wages for males and females are independent. We want to test whether the means of these two populations are equal. That is, we are testing $\mathbb{H}_0: \mu_X = \mu_Y$ against $\mathbb{H}_0: \mu_X \neq \mu_Y$. We can also express this as $\mathbb{H}_0: \mu_X - \mu_Y = 0$ against $\mathbb{H}_0: \mu_X - \mu_Y \neq 0.$
+
+
   That is, for inference, we can use the difference between the sample means $\bar D = \bar X - \bar Y$ with distributions $\bar X \sim N(\mu_X, \frac{\sigma^2_X}{n_X})$ and $\bar Y \sim N(\mu_Y,\frac{\sigma^2_Y}{n_Y})$ according to the CLT. Then $\mathbb{E}(\bar X - \bar Y) = \mu_X - \mu_Y.$
-  
+
+
   Recall in part (b) we said that if the logarithm of wages for males are distributed as $X_i \sim iid N(\mu_X, \sigma_X^2)$ for $i=1,...,n_X$, then the corresponding sample mean and variance are:
 
 $$
-\bar X = \frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i
+\begin{aligned}
+\bar X &= \frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i
 \\
-S_X^2 = \frac{1}{n_X-1}\displaystyle\sum_{i=1}^{n_X}(X_i - \bar X)^2
+S_X^2 &= \frac{1}{n_X-1}\displaystyle\sum_{i=1}^{n_X}(X_i - \bar X)^2
+\end{aligned}
 $$
   
 Similarly, if the logarithm of wages for females as $Y_i \sim iid N(\mu_Y, \sigma_Y^2)$ for $i=1,...,n_Y$, then the corresponding sample mean and variance are:
 
 $$
-\bar Y = \frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i
+\begin{aligned}
+\bar Y &= \frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i
 \\
-S_Y^2 = \frac{1}{n_{Y}-1}\displaystyle\sum_{i=1}^{n_Y}(Y_i - \bar Y)^2
+S_Y^2 &= \frac{1}{n_{Y}-1}\displaystyle\sum_{i=1}^{n_Y}(Y_i - \bar Y)^2
+\end{aligned}
 $$
  
  Notice that we do not know the population variances, so:
@@ -517,15 +534,17 @@ $$
   The variance of $\bar D$ is $\frac{S^2_X}{n_X} + \frac{S^2_Y}{n_Y}$, which may not look as expected in the first glance. Let's see how we derived it:
   
   $$
-  Var(\bar D) = Var(\bar X - \bar Y) = Var\left(\frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i + \frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i\right) 
-  \\
-  = Var\left(\frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i\right) + Var\left(\frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i\right)+2\left(\frac{1}{n_X}\frac{1}{n_Y}\right)Cov\left(\displaystyle\sum_{i=1}^{n_X}X_i , \displaystyle\sum_{i=1}^{n_Y}Y_i\right)
+\begin{aligned}
+Var(\bar D) &= Var(\bar X - \bar Y) = Var\left(\frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i + \frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i\right) 
+\\
+&= Var\left(\frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i\right) + Var\left(\frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i\right)+2\left(\frac{1}{n_X}\frac{1}{n_Y}\right)Cov\left(\displaystyle\sum_{i=1}^{n_X}X_i , \displaystyle\sum_{i=1}^{n_Y}Y_i\right)
+\end{aligned}
   $$
  
   Note that because $X_i$ and $Y_i$ are independent, covariance is 0. So this then becomes:
   
   $$
-  =\left(\frac{1}{n_X}\right)^2 Var\left(\displaystyle\sum_{i=1}^{n_X}X_i\right) + \left(\frac{1}{n_Y}\right)^2 Var\left(\displaystyle\sum_{i=1}^{n_Y}Y_i\right).
+=\left(\frac{1}{n_X}\right)^2 Var\left(\displaystyle\sum_{i=1}^{n_X}X_i\right) + \left(\frac{1}{n_Y}\right)^2 Var\left(\displaystyle\sum_{i=1}^{n_Y}Y_i\right).
   $$
   
 Since $X_i$ are iid and $Y_i$ are iid, we can rewrite this as:
@@ -668,4 +687,31 @@ var_Y
 
 ***
 <br><br>
-**(b)**
+**(b)** State clearly the sampling distribution of the estimated variance.
+
+|   **Answer:** The short answer is:
+
+$$
+\frac{(n_X - 1)S^2_X}{\sigma^2_0} \sim \chi ^2_{n_{X-1}} \ , \ 
+\frac{(n_Y - 1)S^2_Y}{\sigma^2_0} \sim \chi ^2_{n_{Y-1}}
+$$
+
+Let's see how we reach this answer. Recall the "bias-corrected variance estimator": $S^2 = \frac{1}{n-1} \displaystyle\sum_{i=1}^n (X_i - \bar X_n)^2$.
+
+<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:10px 0; margin-top:10px">
+><p>***Why subtract 1 from n for bias correction?***</p>
+<p>
+The expected value of $X$ is the mean so if $\theta = \mathbb{E}(g(X))$ where $g(X)$ is a transformation of the random variable X, and $\theta$ is the expectation of that transformation, then the analog estimator of $\theta$ is the sample mean of $g(X)$. That is, $\widehat{\theta} = \widehat{\mathbb{E}(g(X))} = \frac{1}{n}\sum_{i=1}^n g(X_i).$</p>
+<p>The population variance can then be written as $\sigma^2 = \mathbb{E}[(X-\mathbb{E}(X))^2] = \mathbb{E}(X^2) - (\mathbb{E}(X))^2 = h(\mathbb{E}[g(X)])$ where $h(a,b) = a-b^2$ and $g(X) = (x^2, x).$</p>
+<p>
+The plug-in estimator is then $h(\widehat{\theta}) = h(\widehat{\mathbb{E}(g(X))}) = h\left(\frac{1}{n}\sum_{i=1}^n g(X_i) \right).$</p>
+<p style="margin-left: 40px">*Note:* It is called "plug-in estimator" because we plug-in the estimator $\widehat{\theta}$ into the formula $h(\theta)$.</p>
+<p>Therefore, the plug-in estimator for $\sigma^2$ is:</p>
+$$
+\widehat{\sigma}^2=\frac{1}{n}\displaystyle\sum_{i=1}^n X_i^2 - \left(\frac{1}{n}\displaystyle\sum_{i=1}^n X_i \right)^2 = \frac{1}{n} \displaystyle\sum_{i=1}^n (X_i - \bar{X}_n)^2.
+$$
+We can calculate whether $\hat{\sigma}^2 is unbiased for $\sigma^2.$ To do that, it would be useful to consider an idealized estimator first.
+<p style="margin-left: 40px"> *Idealized estimator:* If we knew the population mean $\mu$ then we'd use the estimator $\widetilde{\sigma} = \frac{1}{n}\sum_{i=1}^n(X_i-\mu)^2$, which is the sample average of iid variables $(X_i - \mu)^2$.</p>
+
+</div>
+
