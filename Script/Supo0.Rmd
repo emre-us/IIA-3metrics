@@ -1,0 +1,38 @@
+---
+author: "Emre Usenmez - github.com/emre-us"
+title: "2023-24 Tripos IIA Paper 3"
+subtitle: Supervision 0
+output: html_document
+html_document:
+  number_sections: yes
+---
+
+<!-- This comment will not be displayed in the output. Below change to CSS style is to ensure the blocktexts are in the same form size as the rest of the text.-->
+
+```{css style settings, echo = FALSE} 
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 14px;
+    border-left: 5px solid #eee;
+}
+```
+
+
+$$\\[0.25in]$$
+
+# <center>**GAUSS-MARKOV THEOREM**</center>
+
+This is the theoretical justification for using Ordinary Least Squares (OLS). The Theorem states that under a set of conditions known as the **Gauss-Markov conditions**, the OLS estimator is the **B**est **L**inear conditionally **U**nbiased **E**stimator (**BLUE**).
+
+## OLS
+Consider the problem of finding the estimator $b$ that minimizes
+\[
+\sum_{i=1}^n
+(X_i-b)^2.
+\]
+This is a measure of the total squared gap between the estimator $b$ and the sample points.
+<p style="margin-left: 40px">
+$\hookrightarrow$
+The gap $(X_i - b)$ can be thought of as a prediction mistake since $b$ is an estimator of $\mathbb{E}(X) and can be thought of as a prediction of the value of $X_i.$
+</p>

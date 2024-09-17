@@ -1,0 +1,1530 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={2023-24 Tripos IIA Paper 3},
+  pdfauthor={Emre Usenmez},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{2023-24 Tripos IIA Paper 3}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Supervision 1}
+\author{Emre Usenmez}
+\date{}
+
+\begin{document}
+\maketitle
+
+\[\\[0.25in]\]
+
+\textbf{QUESTION 1}
+
+Fifteen male economists are in a life raft with a maximum carrying
+capacity of 2850 pounds. If the distribution of weights of male
+economists is normal with a mean of 178 pounds and with a standard
+deviation of 17 pounds.
+
+\textbf{(a)} Find the probability that all the economists weigh less
+than 189 pounds
+
+\begin{quote}
+\textbf{Answer:} Given that the distribution of weights is normal we can
+use the standard normal. For this, we need to first standardize the
+random variable \(X_i\).
+
+\(\hookrightarrow\) i.e transform it into the standard normal random
+variable \(Z_i \sim N(0,1)\) with cdf \(\Phi (\cdot)\).
+
+To standardize a random variable: \(Z=\dfrac{X - \mu}{\sigma}\)
+
+If we denote \(a=\dfrac{1}{\sigma}\) and \(b=-\dfrac{\mu}{\sigma}\) then
+we can rewrite this as \(Z=a\mathbb{E}(X)+b\).
+
+Then, \[
+\begin{aligned}
+\mathbb{E}(Z)& = \mathbb{E}(X)+b = \frac{1}{\sigma}\mu - \frac{\mu}{\sigma} = 0 
+\\
+Var(Z)& = a^2Var(X) = \frac{1}{\sigma^2}\sigma^2 = 1.
+\end{aligned}
+\] Hence, \(Z \sim N(0,1).\)
+
+In this question we are told that \(\mu = 178\) and \(\sigma = 17\) and
+asked to find \(\mathbb{P}(X_i \leq 189)\) which we will need to
+standardize. \[
+\mathbb{P}(X_i \leq 189) = \mathbb{P}\left(\frac{X_i - 178}{17} \leq \frac{189 - 178}{17}\right) = \mathbb{P}\left(Z_i \leq \frac{11}{17} = \Phi\big(\frac{11}{17}\big)\right).
+\] We can then find the probability as follows:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pnorm}\NormalTok{(}\DecValTok{11}\SpecialCharTok{/}\DecValTok{17}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7412031
+\end{verbatim}
+
+\begin{quote}
+This is the probability of one random economist weighing less than 189
+lbs. Since the weight of the economists are independent, we can write:
+\[
+\displaystyle\bigcap_{i=1}^{15}\mathbb{P}(X_i \leq 189) = \displaystyle\prod_{i=1}^{15}\mathbb{P}(X_i \leq 189) = (\mathbb{P}(X_i)\leq 189)^{15} = 0.741^{15}.
+\] Which is:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pnorm}\NormalTok{(}\DecValTok{11}\SpecialCharTok{/}\DecValTok{17}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{15}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01119588
+\end{verbatim}
+
+\[\\[0.5in]\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{(b)} Find the probability that the raft is overloaded and will
+sink.
+
+\begin{quote}
+\textbf{Answer:} Since we are looking for the probability of total
+weight exceeding the maximum carrying capacity of 2850 lbs, we will
+again use the standard normal table to obtain the probability. But what
+are we standardizing?
+
+Denote the sum of weights as \(W_{15} = \sum_{i=1}^{15}X_i\). Then we
+are looking for: \[
+\mathbb{P}\left(\frac{W_{15} - \mathbb{E}(W_{15})}{\sqrt{Var(W_{15})}} > \frac{2850 - \mathbb{E}(W_{15})}{\sqrt{Var(W_{15})}}  \right).
+\] Next, we need to find what \(\mathbb{E}(W_{15})\) and \(Var(W_{15})\)
+are: \[
+\mathbb{E}(W_{15}) = \mathbb{E}\left(\displaystyle\sum_{i=1}^{15}X_i\right) = \displaystyle\sum_{i=1}^{15}\mathbb{E}(X_i) = 15 \times 178
+\] which is
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{15}\SpecialCharTok{*}\DecValTok{178}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2670
+\end{verbatim}
+
+\begin{quote}
+and \[
+\begin{aligned}
+Var(W_{15})& = Var\left(\displaystyle\sum_{i=1}^{15}X_i\right) = \displaystyle\sum_{i=1}^{15}Var(X_i) = Var(X_1 + ... +X_{15})
+\\
+& =\displaystyle\sum_{i=1}^{15}Var(X_i) + 2\displaystyle\sum_{i\neq j}Cov(X_i, X_j) 
+\\
+& = 15 \times 17^2 + 2\times 0
+\end{aligned}
+\] which is
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{15}\SpecialCharTok{*}\DecValTok{17}\SpecialCharTok{\^{}}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4335
+\end{verbatim}
+
+\begin{quote}
+Notice that here we used the independence of \(X_i\) and \(X_j\) for all
+\(i\neq j\). This implies \(Cov(X_i, X_j) = 0.\)
+
+So we established that \(W_{15} \sim N(2670, 4335).\) Now we can plug
+these in: \[
+\mathbb{P}(W_{15} > 2850) = \mathbb{P}\left(\frac{W_{15} - \mathbb{E}(W_{15})}{\sqrt{Var(W_{15})}} > \frac{2850 - \mathbb{E}(W_{15})}{\sqrt{Var(W_{15})}}  \right) = \mathbb{P}\left(\frac{W_{15} - 2670}{\sqrt{4335}} > \frac{2850 - 2670}{\sqrt{4335}}  \right).
+\]
+
+That is:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\DecValTok{2850{-}2670}\NormalTok{)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\DecValTok{4335}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.733871
+\end{verbatim}
+
+\begin{quote}
+So,
+\(\mathbb{P}(W_{15} > 2850) = \mathbb{P}(Z > 2.7339) = 1 - \Phi(2.7339)\)
+which is
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#two ways to calculate this.}
+\CommentTok{\#Option 1:}
+\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{pnorm}\NormalTok{(}\FloatTok{2.7339}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.003129452
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Option 2:}
+\FunctionTok{pnorm}\NormalTok{(}\FloatTok{2.7339}\NormalTok{, }\AttributeTok{lower.tail=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.003129452
+\end{verbatim}
+
+\begin{quote}
+Therefore, the probability of the raft being overloaded is 0.0031.
+\end{quote}
+
+\[\\[0.5in]\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{(c)} Find the maximum number of economists that should enter the
+raft if the probability of overloading is not to exceed 0.0001.
+
+\begin{quote}
+\textbf{Answer:} The approach we take is similar to part (b). Let the
+total weight of \(n\) number of economists that should enter the raft as
+\(W_n=\sum_{i=1}^{n}X_i\). As before, \(W_n \sim (\mu n,\sigma^2 n)\).
+
+We know from the question that \(\mu=178\) and \(\sigma^2=17^2\) and so
+\(W_n \sim N(178n, 17^2n).\)
+
+We want to find \(n\) that is at the threshold of the probability
+0.0001: \[
+\begin{aligned}
+\mathbb{P}(W_n > 2850) &= 0.0001
+\\
+or
+\\
+\mathbb{P}(W_n \leq 2850) &= 1 - 0.0001 = 0.9999.
+\end{aligned}
+\]
+
+Next we ask what standardized z-value corresponds to 0.9999 probability?
+That is, what is \(z\) in \(\Phi(z)=\alpha\) where \(\alpha = 0.9999\)?
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# qnorm() function gives the inverse of CDF }
+\FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.9999}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.719016
+\end{verbatim}
+
+\begin{quote}
+So, \(z = 3.719\) and \(\Phi(3.719) = 0.9999\).
+
+Now we need to standardize \(W_n\) and equate to 3.719. \[
+\mathbb{P}(W_n \leq 2850) = \mathbb{P}\left(\frac{W_n - 178n}{17\sqrt{n}} \leq \frac{2850 - 178n}{17\sqrt{n}}\right) = \Phi\left(\frac{2850-178n}{17\sqrt{n}}\right) = \Phi(3.719) = 0.9999
+\]
+
+This means, \(\dfrac{2850-178n}{17\sqrt{n}} = 3.719\)
+
+or
+
+\(178n + 3.719 \times 17\sqrt{n} - 2850 = 0.\)
+
+This is a quadratic function. To solve it, lets build a function in R
+and apply to this equation:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#build function to solve quadratic equation}
+\NormalTok{quad\_solve }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(a, b, c)}
+\NormalTok{\{}
+\NormalTok{  a }\OtherTok{\textless{}{-}} \FunctionTok{as.complex}\NormalTok{(a)}
+\NormalTok{  answer }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{((}\SpecialCharTok{{-}}\NormalTok{b }\SpecialCharTok{+} \FunctionTok{sqrt}\NormalTok{(b}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{{-}} \DecValTok{4}\SpecialCharTok{*}\NormalTok{a}\SpecialCharTok{*}\NormalTok{c))}\SpecialCharTok{/}\NormalTok{(}\DecValTok{2}\SpecialCharTok{*}\NormalTok{a),}
+\NormalTok{              (}\SpecialCharTok{{-}}\NormalTok{b }\SpecialCharTok{+} \FunctionTok{sqrt}\NormalTok{(b}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{{-}} \DecValTok{4}\SpecialCharTok{*}\NormalTok{a}\SpecialCharTok{*}\NormalTok{c))}\SpecialCharTok{/}\NormalTok{(}\DecValTok{2}\SpecialCharTok{*}\NormalTok{a))}
+  \ControlFlowTok{if}\NormalTok{(}\FunctionTok{all}\NormalTok{(}\FunctionTok{Im}\NormalTok{(answer) }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)) answer }\OtherTok{\textless{}{-}} \FunctionTok{Re}\NormalTok{(answer)}
+  \ControlFlowTok{if}\NormalTok{(answer[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{==}\NormalTok{ answer[}\DecValTok{2}\NormalTok{]) }\FunctionTok{return}\NormalTok{(answer[}\DecValTok{1}\NormalTok{])}
+\NormalTok{  answer}
+\NormalTok{\}}
+
+\CommentTok{\# solve our equation}
+\NormalTok{(}\FunctionTok{quad\_solve}\NormalTok{(}\AttributeTok{a =} \DecValTok{178}\NormalTok{, }\AttributeTok{b=}\FloatTok{3.719}\SpecialCharTok{*}\DecValTok{17}\NormalTok{, }\AttributeTok{c=}\SpecialCharTok{{-}}\DecValTok{2850}\NormalTok{))}\SpecialCharTok{\^{}}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 14.65167
+\end{verbatim}
+
+\begin{quote}
+Notice that we squared the solution. This is because the quadratic
+equation is \(\sqrt{n}\) and we are interested in \(n\). So, the raft
+will not sink with 14 economists on the raft with probability of at
+least 0.9999.
+\end{quote}
+
+\[\\[0.1in]\] \newpage
+
+\textbf{QUESTION 2}
+
+The STATA file Wagefull.dta contains data on hourly wages and other
+variables.
+
+Load the libraries:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{libraries }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"haven"}\NormalTok{,       }\CommentTok{\# to import/export SPSS, STATA, SAS files}
+               \StringTok{"tidyverse"}\NormalTok{,   }\CommentTok{\# for tidy data}
+               \StringTok{"ggplot2"}\NormalTok{,     }\CommentTok{\# for visualization}
+               \StringTok{"gridExtra"}\NormalTok{,   }\CommentTok{\# to plot graphs in grids}
+               \StringTok{"rstatix"}\NormalTok{)     }\CommentTok{\# converts stats functions to a tidyverse{-}friendly format, and can use \textasciigrave{}levene\_test()\textasciigrave{}}
+
+\CommentTok{\# lapply(libraries, library, character.only=TRUE) will load the libraries}
+\end{Highlighting}
+\end{Shaded}
+
+Load the data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wagefull\_df }\OtherTok{\textless{}{-}} \FunctionTok{read\_dta}\NormalTok{(}\StringTok{"../Data/wagefull.dta"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Briefly examine the data frame
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Yuo can use any of the following to examine data frame (df): }
+\CommentTok{\# \textasciigrave{}dim()\textasciigrave{}: for its dimensions, by row and column}
+\CommentTok{\# \textasciigrave{}str()\textasciigrave{}: for its structure}
+\CommentTok{\# \textasciigrave{}summary()\textasciigrave{}: for summary statistics on its columns}
+\CommentTok{\# \textasciigrave{}colnames()\textasciigrave{}: for the name of each column}
+\CommentTok{\# \textasciigrave{}head()\textasciigrave{}: for the first 6 rows of the data frame}
+\CommentTok{\# \textasciigrave{}tail()\textasciigrave{}: for the last 6 rows of the data frame}
+\CommentTok{\# \textasciigrave{}View()\textasciigrave{}: for a spreadsheet{-}like display of the entire data frame}
+
+\FunctionTok{str}\NormalTok{(wagefull\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## tibble [3,296 x 5] (S3: tbl_df/tbl/data.frame)
+##  $ obs   : num [1:3296] 1 2 3 4 5 6 7 8 9 10 ...
+##   ..- attr(*, "label")= chr "OBS"
+##   ..- attr(*, "format.stata")= chr "%10.0g"
+##  $ exper : num [1:3296] 9 12 11 9 8 9 8 10 12 7 ...
+##   ..- attr(*, "label")= chr "EXPER"
+##   ..- attr(*, "format.stata")= chr "%10.0g"
+##  $ male  : num [1:3296] 0 0 0 0 0 0 0 0 0 0 ...
+##   ..- attr(*, "label")= chr "MALE"
+##   ..- attr(*, "format.stata")= chr "%10.0g"
+##  $ school: num [1:3296] 13 12 11 14 14 14 12 12 10 12 ...
+##   ..- attr(*, "label")= chr "SCHOOL"
+##   ..- attr(*, "format.stata")= chr "%10.0g"
+##  $ wage  : num [1:3296] 6.32 5.48 3.64 4.59 2.42 ...
+##   ..- attr(*, "label")= chr "WAGE"
+##   ..- attr(*, "format.stata")= chr "%10.0g"
+\end{verbatim}
+
+\[\\[0.5in]\]
+
+\textbf{(a)} Draw a histogram of wages for the whole population. What
+kind of distribution do you find? Do the same exercise for logarithm of
+wages. How do the two histograms compare? Why is that the case?
+
+\begin{quote}
+\textbf{Answer:}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# We will display the two graphs side by side.}
+\CommentTok{\# Histogram of wage}
+\NormalTok{p1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(wagefull\_df,}
+      \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wage)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{25}\NormalTok{)}
+\CommentTok{\# Histogram of ln wage}
+\NormalTok{p2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(wagefull\_df,}
+      \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{log}\NormalTok{(wage))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{25}\NormalTok{)}
+
+\CommentTok{\# arrange the charts in a grid:}
+\FunctionTok{grid.arrange}\NormalTok{(p1, p2, }\AttributeTok{nrow =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Supo1_files/figure-latex/unnamed-chunk-13-1} \end{center}
+
+\begin{quote}
+While the wages for the whole population is skewed, the distribution for
+logwages has a more symmetric, closer to normal distribution. Because
+logarithmic function is concave, that concavity brings \(log(y)\) and
+\(log(x)\) closer than \(y\) and \(x\) otherwise would.
+\end{quote}
+
+\[\\[0.5in]\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{(b)} Use these data to calculate mean and standard deviation of
+the logarithm of wages for males.
+
+\begin{quote}
+\textbf{Answer:}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wagefull\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(male}\SpecialCharTok{==}\DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(}\FunctionTok{log}\NormalTok{(wage)), }\AttributeTok{st.dev. =} \FunctionTok{sd}\NormalTok{(}\FunctionTok{log}\NormalTok{(wage)), }\AttributeTok{var =} \FunctionTok{var}\NormalTok{(}\FunctionTok{log}\NormalTok{(wage))) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##    mean st.dev.   var
+##   <dbl>   <dbl> <dbl>
+## 1  1.69   0.605 0.366
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# sd() and var() use n{-}1 in the denominator}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+If we denote the logarithm of wages for males as \(X_i \sim\) iid
+\(N(\mu_X, \sigma_X^2)\) for \(i=1,...,n_X\), then the corresponding
+sample mean and variance are: \[
+\begin{aligned}
+\bar X &= \frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i = 1.69
+\\
+S_X^2 &= \frac{1}{n_{X}-1}\displaystyle\sum_{i=1}^{n_X}(X_i - \bar X)^2 = 0.605^2 = 0.366
+\end{aligned}
+\]
+\end{quote}
+
+\begin{quote}
+\textbf{\emph{Why subtract 1 from n for variance bias correction?}}
+
+The expected value of \(X\) is the mean so if
+\(\theta = \mathbb{E}(g(X))\) where \(g(X)\) is a transformation of the
+random variable X, and \(\theta\) is the expectation of that
+transformation, then the analog estimator of \(\theta\) is the sample
+mean of \(g(X)\). That is,
+\(\widehat{\theta} = \widehat{\mathbb{E}(g(X))} = \frac{1}{n}\sum_{i=1}^n g(X_i).\)
+
+The population variance can then be written as
+\(\sigma^2 = \mathbb{E}\left((X-\mathbb{E}(X))^2\right) = \mathbb{E}(X^2) - (\mathbb{E}(X))^2 = h(\mathbb{E}[g(X)])\)
+where \(h(a,b) = a-b^2\) and \(g(X) = (x^2, x).\)
+
+The plug-in estimator is then
+\(h(\widehat{\theta}) = h(\widehat{\mathbb{E}(g(X))}) = h\left(\frac{1}{n}\sum_{i=1}^n g(X_i) \right).\)
+
+\(\hookrightarrow\) \emph{Note:} It is called ``plug-in estimator''
+because we plug-in the estimator \(\widehat{\theta}\) into the formula
+\(h(\theta)\).
+
+Therefore, the plug-in estimator for \(\sigma^2\) is: \[
+\widehat{\sigma}^2=\frac{1}{n}\displaystyle\sum_{i=1}^n X_i^2 - \left(\frac{1}{n}\displaystyle\sum_{i=1}^n X_i \right)^2 = \frac{1}{n} \displaystyle\sum_{i=1}^n (X_i - \bar{X}_n)^2.
+\] We can calculate whether \$\hat{\sigma}\^{}2 is unbiased for
+\(\sigma^2.\) To do that, it would be useful to consider an idealized
+estimator first.
+
+\(\hookrightarrow\) \emph{Idealized estimator:} If we knew the
+population mean \(\mu\) then we'd use the estimator
+\(\widetilde{\sigma}^2 = \dfrac{1}{n}\sum_{i=1}^n(X_i-\mu)^2\), which is
+the sample average of iid variables \((X_i - \mu)^2\). This has the
+expectation
+\(\mathbb{E}(\widetilde{\sigma}^2) = \mathbb{E}\left((X_i - \mu)^2\right) = \sigma^2\),
+and therefore \(\widetilde{\sigma}^2\) is unbiased for \(\sigma^2.\)
+
+Now, we will rewrite \(\widehat{\sigma}^2\) with an algebraic trick
+where \(g(X) = \left((X-\mu)^2, (X-\mu)\right)\) which would give us \[
+\begin{align*}
+\widehat{\sigma}^2 &= \frac{1}{n}\displaystyle\sum_{i=1}^n (X_i - \mu)^2 - \left(\frac{1}{n}\displaystyle\sum_{i=1}^n (X_i-\mu) \right)^2 \\[4pt]
+&= \widetilde{\sigma}^2 - \left(\frac{1}{n}\displaystyle\sum_{i=1}^n (X_i-\mu)\right)^2 \\[4pt]
+&= \widetilde{\sigma}^2 - (\bar{X}_n - \mu)^2.
+\end{align*}
+\] after some algebraic simplification.
+
+This tells us that the sample variance estimator,
+\(\widehat{\sigma}^2\), equals the idalized estimator,
+\(\widetilde{\sigma}^2\), minus an adjustment for estimation of \(\mu\).
+Since that adjustment can't be negative, the sample variance estimator
+will then always be less than the idealized estimator, unless of course
+the adjustment itself is zero. This means, \(\widehat{\sigma}^2\) is
+biased towards 0.
+
+We can actually calculate this bias. Recall that
+\(\mathbb{E}(\widetilde{\sigma}^2 = \sigma^2)\) and
+\(\mathbb{E}\left((\bar{X}_n - \mu)^2\right) = \dfrac{\sigma^2}{n}\).
+So, \[
+\begin{align*}
+\mathbb{E}(\widehat{\sigma}^2) &= \mathbb{E}(\widetilde{\sigma}^2) - \mathbb{E}\left((\bar{X}_n - \mu)^2\right) \\[4pt]
+&= \sigma^2 - \frac{\sigma^2}{n} \\[4pt]
+&= \left(1 - \frac{1}{n}\right)\sigma^2
+\end{align*}
+\] which is smaller than \(\sigma^2\).
+
+One intuition for this downward bias is that \$\widehat{\sigma}\^{}2
+centers the observations \(X_i\) at the sample mean \(\bar{X}_n\) as
+opposed to the true mean \(\mu\). This implies that the sample-centered
+variables \(X_i - \bar{X}_n\) have less variation than the ideally
+centered variables \(X_i - \mu\).
+
+\emph{Correcting the bias:} Notice that the bias
+\(1 - \dfrac{1}{n} = \dfrac{n-1}{n}\) is proportional, which means this
+can be corrected by rescaling, i.e.~inverting the proportion: \[
+s^2 = \frac{n}{n-1}\widehat{\sigma}^2 = \frac{1}{n-1}\displaystyle{\sum_{i=1}^n(X_i - \bar{X}_n)^2}.
+\]
+
+\(\hookrightarrow\) \emph{Note:} Notice that \(s^2\) is an estimator but
+it is not written as \(\widehat{s}^2\). This is because at the time when
+hand typesetting was being used, typesetting a notation with a hat was
+difficult. As a result, \(s^2\) was used to denote the estimator of
+\(\sigma^2\), and \(b\) was used to denote the estimator of \(\beta\),
+etc. This subsequently became the convention.
+
+We can show that this is unbiased: \[
+\begin{align*}
+\mathbb{E}(s^2) &= \mathbb{E}\left(\frac{1}{n-1}\displaystyle{\sum_{i=1}^n(X_i - \bar{X}_n)^2}\right) = \frac{1}{n-1}\mathbb{E}\left(\displaystyle{\sum_{i=1}^nX_i^2 - n\bar{X}_n^2}\right) \\[4pt]
+&= \frac{1}{n-1}\mathbb{E}(n(\sigma^2+\mu^2)-\sigma^2-n\mu^2)=\sigma^2
+\end{align*}
+\]
+
+Some of the discussion is based on Bruce E. Hansen, \emph{Probability
+and Statistics for Economists} (2022) Princeton University Press
+\end{quote}
+
+\[\\[0.5in]\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{(c)} What is the standard deviation of the mean of log-wage for
+males? How does it compare with the standard deviation of log-wage for
+males?
+
+\begin{quote}
+\textbf{Answer:} The standard deviation of the mean of log-wage is the
+square root of its variance, which is: \[
+\begin{aligned}
+Var(\bar X) &= Var\left(\frac{1}{n}\displaystyle\sum_{i=1}^nX_i\right) = \frac{1}{n^2}Var\left(\displaystyle\sum_{i=1}^{n}X_i\right) = \frac{1}{n^2}Var(X_1 + ... +X_{n})
+\\
+&=\frac{1}{n^2}\left(\displaystyle\sum_{i=1}^{n}Var(X_i) + 2\displaystyle\sum_{i\neq j}Cov(X_i, X_j)\right) = \frac{1}{n^2}\displaystyle\sum_{i=1}^{n}Var(X_i) + \frac{1}{n^2}0
+\\
+&= \frac{1}{n^2}\displaystyle\sum_{i=1}^{n}\sigma^2 = \frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n}
+\end{aligned}
+\] and \[
+st.dev.(\bar{X}) = \sqrt{\frac{\sigma^2}{n}}
+\] So:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logwage\_male\_df }\OtherTok{\textless{}{-}}\NormalTok{ wagefull\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(male }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{logwage =} \FunctionTok{log}\NormalTok{(wage))}
+
+\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{var}\NormalTok{(logwage\_male\_df}\SpecialCharTok{$}\NormalTok{logwage)}\SpecialCharTok{/}\FunctionTok{nrow}\NormalTok{(logwage\_male\_df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01456596
+\end{verbatim}
+
+\begin{quote}
+Thus we can see that at 0.0146, the standard deviation of the mean of
+log-wage is significantly smaller than the standard deviation of of
+log-wage for males which is 0.605 as expected.
+\end{quote}
+
+\[\\[0.5in]\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{(d)} State clearly the sampling distribution of the estimated
+mean, and test the hypothesis that the mean of log wages for males is
+equal to 1.7 versus not 1.7. Under what assumption does this hold?
+
+\begin{quote}
+\textbf{Answer} Recall from Central Limit Theorem that if the mean and
+variance of a distribution exists and finite, then the sample mean of
+independent draws from that distribution converges in distribution to a
+normal distribution. That is, if \(X_i\) are iid with
+\(\mathbb{E}(X_i)=\mu < \infty\) and \(Var(X_i) = \sigma^2 < \infty\)
+then the sample mean \(\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i\) has the
+following property: \[
+\bar X_n \overset{a}{\sim} N\left(\mu_X, \frac{\sigma^2_X}{n_X}\right) \iff \frac{\bar X_n - \mu}{\sqrt{\dfrac{\sigma^2_X}{n}}} \overset{a}{\sim} N(0,1).
+\]
+
+This is all the additional assumptions we need to derive this sampling
+distribution of the estimated mean. In part (b) we assumed that the
+log-wages are normally distributed. So the exact distribution where
+\(s^2_X\) is the unbiased estimator of \(\sigma^2_X\) is
+
+\[
+\frac{\bar X - \mu_X}{\sqrt{\dfrac{s^2_X}{n_X}}} \sim t_{n_X-1}
+\]
+
+Since \(t_n \to N(0,1)\) as \(n \to \infty\), we can still refer to the
+sampling distribution in
+\(\bar X_n \overset{a}{\sim} N\left(\mu_X, \frac{\sigma^2_X}{n_X}\right)\)
+above.
+
+In terms of testing the hypothesis we have the following null and
+alternative:
+
+\(\mathbb H_0:\) The mean log wage for males is equal to 1.7
+\((\mu_X = 1.7)\). \(\mathbb H_1:\) The mean log wage for males is not
+equal to 1.7 \((\mu_X \neq 1.7)\).
+
+To test this we will use a one-sample, two tailed t-test to see if we
+should reject the null hypothesis or not. We use two-tailed t-test
+because we are not testing whether the mean is greater than or less than
+1.7. We are only testing if it is different from 1.7.
+
+First lets get the data, summarize and visualize it:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(logwage\_male\_df}\SpecialCharTok{$}\NormalTok{logwage)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  -1.874   1.394   1.734   1.693   2.066   4.726
+\end{verbatim}
+
+\begin{quote}
+From the summary output we can see that mean and median of the `wage'
+variable are very close at 1.693 and 1.734, respectively.
+
+We can use the boxplot to see how the data is spread out:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(logwage\_male\_df,}
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ logwage)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Supo1_files/figure-latex/unnamed-chunk-17-1} \end{center}
+
+\begin{quote}
+The data do not appear to contain any obvious errors. Although mean and
+median are marginally different from 1.7, it is not absolutely certain
+that the sample mean is sufficiently different from this value to be
+``statistically significant''.
+\end{quote}
+
+\begin{quote}
+\textbf{\emph{Assumptions:}} When it comes to one-sample tests, we have
+two options: \emph{t-test} and \emph{Wilcoxon signed-rank} test. To use
+a t-test we have to make two assumptions: 1. parent distribution from
+which the sample is taken is normally distributed, and 2. data in the
+sample are independent. The first assumption can be checked. There are
+three ways of checking for normality. In order of rigor these are: a.
+Histogram b. Quantile-Quantile (Q-Q) plot c.~Shapiro-Wilk test From the
+histogram in part (a) above we already saw that the distribution is
+unimodal and symmetric, so we can't clearly conclude that it is
+non-normal. But there are a lot of distributions that have these
+properties but not normal. So this is not very rigorous. \emph{Q-Q
+Plot}: Sometimes also referred to as \emph{Diagnostic Plot}, Q-Q plot is
+a way of comparing two distributions: one of the data and one of the
+theoretical normal distribution:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(logwage\_male\_df,}
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ logwage)) }\SpecialCharTok{+}
+  \FunctionTok{stat\_qq}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{stat\_qq\_line}\NormalTok{(}\AttributeTok{color =} \StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Supo1_files/figure-latex/unnamed-chunk-18-1} \end{center}
+
+\begin{quote}
+If the data were normally distributed then all of the points should lie
+on, or close to, the diagonal line. Here, the tails of the distribution
+are below and above the line so they are a bit more spread out than
+normal. There is not a simple unambiguous answer when interpreting these
+in terms of whether the assumption of normality has been met or not. It
+often boils down to experience. It is a very rare situation where the
+assumptions necessary for a test will be met unequivocally and a certain
+degree of interpretation is needed to decide if the data are normal
+enough to be confident in the validity of the test. \emph{Shapiro-Wilk
+test:} This is one of a number of formal statistical tests that assesses
+whether a given sample of numbers come from a normal distribution. It
+calculates the probability of getting the sample data if the underlying
+distribution is in fact normal.
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(logwage\_male\_df}\SpecialCharTok{$}\NormalTok{logwage)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  logwage_male_df$logwage
+## W = 0.9414, p-value < 2.2e-16
+\end{verbatim}
+
+\begin{quote}
+3rd line output contains two key outputs from the test: The calculated
+W-statistic is 0.9414, and the p-value is very close to 0. Since the
+p-value is smaller than say 0.05, we can say that there is sufficient
+evidence to reject the null hypothesis that the sample came from a
+normal distribution. It is important to note the limitations of
+Shapiro-Wilk test, in that it is sensitive to the sample sizes. In
+general, for small sample sizes, the test is very relaxed about
+normality and nearly all data sets are considered normal; while for
+large sample sizes the test can be overly strict, and it can fail to
+recognize data sets that are very nearly normal indeed. Given that
+n=1727, here, it is possible that this test was overly strict. In this
+example, the graphical Q-Q plot analysis is not especially conclusive as
+there are some suggestions of snaking in the plot. Shapiro-Wilk test
+gives a significant p-value, so it is unlikely to be normally
+distributed. However, this test may be overly strict. These, along with
+the histogram and the recognition that there are 1727 data points in the
+sample, one can possibly conclude that the assumptions of the t-test are
+met well enough to trust the result of the t-test. That is, we could
+technically ignore that the data is not normally distributed enough
+according the Q-Q and Shapiro because the sample size is large and the
+t-test is likely to be robust in this case. \textbf{\emph{Note:}} If not
+happy, though, we could consider an alternative test, he one-sample
+Wilcoxon signed-rank test, that has less stringent assumptions but also
+less powerful.
+
+Some of the discussion here is based on the fantastic course materials
+prepared by Biostatistics team of the University of Cambridge. Students
+can freely sign-up to these courses.
+\end{quote}
+
+\begin{quote}
+Recall that under the assumption that the null is true, \(\bar X\) has
+the following sampling distribution: \[
+T_{\mu_X} = \frac{\bar X - \mu_X}{\sqrt{\dfrac{s^2_X}{n_X}}} \overset{a}{\sim} N(0,1)
+\] The decision rule is to reject \(\mathbb{H_0}\) if observed sample
+test statistics is \(|t_\mu| > z_{0.995} = 2.576\) when
+\(\Phi(z_{0.995}) = 0.995.\)
+
+Now we are ready to run the t-test and obtain the test statistic: \[
+t_{\mu_X} = \frac{\bar x - \mu_X}{\sqrt{\dfrac{s^2_X}{n_X}}} = \frac{1.69 - 1.7}{\sqrt{\dfrac{0.366}{1727}}}
+\] We can do this the long way by creating the variables first:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x\_bar }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(logwage\_male\_df}\SpecialCharTok{$}\NormalTok{logwage)}
+\NormalTok{sample\_var\_x }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(logwage\_male\_df}\SpecialCharTok{$}\NormalTok{logwage)}
+\NormalTok{st\_err\_x }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(sample\_var\_x}\SpecialCharTok{/}\FunctionTok{nrow}\NormalTok{(logwage\_male\_df))}
+
+\NormalTok{t\_mu\_x }\OtherTok{\textless{}{-}}\NormalTok{ (x\_bar }\SpecialCharTok{{-}} \FloatTok{1.7}\NormalTok{)}\SpecialCharTok{/}\NormalTok{st\_err\_x}
+\NormalTok{t\_mu\_x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.4797975
+\end{verbatim}
+
+\begin{quote}
+or, alternatively, use the \texttt{t.test()} function:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(logwage\_male\_df}\SpecialCharTok{$}\NormalTok{logwage,}
+       \AttributeTok{mu =} \FloatTok{1.7}\NormalTok{,}
+       \AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  One Sample t-test
+## 
+## data:  logwage_male_df$logwage
+## t = -0.4798, df = 1726, p-value = 0.6314
+## alternative hypothesis: true mean is not equal to 1.7
+## 95 percent confidence interval:
+##  1.664442 1.721580
+## sample estimates:
+## mean of x 
+##  1.693011
+\end{verbatim}
+
+\begin{quote}
+In the output:
+
+\begin{itemize}
+\tightlist
+\item
+  1st line gives the name of the test and the 2nd line reminds you the
+  data on which the test is applied
+\item
+  3rd line contains three key outputs from the test: calculated t-value
+  which is needed for reporting, degrees of freedom which is also needed
+  for reporting, and the p-value.
+\item
+  4th line states the alternative hypothesis
+\item
+  5th and 6th line gives the 95\% confidence interval. If you want to
+  change the this, you can add the argument \texttt{conf.level\ =\ 0.99}
+  for 99\% CI
+\item
+  7th, 8th, and 9th lines give the sample mean
+\end{itemize}
+
+In this case the test statistic is -0.48. So \(|t_\mu| < z_{0.995}\) and
+we cannot reject the null at \(\alpha = 0.05\).
+
+Similarly, the confidence interval includes our 1.7 and the p-value is
+much higher than 0.05 so we cannot reject the null hypothesis, We
+therefore state the following:
+\end{quote}
+
+``\emph{A one-sample t-test indicated that the mean logarithm of wages
+of males (1.69) does not differ significantly from 1.7 (t=-0.48,
+p=0.6314, CI={[}1.664,1.722{]}).}''
+
+\[\\[0.5in]\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{(e)} Explain how you wold conduct a test of the hypothesis that
+the mean of log wages is the same for males and females, stating the
+sampling distribution of the relevant statistic, and conduct such a
+test.
+
+\begin{quote}
+\textbf{Answer:} We are going to assume the wages for males and females
+are independent. We want to test whether the means of these two
+populations are equal. So we are testing \(\mathbb{H}_0: \mu_X = \mu_Y\)
+against \(\mathbb{H}_0: \mu_X \neq \mu_Y\). We can also express this as
+\(\mathbb{H}_0: \mu_X - \mu_Y = 0\) against
+\(\mathbb{H}_0: \mu_X - \mu_Y \neq 0.\)
+
+That is, for inference, we can use the difference between the sample
+means \(\bar D = \bar X - \bar Y\) with distributions
+\(\bar X \sim N(\mu_X, \frac{\sigma^2_X}{n_X})\) and
+\(\bar Y \sim N(\mu_Y,\frac{\sigma^2_Y}{n_Y})\) according to the CLT.
+Then
+\(\mathbb{E}(\bar{D}) = \mathbb{E}(\bar{X} - \bar{Y}) = \mu_X - \mu_Y.\)
+
+Recall in part (b) we said that if the logarithm of wages for males are
+distributed as \(X_i \sim\) iid \(N(\mu_X, \sigma_X^2)\) for
+\(i=1,...,n_X\), then the corresponding sample mean and variance are: \[
+\begin{aligned}
+\bar X &= \frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i
+\\
+S_X^2 &= \frac{1}{n_X-1}\displaystyle\sum_{i=1}^{n_X}(X_i - \bar X)^2
+\end{aligned}
+\] Similarly, if the logarithm of wages for females as \(Y_i \sim\) iid
+\(N(\mu_Y, \sigma_Y^2)\) for \(i=1,...,n_Y\), then the corresponding
+sample mean and variance are: \[
+\begin{aligned}
+\bar Y &= \frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i
+\\
+S_Y^2 &= \frac{1}{n_{Y}-1}\displaystyle\sum_{i=1}^{n_Y}(Y_i - \bar Y)^2
+\end{aligned}
+\] Notice that we do not know the population variances, so: \[
+\bar D = \bar X - \bar Y \overset{a}{\sim} N\left(\mu_X - \mu_Y, \frac{S^2_X}{n_X} + \frac{S^2_Y}{n_Y}\right)
+\] The variance of \(\bar D\) is
+\(\frac{S^2_X}{n_X} + \frac{S^2_Y}{n_Y}\), which may look unexpected in
+first glance. Let's see how we derived it: \[
+\begin{aligned}
+Var(\bar D) &= Var(\bar X - \bar Y) = Var\left(\frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i + \frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i\right) 
+\\
+&= Var\left(\frac{1}{n_X}\displaystyle\sum_{i=1}^{n_X}X_i\right) + Var\left(\frac{1}{n_Y}\displaystyle\sum_{i=1}^{n_Y}Y_i\right)+2\left(\frac{1}{n_X}\frac{1}{n_Y}\right)Cov\left(\displaystyle\sum_{i=1}^{n_X}X_i , \displaystyle\sum_{i=1}^{n_Y}Y_i\right)
+\end{aligned}
+\] Since \(X_i\) and \(Y_i\) are independent, covariance is 0. So this
+becomes: \[
+=\left(\frac{1}{n_X}\right)^2 Var\left(\displaystyle\sum_{i=1}^{n_X}X_i\right) + \left(\frac{1}{n_Y}\right)^2 Var\left(\displaystyle\sum_{i=1}^{n_Y}Y_i\right).
+\] Since \(X_i\) are iid and \(Y_i\) are iid, we can rewrite this as: \[
+=\left(\frac{1}{n_X}\right)^2\displaystyle\sum_{i=1}^{n_X}Var(X_i) + \left(\frac{1}{n_Y}\right)^2\displaystyle\sum_{i=1}^{n_Y}Var(Y_i) = \frac{\sigma^2}{n_X}+\frac{\sigma^2}{n_Y}.
+\] However, because we do not know the population variances, we use the
+sample variances instead.
+
+Now we are ready to discuss how we would conduct a test of the
+hypothesis. The test statistic for \(\mathbb{H}_0\) is: \[
+T_D = \frac{\bar X - \bar Y}{\sqrt{\frac{S^2_X}{n_X}+\frac{S^2_Y}{n_Y}}} \overset{a}{\sim} N(0,1).
+\] Let's calculate this:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# In part (c) we created logwage\_male dataframe that introduced a new row called logwage. Lets first do the same for females:}
+\NormalTok{logwage\_female\_df }\OtherTok{\textless{}{-}}\NormalTok{ wagefull\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(male }\SpecialCharTok{==} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{logwage =} \FunctionTok{log}\NormalTok{(wage))}
+
+\CommentTok{\# Now we can create our variables:}
+\NormalTok{X\_bar }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(logwage\_male\_df}\SpecialCharTok{$}\NormalTok{logwage)}
+\NormalTok{Y\_bar }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(logwage\_female\_df}\SpecialCharTok{$}\NormalTok{logwage)}
+\NormalTok{var\_X }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(logwage\_male\_df}\SpecialCharTok{$}\NormalTok{logwage)  }\CommentTok{\# like sd() var() uses denominator n{-}1.}
+\NormalTok{var\_Y }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(logwage\_female\_df}\SpecialCharTok{$}\NormalTok{logwage)}
+\NormalTok{n\_X }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(logwage\_male\_df)}
+\NormalTok{n\_Y }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(logwage\_female\_df)}
+\NormalTok{st\_err }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(var\_X}\SpecialCharTok{/}\NormalTok{n\_X }\SpecialCharTok{+}\NormalTok{ var\_Y}\SpecialCharTok{/}\NormalTok{n\_Y)}
+
+\CommentTok{\# calculate the test statistic:}
+
+\NormalTok{t\_D }\OtherTok{\textless{}{-}}\NormalTok{ (X\_bar }\SpecialCharTok{{-}}\NormalTok{ Y\_bar)}\SpecialCharTok{/}\NormalTok{st\_err}
+
+\CommentTok{\#display the variables in a table}
+\FunctionTok{data.frame}\NormalTok{(t\_D, X\_bar, Y\_bar, var\_X, var\_Y, n\_X, n\_Y, st\_err)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        t_D    X_bar    Y_bar     var_X     var_Y  n_X  n_Y     st_err
+## 1 10.11339 1.693011 1.474751 0.3664128 0.3978769 1727 1569 0.02158132
+\end{verbatim}
+
+\begin{quote}
+Our decision would be to reject the null at significance level
+\(\alpha\) if the observed sample test statistic is
+\(|t| > z_{1-\frac{\alpha}{2}}\). Here,
+\(z_{1-\frac{\alpha}{2}} = \Phi^{-1}(1-\frac{\alpha}{2})\) is the
+critical value from the standard normal distribution.
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# let\textquotesingle{}s obtain the critical value for 1\% significance level from standard normal:}
+
+\FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.995}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.575829
+\end{verbatim}
+
+\begin{quote}
+Alternatively, as before, we can run the \texttt{t.test()} function
+instead of creating the variables individually:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logwagefull\_df }\OtherTok{\textless{}{-}}\NormalTok{ wagefull\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{logwage =} \FunctionTok{log}\NormalTok{(wage)) }
+
+\FunctionTok{t.test}\NormalTok{(logwage }\SpecialCharTok{\textasciitilde{}}\NormalTok{ male,}
+       \AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{,}
+       \AttributeTok{conf.level =} \FloatTok{0.99}\NormalTok{,}
+       \AttributeTok{var.equal =} \ConstantTok{TRUE}\NormalTok{,}
+       \AttributeTok{data =}\NormalTok{ logwagefull\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Two Sample t-test
+## 
+## data:  logwage by male
+## t = -10.133, df = 3294, p-value < 2.2e-16
+## alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+## 99 percent confidence interval:
+##  -0.2737726 -0.1627480
+## sample estimates:
+## mean in group 0 mean in group 1 
+##        1.474751        1.693011
+\end{verbatim}
+
+\begin{quote}
+In the output:
+
+\begin{itemize}
+\tightlist
+\item
+  1st line gives the name of the test and the 2nd line reminds you on
+  which columns the test is applied
+\item
+  3rd line contains three key outputs from the test: calculated t-value
+  which is needed for reporting, degrees of freedom which is also needed
+  for reporting, and the p-value.
+\item
+  4th line states the alternative hypothesis
+\item
+  5th and 6th line gives the 99\% confidence interval.
+\item
+  7th, 8th, and 9th lines give the sample mean
+\end{itemize}
+\end{quote}
+
+\begin{quote}
+\textbf{\emph{Note:}} Recall that here we are assuming both \(X_i\) and
+\(Y_i\) are normally distributed. Moreover, and this is captured by the
+argument \texttt{var.equal\ =\ TRUE}, we assume homoskedasticity. We can
+test if homoskedasticity assumption is true using
+\texttt{levene\_test()} function from \texttt{rstatix} library.
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#First convert the male column into categorical data}
+\NormalTok{logwagefull\_df}\SpecialCharTok{$}\NormalTok{male }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(logwagefull\_df}\SpecialCharTok{$}\NormalTok{male)}
+\FunctionTok{levene\_test}\NormalTok{(}\AttributeTok{data =}\NormalTok{ logwagefull\_df,}
+            \AttributeTok{formula =}\NormalTok{ logwage }\SpecialCharTok{\textasciitilde{}}\NormalTok{ male)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 4
+##     df1   df2 statistic     p
+##   <int> <int>     <dbl> <dbl>
+## 1     1  3294      1.40 0.236
+\end{verbatim}
+
+\begin{quote}
+The key information in this output is the p-value. Here p-value of
+0.2365 tells us the probability of observing these two samples if they
+come from distributions with the same variance. Since this probability
+is higher than the arbitrarily chosen significance level of 0.05, then
+we can be somewhat confident that the assumptions needed to carry out
+the t-test on these two samples do hold.
+\end{quote}
+
+\begin{quote}
+Since, \(|t_D| = 10.11 > z_{0.995} = 2.576\) we reject the null and
+conclude that:
+\end{quote}
+
+``\emph{The mean logarithm wage for men \((\bar{x} = 1.693)\) differs
+from the mean logarithm wage for women \((\bar{y} = 1.475)\) at
+\(\alpha = 1\)\% significance level.}''
+
+\[\\[0.5in]\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{(f)} Is the hypothesis of question (e) the same as the
+hypothesis the men and women have the same wage on average?
+
+\begin{quote}
+\textbf{Answer:} Although both are looking at the mean differences
+between two populations, in part (e) the hypothesis was the difference
+between the mean logarithm of wages between men and women is 0. In there
+we denoted mean of logarithm of male wages \(X_i\) and mean of logarithm
+of female wages \(Y_i\). The hypothesis was that
+\(\mathbb{H}_0: \bar D = \bar X - \bar Y = 0\) against \(\neq 0\).
+
+This is different than the hypothesis that the men and women have the
+same wage on average. Denote the wage of men - not the logarithm - as
+\(M_i\) and of women as \(W_i\). The hypothesis is then
+\(\mathbb{H}_0: \overset{\sim}{D} = \bar M - \bar F = 0\) against
+\(\neq 0\).
+
+The key thing to notice here is that \(X_i = log(M_i)\) and
+\(Y_i = log(F_i)\). From Jensen's inequality we have \$ \mathbb{E}(X\_i
+= log(wage)) \neq log(\mathbb{E}(M\_i = wage))\$.
+
+That is, for any concave function \(h(\cdot)\) and a random variable
+\(V\), \[
+\mathbb{E}(h(V)) \leq h(\mathbb{E}(V)).
+\] Since \(log(\cdot)\) is a concave function and we have random
+variable \(wage_i\), we conclude that \[
+\mathbb{E}(X_i = log(wage)) \leq log(\mathbb{E}(M_i = wage)).
+\] Thus, testing \(\mathbb{H}_0: log(\mathbb{E}(wage)) = \mu_0\) is not
+equivalent to testing \(\mathbb{H}_0: \mathbb{E}(log(wage)) = \mu_0\).
+By the same logic, testing \(\mathbb{H}_0: \bar D = 0\) is not
+equivalent to testing \(\mathbb{H}_0: \overset{\sim}{D}\).
+\end{quote}
+
+\[\\[1in]\] \newpage
+
+\textbf{QUESTION 3}
+
+\textbf{(a)} Now, use the same data to calculate the estimates of the
+variance of the logarithm of wages for females.
+
+\begin{quote}
+\textbf{Answer:} We calculated this in Question 2(e)
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{var\_Y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3978769
+\end{verbatim}
+
+\[\\[0.5in]\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{(b)} State clearly the sampling distribution of the estimated
+variance.
+
+\begin{quote}
+\textbf{Answer:} The short answer is:
+
+\[
+\frac{(n_X - 1)S^2_X}{\sigma^2_0} \sim \chi ^2_{n_{X-1}} \quad , \quad 
+\frac{(n_Y - 1)S^2_Y}{\sigma^2_0} \sim \chi ^2_{n_{Y-1}}
+\]
+
+Let's see how we reach this answer. We will use the definition of a
+\(\chi^2\)-distributed random variable to determine the sampling
+distribution of the variance estimator.
+\end{quote}
+
+\begin{quote}
+\textbf{\emph{The \(\chi^2\) Distribution}}
+
+The chi-squared distribution is the distribution of the sum of \(n\)
+squared independent standard normal random variables.
+
+\(\hookrightarrow\) Recall from Question 1(a) standard normal random
+variable is \(Z=\dfrac{X - \mu}{\sigma}.\)
+
+This distribution depends on \(n\), which is called the \emph{degrees of
+freedom} of the chi-squared distribution.
+
+\(\hookrightarrow\) For example, let \(Z_1, Z_2,\) and \(Z_3\) be
+independent standard normal random variables. Then,
+\(\sum_{i=1}^3 Z_u = Z_1^2 + Z_2^2 + Z_3^2\) has a \(\chi^2\)
+distribution with 3 degrees of freedom.
+
+We can expand this to \(n\) degrees of freedom. Let \(Z_i\) be standard
+normal random variables. That is, \(Z_i \sim\) iid \(N(0,1)\) for
+\(i=1,\dots,n.\) If we define a new variable \(U\) as the sum of the
+squares of \(Z_i\): \[
+U = \displaystyle\sum_{i=1}^nZ_i^2,
+\] then \(U\) has a chi-squared distribution with \(n\) degrees of
+freedom: \(U \sim \chi_n^2.\) It can be shown that \(\mathbb{E}(U)=n\)
+and \(Var(U)=2n\), because \(\mathbb{E}(Z_i^2)=1\) and
+\(\mathbb{E}(Z_i^4)=3.\) Chi-squared is always non-negative, and unlike
+the normal distribution, the chi-squared is not symmetric about any
+point. However, it appraches a normal distribution as the degrees of
+freedom increases.
+
+We can plot the pdf for \(\chi^2\) with varying degrees of freedom to
+illustrate:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dchisq}\NormalTok{(x, }\AttributeTok{df =} \DecValTok{3}\NormalTok{), }\AttributeTok{from =} \DecValTok{0}\NormalTok{, }\AttributeTok{to =} \DecValTok{40}\NormalTok{, }\AttributeTok{col =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(}\AttributeTok{x=}\DecValTok{4}\NormalTok{, }\AttributeTok{y=}\FloatTok{0.2}\NormalTok{, }\StringTok{"df = 3"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dchisq}\NormalTok{(x, }\AttributeTok{df =} \DecValTok{5}\NormalTok{), }\AttributeTok{from =} \DecValTok{0}\NormalTok{, }\AttributeTok{to =} \DecValTok{40}\NormalTok{, }\AttributeTok{col =} \DecValTok{2}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(}\AttributeTok{x=}\DecValTok{7}\NormalTok{, }\AttributeTok{y=}\FloatTok{0.12}\NormalTok{, }\StringTok{"df = 5"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dchisq}\NormalTok{(x, }\AttributeTok{df =} \DecValTok{12}\NormalTok{), }\AttributeTok{from =} \DecValTok{0}\NormalTok{, }\AttributeTok{to =} \DecValTok{40}\NormalTok{, }\AttributeTok{col =} \DecValTok{3}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(}\AttributeTok{x=}\DecValTok{14}\NormalTok{, }\AttributeTok{y =} \FloatTok{0.09}\NormalTok{, }\StringTok{"df = 12"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dchisq}\NormalTok{(x, }\AttributeTok{df =} \DecValTok{20}\NormalTok{), }\AttributeTok{from =} \DecValTok{0}\NormalTok{, }\AttributeTok{to =} \DecValTok{40}\NormalTok{, }\AttributeTok{col =} \DecValTok{4}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(}\AttributeTok{x=}\FloatTok{23.5}\NormalTok{, }\AttributeTok{y=}\FloatTok{0.065}\NormalTok{, }\StringTok{"df = 20"}\NormalTok{)}
+\FunctionTok{title}\NormalTok{(}\AttributeTok{main =} \StringTok{"The chi{-}squared distribution of various degrees of freedom"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Supo1_files/figure-latex/unnamed-chunk-27-1} \end{center}
+
+\begin{quote}
+So we will use this definition to derive the sampling distribution of
+the variance estimator. \[
+U = \displaystyle\sum_{i=1}^nZ_i^2 = \displaystyle\sum_{i=1}^n\left(\frac{X_i-\mu}{\sigma}\right)^2
+\] Add and subtract \(\bar{X}\) in the numerator which would not change
+the value of \(U\): \[
+\begin{align*}
+U &=\displaystyle\sum_{i=1}^n\left(\frac{(X_i-\bar{X})+(\bar{X}-\mu)}{\sigma}\right)^2 \\[4pt]
+&=\displaystyle\sum_{i=1}^n\left(\frac{X_i-\bar{X}}{\sigma}\right)^2+\displaystyle\sum_{i=1}^n\left(\frac{\bar{X}-\mu}{\sigma}\right)^2 + 2\left(\frac{\bar{X}-\mu}{\sigma^2}\right)\displaystyle\sum_{i=1}^n(X_i-\bar{X})
+\end{align*}
+\] Since \(\sum_{i=1}^n(X_i-\bar{X}) = n\bar{X}-n\bar{X} = 0\), \(U\)
+becomes: \[
+U = \displaystyle\sum_{i=1}^n\frac{(X_i-\bar{X})^2}{\sigma^2}+\displaystyle\sum_{i=1}^n\frac{(\bar{X}-\mu)^2}{\sigma^2}
+\] Now, recall from Question 2(b) that the ``bias-corrected variance
+estimator'' is: \[
+\begin{align*}
+S^2 &= \frac{1}{n-1} \displaystyle\sum_{i=1}^n (X_i - \bar X_n)^2 \\[4pt]
+(n-1)S^2 &= \displaystyle\sum_{i=1}^n (X_i - \bar X_n)^2
+\end{align*}
+\] We can plug this into the expression for \(U\) and get: \[
+\begin{align*}
+U &= \displaystyle\sum_{i=1}^nZ_i^2 = \underbrace{\displaystyle\sum_{i=1}^n\left(\frac{X_i-\mu}{\sigma}\right)^2}_{\chi_n^2-\text{distribution}} = \displaystyle\sum_{i=1}^n\frac{(n-1)S^2}{\sigma^2}+\displaystyle\sum_{i=1}^n\frac{(\bar{X}-\mu)^2}{\sigma^2}\\[4pt]
+&=\frac{(n-1)S^2}{\sigma^2}+\underbrace{\frac{n(\bar{X}-\mu)^2}{\sigma^2}}_{\chi_1^2-\text{distribution}}
+\end{align*}
+\] The uniqueness property of moment-generating functions (not covered
+here) tells us that \[
+\frac{(n-1)S^2}{\sigma^2} = \frac{\sum_{i=1}^n(X_i-\bar{X})^2}{\sigma^2} \sim \chi_{n-1}^2.
+\]
+\end{quote}
+
+\begin{quote}
+\textbf{\emph{Note:}} Please note the difference between population and
+sample means: \[
+\frac{\sum_{i=1}^n(X_i-\mu)^2}{\sigma^2} \sim \chi_n^2 \\[8pt]
+vs.\\[8pt]
+\frac{\sum_{i=1}^n(X_i-\bar{X})^2}{\sigma^2} = \frac{(n-1)S^2}{\sigma^2} = \sim \chi_{n-1}^2
+\] In the first case we are adding up the squared differences from the
+population mean, \(\mu.\) In the second case we are adding up the
+squared differences from the sample mean, \(\bar{X}.\) Notice that when
+the population mean, \(\mu\), is unknown and when we are estimating it
+with \(\bar{X}\), we loose 1 degree of freedom.
+\end{quote}
+
+\[\\[0.5in]\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{(c)} Explain how you would conduct a test of the hypothesis that
+the variance of log wages is the same for males and females, stating the
+sampling distribution of the relevant statistic, and conduct such a
+test.
+
+\begin{quote}
+\textbf{Answer:} We want to test a a two-sample hypothesis that the
+population variances are the same:
+
+\(\hookrightarrow \mathbb{H}_0: \sigma_x^2 = \sigma_y^2\) against
+\(\mathbb{H}_1: \sigma_x^2 \neq \sigma_y^2.\)
+
+We will use F-test statistic for this hypothesis.
+\end{quote}
+
+\begin{quote}
+\textbf{\emph{The F Distribution}}
+
+Suppose that the random variables \(U_1\) and \(U_2\) each have
+chi-squared distribution with \(k_1\) and \(k_2\) degrees of freedom,
+respectively, i.e.~\(U_1 \sim \chi_{k_1}^2\) and
+\(U_2 \sim \chi_{k_2}^2\), and that \(U_1\) and \(U_2\) are independent.
+Then, the random variable \(F\) has an \(F\) distribution with
+\((k_1, k_2)\) degrees of freedom: \[
+F = \frac{\frac{U_1}{k_1}}{\frac{U_2}{k_2}} \sim F_{k_1,k_2}.
+\] We can see from this expression that each of the two independent
+chi-squared distributions are corrected for their respective degrees of
+freedom \(k_1\) and \(k_2\), that are commonly referred to as
+\emph{numerator degrees of freedom} and \emph{denominator degrees of
+freedom}, respectively. The F random variable is the ratio of these two
+corrected distributions, and itself has \(F_{k_1, k_2}\) distribution.
+
+The pdf of the F distribution is
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{df}\NormalTok{(x, }\AttributeTok{df1 =} \DecValTok{2}\NormalTok{, }\AttributeTok{df2 =} \DecValTok{4}\NormalTok{), }\AttributeTok{from =} \DecValTok{0}\NormalTok{, }\AttributeTok{to =} \DecValTok{3}\NormalTok{, }\AttributeTok{col =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(}\AttributeTok{x=}\FloatTok{0.27}\NormalTok{, }\AttributeTok{y=}\FloatTok{0.9}\NormalTok{, }\StringTok{"df = 2, 4"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{df}\NormalTok{(x, }\AttributeTok{df1 =} \DecValTok{4}\NormalTok{, }\AttributeTok{df2 =} \DecValTok{4}\NormalTok{), }\AttributeTok{from =} \DecValTok{0}\NormalTok{, }\AttributeTok{to =} \DecValTok{3}\NormalTok{, }\AttributeTok{col =} \DecValTok{2}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(}\AttributeTok{x=}\FloatTok{0.83}\NormalTok{, }\AttributeTok{y=}\FloatTok{0.54}\NormalTok{, }\StringTok{"df = 4, 4"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{df}\NormalTok{(x, }\AttributeTok{df1 =} \DecValTok{6}\NormalTok{, }\AttributeTok{df2 =} \DecValTok{18}\NormalTok{), }\AttributeTok{from =} \DecValTok{0}\NormalTok{, }\AttributeTok{to =} \DecValTok{3}\NormalTok{, }\AttributeTok{col =} \DecValTok{3}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(}\AttributeTok{x=}\FloatTok{0.87}\NormalTok{, }\AttributeTok{y=}\FloatTok{0.76}\NormalTok{, }\StringTok{"df = 6, 18"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{df}\NormalTok{(x, }\AttributeTok{df1 =} \DecValTok{18}\NormalTok{, }\AttributeTok{df2 =} \DecValTok{18}\NormalTok{), }\AttributeTok{from =} \DecValTok{0}\NormalTok{, }\AttributeTok{to =} \DecValTok{3}\NormalTok{, }\AttributeTok{col =} \DecValTok{4}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(}\AttributeTok{x=}\FloatTok{1.17}\NormalTok{, }\AttributeTok{y=}\FloatTok{0.9}\NormalTok{, }\StringTok{"df = 18, 18"}\NormalTok{)}
+\FunctionTok{title}\NormalTok{(}\AttributeTok{main =} \FunctionTok{expression}\NormalTok{(}\StringTok{"The F"}\NormalTok{[k[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{*}\StringTok{","}\NormalTok{[k[}\DecValTok{2}\NormalTok{]]}\SpecialCharTok{*}\StringTok{" distribution of various degrees of freedom, k"}\NormalTok{[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{*}\StringTok{", k"}\NormalTok{[}\DecValTok{2}\NormalTok{]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Supo1_files/figure-latex/unnamed-chunk-28-1} \end{center}
+
+\begin{quote}
+We can see that unlike the normal distribution, the pdf of
+F-distribution is not symmetric about any point. However, it approaches
+normal distribution as the degrees of freedom for the numerator and for
+the denominator get larger. Also, it is only defined for non-negative
+values. This is important for constructing confidence intervals and for
+conducting inference on the population variance \(\sigma^2.\)
+\end{quote}
+
+\begin{quote}
+We will now apply this definition of the F-distributed random variable F
+to our test \(\mathbb{H}_0:\sigma_x^2 = \sigma_y^2.\) For the purposes
+of this question, denote \(U_1\) and \(U_2\) from the definition as: \[
+U_1 = \frac{(n_x-1)S_x^2}{\sigma^2} \sim \chi_{n_x-1}^2 \quad , \quad 
+U_2 = \frac{(n_y-1)S_y^2}{\sigma^2} \sim \chi_{n_y-1}^2
+\] Notice that the degrees of freedom are not the same. \(U_1\) has
+\(k_1=n_x-1\) degrees of freedom and \(U_2\) has \(k_2=n_y-1\) degrees
+of freedom.
+
+Also note that \(\mathbb{E}(S_x^2)=\sigma_x^2\) and
+\(\mathbb{E}(S_y^2)=\sigma_y^2.\) So for our two-sample hypothesis that
+the population variances are the same means under \(\mathbb{H}_0\) the
+population variances are equal to the same number,
+\(\sigma_x^2 = \sigma_y^2 = \sigma^2.\)
+
+We apply the definition of the F-distributed random variable above to
+obtain the F-test statistic: \[
+F = \frac{\dfrac{U_1}{n_x-1}}{\dfrac{U_2}{n_y-1}} 
+= \frac{\dfrac{(n_x-1)S_x^2}{\sigma^2(n_x-1)}}{\dfrac{(n_y-1)S_y^2}{\sigma^2(n_y-1)}}
+= \frac{S_x^2}{S_y^2}
+\sim F_{n_x-1,n_y-1}.
+\] Once we calculate the F-statistic as the ratio of variance
+estimators, \(S_x^2/s_y^2\), we can compare it to the critical values of
+the \(F_{n_x-1,n_y-1}\) distribution.
+
+\textbf{Decision:} For the two-sided alternative,
+\(\mathbb{H}_1:\sigma_x^2 \neq \sigma_y^2\), we would reject the null at
+\(\alpha\) significance level if the sample test statistic \[
+F < F_{\frac{\alpha}{2}, (n_x-1), (n_y-1)} \quad
+\text{or} \quad
+F > F_{1-\frac{\alpha}{2}, (n_x-1), (n_y-1)}.
+\] Since F is nonsymmetrical and defined only for nonnegative values,
+\(x\ge 0\), we need to look up two critical values from the statistical
+tables: \(F_{\frac{\alpha}{2}, (n_x-1), (n_y-1)}\) and
+\(F_{1-\frac{\alpha}{2}, (n_x-1), (n_y-1)}\), if we have two-sided
+alternative.
+
+Lets calculate the F-statistic:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{var\_X}\SpecialCharTok{/}\NormalTok{var\_Y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9209199
+\end{verbatim}
+
+\begin{quote}
+\[
+\frac{S_x^2}{S_y^2} = \frac{0.3664}{0.3979} = 0.9209
+\] We need to compare this 0.9209 to two F critical values. For this, we
+will use \texttt{qf()} function:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k1 }\OtherTok{\textless{}{-}}\NormalTok{ n\_X }\SpecialCharTok{{-}} \DecValTok{1}
+\NormalTok{k2 }\OtherTok{\textless{}{-}}\NormalTok{ n\_Y }\SpecialCharTok{{-}} \DecValTok{1}
+\NormalTok{alpha }\OtherTok{\textless{}{-}} \FloatTok{0.05}
+\FunctionTok{qf}\NormalTok{(}\AttributeTok{p =}\NormalTok{ alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\AttributeTok{df1 =}\NormalTok{ k1, }\AttributeTok{df2 =}\NormalTok{ k2, }\AttributeTok{lower.tail =} \ConstantTok{TRUE}\NormalTok{) }\CommentTok{\# if lower.tail = TRUE, then the probability to the left of p is returned}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9079001
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qf}\NormalTok{(}\AttributeTok{p =}\NormalTok{ alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\AttributeTok{df1 =}\NormalTok{ k1, }\AttributeTok{df2 =}\NormalTok{ k2, }\AttributeTok{lower.tail =} \ConstantTok{FALSE}\NormalTok{) }\CommentTok{\# if lower.tail = FALSE, then the probability to the right of p is returned}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.101693
+\end{verbatim}
+
+\begin{quote}
+So at \(\alpha = 0.05\) our F-statistic of \(0.9209\) is neither greater
+than \(F_{0.975,1726,1568} = 1.1017\) nor less than
+\(F_{0.025,1726,1568} = 0.9079.\) Accordingly, we cannot reject the null
+hypothesis and state that:
+\end{quote}
+
+``\emph{With F-statistic of 0.9209 with (1726, 1568) degrees of freedom
+we cannot reject the null hypothesis that the variance of log wages is
+the same for males and females at \(\alpha = 5%
+\) significance level.}''
+
+\begin{quote}
+We can actually simplify this appraoch a bit. Since variances are
+strictly positive, one of the variance estimators will inevitably be
+larger than the other. As a result, it is more common to test
+\(\mathbb{H}_0\) against a one-sided alternative. For this, we find the
+sample variance that is larger than the other and formulate the
+alternative accordingly as the corresponding population variance also
+being larger.
+
+So, in this case, from Question 2(e) we know
+\(S_y^2 = 0.3979 > 0.3664 = S_x^2\). Therefore, the alternative is
+\(\mathbb{H}_1: \sigma_y^2 > \sigma_x^2.\) This way, we only need to
+look at the right tail of the \(F_{n_y-1,n_x-1}\) distribution and
+compare our F-statistic \(S_y^2/S_x^2\) to that single critical value.
+We would then reject the null hypothesis if F-statistic exceeds that
+critical value.
+
+Accordingly, our observed sample test statistic is now:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{var\_Y}\SpecialCharTok{/}\NormalTok{var\_X}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.085871
+\end{verbatim}
+
+\begin{quote}
+and the critical value for \(\alpha=0.5\) is
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qf}\NormalTok{(}\AttributeTok{p =}\NormalTok{ alpha, }\AttributeTok{df1 =}\NormalTok{ k2, }\AttributeTok{df2 =}\NormalTok{ k1, }\AttributeTok{lower.tail =} \ConstantTok{FALSE}\NormalTok{) }\CommentTok{\# since it is one sided, we do not divide alpha by 2, and we are interested in the probability of the right side of p. Also notice that we swapped the numerator and denominator degrees of freedom.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.084464
+\end{verbatim}
+
+\begin{quote}
+The test statistic \(1.0859\) is not larger than the critical value
+\$F\_\{0.95,1568,1726\} = 1.1215. So, we are unable to reject the null
+hyopthesis at \(\alpha=0.05\).
+\end{quote}
+
+\[\\[0.5in]\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{(d)} What would be your intuition about which variance should be
+larger? Why? Is that what the data bear out?
+
+\begin{quote}
+\textbf{Answer:} Given that the sample variance calculation uses sample
+size in the denominator, I would expect the smaller sample size to have
+a larger variance. The data does bear out this way as well. The sample
+size of hourly wages is 1569 for female and 1727 for male. The variances
+are 0.3979 and 0.3664, respectively.
+\end{quote}
+
+\end{document}
