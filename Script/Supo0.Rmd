@@ -4,7 +4,12 @@ title: "2023-24 Tripos IIA Paper 3"
 subtitle: Supervision 0
 output: html_document
 html_document:
-  number_sections: yes
+    toc: true
+  toc_float: true
+  toc_collapsed: true
+  toc_depth: 3
+  theme: lumen
+  number_sections: true
 ---
 
 <!-- This comment will not be displayed in the output. Below change to CSS style is to ensure the blocktexts are in the same form size as the rest of the text.-->
