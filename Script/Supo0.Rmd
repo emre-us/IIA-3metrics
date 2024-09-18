@@ -34,6 +34,7 @@ $$\\[0.25in]$$
 
 This is the theoretical justification for using **O**rdinary **L**east **S**quares (**OLS**). The theorem states that under a set of conditions known as the **Gauss-Markov conditions**, the OLS estimator is the **B**est **L**inear conditionally **U**nbiased **E**stimator (**BLUE**).
 
+
 ### OLS
 
 Consider the problem of finding the estimator $a$ that minimizes
@@ -202,7 +203,7 @@ $\hookrightarrow$
 $$\\[0.5in]$$
 
 
-#### The Least Squares Assumptions
+<h4>The Least Squares Assumptions</h4>
 
 For the multiple regression model $Y_i = \vec{X}_i^T \ \vec{\beta}+u_i, \ i=1,\dots,n$ there are six assumptions we consider here. The first one essentially expresses the idea that $X$ is randomly assigned in linear regression language. The second and third assumptions are extensions of the two assumptions underlying the weak law of large numbers and the central limit theorem. The fourth rules our multicollinearity, and the last two expresses the homoskedasticity and normal distribution of errors.
 
