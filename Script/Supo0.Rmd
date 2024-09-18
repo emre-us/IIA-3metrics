@@ -21,18 +21,337 @@ blockquote {
 
 $$\\[0.25in]$$
 
-# <center>**GAUSS-MARKOV THEOREM**</center>
+<center><h2>GAUSS-MARKOV THEOREM</h2></center>
 
-This is the theoretical justification for using Ordinary Least Squares (OLS). The Theorem states that under a set of conditions known as the **Gauss-Markov conditions**, the OLS estimator is the **B**est **L**inear conditionally **U**nbiased **E**stimator (**BLUE**).
+This is the theoretical justification for using **O**rdinary **L**east **S**quares (**OLS**). The theorem states that under a set of conditions known as the **Gauss-Markov conditions**, the OLS estimator is the **B**est **L**inear conditionally **U**nbiased **E**stimator (**BLUE**).
 
-## OLS
-Consider the problem of finding the estimator $b$ that minimizes
+<h3>OLS</h3>
+
+Consider the problem of finding the estimator $a$ that minimizes
 \[
-\sum_{i=1}^n
-(X_i-b)^2.
+\sum_{i=1}^n(X_i-a)^2.
 \]
 This is a measure of the total squared gap between the estimator $b$ and the sample points.
 <p style="margin-left: 40px">
 $\hookrightarrow$
-The gap $(X_i - b)$ can be thought of as a prediction mistake since $b$ is an estimator of $\mathbb{E}(X) and can be thought of as a prediction of the value of $X_i.$
+The gap $(X_i - a)$ can be thought of as a prediction mistake since $b$ is an estimator of $\mathbb{E}(X)$ and can be thought of as a prediction of the value of $X_i.$
 </p>
+
+
+The estimator $b$ that minimizes the sum of squared prediction mistakes is called the *least squares estimator*. To minimize this, we take its derivative and set it to 0:
+\[
+\frac{d}{db}\sum_{i=1}^n(X_i-a)^2 = -2\sum_{i=1}^n
+(X_i-a) = -2\sum_{i=1}^nX_i + 2na = 0.
+\]
+
+This would be equal to 0 when $a=\frac{1}{n}\sum_{i=1}^nX_i=\bar{X}.$ This means $a=\bar{X}$ minimizes the sum of squared prediction mistakes, and therefore $\bar{X}$ is the least squares estimator of population mean, $\mu_X$.
+
+
+The OLS estimator extends this idea to the linear regression model. Consider the linear regression model $Y_i = \beta_0 + \beta_1X_i + u_i,$ and let $b_0$ and $b_1$ be some estimators of $\beta_0$ and $\beta_1$. The value of $Y_i$ is then predicted by the line $b_0+b_1X_i.$
+
+
+The prediction mistake for the $i^{th}$ observation is $Y_i-(b_0+b_1X_i)=Y_i-b_0-b_1X_i.$ The sum of these squared prediction mistakes over all n observations is:
+\[
+\sum_{i=1}^n(Y_i-b_0-b_1X_i)^2.
+\]
+
+This is the extension of the sum of squared mistakes in estimating the mean applied to linear regression model. In fact, if there is no regressor $b_1$ then the two are identical except for the notation.
+
+As is the case with $\bar{X}$ being the unique estimator that minimizes $\sum_{i=1}^n(X_i-a)^2$, there is also a unique pair of estimators that minimize $\sum_{i=1}^n(Y_i-b_0-b_1X_i)^2$. The estimators $\widehat{\beta}_0$ and $\widehat{\beta}_1$ that minimize the intercept $\beta_0$ and slope $\beta_1$ are called **o**rdinary **l**east **s**quares (**OLS**) estimators of $\beta_0$ and $\beta_1$.
+
+
+As before, to minimize, we take partial derivatives with respect to $b_0$ and $b_1$ and set them to 0:
+\[
+\frac{\partial}{\partial b_0}\sum_{i=1}^n(Y_i-b_0-b_1X_i)^2 = -2\sum_{i=1}^n(Y_i-b_0-b_1X_i) = 0 \\[4pt]
+\frac{\partial}{\partial b_1}\sum_{i=1}^n(Y_i-b_0-b_1X_i)^2 = -2\sum_{i=1}^n(Y_i-b_0-b_1X_i)X_i = 0
+\]
+Rearranging the terms and dividing by $n$ shows thta the OLS estimators $\widehat{\beta}_0$ and $\widehat{\beta}_1$ need to satisfy the following two equations
+\[
+\begin{align*}
+\bar{Y} - \widehat{\beta}_0 - \widehat{\beta}_1\bar{X} &= 0 \\[4pt]
+\frac{1}{n}\sum_{i=1}^nX_iY_i-\widehat{\beta}_0\bar{X}-\widehat{\beta}_1\frac{1}{n}\sum_{i=1}^nX_i^2 &= 0
+\end{align*}
+\]
+Solving these for $\widehat{\beta}_0$ and $\widehat{\beta}_1$ gives:
+\[
+\widehat{\beta}_0=\bar{Y}-\widehat{\beta}_1\bar{X}\\[4pt]
+\text{and} \\[4pt]
+\widehat{\beta}_1 = \frac{\dfrac{1}{n}\displaystyle\sum_{i=1}^nX_iY_i-\bar{X}\bar{Y}}{\dfrac{1}{n}\displaystyle\sum_{i=1}^nX_i^2-\bar{X}^2} = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}.
+\]
+Notice that if we divide the numerator and the denominator of the expression for $\widehat{\beta}_1$ by $n-1$, we can also express it as:
+\[
+\widehat{\beta}_1 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} = \frac{S_{XY}}{S_X^2}.
+\]
+So, the OLS predicted values $\widehat{Y}_i$ is:
+\[
+\widehat{Y}_i=\widehat{\beta}_0+\widehat{\beta}_0X_i=\left(\bar{Y}-\widehat{\beta}_1\bar{X}\right)+\left(\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}\right)X_i \ , \ \text{for} \ i=1,\dots,n,
+\]
+The difference between $Y_i$ and its predicted value is then the *residual* for the $i^{th}$ observation:
+\[
+\widehat{u}_i=Y_i-\widehat{Y}_i = Y_i - \widehat{\beta}_0-\widehat{\beta}_1X_i \ , \ \text{for} \ i=1,\dots,n.
+\]
+The intercept $\widehat{\beta}_0$, slope $\widehat{\beta}_1$, and residual $\widehat{u}_i$ are estimated from a sample of $n$ observations of $X_i$ and $Y_i$. These are estimates of the *unknown* true population intercept $\beta_0$, slope $\beta_1$, and error term $u_i$.
+
+
+$$\\[1in]$$
+
+
+<h4>OLS Estimator in Multiple Regression</h4>
+
+We can extend the above discussion to multiple regression model $Y_i=\beta_0+\beta_1X_{1i}+\beta_2X_{2i}+\dots+\beta_kX_{ki}+u_i$ with $i=1,\dots,n$ whereby the sum of the squared mistakes over n observations is
+\[
+\sum_{i=1}^n(Y_i-b_0-b_1X_{1i}-b_2X_{2i}-\dots-b_kX_{ki})^2.
+\]
+
+This is easier to express and work with in matrix notation so define the following vectors and matrices:
+\[
+\vec{Y} = \begin{pmatrix}
+Y_1 \cr
+Y_2 \cr
+\vdots \cr
+Y_n
+\end{pmatrix} 
+\ , \
+\vec{\beta} = \begin{pmatrix}
+\beta_0 \cr
+\beta_1 \cr
+\vdots \cr
+\beta_k
+\end{pmatrix} 
+\ , \
+\mathbf{X} = \begin{bmatrix}
+1 & X_{11} & \dots & X_{k1} \cr
+1 & X_{12} & \dots & X_{k2} \cr
+\vdots & \vdots & \ddots & \vdots \cr
+1 & X_{1n} & \dots & X_{kn}
+\end{bmatrix}
+= \begin{pmatrix}
+\vec{X}_1^T \cr
+\vec{X}_2^T \cr
+\vdots \cr
+\vec{X}_n^T
+\end{pmatrix} 
+\ , \
+\text{and} 
+\ , \
+\vec{U}= \begin{pmatrix}
+u_1 \cr
+u_2 \cr
+\vdots \cr
+u_n
+\end{pmatrix}
+\]
+
+- $\vec{Y}$ is the $n \times 1$ dimensional vector of n observations on the dependent variable
+- $\vec{\beta}$ is the $(k+1)\times 1$ dimensional vector of the $k+1$ unknown regression coefficients
+- \mathbf{X} is the $n \times (k+1)$ dimensional matrix of $n$ observations on the $k+1$ regressors that include the 'constant' regressor for the intercept
+  * $\vec{X}_i^T=(1 \ \ X_{1i} \ \ \dots \ \ X_{ki})$ is the transpose of the $(k+1)\times 1$ dimensional column vector $\vec{\mathbf{X}}_i$, which is the $i^{th}$ observation of the $k+1$ regressors
+- $\vec{U}$ is the $n\times 1$ dimensional vector of the $n$ error terms.
+
+
+The multiple regression model for the $i^{th}$ observation is then written as
+\[
+Y_i = \vec{X}_i^T \ \vec{\beta}+u_i \ , \ i=1,\dots,n.
+\]
+<p style="margin-left: 40px">
+$\hookrightarrow$
+Notice that the first regressor is the 'constant' regressor that is always 1, and its coefficient is the intercept. So the intercept does not appear separately in this equation but it is the first element of the coefficient vector $\vec{\beta}$.
+</p>
+
+
+If we stack all $n$ observations then we get the multiple regression model in matrix form:
+\[
+\vec{Y} = \mathbf{X}\vec{\beta}+\vec{U}.
+\]
+
+Now we can take the derivative of the sum of squared prediction mistakes with respect to each element of the coefficient vector and set these derivatives to 0. We can then solve for the estimator $\widehat{\vec{\beta}}.$.
+
+
+Consider the $j^{th}$ regression coefficient $b_j$. The derivative of the sum of squared prediction mistakes with respect to that regression coefficient is:
+\[
+\frac{\partial}{\partial b_j}\sum_{i=1}^n(Y_i-b_0-b_1X_{1i}-b_2X_{2i}-\dots-b_kX_{ki})^2 = -2\sum_{i=1}^n(Y_i-b_0-b_1X_{1i}-b_2X_{2i}-\dots-b_kX_{ki})X_{ji} \\ \text{for} \ , \ j=0,\dots,k.
+\]
+Notice that for $j=0, \ X_{0i}=1$ for all $i$. The right hand side of this equality is the $j^{th}$ element of the $k+1$ dimensional vector $-2\vec{X}^T(\vec{Y}-\mathbf{X}\vec{b}).$ Here, $\vec{b}$ is the $k+1$ dimensional vector consisting of $b_0,\dots,b_k$.
+
+There are $k+1$ such derivatives, each corresponding to an element of $\vec{b}$. If we combine all of them, then we get the system of $k+1$ equations that, when set to 0, constitute the first-order conditions for the OLS estimator $\widehat{\vec{\beta}}$. That is, $\widehat{\vec{\beta}}$ solves the system of $k+1$ equations:
+\[
+\vec{X}^T(\vec{Y}-\mathbf{X}\widehat{\vec{\beta}}) = \vec{0}_{k+1} \\
+\text{or} \\
+\vec{X}^T\vec{Y}=\vec{X}^T\mathbf{X}\widehat{\vec{\beta}}
+\]
+Solving this system of equations yields the OLS estimator in matrix form:
+\[
+\widehat{\vec{\beta}}=\left(\vec{X}^T\mathbf{X}\right)^{-1}\vec{X}^T\vec{Y}.
+\]
+<p style="margin-left: 40px">
+$\hookrightarrow$
+*Note:* If the matrix $\mathbf{X}$ does not have full column rank then there is not a unique solution to $\vec{X}^T(\vec{Y}-\mathbf{X}\widehat{\vec{\beta}}) = \vec{0}_{k+1}$, and $\widehat{\vec{\beta}}$ cannot be computed.
+</p>
+
+
+
+$$\\[0.5in]$$
+
+
+<h4>The Least Squares Assumptions</h4>
+
+For the multiple regression model $Y_i = \vec{X}_i^T \ \vec{\beta}+u_i, \ i=1,\dots,n$ there are six assumptions we consider here. The first one essentially expresses the idea that $X$ is randomly assigned in linear regression language. The second and third assumptions are extensions of the two assumptions underlying the weak law of large numbers and the central limit theorem. The fourth rules our multicollinearity, and the last two expresses the homoskedasticity and normal distribution of errors.
+
+$$\\[0.25in]$$
+<h5><ins>Assumption 1</ins>: $\mathbb{E}(u_i | \vec{X}_i)=0$</h5>
+
+This is the key assumption that makes the OLS estimators unbiased. It states that given $\vec{X}_i$, the conditional distribution of $u_i$ has a mean of $0$. This assumption expresses the idea that there may be other factors that impact the dependent variable but these other factors are unrelated to $\vec{X}_i$. What is meant by 'unrelated' here is that given a value of $\vec{X}_i$, the mean distribution of these other factors is $0$.
+
+To see this, recall the definitions of conditional expectation, covariance, and correlation:
+\[
+\begin{align*}
+\mathbb{E}(Y|X=x) &= \sum_{i=1}^ny_i\mathbb{P}(Y=y_i|X=x_i) \\[6pt]
+Cov(X, Y) &= \mathbb{E}\left([X-\mathbb{E}(X)][Y-\mathbb{E}(Y)]\right) = \mathbb{E}(XY)-\mathbb{E}(X)\mathbb{E}(Y) \\[6pt]
+Corr(X,Y) &= \frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}
+\end{align*}
+\]
+where $\mathbb{P}(Y=y|X=x)$ is the conditional probability that $Y$ takes on the value $y$ when $X$ takes on the value $x$, and is expressed as:
+\[
+\mathbb{P}(Y=y|X=x) = \frac{\mathbb{P}(X=x, Y=y)}{\mathbb{P}(X=x)}.
+\]
+
+
+So if $Cov(X,Y)=0$ then $Corr(X,Y)=0$, and we can typically say $X$ and $Y$ are *uncorrelated*. So, if $X$ and $Y$ are independent with finite variances, then $X$ and $Y$ are uncorrelated.
+<p style="margin-left: 40px">
+$\hookrightarrow$
+*Note:* The reverse is not true. For example, suppose $X\sim U[-1,1]$. This is symmetrically distributed about 0, so $\mathbb{E}(X)=0$. Set $Y=X^2$. Then, $Cov(X,Y)=\mathbb{E}(X^3)-\mathbb{E}(X)\mathbb{E}(X^2) = 0$ since $\mathbb{E}(X^3)=0$. Therefore, $X$ and $Y$ are uncorrelated, yet they are fully dependent. Thus, uncorrelated random variables may be dependent. 
+</p>
+
+
+Now suppose $\mathbb{E}(X)=\mu_X$ and $\mathbb{E}(Y)=\mu_Y$ so that $Cov(X,Y) = \mathbb{E}(XY) - \mu_X\mu_Y.$ To determine $\mathbb{E}(XY)$ we will use the law of iterated expectations:
+\[
+\mathbb{E}(XY) = \mathbb{E}(\mathbb{E}(XY|X)) = \mathbb{E}(\mathbb{E}(Y|X)X) = \mu_Y\mathbb{E}(X)=\mu_Y\mu_X
+\]
+So, $Cov(X,Y) = \mu_X\mu_Y - \mu_X\mu_Y = 0.$
+
+<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
+> <p>***Law of Iterated Expectations***</p>
+> 
+The Law of Iterated Expectations state that if $\mathbb{E}(Y) < \infty$ then $\mathbb{E}(\mathbb{E}(Y|X)) = \mathbb{E}(Y)$. That is, the expectation of $Y$ is the expectation of the conditional expectation of $Y$ given $X$. This is because we treat $\mathbb{E}(Y|X)$ itself as a random variable, so we can consider the expectation of that conditional expectation. 
+>
+> 
+Stated differently, if we obtain $\mathbb{E}(Y|X)$ as a function of $X$ and then take the expected value of this with respect to the distribution of $X$, then we get $\mathbb{E}(Y).$
+>
+>
+The law of iterated expectations implies that if the conditional mean of $Y$ given $X$ is $0$, then the mean of $Y$ is $0$. This is because if $\mathbb{E}(Y|X) = 0$, then $\mathbb{E}(Y) = \mathbb{E}(\mathbb{E}(Y|X)) = \mathbb{E}(0) = 0$. That is, if the mean of $Y$ given $X$ is $0$, then it must be that the probability-weighted average of these conditional means is $0$, and thus the mean of $Y$ must be $0$.
+>
+> 
+The law of iterated expectations can be generalized to multiple random variables. For example, let $X, Y, Z$ be random variables that are jointly distributed. Then the law of iterated expectations says that $\mathbb{E}(Y) = \mathbb{E}(\mathbb{E}(Y|X,Z))$ and that $\mathbb{E}(Y|X) = \mathbb{E}(\mathbb{E}(Y|X,Z)|X).$ That is, we can find $\mathbb{E}(Y|X)$ in two steps. First, find $\mathbb{E}(Y|X,Z)$ for random variable $Z$. Second, find the expected value of $\mathbb{E}(Y|X,Z)$, conditional on $X$.
+
+</div>
+
+
+Therefore the conditional mean assumption $\mathbb{E}(u_i | \vec{X}_i)=0$ implies that $u_i$ and $\vec{X}_i$ are uncorrelated, i.e. $Corr(u_i, \vec{X}_i)=0$.
+<p style="margin-left: 40px">
+$\hookrightarrow$
+Note that the reverse is not necessarily true. Since correlation is a measure of *linear* association, the conditional mean of $u_i$ given $\vec{X}_i$ might be nonzero even if $u_i$ and $\vec{X}_i$ are uncorrelated.
+</p>
+<p style="margin-left: 40px">
+$\hookrightarrow$
+However, if $u_i$ and $\vec{X}_i$ are correlated, then it must be that $\mathbb{E}(u_i|X_i) \neq 0.$
+</p>
+
+
+It is therefore common to discuss the conditional mean assumption in terms of possible correlation between $u_i$ and $\vec{X}_i$. If they are correlated, then the conditional mean assumption is violated.
+
+
+In observational data, $\vec{X}$ is not necessarily randomly assigned but we hope that it behaves as if it was randomly assigned, meaning $\mathbb{E}(u_i | \vec{X}_i)=0$. Whether this holds requires careful thought and judgment and we will come back to this issue frequently.
+
+
+
+
+$$\\[0.25in]$$
+<h5><ins>Assumption 2</ins>: $(\vec{X}_i,Y_i)$ are i.i.d. draws from their joint distribution</h5>
+
+This assumption states that $(X_{1i},X_{2i},\dots,X_{ki},Y_i) \ , \ i=1,\dots,n$ are independently and identically distributed (i.i.d.) random variables. This assumption holds automatically if the data are collected by simple random sampling.
+p style="margin-left: 40px">
+$\hookrightarrow$
+In time series data observations falling close to each other in time are usually correlated with each other, violating the "independence" part of the iid assumption.
+
+
+
+$$\\[0.25in]$$
+
+<h5><ins>Assumption 3</ins>: $\vec{X}_i$ and $u_i$ have nonzero finite fourth moment</h5>
+
+This assumption is effectively stating that large outliers are unlikely. By stating that $0 < \mathbb{E}(\vec{X}_i^4) < \infty$ and $0 < \mathbb{E}(Y_i^4) < \infty$ it states that $\vec{X}$ and $Y$ have finite kurtosis. If the assumption of finite fourth moments holds then it is unlikely that statistical inferences using OLS will be dominated by a few observations. Thus, the OLS estimator of the coefficients in the multiple regression model can be sensitive to large outliers.
+
+$$\\[0.25in]$$
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
+> Under these *three assumptions* the OLS estimator is **unbiased**,**consistent**, and has a **normal sampling distribution** in large samples. If these three assumptions hold, and the sample size is large, then the methods for inference (hypothesis testing using the t-statistic and construction of 95% confidence intervals as $\pm 1.96$ standard errors) are justified.
+>
+>
+However, we need stronger assumptions to develop a theory of *efficient* estimation using OLS or to characterize the exact sampling distribution of the OLS estimator.
+</div>
+
+
+
+
+
+$$\\[0.25in]$$
+
+<h5><ins>Assumption 4</ins>: $\mathbf{X}$ has full column rank (i.e. no perfect multicollinearity)</h5>
+
+Presence of perfect multicollinearity would make it impossible to calculate the OLS estimator. The regressors are said to exhibit perfect multicollinearity if one of the regressors is a perfect linear function of the other regressors. That is, one regressor can be written as a perfect linear combination of the others. 
+
+
+In matrix notation, perfect multicollinearity means that one column of $\mathbf{X}$ is a perfect linear combination of the other columns of $\mathbf{X}$, therefore $\mathbf{X}$ does not have full column rank. Therefore, stating that $\mathbf{X}$ has rank $k+1$, or that rank is equal to the number of columns of $\mathbf{X}$, is the same as saying that the regressors are not perfectly multicollinear.
+
+
+When perfect multicollinearity occurs, it often reflects a logical mistake in choosing the regressors (perhaps accidentally choosing the same regressor twice), or some previously unrecognized feature of the data set. In general, the solution to perfect multicollinearity is to modify the regressors to eliminate the problem.
+
+
+Also note that imperfect multicollinearity is not a problem for the theory of OLS estimators. Imperfect multicollinearity means that two or more of the regressors are highly correlated, i.e. there is a linear function of the regressors that is highly correlated with another regressor. If the variables in the regression are the ones we meant to include then imperfect multicollinearity implies that it will be difficult to estimate precisely one or more of the partial effects using the data.
+
+
+
+
+$$\\[0.25in]$$
+
+<h5><ins>Assumption 5</ins>: Homoskedasticity $Var(u_i|\vec{X}_i)=\sigma_u^2$ </h5>
+
+The error term $u_i$ is *homoskedastic* if the variance of the conditional distribution of $u_i$ given $\vec{X}_i$ is constant for $i=1,\dots,n$, and it does not depend on $\vec{X}_i$. Otherwise the error term is *heteroskedastic*.
+
+
+The homoskedasticity assumption is distinct from the zero conditional mean assumption $\mathbb{E}(u_i | \vec{X}_i)=0$ discussed in Assumption 1 above. Assumption 1 involves the *expected value* of $u_i$ conditional on $\vec{X}_i$, whereas this Assumption 5 concerns the *variance* of $u_i$ conditional on $\vec{X}_i.$
+
+
+If we assume that $u_i$ and $\vec{X}_i$ are independent, then the distribution of $u_i$ given $\vec{X}_i$ does not depend on $\vec{X}_i$. Accordingly, $\mathbb{E}(u_i|\vec{X}_i)=\mathbb{E}(u_i)=0$ and $Var(u_i|\vec{X}_i)=\sigma_u^2.$
+
+
+This, in turn, means that $\sigma_u^2$ is also the *unconditional expectation* of $u_i^2$ because $\sigma_u^2=Var(u_i|\vec{X}_i) = \mathbb{E}\left(u_i^2|\vec{X}_i^2\right) - \left(\mathbb{E}(u_i|\vec{X}_i)\right)^2$, and since $\mathbb{E}(u_i|\vec{X}_i)=\mathbb{E}(u_i)=0$, this expression simplifies to $\sigma_u^2=Var(u_i|\vec{X}_i) = \mathbb{E}\left(u_i^2|\vec{X}_i^2\right)-0.$ Since $u_i$ and $\vec{X}_i$ are independent, and $\mathbb{E}(u_i)=0$, we therefore have $\sigma_u^2=\mathbb{E}(u_i^2|\vec{X}_i)=\mathbb{E}(u_i^2)=Var(u_i).$
+
+
+In other words, $\sigma_u^2$ is the *unconditional variance* of $u_i$. Accordingly, $\sigma_u^2$ is often called the *error variance* or *disturbance variance*.
+
+
+It is often useful to also write Assumption 1 and this Assumption 5 not in terms of the erorr term but in terms of the conditional mean and conditional variance of $Y_i$:
+\[
+\mathbb{E}(Y_i|\vec{X_i})=\vec{X}_i\vec{\beta}_i \\
+Var(Y_i|\vec{X}_i) = \sigma_u^2.
+\]
+That is, the conditional expectation of $Y_i$ given $\vec{X}_i$ is linear in $\vec{X}_i$, but the variance of $Y_i$ given $\vec{X}_i$ is constant.
+
+
+A point to note is that the nature of skedasticity concerns with the conditional variance and not the unconditional variance. By definition, the unconditional variance $\sigma_u^2$ is a constant and is independent of the regressors $\vec{X}_i$. So in discussing the variance as a function of the regressors, it refers to conditional variance.
+
+
+When $Var(u_i|\vec{X}_i)$ depends on $\vec{X}_i$, the error term is said to exhibit heteroskedasticity. Also note that heteroskedasticity is present whenever $Var(Y_i|\vec{X}_i)$ is a function of $\vec{X}_i$ because $Var(u_i|\vec{X}_i)=Var(Y_i|\vec{X}_i).$
+
+
+*Important:* Homoskedasticity assumption plays <ins>no role</ins> in showing that $\widehat{\vec{\beta}}$ are unbiased. That is, the OLS estimators remain unbiased, consistent, and asymptotically normal irrespective of whether the errors are homoskedastic or not.
+
+
+*Note:* The correct way of spelling 'homoskedasticity' and 'heteroskedasticity' is with 'k', despite some textbooks spelling it with 'c'. This is because the words derived into English from Greek roots. $\sigma\kappa\epsilon\delta\alpha\nu\nu\upsilon\mu\iota$, means "to scatter" and transliterated into English with 'k', while $\omicron\mu\omicron\iota\omicron\zeta$ means "same" and $\epsilon\tau\epsilon\rho\omicron$ means "other" or "different". See McCulloch, J Huston (1985) "On heteros*edasticity" Econometrica 53, 483 and Hansen, Bruce E (2022) Econometrics, Princeton University Press, 29-30. 
+
+
+$$\\[0.25in]$$
+
+<h5><ins>Assumption 6</ins>: Conditional distribution of $u_i$ given $\vec{X}_i$ is normal (normal errors)</h5>
+
+The distribution of $(u_i|\vec{X}_i)$ has a mean $0$ by virtue of Assumption 1, and variance of $Var(u_i|\vec{X}_i)$. That is, $(u_i|\vec{X}_i) \sim N(0, Var(u_i|\vec{X}_i)).$ Since the discussion in Assumption 5 showed that $Var(u_i|\vec{X}_i)=\sigma_u^2$, the conditional distribution becomes: $(u_i|\vec{X}_i) \sim N(0, \sigma_u^2).$ Also, $u_i$ and $\vec{X}_i$ are independently distributed since the conditional distribution of $(u_i|\vec{X}_i)$ does not depend on $\vec{X}_i$. Additionally, due to Assumption 2, $u_i$ is distributed independently of $u_j$ for all $j\neq i$. Therefore, uner Assumptions 1,2,5, and 6, $u_i$ and $\vec{X}_i$ are independently distributed and $u_i \sim i.i.d. N(0,\sigma_u^2).$  
