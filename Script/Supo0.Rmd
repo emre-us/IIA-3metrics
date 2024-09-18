@@ -2,14 +2,14 @@
 author: "Emre Usenmez - github.com/emre-us"
 title: "2023-24 Tripos IIA Paper 3"
 subtitle: Supervision 0
-output: html_document
-html_document:
+output:
+  html_document:
     toc: true
-  toc_float: true
-  toc_collapsed: true
-  toc_depth: 3
-  theme: lumen
-  number_sections: true
+    toc_float:
+      collapsed: false
+    toc_depth: 5
+    theme: spacelab
+    number_sections: false
 ---
 
 <!-- This comment will not be displayed in the output. Below change to CSS style is to ensure the blocktexts are in the same form size as the rest of the text.-->
@@ -21,16 +21,20 @@ blockquote {
     font-size: 14px;
     border-left: 5px solid #eee;
 }
+
+h1, h2 {
+text-align: center;
+}
 ```
 
 
 $$\\[0.25in]$$
 
-<center><h2>GAUSS-MARKOV THEOREM</h2></center>
+## GAUSS-MARKOV THEOREM
 
 This is the theoretical justification for using **O**rdinary **L**east **S**quares (**OLS**). The theorem states that under a set of conditions known as the **Gauss-Markov conditions**, the OLS estimator is the **B**est **L**inear conditionally **U**nbiased **E**stimator (**BLUE**).
 
-<h3>OLS</h3>
+### OLS
 
 Consider the problem of finding the estimator $a$ that minimizes
 \[
@@ -101,7 +105,7 @@ The intercept $\widehat{\beta}_0$, slope $\widehat{\beta}_1$, and residual $\wid
 $$\\[1in]$$
 
 
-<h4>OLS Estimator in Multiple Regression</h4>
+#### OLS Estimator in Multiple Regression
 
 We can extend the above discussion to multiple regression model $Y_i=\beta_0+\beta_1X_{1i}+\beta_2X_{2i}+\dots+\beta_kX_{ki}+u_i$ with $i=1,\dots,n$ whereby the sum of the squared mistakes over n observations is
 \[
@@ -198,7 +202,7 @@ $\hookrightarrow$
 $$\\[0.5in]$$
 
 
-<h4>The Least Squares Assumptions</h4>
+#### The Least Squares Assumptions
 
 For the multiple regression model $Y_i = \vec{X}_i^T \ \vec{\beta}+u_i, \ i=1,\dots,n$ there are six assumptions we consider here. The first one essentially expresses the idea that $X$ is randomly assigned in linear regression language. The second and third assumptions are extensions of the two assumptions underlying the weak law of large numbers and the central limit theorem. The fourth rules our multicollinearity, and the last two expresses the homoskedasticity and normal distribution of errors.
 
@@ -271,7 +275,7 @@ In observational data, $\vec{X}$ is not necessarily randomly assigned but we hop
 
 
 $$\\[0.25in]$$
-<h5><ins>Assumption 2</ins>: $(\vec{X}_i,Y_i)$ are i.i.d. draws from their joint distribution</h5>
+##### <ins>Assumption 2</ins>: $(\vec{X}_i,Y_i)$ are i.i.d. draws from their joint distribution
 
 This assumption states that $(X_{1i},X_{2i},\dots,X_{ki},Y_i) \ , \ i=1,\dots,n$ are independently and identically distributed (i.i.d.) random variables. This assumption holds automatically if the data are collected by simple random sampling.
 p style="margin-left: 40px">
@@ -282,7 +286,7 @@ In time series data observations falling close to each other in time are usually
 
 $$\\[0.25in]$$
 
-<h5><ins>Assumption 3</ins>: $\vec{X}_i$ and $u_i$ have nonzero finite fourth moment</h5>
+##### <ins>Assumption 3</ins>: $\vec{X}_i$ and $u_i$ have nonzero finite fourth moment
 
 This assumption is effectively stating that large outliers are unlikely. By stating that $0 < \mathbb{E}(\vec{X}_i^4) < \infty$ and $0 < \mathbb{E}(Y_i^4) < \infty$ it states that $\vec{X}$ and $Y$ have finite kurtosis. If the assumption of finite fourth moments holds then it is unlikely that statistical inferences using OLS will be dominated by a few observations. Thus, the OLS estimator of the coefficients in the multiple regression model can be sensitive to large outliers.
 
@@ -300,7 +304,7 @@ However, we need stronger assumptions to develop a theory of *efficient* estimat
 
 $$\\[0.25in]$$
 
-<h5><ins>Assumption 4</ins>: $\mathbf{X}$ has full column rank (i.e. no perfect multicollinearity)</h5>
+##### <ins>Assumption 4</ins>: $\mathbf{X}$ has full column rank (i.e. no perfect multicollinearity)
 
 Presence of perfect multicollinearity would make it impossible to calculate the OLS estimator. The regressors are said to exhibit perfect multicollinearity if one of the regressors is a perfect linear function of the other regressors. That is, one regressor can be written as a perfect linear combination of the others. 
 
@@ -318,7 +322,7 @@ Also note that imperfect multicollinearity is not a problem for the theory of OL
 
 $$\\[0.25in]$$
 
-<h5><ins>Assumption 5</ins>: Homoskedasticity $Var(u_i|\vec{X}_i)=\sigma_u^2$ </h5>
+##### <ins>Assumption 5</ins>: Homoskedasticity $Var(u_i|\vec{X}_i)=\sigma_u^2$
 
 The error term $u_i$ is *homoskedastic* if the variance of the conditional distribution of $u_i$ given $\vec{X}_i$ is constant for $i=1,\dots,n$, and it does not depend on $\vec{X}_i$. Otherwise the error term is *heteroskedastic*.
 
@@ -357,6 +361,6 @@ When $Var(u_i|\vec{X}_i)$ depends on $\vec{X}_i$, the error term is said to exhi
 
 $$\\[0.25in]$$
 
-<h5><ins>Assumption 6</ins>: Conditional distribution of $u_i$ given $\vec{X}_i$ is normal (normal errors)</h5>
+##### <ins>Assumption 6</ins>: Conditional distribution of $u_i$ given $\vec{X}_i$ is normal (normal errors)
 
 The distribution of $(u_i|\vec{X}_i)$ has a mean $0$ by virtue of Assumption 1, and variance of $Var(u_i|\vec{X}_i)$. That is, $(u_i|\vec{X}_i) \sim N(0, Var(u_i|\vec{X}_i)).$ Since the discussion in Assumption 5 showed that $Var(u_i|\vec{X}_i)=\sigma_u^2$, the conditional distribution becomes: $(u_i|\vec{X}_i) \sim N(0, \sigma_u^2).$ Also, $u_i$ and $\vec{X}_i$ are independently distributed since the conditional distribution of $(u_i|\vec{X}_i)$ does not depend on $\vec{X}_i$. Additionally, due to Assumption 2, $u_i$ is distributed independently of $u_j$ for all $j\neq i$. Therefore, uner Assumptions 1,2,5, and 6, $u_i$ and $\vec{X}_i$ are independently distributed and $u_i \sim i.i.d. N(0,\sigma_u^2).$  
