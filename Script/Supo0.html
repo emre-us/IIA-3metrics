@@ -1535,10 +1535,10 @@ text-align: center;
 <strong>S</strong>quares (<strong>OLS</strong>). The theorem states that
 under a set of conditions known as the <strong>Gauss-Markov
 conditions</strong>, the OLS estimator is the <strong>B</strong>est
-<strong>L</strong>inear conditionally <strong>U</strong>nbiased
+<strong>L</strong>inear <strong>U</strong>nbiased
 <strong>E</strong>stimator (<strong>BLUE</strong>).</p>
 <div id="ols" class="section level3">
-<h3>OLS</h3>
+<h3>1. OLS</h3>
 Consider the problem of finding the estimator <span class="math inline">\(a\)</span> that minimizes <span class="math display">\[
 \sum_{i=1}^n(X_i-a)^2.
 \]</span> This is a measure of the total squared gap between the
@@ -1604,12 +1604,18 @@ the expression for <span class="math inline">\(\widehat{\beta}_1\)</span> by <sp
 \widehat{\beta}_1 =
 \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}
 = \frac{S_{XY}}{S_X^2}.
-\]</span> So, the OLS predicted values <span class="math inline">\(\widehat{Y}_i\)</span> is: <span class="math display">\[
-\widehat{Y}_i=\widehat{\beta}_0+\widehat{\beta}_0X_i=\left(\bar{Y}-\widehat{\beta}_1\bar{X}\right)+\left(\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}\right)X_i
-\ , \ \text{for} \ i=1,\dots,n,
-\]</span> The difference between <span class="math inline">\(Y_i\)</span> and its predicted value is then the
-<em>residual</em> for the <span class="math inline">\(i^{th}\)</span>
-observation: <span class="math display">\[
+\]</span> So, the OLS predicted values <span class="math inline">\(\widehat{Y}_i\)</span> is: [<span class="math display">\[\begin{align*}
+\widehat{Y}_i = \widehat{\beta}_0 + \widehat{\beta}_1X_i
+&amp;=\left(\bar{Y}-\widehat{\beta}_1\bar{X}\right) +
+\widehat{\beta}_1X_i \ , \ \text{for} \ i=1,\dots,n \\[4pt]
+&amp;=\left(\bar{Y}-\left(\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}\right)\bar{X}\right)
++
+\left(\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}\right)X_i
+\\[4pt]
+&amp;=\bar{Y}-\frac{S_{XY}}{S_X^2}\bar{X} + \frac{S_{XY}}{S_X^2}X_i
+\end{align*}\]</span></p>
+<p>] The difference between <span class="math inline">\(Y_i\)</span> and
+its predicted value is then the <em>residual</em> for the <span class="math inline">\(i^{th}\)</span> observation: <span class="math display">\[
 \widehat{u}_i=Y_i-\widehat{Y}_i = Y_i -
 \widehat{\beta}_0-\widehat{\beta}_1X_i \ , \ \text{for} \ i=1,\dots,n.
 \]</span> The intercept <span class="math inline">\(\widehat{\beta}_0\)</span>, slope <span class="math inline">\(\widehat{\beta}_1\)</span>, and residual <span class="math inline">\(\widehat{u}_i\)</span> are estimated from a sample
@@ -1617,7 +1623,7 @@ of <span class="math inline">\(n\)</span> observations of <span class="math inli
 <em>unknown</em> true population intercept <span class="math inline">\(\beta_0\)</span>, slope <span class="math inline">\(\beta_1\)</span>, and error term <span class="math inline">\(u_i\)</span>.</p>
 <p><span class="math display">\[\\[1in]\]</span></p>
 <div id="ols-estimator-in-multiple-regression" class="section level4">
-<h4>OLS Estimator in Multiple Regression</h4>
+<h4>1.1. OLS Estimator in Multiple Regression</h4>
 <p>We can extend the above discussion to multiple regression model <span class="math inline">\(Y_i=\beta_0+\beta_1X_{1i}+\beta_2X_{2i}+\dots+\beta_kX_{ki}+u_i\)</span>
 with <span class="math inline">\(i=1,\dots,n\)</span> whereby the sum of
 the squared mistakes over n observations is <span class="math display">\[
@@ -1654,7 +1660,7 @@ Y_n
 \ , \
 \text{and}
 \ , \
-\vec{U}= \begin{pmatrix}
+\vec{u}= \begin{pmatrix}
 u_1 \cr
 u_2 \cr
 \vdots \cr
@@ -1677,7 +1683,7 @@ X_{ki})\)</span> is the transpose of the <span class="math inline">\((k+1)\times
 <span class="math inline">\(\vec{\mathbf{X}}_i\)</span>, which is the
 <span class="math inline">\(i^{th}\)</span> observation of the <span class="math inline">\(k+1\)</span> regressors</li>
 </ul></li>
-<li><span class="math inline">\(\vec{U}\)</span> is the <span class="math inline">\(n\times 1\)</span> dimensional vector of the <span class="math inline">\(n\)</span> error terms.</li>
+<li><span class="math inline">\(\vec{u}\)</span> is the <span class="math inline">\(n\times 1\)</span> dimensional vector of the <span class="math inline">\(n\)</span> error terms.</li>
 </ul>
 The multiple regression model for the <span class="math inline">\(i^{th}\)</span> observation is then written as
 <span class="math display">\[
@@ -1692,11 +1698,11 @@ coefficient vector <span class="math inline">\(\vec{\beta}\)</span>.
 </p>
 <p>If we stack all <span class="math inline">\(n\)</span> observations
 then we get the multiple regression model in matrix form: <span class="math display">\[
-\vec{Y} = \mathbf{X}\vec{\beta}+\vec{U}.
+\vec{Y} = \mathbf{X}\vec{\beta}+\vec{u}.
 \]</span></p>
 <p>Now we can take the derivative of the sum of squared prediction
 mistakes with respect to each element of the coefficient vector and set
-these derivatives to 0. We can then solve for the estimator <span class="math inline">\(\widehat{\vec{\beta}}.\)</span>.</p>
+these derivatives to 0. We can then solve for the estimator <span class="math inline">\(\widehat{\vec{\beta}}.\)</span></p>
 <p>Consider the <span class="math inline">\(j^{th}\)</span> regression
 coefficient <span class="math inline">\(b_j\)</span>. The derivative of
 the sum of squared prediction mistakes with respect to that regression
@@ -1731,10 +1737,130 @@ the matrix <span class="math inline">\(\mathbf{X}\)</span> does not have
 full column rank then there is not a unique solution to <span class="math inline">\(\vec{X}^T(\vec{Y}-\mathbf{X}\widehat{\vec{\beta}})
 = \vec{0}_{k+1}\)</span>, and <span class="math inline">\(\widehat{\vec{\beta}}\)</span> cannot be computed.
 </p>
+We can next define the <em>fitted value</em> as <span class="math inline">\(\widehat{\vec{Y}} =
+\mathbf{X}\widehat{\vec{\beta}}\)</span>. Since <span class="math inline">\(\vec{Y} = \widehat{\vec{Y}} +
+\widehat{\vec{u}}\)</span>, we have <span class="math display">\[
+\vec{Y} = \mathbf{X}\widehat{\vec{\beta}}+\widehat{\vec{u}}.
+\]</span>
+<p style="margin-left: 40px">
+<span class="math inline">\(\hookrightarrow\)</span> Sometimes <span class="math inline">\(\widehat{\vec{Y}}\)</span> is called <em>predicted
+value</em> but this is misleading. The fitted value <span class="math inline">\(\widehat{\vec{Y}}\)</span> is a function of the
+entire sample, including <span class="math inline">\(\vec{Y}\)</span>,
+so it cannot be interpreted as a valid prediction of <span class="math inline">\(\vec{Y}\)</span>. It is therefore more accurate to
+describe <span class="math inline">\(\widehat{\vec{Y}}\)</span> as
+<em>fitted</em> rather than <em>predicted</em> value.
+</p>
+Equivalently, the <em>residual</em> vector is: <span class="math display">\[
+\widehat{\vec{u}} = \vec{Y} - \mathbf{X}\widehat{\vec{\beta}}.
+\]</span>
+<p style="margin-left: 40px">
+<span class="math inline">\(\hookrightarrow\)</span> Note that there is
+a distinction between the <ins>error</ins> <span class="math inline">\(\vec{u}\)</span> and <ins>residual</ins> <span class="math inline">\(\widehat{\vec{u}}\)</span>. The error <span class="math inline">\(\vec{u}\)</span> is unobservable, while the
+residual <span class="math inline">\(\widehat{\vec{u}}\)</span> is an
+estimator.
+</p>
+<p>Using the residual vector we also have <span class="math inline">\(\mathbf{X}^T\widehat{\vec{u}}=0\)</span> since
+<span class="math inline">\(\sum_{i=1}^nX_i\widehat{u}_i=0.\)</span></p>
 <p><span class="math display">\[\\[0.5in]\]</span></p>
-<h4>
-The Least Squares Assumptions
-</h4>
+</div>
+<div id="how-well-does-the-regression-line-describe-the-data" class="section level4">
+<h4>1.2. How Well Does the Regression Line Describe the Data?</h4>
+<p>OLS can be thought of as decomposing each <span class="math inline">\(\vec{Y}\)</span> into two parts, a fitted value
+<span class="math inline">\(\widehat{\vec{Y}}\)</span> and a residual
+<span class="math inline">\(\widehat{\vec{u}}\)</span>. The discussion
+in this section develops an understanding of the extent the regressor
+accounts for the variation in <span class="math inline">\(\vec{Y}\)</span> and the extent the observations
+cluster around the regression line. Different textbooks use slightly
+different terminology ranging from <em>Goodness of Fit</em> to
+<em>Measures of Fit</em> and <em>Prediction Accuracy</em> for this
+discussion.</p>
+<p>The two key measures are <em>R-squared</em> and the <em>standard
+error of the regression</em>. The former measures how well the
+regression line fits the data, and the latter measures how far <span class="math inline">\(Y_i\)</span> typically is from its predicted
+value.</p>
+<p><span class="math display">\[\\[0.25in]\]</span></p>
+<div id="the-r-squared" class="section level5">
+<h5>1.2.1. <ins>The R-squared</ins></h5>
+<p>Sometimes also referred to as the <em>coefficient of
+determination</em>, the <em>regression <span class="math inline">\(R^2\)</span></em> is the ratio of the sample
+variance of <span class="math inline">\(\vec{Y}\)</span> explained by
+<span class="math inline">\(\mathbf{X}.\)</span> In other words, <span class="math inline">\(R^2\)</span> is the ratio of the sample variance
+of <span class="math inline">\(\widehat{\vec{Y}}\)</span> to the sample
+variance of <span class="math inline">\(\vec{Y}.\)</span></p>
+That is, <span class="math display">\[
+R^2 = \frac{ESS =
+\displaystyle\sum_{i=1}^n(\widehat{Y}_i-\bar{Y})^2}{TSS =
+\displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2}
+\]</span> where ESS is the abbreviation of explained sum of squares and
+TSS is of total sum of squares. In matrix notation: <span class="math display">\[
+R^2 =
+\frac{\left(\widehat{\vec{Y}}-\vec{\bar{Y}}\right)^2}{\left(\vec{Y}-\vec{\bar{Y}}\right)^2}.
+\]</span> The <span class="math inline">\(R^2\)</span> can also be
+expressed in terms of the fraction of variance of <span class="math inline">\(\vec{Y}\)</span> that is <em>not explained</em> by
+<span class="math inline">\(\mathbf{X}:\)</span> <span class="math display">\[
+R^2 = 1 - \frac{RSS = \displaystyle\sum_{i=1}^n\widehat{u}_i^2 =
+\displaystyle\sum_{i=1}^n(Y_i - \widehat{Y}_i)}{TSS =
+\displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2}
+\]</span> or in matrix notation: <span class="math display">\[
+R^2 = 1 -
+\frac{\widehat{\vec{u}}^2}{\left(\vec{Y}-\vec{\bar{Y}}\right)^2}
+\]</span> Also note that <span class="math display">\[
+\begin{align*}
+TSS &amp;= ESS + RSS \\
+\displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2 &amp;=
+\displaystyle\sum_{i=1}^n(\widehat{Y}_i-\bar{Y})^2 +
+\displaystyle\sum_{i=1}^n\widehat{u}_i^2
+\end{align*}
+\]</span> so ESS cannot be larger than TSS. Accordingly, <span class="math inline">\(R^2\)</span> is between <span class="math inline">\(0\)</span> and <span class="math inline">\(1.\)</span>
+<p style="margin-left: 40px">
+<span class="math inline">\(\hookrightarrow\)</span> Note that in some
+text books TSS is abbreviated as SST, ESS as SSE, and RSS as SSR.
+</p>
+<p>The definition of <span class="math inline">\(R^2\)</span> means that
+the RSS will decrease when a new regressor is added, increasing the
+<span class="math inline">\(R^2\)</span> as a result. However, adding a
+variable does not necessarily mean it actually improves the fit of the
+model. So, in a way, <span class="math inline">\(R^2\)</span> can give
+an inflated estimate of how well the regression fits the data. One way
+to correct for this is to deflate or reduce <span class="math inline">\(R^2\)</span> by some factor.</p>
+<div id="the-adjusted-r-squared" class="section level6">
+<h6><strong>The Adjusted R-Squared</strong></h6>
+<p>The adjusted <span class="math inline">\(R^2\)</span>, or <span class="math inline">\(\bar{R}^2\)</span>, modifies <span class="math inline">\(R^2\)</span> in a way that does not necessarily
+increase when a new regressor is added: <span class="math display">\[
+\bar{R}^2 = 1 - \frac{n-1}{n-k-1}\frac{RSS}{TSS}
+\]</span> Notice that the adjustment factor <span class="math inline">\(\frac{n-1}{n-k-1}\)</span> is always greater than
+1, so <span class="math inline">\(\bar{R}^2\)</span> is always less than
+<span class="math inline">\(R^2/\)</span>. Also notice that adding a
+regressor has two opposite effects on <span class="math inline">\(\bar{R}^2.\)</span> On the one hand, the SSR
+declines, increasing <span class="math inline">\(\bar{R}^2\)</span> as a
+result. On the other hand, the adjustment factor <span class="math inline">\(\frac{n-1}{n-k-1}\)</span> increases. Finally,
+notice that <span class="math inline">\(\bar{R}^2\)</span> can be
+negative.</p>
+<p><span class="math display">\[\\[0.25in]\]</span></p>
+</div>
+</div>
+<div id="standard-error-of-the-regression" class="section level5">
+<h5>1.2.2. <ins>Standard error of the regression</ins></h5>
+<p>Sometimes also referred to as <em>standard error of the
+estimate</em>, or as <em>root mean squared error</em>, the standard
+error of the regression (SER) is an estimator of the standard deviation
+of the regression error <span class="math inline">\(\vec{u}.\)</span>
+Since regression errors <span class="math inline">\(u_1,\dots,u_n\)</span> are unobserved, the SER is
+computed using their sample counterparts, the OLS residuals <span class="math inline">\(\hat{u}_1, \dots, \hat{u}_n.\)</span> <span class="math display">\[
+SER = s_\widehat{\vec{u}} = \sqrt{s_\widehat{\vec{u}}^2}
+\]</span> where <span class="math display">\[
+s_\widehat{\vec{u}}^2 = \frac{1}{n-k-1}\sum_{i=1}^n\widehat{u}_i^2 =
+\frac{SSR}{n-k-1}
+\]</span> The estimate <span class="math inline">\(s_\widehat{u}\)</span> is an estimate of the
+standard deviation in the unobservables affecting <span class="math inline">\(\vec{Y}\)</span>. That is, it estimates the
+standard deviation in <span class="math inline">\(\vec{Y}\)</span> after
+the effect of <span class="math inline">\(\mathbf{X}\)</span> has been
+taken out.</p>
+<p><span class="math display">\[\\[0.5in]\]</span></p>
+</div>
+</div>
+<div id="the-least-squares-assumptions" class="section level4">
+<h4>1.3. The Least Squares Assumptions</h4>
 <p>For the multiple regression model <span class="math inline">\(Y_i =
 \vec{X}_i^T \ \vec{\beta}+u_i, \ i=1,\dots,n\)</span> there are six
 assumptions we consider here. The first one essentially expresses the
@@ -1744,13 +1870,10 @@ extensions of the two assumptions underlying the weak law of large
 numbers and the central limit theorem. The fourth rules our
 multicollinearity, and the last two expresses the homoskedasticity and
 normal distribution of errors.</p>
-<span class="math display">\[\\[0.25in]\]</span>
-<h5>
-<ins>
-Assumption 1
-</ins>
-: <span class="math inline">\(\mathbb{E}(u_i | \vec{X}_i)=0\)</span>
-</h5>
+<p><span class="math display">\[\\[0.25in]\]</span></p>
+<div id="assumption-1-mathbbeu_i-vecx_i0" class="section level5">
+<h5><ins>Assumption 1</ins>: <span class="math inline">\(\mathbb{E}(u_i
+| \vec{X}_i)=0\)</span></h5>
 <p>This is the key assumption that makes the OLS estimators unbiased. It
 states that given <span class="math inline">\(\vec{X}_i\)</span>, the
 conditional distribution of <span class="math inline">\(u_i\)</span> has
@@ -1837,18 +1960,23 @@ is not necessarily randomly assigned but we hope that it behaves as if
 it was randomly assigned, meaning <span class="math inline">\(\mathbb{E}(u_i | \vec{X}_i)=0\)</span>. Whether
 this holds requires careful thought and judgment and we will come back
 to this issue frequently.</p>
-<p><span class="math display">\[\\[0.25in]\]</span> #####
-<ins>Assumption 2</ins>: <span class="math inline">\((\vec{X}_i,Y_i)\)</span> are i.i.d. draws from
-their joint distribution</p>
-<p>This assumption states that <span class="math inline">\((X_{1i},X_{2i},\dots,X_{ki},Y_i) \ , \
+<p><span class="math display">\[\\[0.25in]\]</span></p>
+</div>
+<div id="assumption-2-vecx_iy_i-are-i.i.d.-draws-from-their-joint-distribution" class="section level5">
+<h5><ins>Assumption 2</ins>: <span class="math inline">\((\vec{X}_i,Y_i)\)</span> are i.i.d. draws from
+their joint distribution</h5>
+This assumption states that <span class="math inline">\((X_{1i},X_{2i},\dots,X_{ki},Y_i) \ , \
 i=1,\dots,n\)</span> are independently and identically distributed
 (i.i.d.) random variables. This assumption holds automatically if the
-data are collected by simple random sampling. p style=“margin-left:
-40px”&gt; <span class="math inline">\(\hookrightarrow\)</span> In time
-series data observations falling close to each other in time are usually
-correlated with each other, violating the “independence” part of the iid
-assumption.</p>
+data are collected by simple random sampling.
+<p style="margin-left: 40px">
+<span class="math inline">\(\hookrightarrow\)</span> In time series data
+observations falling close to each other in time are usually correlated
+with each other, violating the “independence” part of the iid
+assumption.
+</p>
 <p><span class="math display">\[\\[0.25in]\]</span></p>
+</div>
 <div id="assumption-3-vecx_i-and-u_i-have-nonzero-finite-fourth-moment" class="section level5">
 <h5><ins>Assumption 3</ins>: <span class="math inline">\(\vec{X}_i\)</span> and <span class="math inline">\(u_i\)</span> have nonzero finite fourth
 moment</h5>
@@ -1868,8 +1996,8 @@ be sensitive to large outliers.</p>
 <strong>normal sampling distribution</strong> in large samples. If these
 three assumptions hold, and the sample size is large, then the methods
 for inference (hypothesis testing using the t-statistic and construction
-of 95% confidence intervals as <span class="math inline">\(\pm
-1.96\)</span> standard errors) are justified.</p>
+of 95% confidence intervals as <span class="math inline">\(\pm\)</span>
+1.96 standard errors) are justified.</p>
 <p>However, we need stronger assumptions to develop a theory of
 <em>efficient</em> estimation using OLS or to characterize the exact
 sampling distribution of the OLS estimator.</p>
@@ -1935,7 +2063,7 @@ variance</em> or <em>disturbance variance</em>.</p>
 <p>It is often useful to also write Assumption 1 and this Assumption 5
 not in terms of the erorr term but in terms of the conditional mean and
 conditional variance of <span class="math inline">\(Y_i\)</span>: <span class="math display">\[
-\mathbb{E}(Y_i|\vec{X_i})=\vec{X}_i\vec{\beta}_i \\
+\mathbb{E}(Y_i|\vec{X}_i)=\vec{X}_i\vec{\beta}_i \\
 Var(Y_i|\vec{X}_i) = \sigma_u^2.
 \]</span> That is, the conditional expectation of <span class="math inline">\(Y_i\)</span> given <span class="math inline">\(\vec{X}_i\)</span> is linear in <span class="math inline">\(\vec{X}_i\)</span>, but the variance of <span class="math inline">\(Y_i\)</span> given <span class="math inline">\(\vec{X}_i\)</span> is constant.</p>
 <p>A point to note is that the nature of skedasticity concerns with the
@@ -1949,19 +2077,21 @@ said to exhibit heteroskedasticity. Also note that heteroskedasticity is
 present whenever <span class="math inline">\(Var(Y_i|\vec{X}_i)\)</span>
 is a function of <span class="math inline">\(\vec{X}_i\)</span> because
 <span class="math inline">\(Var(u_i|\vec{X}_i)=Var(Y_i|\vec{X}_i).\)</span></p>
-<p><em>Important:</em> Homoskedasticity assumption plays <ins>no
-role</ins> in showing that <span class="math inline">\(\widehat{\vec{\beta}}\)</span> are unbiased. That
+<p style="margin-left: 40px">
+<em>Important:</em> Homoskedasticity assumption plays <ins>no role</ins>
+in showing that <span class="math inline">\(\widehat{\vec{\beta}}\)</span> are unbiased. That
 is, the OLS estimators remain unbiased, consistent, and asymptotically
-normal irrespective of whether the errors are homoskedastic or not.</p>
-<p><em>Note:</em> The correct way of spelling ‘homoskedasticity’ and
-‘heteroskedasticity’ is with ‘k’, despite some textbooks spelling it
+normal irrespective of whether the errors are homoskedastic or not.
+<br><br> <em>Note:</em> The correct way of spelling ‘homoskedasticity’
+and ‘heteroskedasticity’ is with ‘k’, despite some textbooks spelling it
 with ‘c’. This is because the words derived into English from Greek
 roots. <span class="math inline">\(\sigma\kappa\epsilon\delta\alpha\nu\nu\upsilon\mu\iota\)</span>,
 means “to scatter” and transliterated into English with ‘k’, while <span class="math inline">\(\omicron\mu\omicron\iota\omicron\zeta\)</span>
 means “same” and <span class="math inline">\(\epsilon\tau\epsilon\rho\omicron\)</span> means
 “other” or “different”. See McCulloch, J Huston (1985) “On
 heteros*edasticity” Econometrica 53, 483 and Hansen, Bruce E (2022)
-Econometrics, Princeton University Press, 29-30.</p>
+Econometrics, Princeton University Press, 29-30.
+</p>
 <p><span class="math display">\[\\[0.25in]\]</span></p>
 </div>
 <div id="assumption-6-conditional-distribution-of-u_i-given-vecx_i-is-normal-normal-errors" class="section level5">
@@ -1979,7 +2109,202 @@ independently of <span class="math inline">\(u_j\)</span> for all <span class="m
 1,2,5, and 6, <span class="math inline">\(u_i\)</span> and <span class="math inline">\(\vec{X}_i\)</span> are independently distributed
 and <span class="math inline">\(u_i \sim i.i.d.
 N(0,\sigma_u^2).\)</span></p>
+<p><span class="math display">\[\\[1in]\]</span></p>
 </div>
+</div>
+</div>
+<div id="blue" class="section level3">
+<h3>2. BLUE</h3>
+<p>An estimator is BLUE if it is the most efficient estimator among all
+estimators that are unbiased and are linear functions. We discuss each
+component of the acronym next.</p>
+<p><span class="math display">\[\\[0.5in]\]</span></p>
+<div id="unbiased-estimator" class="section level4">
+<h4>2.1. <ins>U</ins>nbiased <ins>E</ins>stimator</h4>
+<p>Suppose we are evaluating an estimator many times. We are doing this
+evaluation over repeated randomly drawn samples. We would hope that, on
+average, we would get the right answer. So a reasonable property of an
+estimator is that the mean of its sampling distribution equals the
+population mean, <span class="math inline">\(\mu_Y\)</span>. If that is
+the case, then the estimator is unbiased. That is, the estimator <span class="math inline">\(\widehat{\mu}_X\)</span> is unbiased if <span class="math inline">\(\mathbb{E}(\widehat{\mu}_x) = \mu_X\)</span>,
+where <span class="math inline">\(\mathbb{E}(\widehat{\mu}_X)\)</span>
+is the mean of the sampling distribution of <span class="math inline">\(\widehat{\mu}_X.\)</span> Otherwise, <span class="math inline">\(\widehat{\mu}_X\)</span> is biased.</p>
+<p>For example, suppose observations <span class="math inline">\(X_1,\dots,X_n\)</span> are i.i.d., and let <span class="math inline">\(\mu_X\)</span> denote the mean of <span class="math inline">\(X_i\)</span>. Note that the mean is the same for
+all <span class="math inline">\(i=1,\dots,n\)</span> because the
+observations are i.i.d.. The sample mean, <span class="math inline">\(\bar{X} = \frac{1}{n}(X_1+X_2+\dots+X_n) =
+\frac{1}{n}\sum_{i=1}^nX_i.\)</span> Then th expectation of the sample
+mean is: <span class="math display">\[
+\mathbb{E}(\bar{X}) = \frac{1}{n}\sum_{i=1}^n\mathbb{E}(X_i) = \mu_X
+\]</span> Since the expectation of the sample mean is the population
+mean, the estimator <span class="math inline">\(\bar{X}\)</span> is
+unbiased. Also notice that if <span class="math inline">\(n\)</span> is
+large, the central limit theorem states that this distribution is
+approximately normal.</p>
+<p>The sample mean is not the only unbiased estimator. For example <span class="math inline">\(X_1\)</span>, the first observation, satisfies
+<span class="math inline">\(\mathbb{E}(X_1)=\mu\)</span>, so it is also
+unbiased. In general, any unbiased weighted average <span class="math inline">\(\dfrac{\sum_{i=1}^n\omega_iX_i}{\sum_{i=1}^n\omega_i}\)</span>
+with <span class="math inline">\(\omega_i \geq 0\)</span> is unbiased
+for <span class="math inline">\(\mu.\)</span></p>
+<p>Some estimators, on the other hand, are biased. For example, <span class="math inline">\(c\bar{X}_n\)</span> with <span class="math inline">\(c\neq 1\)</span> has expectation <span class="math inline">\(c\mu_X\)</span> which is different from <span class="math inline">\(\mu_X\)</span> and therefore is biased.</p>
+<p>It is also possible for an estimator to be unbiased for a set of
+distributions while being biased for other sets. For example, the
+estimator <span class="math inline">\(\widetilde{\mu}_X=0\)</span> is
+biased when <span class="math inline">\(\mu_X\neq 0\)</span> and
+unbiased when <span class="math inline">\(\mu_X=0\)</span>. This may be
+a trivial example but it is useful to be clear about the contexts where
+an estimator is unbiased or biased.</p>
+<p>These ideas carry over to the OLS estimators. Since the OLS
+estimators are calculated using a random sample, <span class="math inline">\(\widehat{\beta}_0\)</span> and <span class="math inline">\(\widehat{\beta}_1\)</span> are themselves random
+variables that take on different values from one sample to the next. The
+probability of these different values is summarized in their sampling
+distributions.</p>
+<p>We obtained the expressions for <span class="math inline">\(\widehat{\beta}_0\)</span> and <span class="math inline">\(\widehat{\beta}_1\)</span> in Section 1 above
+under the OLS discussion. Lets replicate them here for convenience:
+<span class="math display">\[
+\widehat{\beta}_0=\bar{Y}-\widehat{\beta}_1\bar{X} \ \ \ \ \ , \ \ \ \ \
+\widehat{\beta}_1 =
+\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}
+\]</span> Let’s now rewrite the expression for <span class="math inline">\(\widehat{\beta}_1\)</span> in terms of the
+regressors and errors. This will be useful in demonstrating the
+unbiasedness of the OLS estimators. First note that since <span class="math inline">\(Y_i = \beta_0 + \beta_1X_i + u_i\)</span> for a
+linear regression with one regressor, we have <span class="math inline">\((Y_i-\bar{Y}) = \beta_1(X_i - \bar{X}) + u_i -
+\bar{u}\)</span>. We can plug this in to the numerator of the expression
+for <span class="math inline">\(\widehat{\beta}_1:\)</span> <span class="math display">\[
+\begin{align*}
+\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})
+&amp;= (X_i - \bar{X})\left(\beta_1(X_i-\bar{X}) + (u_i-\bar{u})\right)
+\\
+&amp;= \beta_1\sum_{i=1}^n(X_i-\bar{X})^2 +
+\sum_{i=1}^n(X_i-\bar{X})(u_i-\bar{u}) \\
+&amp;= \beta_1\sum_{i=1}^n(X_i-\bar{X})^2 + \sum_{i=1}^n(X_i-\bar{X})u_i
+- \sum_{i=1}^n(X_i-\bar{X})\bar{u} \\
+&amp;= \beta_1\sum_{i=1}^n(X_i-\bar{X})^2 + \sum_{i=1}^n(X_i-\bar{X})u_i
+- \left(\sum_{i=1}^nX_i - n\bar{X}\right)\bar{u} \\
+&amp;= \beta_1\sum_{i=1}^n(X_i-\bar{X})^2 + \sum_{i=1}^n(X_i-\bar{X})u_i
+- (n\bar{X} - n\bar{X})\bar{u} \\
+&amp;= \beta_1\sum_{i=1}^n(X_i-\bar{X})^2 + \sum_{i=1}^n(X_i-\bar{X})u_i
+\end{align*}
+\]</span> We can now rewrite <span class="math inline">\(\widehat{\beta}_1\)</span> in terms of the
+regressors and errors with this expression in the numerator: <span class="math display">\[
+\widehat{\beta}_1 =
+\frac{\beta_1\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2 +
+\sum_{i=1}^n(X_i-\bar{X})u_i}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}
+= \beta_1 +
+\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})u_i}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}
+\]</span></p>
+<p>We can now use this expression to derive the expectation of <span class="math inline">\(\widehat{\beta_1}\)</span> assuming the first
+three least squared assumptions in Section 1.3 above holds: <span class="math display">\[
+\begin{align*}
+\mathbb{E}\left(\widehat{\beta}_1 | X_1,...,X_n\right)
+&amp;= \beta_1 +
+\mathbb{E}\left(\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})u_i}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}
+| X_1,\dots,X_n\right) \\[6pt]
+&amp;= \beta_1 +
+\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})\mathbb{E}(u_i|X_1,\dots,X_n)}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}
+\\[6pt]
+&amp;= \beta_1 \ \ \ \ \ \ \text{because }\mathbb{E}(u_i|X_1,\dots,X_n)
+= \mathbb{E}(u_i|X_i) = 0.
+\end{align*}
+\]</span> Notice that <span class="math inline">\(\widehat{\beta}_1\)</span> is unbiased after
+averaging over all samples <span class="math inline">\(X_1,\dots,X_n\)</span> because it is unbiased
+given <span class="math inline">\(X_1,\dots,X_n.\)</span> Therefore, the
+unbiasedness of <span class="math inline">\(\widehat{\beta}_1\)</span>
+follows from the above derivation and from the law of iterated
+expectations: <span class="math display">\[
+\mathbb{E}(\widehat{\beta}_1) =
+\mathbb{E}\left(\mathbb{E}(\widehat{\beta}_1 | X_1,\dots,X_n)\right) =
+\beta_1.
+\]</span> Similarly, we can show the unbiasedness of <span class="math inline">\(\widehat{\beta}_0\)</span> as follows: <span class="math display">\[
+\begin{align*}
+\mathbb{E}(\widehat{\beta}_0)
+&amp;= \mathbb{E}(\bar{Y} - \widehat{\beta}_1\bar{X}) \\[4pt]
+&amp;=
+\frac{1}{n}\sum_{i=1}^n\mathbb{E}(Y_i)-\mathbb{E}(\widehat{\beta}_1)\bar{X}
+\\[4pt]
+&amp;= \frac{1}{n}\sum_{i=1}^n(\beta_0+\beta_1X_i) - \beta_1\bar{X}
+\\[4pt]
+&amp;= \frac{1}{n}(n\beta_0 + n\beta_1\bar{X})-\beta_1\bar{X} \\[4pt]
+&amp;= \beta_0.
+\end{align*}
+\]</span> Thus, <span class="math inline">\(\widehat{\beta}_0\)</span>
+is an unbiased estimator of <span class="math inline">\(\beta_0.\)</span></p>
+<p><span class="math display">\[\\[0.5in]\]</span></p>
+</div>
+<div id="linear-conditionally-unbiased-estimators" class="section level4">
+<h4>2.2. <ins>L</ins>inear conditionally <ins>U</ins>nbiased
+<ins>E</ins>stimators</h4>
+<p>The class of linear conditionally unbiased estimators consists of all
+estimators of <span class="math inline">\(\beta_1\)</span> that are both
+linear functions of <span class="math inline">\(Y_1,\dots,Y_n\)</span>
+and that are unbiased conditional on <span class="math inline">\(X_1,\dots,X_n.\)</span> So, if <span class="math inline">\(\widehat{\beta}_1\)</span> is a linear estimator
+then it can be written as <span class="math display">\[
+\widehat{\beta}_1 = \sum_{i=1}^n\omega_iY_i
+\]</span> where the weights <span class="math inline">\(\omega_1,\dots,\omega_n\)</span> can depend on
+<span class="math inline">\(X_1,\dots,X_n\)</span> but not on <span class="math inline">\(Y_1,\dots,Y_n.\)</span></p>
+<p>The estimator <span class="math inline">\(\widehat{{\beta}}_1\)</span> is conditionally
+unbiased if <span class="math inline">\(\mathbb{E}(\widehat{\beta}_1 |
+X_1,\dots,X_n) = \beta_1\)</span> as discussed above in Section 2.1. So
+we just need to show that it is linear. For this, we again start with
+the expression for <span class="math inline">\(\widehat{\beta}_1\)</span> we obtained in Section
+1 and reproduced in Section 2.1: <span class="math display">\[
+\begin{align*}
+\widehat{\beta}_1
+&amp;=
+\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}
+= \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})Y_i -
+\bar{Y}\displaystyle\sum_{i=1}^n(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}
+\\[6pt]
+&amp;= \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})Y_i -
+\bar{Y}n(\bar{X}-\bar{X})}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}
+=
+\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})Y_i}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}
+\\[6pt]
+&amp;= \sum_{i=1}^n\widehat{\omega}_iY_i \ \ \ \ \text{where }
+\widehat{\omega}_i=\frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}.
+\end{align*}
+\]</span> Since the weights <span class="math inline">\(\widehat{\omega}_i, \ i=1,\dots,n\)</span> in this
+expression for <span class="math inline">\(\widehat{\beta}_1\)</span>
+depend on <span class="math inline">\(X_1,\dots,X_n\)</span> but not on
+<span class="math inline">\(Y_1,\dots,Y_n\)</span>, the OLS estimator
+<span class="math inline">\(\widehat{\beta}_1\)</span> is a linear
+estimator. Since it is also conditionally unbiased, it is linear
+conditionally unbiased estimator.</p>
+<p><span class="math display">\[\\[0.5in]\]</span></p>
+</div>
+<div id="best-estimators" class="section level4">
+<h4>2.3. <ins>B</ins>est <ins>E</ins>stimators</h4>
+<p>An important feature of the sampling distribution is its variance.
+Understanding the sampling variance of estimators is one of the core
+components of the theory of point estimation. Consider the sample mean
+<span class="math inline">\(\bar{X}\)</span> and its variance. <span class="math display">\[
+\begin{align*}
+Var(\bar{X})
+&amp;= Var\left(\frac{1}{n}\sum_{i=1}^nX_i\right)
+=  \frac{1}{n^2}Var\left(\sum_{i=1}^nX_i\right) \\[4pt]
+&amp;= \frac{1}{n^2}\sum_{i=1}^nVar(X_i) +
+\frac{1}{n^2}\sum_{i=1}^n\sum_{j=1}^nCov(X_i,Xj) \\[4pt]
+&amp;= \frac{1}{n^2}\sum_{i=1}^n\sigma^2 \ \ \ \ \text{because }
+X_1,\dots,X_n \ \text{are i.i.d. so } Cov(X_i, X_j)=0 \\[4pt]
+&amp;= \frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n}.
+\end{align*}
+\]</span> Notice that the variance of the sample mean depends on the
+population variance <span class="math inline">\(\sigma^2\)</span> and
+sample size <span class="math inline">\(n\)</span>, whereby <span class="math inline">\(\bar{X}\)</span> is more accurate as an estimator
+when <span class="math inline">\(n\)</span> is large than when <span class="math inline">\(n\)</span> is small.</p>
+<p>Among unbiased estimators, we prefer the estimator with the smallest
+variance; and this is what is meant by <em>best</em>. For example, in
+Section 2.1 above we said both estimators <span class="math inline">\(\bar{X}\)</span> and <span class="math inline">\(X_1\)</span> are unbiased. For a random sample
+from a population with mean <span class="math inline">\(\mu\)</span> and
+variance <span class="math inline">\(\sigma^2\)</span>, we know that
+<span class="math inline">\(Var(\bar{X})=\frac{\sigma^2}{n}\)</span>.
+Similarly, <span class="math inline">\(Var(X_1)=\sigma^2\)</span>
+because <span class="math inline">\(X_1\)</span> is a random draw from
+the population. Therefore, the difference between <span class="math inline">\(Var(\bar{X})\)</span> and <span class="math inline">\(Var(X_1)\)</span> can be large even for small
+sample sizes. If, say, <span class="math inline">\(n=10\)</span>, then
+<span class="math inline">\(Var(X_1) = \sigma^2\)</span> is <span class="math inline">\(10\)</span> times as large as <span class="math inline">\(Var(\bar{X}) = \frac{\sigma^2}{10}.\)</span> Thus,
+<span class="math inline">\(\bar{X}\)</span> is <ins>efficient</ins>
+relative to <span class="math inline">\(X_1\)</span> for estimating
+<span class="math inline">\(\mu\)</span>.</p>
 </div>
 </div>
 </div>
@@ -2033,7 +2358,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3,h4,h5",
+      selectors: "h1,h2,h3,h4,h5,h6",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
