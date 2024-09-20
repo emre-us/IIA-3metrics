@@ -1,15 +1,15 @@
 ---
-author: "Emre Usenmez - github.com/emre-us"
+author: "Emre Usenmez"
 title: "2023-24 Tripos IIA Paper 3"
 subtitle: Supervision 0
 output:
-  html_document:
+  html_document: 
     toc: true
     toc_float:
       collapsed: false
     toc_depth: 6
     theme: spacelab
-    number_sections: false
+    number_sections: true
 ---
 
 <!-- This comment will not be displayed in the output. Below change to CSS style is to ensure the blocktexts are in the same form size as the rest of the text.-->
@@ -28,6 +28,9 @@ text-align: center;
 ```
 
 
+<span style="font-size:0.75em;">The discussions in here are based on Hansen, B E (2022) *Probability and Statistics for Economists* Princeton University Press; Stock, J H and Watson M W (2020) *Introduction to Econometrics* (4th Global ed) Pearson; Wooldridge, J M (2020) *Introductory Econometrics: A Modern Approach* (7th ed) Cengage; Hansen, B E (2022) *Econometrics* Princeton University Press.
+</span>
+
 $$\\[0.25in]$$
 
 ## GAUSS-MARKOV THEOREM
@@ -35,7 +38,7 @@ $$\\[0.25in]$$
 This is the theoretical justification for using **O**rdinary **L**east **S**quares (**OLS**). The theorem states that under a set of conditions known as the **Gauss-Markov conditions**, the OLS estimator is the **B**est **L**inear **U**nbiased **E**stimator (**BLUE**).
 
 
-### 1. OLS
+### OLS
 
 Consider the problem of finding the estimator $a$ that minimizes
 \[
@@ -111,7 +114,7 @@ The intercept $\widehat{\beta}_0$, slope $\widehat{\beta}_1$, and residual $\wid
 $$\\[1in]$$
 
 
-#### 1.1. OLS Estimator in Multiple Regression
+#### OLS Estimator in Multiple Regression
 
 We can extend the above discussion to multiple regression model $Y_i=\beta_0+\beta_1X_{1i}+\beta_2X_{2i}+\dots+\beta_kX_{ki}+u_i$ with $i=1,\dots,n$ whereby the sum of the squared mistakes over n observations is
 \[
@@ -230,7 +233,7 @@ Using the residual vector we also have $\mathbf{X}^T\widehat{\vec{u}}=0$ since $
 $$\\[0.5in]$$
 
 
-#### 1.2. How Well Does the Regression Line Describe the Data?
+#### How Well Does the Regression Line Describe the Data?
 
 OLS can be thought of as decomposing each $\vec{Y}$ into two parts, a fitted value $\widehat{\vec{Y}}$ and a residual $\widehat{\vec{u}}$. The discussion in this section develops an understanding of the extent the regressor accounts for the variation in $\vec{Y}$ and the extent the observations cluster around the regression line. Different textbooks use slightly different terminology ranging from *Goodness of Fit* to *Measures of Fit* and *Prediction Accuracy* for this discussion.
 
@@ -239,7 +242,7 @@ The two key measures are *R-squared* and the *standard error of the regression*.
 
 $$\\[0.25in]$$
 
-##### 1.2.1. <ins>The R-squared</ins>
+##### <ins>The R-squared</ins>
 
 Sometimes also referred to as the *coefficient of determination*, the *regression $R^2$* is the ratio of the sample variance of $\vec{Y}$ explained by $\mathbf{X}.$ In other words, $R^2$ is the ratio of the sample variance of $\widehat{\vec{Y}}$ to the sample variance of $\vec{Y}.$
 
@@ -275,9 +278,9 @@ Note that in some text books TSS is abbreviated as SST, ESS as SSE, and RSS as S
 
 The definition of $R^2$ means that the RSS will decrease when a new regressor is added, increasing the $R^2$ as a result. However, adding a variable does not necessarily mean it actually improves the fit of the model. So, in a way, $R^2$ can give an inflated estimate of how well the regression fits the data. One way to correct for this is to deflate or reduce $R^2$ by some factor.
 
+$$\\[0.25in]$$
 
-
-###### **The Adjusted R-Squared**
+###### *The Adjusted R-Squared* {.unnumbered}
 
 The adjusted $R^2$, or $\bar{R}^2$, modifies $R^2$ in a way that does not necessarily increase when a new regressor is added:
 \[
@@ -288,7 +291,7 @@ Notice that the adjustment factor $\frac{n-1}{n-k-1}$ is always greater than 1, 
 
 $$\\[0.25in]$$
 
-##### 1.2.2. <ins>Standard error of the regression</ins>
+##### <ins>Standard error of the regression</ins>
 
 Sometimes also referred to as *standard error of the estimate*, or as *root mean squared error*, the standard error of the regression (SER) is an estimator of the standard deviation of the regression error $\vec{u}.$ Since regression errors $u_1,\dots,u_n$ are unobserved, the SER is computed using their sample counterparts, the OLS residuals $\hat{u}_1, \dots, \hat{u}_n.$ 
 \[
@@ -307,13 +310,13 @@ The estimate $s_\widehat{u}$ is an estimate of the standard deviation in the uno
 $$\\[0.5in]$$
 
 
-#### 1.3. The Least Squares Assumptions
+#### The Least Squares Assumptions
 
 For the multiple regression model $Y_i = \vec{X}_i^T \ \vec{\beta}+u_i, \ i=1,\dots,n$ there are six assumptions we consider here. The first one essentially expresses the idea that $X$ is randomly assigned in linear regression language. The second and third assumptions are extensions of the two assumptions underlying the weak law of large numbers and the central limit theorem. The fourth rules our multicollinearity, and the last two expresses the homoskedasticity and normal distribution of errors.
 
 $$\\[0.25in]$$
 
-##### <ins>Assumption 1</ins>: $\mathbb{E}(u_i | \vec{X}_i)=0$
+##### <ins>LS Assumption 1</ins>: $\mathbb{E}(u_i | \vec{X}_i)=0$ {.unnumbered}
 
 This is the key assumption that makes the OLS estimators unbiased. It states that given $\vec{X}_i$, the conditional distribution of $u_i$ has a mean of $0$. This assumption expresses the idea that there may be other factors that impact the dependent variable but these other factors are unrelated to $\vec{X}_i$. What is meant by 'unrelated' here is that given a value of $\vec{X}_i$, the mean distribution of these other factors is $0$.
 
@@ -382,7 +385,7 @@ In observational data, $\vec{X}$ is not necessarily randomly assigned but we hop
 
 $$\\[0.25in]$$
 
-##### <ins>Assumption 2</ins>: $(\vec{X}_i,Y_i)$ are i.i.d. draws from their joint distribution
+##### <ins>LS Assumption 2</ins>: $(\vec{X}_i,Y_i)$ are i.i.d. draws from their joint distribution {.unnumbered}
 
 This assumption states that $(X_{1i},X_{2i},\dots,X_{ki},Y_i) \ , \ i=1,\dots,n$ are independently and identically distributed (i.i.d.) random variables. This assumption holds automatically if the data are collected by simple random sampling.
 <p style="margin-left: 40px">
@@ -393,7 +396,7 @@ In time series data observations falling close to each other in time are usually
 
 $$\\[0.25in]$$
 
-##### <ins>Assumption 3</ins>: $\vec{X}_i$ and $u_i$ have nonzero finite fourth moment
+##### <ins>LS Assumption 3</ins>: $\vec{X}_i$ and $u_i$ have nonzero finite fourth moment {.unnumbered}
 
 This assumption is effectively stating that large outliers are unlikely. By stating that $0 < \mathbb{E}(\vec{X}_i^4) < \infty$ and $0 < \mathbb{E}(Y_i^4) < \infty$ it states that $\vec{X}$ and $Y$ have finite kurtosis. If the assumption of finite fourth moments holds then it is unlikely that statistical inferences using OLS will be dominated by a few observations. Thus, the OLS estimator of the coefficients in the multiple regression model can be sensitive to large outliers.
 
@@ -411,7 +414,7 @@ However, we need stronger assumptions to develop a theory of *efficient* estimat
 
 $$\\[0.25in]$$
 
-##### <ins>Assumption 4</ins>: $\mathbf{X}$ has full column rank (i.e. no perfect multicollinearity)
+##### <ins>LS Assumption 4</ins>: $\mathbf{X}$ has full column rank (i.e. no perfect multicollinearity) {.unnumbered}
 
 Presence of perfect multicollinearity would make it impossible to calculate the OLS estimator. The regressors are said to exhibit perfect multicollinearity if one of the regressors is a perfect linear function of the other regressors. That is, one regressor can be written as a perfect linear combination of the others. 
 
@@ -429,7 +432,7 @@ Also note that imperfect multicollinearity is not a problem for the theory of OL
 
 $$\\[0.25in]$$
 
-##### <ins>Assumption 5</ins>: Homoskedasticity $Var(u_i|\vec{X}_i)=\sigma_u^2$
+##### <ins>LS Assumption 5</ins>: Homoskedasticity $Var(u_i|\vec{X}_i)=\sigma_u^2$ {.unnumbered}
 
 The error term $u_i$ is *homoskedastic* if the variance of the conditional distribution of $u_i$ given $\vec{X}_i$ is constant for $i=1,\dots,n$, and it does not depend on $\vec{X}_i$. Otherwise the error term is *heteroskedastic*.
 
@@ -467,7 +470,7 @@ When $Var(u_i|\vec{X}_i)$ depends on $\vec{X}_i$, the error term is said to exhi
 
 $$\\[0.25in]$$
 
-##### <ins>Assumption 6</ins>: Conditional distribution of $u_i$ given $\vec{X}_i$ is normal (normal errors)
+##### <ins>LS Assumption 6</ins>: Conditional distribution of $u_i$ given $\vec{X}_i$ is normal (normal errors) {.unnumbered}
 
 The distribution of $(u_i|\vec{X}_i)$ has a mean $0$ by virtue of Assumption 1, and variance of $Var(u_i|\vec{X}_i)$. That is, $(u_i|\vec{X}_i) \sim N(0, Var(u_i|\vec{X}_i)).$ Since the discussion in Assumption 5 showed that $Var(u_i|\vec{X}_i)=\sigma_u^2$, the conditional distribution becomes: $(u_i|\vec{X}_i) \sim N(0, \sigma_u^2).$ Also, $u_i$ and $\vec{X}_i$ are independently distributed since the conditional distribution of $(u_i|\vec{X}_i)$ does not depend on $\vec{X}_i$. Additionally, due to Assumption 2, $u_i$ is distributed independently of $u_j$ for all $j\neq i$. Therefore, uner Assumptions 1,2,5, and 6, $u_i$ and $\vec{X}_i$ are independently distributed and $u_i \sim i.i.d. N(0,\sigma_u^2).$  
 
@@ -477,14 +480,14 @@ The distribution of $(u_i|\vec{X}_i)$ has a mean $0$ by virtue of Assumption 1, 
 
 $$\\[1in]$$
 
-### 2. BLUE
+### BLUE
 
 An estimator is BLUE if it is the most efficient estimator among all estimators that are unbiased and are linear functions. We discuss each component of the acronym next.
 
 
 $$\\[0.5in]$$
 
-#### 2.1. <ins>U</ins>nbiased <ins>E</ins>stimator
+#### <ins>U</ins>nbiased <ins>E</ins>stimator
 
 Suppose we are evaluating an estimator many times. We are doing this evaluation over repeated randomly drawn samples. We would hope that, on average, we would get the right answer. So a reasonable property of an estimator is that the mean of its sampling distribution equals the population mean, $\mu_Y$. If that is the case, then the estimator is unbiased. That is, the estimator $\widehat{\mu}_X$ is unbiased if $\mathbb{E}(\widehat{\mu}_x) = \mu_X$, where $\mathbb{E}(\widehat{\mu}_X)$ is the mean of the sampling distribution of $\widehat{\mu}_X.$ Otherwise, $\widehat{\mu}_X$ is biased.
 
@@ -496,13 +499,92 @@ For example, suppose observations $X_1,\dots,X_n$ are i.i.d., and let $\mu_X$ de
 Since the expectation of the sample mean is the population mean, the estimator $\bar{X}$ is unbiased. Also notice that if $n$ is large, the central limit theorem states that this distribution is approximately normal.
 
 
-The sample mean is not the only unbiased estimator. For example $X_1$, the first observation, satisfies $\mathbb{E}(X_1)=\mu$, so it is also unbiased. In general, any unbiased weighted average $\dfrac{\sum_{i=1}^n\omega_iX_i}{\sum_{i=1}^n\omega_i}$ with $\omega_i \geq 0$ is unbiased for $\mu.$
+The sample mean is not the only unbiased estimator. For example $X_1$, the first observation, satisfies $\mathbb{E}(X_1)=\mu$, so it is also unbiased. In general, any unbiased weighted average $\dfrac{\sum_{i=1}^nw_iX_i}{\sum_{i=1}^nw_i}$ with $w_i \geq 0$ is unbiased for $\mu.$
 
 
 Some estimators, on the other hand, are biased. For example, $c\bar{X}_n$ with $c\neq 1$ has expectation $c\mu_X$ which is different from $\mu_X$ and therefore is biased.
 
 
 It is also possible for an estimator to be unbiased for a set of distributions while being biased for other sets. For example, the estimator $\widetilde{\mu}_X=0$ is biased when $\mu_X\neq 0$ and unbiased when $\mu_X=0$. This may be a trivial example but it is useful to be clear about the contexts where an estimator is unbiased or biased. 
+
+<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
+> <p>***Why variance is biased and why subtract 1 from n for variance bias correction?***</p>
+<p>
+The expected value of $X$ is the mean so if $\theta = \mathbb{E}(g(X))$ where $g(X)$ is a transformation of the random variable X, and $\theta$ is the expectation of that transformation, then the analog estimator of $\theta$ is the sample mean of $g(X)$. That is, $\widehat{\theta} = \widehat{\mathbb{E}(g(X))} = \frac{1}{n}\sum_{i=1}^n g(X_i).$</p>
+<p>The population variance can then be written as $\sigma^2 = \mathbb{E}\left((X-\mathbb{E}(X))^2\right) = \mathbb{E}(X^2) - (\mathbb{E}(X))^2 = h(\mathbb{E}[g(X)])$ where $h(a,b) = a-b^2$ and $g(X) = (x^2, x).$</p>
+<p>
+The plug-in estimator is then $h(\widehat{\theta}) = h(\widehat{\mathbb{E}(g(X))}) = h\left(\frac{1}{n}\sum_{i=1}^n g(X_i) \right).$
+</p>
+<p style="margin-left: 40px">
+$\hookrightarrow$ 
+*Note:* It is called "plug-in estimator" because we plug-in the estimator $\widehat{\theta}$ into the formula $h(\theta)$.
+</p>
+<p>
+Therefore, the plug-in estimator for $\sigma^2$ is:
+$$
+\widehat{\sigma}^2=\frac{1}{n}\displaystyle\sum_{i=1}^n X_i^2 - \left(\frac{1}{n}\displaystyle\sum_{i=1}^n X_i \right)^2 = \frac{1}{n} \displaystyle\sum_{i=1}^n (X_i - \bar{X}_n)^2.
+$$
+We can calculate whether $\hat{\sigma}^2$ is unbiased for $\sigma^2.$ To do that, it would be useful to consider an idealized estimator first.
+</p>
+<p style="margin-left: 40px"> 
+$\hookrightarrow$
+*Idealized estimator:* 
+<br>
+If we knew the population mean $\mu$ then we'd use the estimator $\widetilde{\sigma}^2 = \dfrac{1}{n}\sum_{i=1}^n(X_i-\mu)^2$, which is the sample average of iid variables $(X_i - \mu)^2$.
+This has the expectation $\mathbb{E}(\widetilde{\sigma}^2) = \mathbb{E}\left((X_i - \mu)^2\right) = \sigma^2$, and therefore $\widetilde{\sigma}^2$ is unbiased for $\sigma^2.$
+</p>
+<p>
+Now, we will rewrite $\widehat{\sigma}^2$ with an algebraic trick where $g(X) = \left((X-\mu)^2, (X-\mu)\right)$ which would give us
+$$
+\begin{align*}
+\widehat{\sigma}^2 &= \frac{1}{n}\displaystyle\sum_{i=1}^n (X_i - \mu)^2 - \left(\frac{1}{n}\displaystyle\sum_{i=1}^n (X_i-\mu) \right)^2 \\[4pt]
+&= \widetilde{\sigma}^2 - \left(\frac{1}{n}\displaystyle\sum_{i=1}^n (X_i-\mu)\right)^2 \\[4pt]
+&= \widetilde{\sigma}^2 - (\bar{X}_n - \mu)^2.
+\end{align*}
+$$
+after some algebraic simplification.
+</p>
+<p>
+This tells us that the sample variance estimator, $\widehat{\sigma}^2$, equals the idalized estimator, $\widetilde{\sigma}^2$, minus an adjustment for estimation of $\mu$. Since that adjustment can't be negative, the sample variance estimator will then always be less than the idealized estimator, unless of course the adjustment itself is zero. This means, $\widehat{\sigma}^2$ is biased towards 0.
+</p>
+<p>
+We can actually calculate this bias. Recall that $\mathbb{E}(\widetilde{\sigma}^2 = \sigma^2)$ and $\mathbb{E}\left((\bar{X}_n - \mu)^2\right) = \dfrac{\sigma^2}{n}$. So,
+$$
+\begin{align*}
+\mathbb{E}(\widehat{\sigma}^2) &= \mathbb{E}(\widetilde{\sigma}^2) - \mathbb{E}\left((\bar{X}_n - \mu)^2\right) \\[4pt]
+&= \sigma^2 - \frac{\sigma^2}{n} \\[4pt]
+&= \left(1 - \frac{1}{n}\right)\sigma^2
+\end{align*}
+$$
+which is smaller than $\sigma^2$.
+</p>
+<p>
+One intuition for this downward bias is that $\widehat{\sigma}^2 centers the observations $X_i$ at the sample mean $\bar{X}_n$ as opposed to the true mean $\mu$. This implies that the sample-centered variables $X_i - \bar{X}_n$ have less variation than the ideally centered variables $X_i - \mu$.
+</p>
+<p>
+*Correcting the bias:*
+<br>
+Notice that the bias $1 - \dfrac{1}{n} = \dfrac{n-1}{n}$ is proportional, which means this can be corrected by rescaling, i.e. inverting the proportion:
+$$
+s^2 = \frac{n}{n-1}\widehat{\sigma}^2 = \frac{1}{n-1}\displaystyle{\sum_{i=1}^n(X_i - \bar{X}_n)^2}.
+$$
+</p>
+<p style="margin-left: 40px">
+$\hookrightarrow$ 
+*Note:* Notice that $s^2$ is an estimator but it is not written as $\widehat{s}^2$. This is because at the time when hand typesetting was being used, typesetting a notation with a hat was difficult. As a result, $s^2$ was used to denote the estimator of $\sigma^2$, and $b$ was used to denote the estimator of $\beta$, etc. This subsequently became the convention. 
+</p>
+<p>
+We can show that this is unbiased:
+<br>
+$$
+\begin{align*}
+\mathbb{E}(s^2) &= \mathbb{E}\left(\frac{1}{n-1}\displaystyle{\sum_{i=1}^n(X_i - \bar{X}_n)^2}\right) = \frac{1}{n-1}\mathbb{E}\left(\displaystyle{\sum_{i=1}^nX_i^2 - n\bar{X}_n^2}\right) \\[4pt]
+&= \frac{1}{n-1}\mathbb{E}(n(\sigma^2+\mu^2)-\sigma^2-n\mu^2)=\sigma^2
+\end{align*}
+$$
+</p>
+
+</div>
 
 
 These ideas carry over to the OLS estimators. Since the OLS estimators are calculated using a random sample, $\widehat{\beta}_0$ and $\widehat{\beta}_1$ are themselves random variables that take on different values from one sample to the next. The probability of these different values is summarized in their sampling distributions.
@@ -559,13 +641,13 @@ Thus, $\widehat{\beta}_0$ is an unbiased estimator of $\beta_0.$
 
 $$\\[0.5in]$$
 
-#### 2.2. <ins>L</ins>inear conditionally <ins>U</ins>nbiased <ins>E</ins>stimators
+#### <ins>L</ins>inear conditionally <ins>U</ins>nbiased <ins>E</ins>stimators
 
 The class of linear conditionally unbiased estimators consists of all estimators of $\beta_1$ that are both linear functions of $Y_1,\dots,Y_n$ and that are unbiased conditional on $X_1,\dots,X_n.$ So, if $\widehat{\beta}_1$ is a linear estimator then it can be written as
 \[
-\widehat{\beta}_1 = \sum_{i=1}^n\omega_iY_i
+\widehat{\beta}_1 = \sum_{i=1}^nw_iY_i
 \]
-where the weights $\omega_1,\dots,\omega_n$ can depend on $X_1,\dots,X_n$ but not on $Y_1,\dots,Y_n.$
+where the weights $w_1,\dots,w_n$ can depend on $X_1,\dots,X_n$ but not on $Y_1,\dots,Y_n.$
 
 The estimator $\widehat{{\beta}}_1$ is conditionally unbiased if $\mathbb{E}(\widehat{\beta}_1 | X_1,\dots,X_n) = \beta_1$ as discussed above in Section 2.1. So we just need to show that it is linear. For this, we again start with the expression for $\widehat{\beta}_1$ we obtained in Section 1 and reproduced in Section 2.1:
 \[
@@ -575,10 +657,10 @@ The estimator $\widehat{{\beta}}_1$ is conditionally unbiased if $\mathbb{E}(\wi
 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})Y_i - \bar{Y}\displaystyle\sum_{i=1}^n(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2} \\[6pt]
 &= \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})Y_i - \bar{Y}n(\bar{X}-\bar{X})}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}
 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})Y_i}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2} \\[6pt]
-&= \sum_{i=1}^n\widehat{\omega}_iY_i \ \ \ \ \text{where } \widehat{\omega}_i=\frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}.
+&= \sum_{i=1}^n\widehat{w}_iY_i \ \ \ \ \text{where } \widehat{w}_i=\frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}.
 \end{align*}
 \]
-Since the weights $\widehat{\omega}_i, \ i=1,\dots,n$ in this expression for $\widehat{\beta}_1$ depend on $X_1,\dots,X_n$ but not on $Y_1,\dots,Y_n$, the OLS estimator $\widehat{\beta}_1$ is a linear estimator. Since it is also conditionally unbiased, it is linear conditionally unbiased estimator.
+Since the weights $\widehat{w}_i, \ i=1,\dots,n$ in this expression for $\widehat{\beta}_1$ depend on $X_1,\dots,X_n$ but not on $Y_1,\dots,Y_n$, the OLS estimator $\widehat{\beta}_1$ is a linear estimator. Since it is also conditionally unbiased, it is linear conditionally unbiased estimator.
 
 
 
@@ -586,7 +668,7 @@ Since the weights $\widehat{\omega}_i, \ i=1,\dots,n$ in this expression for $\w
 
 $$\\[0.5in]$$
 
-#### 2.3. <ins>B</ins>est <ins>E</ins>stimators
+#### <ins>B</ins>est <ins>E</ins>stimators
 
 An important feature of the sampling distribution is its variance. Understanding the sampling variance of estimators is one of the core components of the theory of point estimation. Consider the sample mean $\bar{X}$ and its variance.
 \[
@@ -601,4 +683,137 @@ Var(\bar{X})
 Notice that the variance of the sample mean depends on the population variance $\sigma^2$ and sample size $n$, whereby $\bar{X}$ is more accurate as an estimator when $n$ is large than when $n$ is small.
 
 
-Among unbiased estimators, we prefer the estimator with the smallest variance; and this is what is meant by *best*. For example, in Section 2.1 above we said both estimators $\bar{X}$ and $X_1$ are unbiased. For a random sample from a population with mean $\mu$ and variance $\sigma^2$, we know that $Var(\bar{X})=\frac{\sigma^2}{n}$. Similarly, $Var(X_1)=\sigma^2$ because $X_1$ is a random draw from the population. Therefore, the difference between $Var(\bar{X})$ and $Var(X_1)$ can be large even for small sample sizes. If, say, $n=10$, then $Var(X_1) = \sigma^2$ is $10$ times as large as $Var(\bar{X}) = \frac{\sigma^2}{10}.$ Thus, $\bar{X}$ is <ins>efficient</ins> relative to $X_1$ for estimating $\mu$.
+Among unbiased estimators, we prefer the estimator with the smallest variance. For example, in Section 2.1 above we said both estimators $\bar{X}$ and $X_1$ are unbiased. For a random sample from a population with mean $\mu$ and variance $\sigma^2$, we know that $Var(\bar{X})=\frac{\sigma^2}{n}$. Similarly, $Var(X_1)=\sigma^2$ because $X_1$ is a random draw from the population. Therefore, the difference between $Var(\bar{X})$ and $Var(X_1)$ can be large even for small sample sizes. If, say, $n=10$, then $Var(X_1) = \sigma^2$ is $10$ times as large as $Var(\bar{X}) = \frac{\sigma^2}{10}.$ Thus, $\bar{X}$ is <ins>efficient</ins> relative to $X_1$ for estimating $\mu$.
+
+
+We can't however always choose between unbiased estimators based on the smallest variance criterion. For example, when estimating $\mu$ we can use a trivial estimator that is equal to zero, regardless of the sample we draw. The variance of this estimator is zero since it is the same value for every random sample. Yet the bias of this estimator is $-\mu$, which is a poor estimator especially when $|\mu|$ is large.
+
+
+This does not mean we cannot compare unbiased estimators. One way to do so is to calcuate the *mean squared error (MSE)* of the estimators.
+
+
+
+
+$$\\[0.25in]$$
+
+##### <ins>MSE</ins>
+
+MSE is a standard measure of accuracy. If $\widehat{\theta}$ is an estimator of $\theta$, then
+\[
+MSE(\widehat{\theta})=\mathbb{E}\left((\widehat{\theta}-\theta)^2\right)
+\]
+By expanding the square we find that
+\[
+\begin{align*}
+MSE(\widehat{\theta})=\mathbb{E}\left((\widehat{\theta}-\theta)^2\right)
+&= \mathbb{E}\left(\left(\widehat{\theta}-\mathbb{E}(\widehat{\theta})+\mathbb{E}(\widehat{\theta})-\theta\right)^2\right) \\
+&= \mathbb{E}\left(\left(\widehat{\theta}-\mathbb{E}(\widehat{\theta})\right)^2\right) +
+2 \mathbb{E}\left(\widehat{\theta}-\mathbb{E}(\widehat{\theta})\right)  \left(\mathbb{E}(\widehat{\theta})-\theta\right) + 
+\left(\mathbb{E}(\widehat{\theta})-\theta\right)^2 \\
+&= Var(\widehat{\theta})+\left(bias(\widehat{\theta})\right)^2.
+\end{align*}
+\]
+The MSE, therefore, measures how far on average the estimator is away from $\theta$, and is equal to the variance plus the squared bias. So MSE, as a measure of accuracy, combines the variance and bias. This allows us to compare two estimators when one or both are biased.
+
+
+When an estimator is unbiased, its MSE equals its variance. Since $\bar{X}$ is unbiased, $MSE(\bar{X}) = Var(\bar{X}) = \frac{\sigma^2}{n}.$
+
+
+
+
+$$\\[0.25in]$$
+
+##### <ins>Best Linear Unbiased Estimator</ins>
+
+Consider another estimator in which the observations are alternately weighted by $\frac{1}{2}$ and $\frac{3}{2}$:
+\[
+\widetilde{X} = \frac{1}{n}\left(\frac{1}{2}X_1 + \frac{3}{2}X_2 + \frac{1}{2}X_3 + \frac{3}{2}X_4 + \dots + \frac{1}{2}X_{n-1} + \frac{3}{2}X_n \right).
+\]
+The mean of $\widetilde{X}$ is $\mu_X$ so it is unbiased. Its variance is
+\[
+Var(\widetilde{X}) = \left(\frac{0.5^2 + 1.5^2}{2}\right)\frac{\sigma^2}{n} = 1.25\frac{\sigma^2}{n}.
+\]
+This shows that $\widetilde{X}$ has 1.25 times higher variance than $\bar{X}$, so $\bar{X}$ is more efficient than $\widetilde{X}.$
+
+
+The estimators $\bar{X},X_1,$ and $\widetilde{X}$ all have a common structure: they are weighted averages of $X_1,\dots,X_n.$ We have seen that both $X_1$ and $\widetilde{X}$ have higher variances than $\bar{X}.$ These reflect a more general result: 
+
+
+$\bar{X}$ is the *most efficient* estimator of all unbiased estimators that are weighted averages of $X_1,\dots,X_n.$ Thus, $\bar{X}$ is the **Best Linear Unbiased Estimator (BLUE)** of $\mu.$
+<p style="margin-left: 40px">
+$\hookrightarrow$
+Here 'best' refers to *lowest variance*, and 'linear' refers to a *linear function of $X_i$*. 
+</p>
+
+<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
+> <p>***Why the Sample Mean is BLUE?***</p>
+> 
+This class of estimators is $\widetilde{\mu}=\sum_{i=1}^nw_i\mathbb{E}(X_i)$ where the weights $w_i$ are freely selected. Unbiasedness requires
+\[
+\mathbb{E}(\widetilde{\mu})=\mathbb{E}\left(\sum_{i=1}^nw_iX_i\right) = \sum_{i=1}^nw_i\mathbb{E}(X_i) = \sum_{i=1}^nw_i\mu = \mu
+\]
+which holds if and only if $\sum_{i=1}^nw_i=1.$ The variance of $\widehat{\mu}$ is
+\[
+Var(\widetilde{\mu}) = Var\left(\sum_{i=1}^nw_iX_i\right) = \sigma^2\sum_{i=1}^nw_i^2.
+\]
+Hence, the best, i.e. minimum variance, estimator is $\widetilde{\mu}=\sum_{i=1}^nw_i\mathbb{E}(X_i)$ with the weights selected to minimize $\sum_{i=1}^nw_i^2$ subject to the restriction $\sum_{i=1}^nw_i=1.$
+>
+>
+This can be solved by Lagrangian methods. The problem is to minimize
+\[
+L(w_1,\dots,w_n)=\sum_{i=1}^nw_i^2-\lambda\left(\sum_{i=1}^nw_i-1\right)
+\]
+The first order condition with respect to $w_i$ is $2w_i-\lambda=0$, or $w_i=\frac{\lambda}{2}.$ This condition implies that the optimal weights are all identical, which means they must satisfy $\w_i=\frac{1}{n}$ in order to satisfy the restriction $\sum_{i=1}^nw_i=1.$ Thus, the BLUE estimator is:
+\[
+\sum_{i=1}^n\frac{1}{n}\bar{X}_i = \bar{X}
+\]
+and hence the sample mean is BLUE.
+
+</div>
+
+Extension of this discussion to the OLS estimators give us the **Gauss-Markov Theorem**.
+
+
+
+
+
+$$\\[1in]$$
+
+### Gauss-Markov Theorem and Its Assumptions
+
+Gauss-Markov Theorem says that the OLS estimators $\widehat{\beta}_0$ and $\widehat{\beta}_1$ are efficient among all estimators that satisfies the following set of specific assumptions.
+
+
+$$\\[0.25in]$$
+
+##### <ins>GM Assumption 1</ins>: Linearity {.unnumbered}
+
+The population regression model, or what is sometimes called the true model, is linear in parameters. That is, the population regression model can bet written as $Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \dots + \beta_kX_k + u $ where $\beta_0, beta_1, \beta_2,\dots,\beta_k$ are the unknown parameters (constants), and $u$ is an unobserved random error or disturbance term.
+
+
+The key feature in this assumption is that the model is linear in the parameters $\beta_0, \beta_1, \beta_2, \dots, \beta_k.$ Notice that this is different than the *linear conditionally unbiased estimator* discussion above which focused on the estimator $\widehat{\beta}_1$. Here, the population model is linear in parameters.
+
+
+
+$$\\[0.25in]$$
+
+##### <ins>GM Assumption 2</ins>: Random Sampling {.unnumbered}
+
+In simple random sampling, $n$ objects are selected from at random from a population. These $n$ observations are denoted as $Y_1,\dots,Y_n.$ Because the members of the population are included in the sample are selected at random, the values of the observations $Y_i,\dots,Y_n$ are random. So the act of random sampling means that $Y_i,\dots,Y_n$ can themselves be treated as random variables. Before sampled, $Y_1,\dots,Y_n$ can take on many possible values; after they are sampled a specific value is recorded for each observation.
+
+
+Because $Y_1,\dots,Y_n$ are randomly drawn from the same population, the marginal distribution of $Y_i$ is the same for each $i=1,\dots,n.$ When $Y_i$ has the same marginal distribution for $i=1,\dots,n$, then $Y_1, \dots, Y_n$ are said to be *identically distributed*.
+
+
+Under simple random sampling knowing the value of $Y_1$ provides no information about $Y_2$. So, the conditional distribution of $Y_2$ given $Y_1$ is the same as the marginal distribution of $Y_2$. In other words, under simple random sampling, $Y_1$ is distributed independently of $Y_2,\dots,Y_n.$
+
+
+When $Y_1,\dots,Y_n$ are drawn from the same distribution and are independently distributed, they are said to be *independently and identically distributed (i.i.d.).
+
+
+We can extend this to vectors. The random vectors $\{\vec{Y}_1,\dots,\vec{Y}_n\}$ are i.i.d. if they are mutually independent with identical marginal distributions *F*. A collection of random vectors $\{\vec{Y}_l,\dots,\vec{Y}_n\}$ is a *random sample* from the population $F$ if the $\vec{Y}_i$ are i.i.d. with distribution $F$, i.e. the population distribution.
+
+Sometimes we need to write the equation for a particular observation $i$: for a randomly drawn observation from the population, we have $Y_i = \beta+0 + \beta_1X_{i1} + \beta_2X_{i2} +\dots + \beta_kX{ik} + u.$ For example, we can write a CEO salary equation for a particular CEO $i$ as $log(salary_i) = \beta_0 + \beta_1log(sales_i)+\beta_2ceotenure_i + u_i.$
+
+
+
