@@ -1537,7 +1537,7 @@ The gap <span class="math inline">\((X_i - a)\)</span> can be thought of as a pr
 <p>This would be equal to 0 when <span class="math inline">\(a=\frac{1}{n}\sum_{i=1}^nX_i=\bar{X}.\)</span> This means <span class="math inline">\(a=\bar{X}\)</span> minimizes the sum of squared prediction mistakes, and therefore <span class="math inline">\(\bar{X}\)</span> is the least squares estimator of population mean, <span class="math inline">\(\mu_X\)</span>.</p>
 <p>The OLS estimator extends this idea to the linear regression model.</p>
 <p><span class="math display">\[\\[0.75in]\]</span></p>
-<div id="ols-estimator-in-single-regression" class="section level2" number="1.1">
+<div id="ols-single" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> OLS Estimator in Single Regression</h2>
 <p>Consider the linear regression model <span class="math inline">\(Y_i = \beta_0 + \beta_1X_i + u_i,\)</span> and let <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> be some estimators of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. The value of <span class="math inline">\(Y_i\)</span> is then predicted by the line <span class="math inline">\(b_0+b_1X_i.\)</span></p>
 <p>The prediction mistake for the <span class="math inline">\(i^{th}\)</span> observation is <span class="math inline">\(Y_i-(b_0+b_1X_i)=Y_i-b_0-b_1X_i.\)</span> The sum of these squared prediction mistakes over all n observations is:
@@ -2005,7 +2005,7 @@ We can show that this is unbiased:
 </blockquote>
 </div>
 <p>These ideas carry over to the OLS estimators. Since the OLS estimators are calculated using a random sample, <span class="math inline">\(\widehat{\beta}_0\)</span> and <span class="math inline">\(\widehat{\beta}_1\)</span> are themselves random variables that take on different values from one sample to the next. The probability of these different values is summarized in their sampling distributions.</p>
-<p>We obtained the expressions for <span class="math inline">\(\widehat{\beta}_0\)</span> and <span class="math inline">\(\widehat{\beta}_1\)</span> in Section 1 above under the OLS discussion. Lets replicate them here for convenience:
+<p>We obtained the expressions for <span class="math inline">\(\widehat{\beta}_0\)</span> and <span class="math inline">\(\widehat{\beta}_1\)</span> in the <a href="#ols-single">OLS estimator in single regression</a> discussion. Lets replicate them here for convenience:
 <span class="math display">\[
 \widehat{\beta}_0=\bar{Y}-\widehat{\beta}_1\bar{X} \ \ \ \ \ , \ \ \ \ \ \widehat{\beta}_1 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}
 \]</span>
@@ -2286,11 +2286,51 @@ These ideas carry over to the OLS estimators <span class="math inline">\(\wideha
 </div>
 <div id="consistency-of-ols" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Consistency of OLS</h2>
-<p>The <a href="#ue">Unbiased Estimator</a> section establishes that <span class="math inline">\(\widehat{beta}_0\)</span> and <span class="math inline">\(\widehat{\beta}_1\)</span> are unbiased estimators.</p>
+<p>The <a href="#ue">Unbiased Estimator</a> section established that <span class="math inline">\(\widehat{beta}_0\)</span> and <span class="math inline">\(\widehat{\beta}_1\)</span> are unbiased estimators. The same set of assumptions - Assumptions 1 through 5 - also implies consistency of OLS. Recall that in the <a href="#ue">unbiased estimator</a> section we expressed $_1 as
+<span class="math display">\[
+\begin{align*}
+\widehat{\beta}_1
+&amp;= \beta_1 + \frac{\displaystyle\sum_{i=1}^n(X_{i1}-\bar{X}_1)u_i}{\displaystyle\sum_{i=1}^n(X_{i1}-\bar{X}_1)^2} \\[6pt]
+&amp;= \beta_1 + \frac{\dfrac{1}{n}\displaystyle\sum_{i=1}^n(X_{i1}-\bar{X}_1)u_i}{\dfrac{1}{n}\displaystyle\sum_{i=1}^n(X_{i1}-\bar{X}_1)^2}
+\end{align*}
+\]</span>
+When law of large numbers is applied to the second part of this equation, the numerator and denominator converge in probability to the population quantities <span class="math inline">\(Cov(X_1,u)\)</span> and <span class="math inline">\(Var(X_1)\)</span>, respectively. So,
+<span class="math display">\[\begin{align*}
+plim \ \widehat{\beta}_1
+&amp;= \beta_1 + \frac{Cov(X_1,u)}{Var(X_1)} \\
+&amp;= \beta_1 \ \ \ \text{because } Var(X_1) &gt; 0 \text{ and } \mathbb{E}(u|X_1)=0 \text{ implies } Cov(X_1,u) = 0
+\end{align*}
+\]</span>
+In general, <span class="math inline">\(\widehat{\beta}_j\)</span> has a probability distribution that represents its possible values in different size <span class="math inline">\(n\)</span> samples. Since <span class="math inline">\(\widehat{\beta}_j\)</span> is unbiased, this distribution has a mean value of <span class="math inline">\(\beta_j\)</span>. If this estimator is consistent, then the distribution of <span class="math inline">\(\widehat{\beta}_j\)</span> becomes more and more tightly distributed around <span class="math inline">\(\beta_j\)</span> as the sample size grows. As <span class="math inline">\(n\)</span> tends to infinity, the distribution of <span class="math inline">\(\widehat{\beta}_j\)</span> collapses to a single point <span class="math inline">\(\beta_j\)</span>.</p>
+<p>Just as <span class="math inline">\(\mathbb{E}(u|X_1,\dots,X_n)\neq 0\)</span> causes bias in the OLS estimators, correlation between <span class="math inline">\(u\)</span> and <ins>any</ins> of <span class="math inline">\(X_1,\dots,X_n\)</span> generally causes <ins>all</ins> of the OLS estimators to be <em>inconsistent</em>. That is, <em>if the error is correlated with any of the independent variables, then OLS is biased and inconsistent</em>. This means, any bias persists as the sample size grows.</p>
+<p>In simple regression case, the <em>inconsistency</em>, or as sometimes also called <em>asymptotic bias</em>, in <span class="math inline">\(\widehat{\beta}_1\)</span> is
+<span class="math display">\[
+plim \ \widehat{\beta}_1 - \beta_1 = \frac{Cov(X_1,u)}{Var(X_1)}.
+\]</span>
+Since <span class="math inline">\(Var(X_1) &gt; 0\)</span>, the inconsistency in <span class="math inline">\(\widehat{\beta}_1\)</span> is positive if <span class="math inline">\(X_1\)</span> and <span class="math inline">\(u\)</span> are positively correlated, and negative if negatively correlated. If the covariance between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(u\)</span> is small relative to <span class="math inline">\(Var(X_1)\)</span>, the inconsistency can be negligible. However, we cannot estimate how big <span class="math inline">\(Cov(X_1,u)\)</span> is because <span class="math inline">\(u\)</span> is unobserved.</p>
+<p>We can nevertheless use this inconsistency approach to derive, for example, the asymptotic version of the omitted variable bias. Suppose the true model <span class="math inline">\(Y=\beta_0+\beta_1X_1+\beta_2X_2+v\)</span> satisfies the first five Gauss-Markov assumptions. Then <span class="math inline">\(v\)</span> has a <span class="math inline">\(0\)</span> mean and is uncorrelated with <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>. From law of large numbers, we also know that <span class="math inline">\(\widehat{\beta}_0,\widehat{\beta}_1,\)</span> and <span class="math inline">\(\widehat{\beta}_2\)</span> are consistent. If we omit <span class="math inline">\(X_2\)</span> from the regression and carry out a simple regression of <span class="math inline">\(Y\)</span> on <span class="math inline">\(X_1\)</span> then <span class="math inline">\(u=\beta_2X_2+v.\)</span> If we let <span class="math inline">\(\widetilde{\beta}_1\)</span> denote the simple regression slope estimator, then
+<span class="math display">\[
+plim \ \widetilde{\beta}_1 = \beta_1 + \beta_2\left(\frac{Cov(X_1,X_2)}{Var(X_1)}\right).
+\]</span>
+Thus, for practical purposes, we can view inconsistency as being the same as the bias. The difference is that
+- the inconsistency is expressed in terms of the population variance of <span class="math inline">\(X_1\)</span> and the population covariance between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, while
+-the bias is based on their sample counterparts.</p>
+If <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are uncorrelated in the population, then <span class="math inline">\(Cov(X_1,X_2)/Var(X_1)=0\)</span> and $_1 is a consistent estimator of <span class="math inline">\(\beta_1\)</span>.
+<p style="margin-left: 40px">
+<span class="math inline">\(\hookrightarrow\)</span>
+<em>Note</em>: This does not necessarily mean <span class="math inline">\(\widetilde{\beta}_1\)</span> is unbiased.
+</p>
 <p><span class="math display">\[\\[0.75in]\]</span></p>
 </div>
-<div id="the-central-limit-theorem" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> The Central Limit Theorem</h2>
+<div id="the-central-limit-theorem-clt" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> The Central Limit Theorem (CLT)</h2>
+This theorem says that, under general conditions, the distribution of <span class="math inline">\(\bar{X}\)</span> is well approximated by a normal distribution when <span class="math inline">\(n\)</span> is large. Recall that the mean of <span class="math inline">\(X\)</span> is <span class="math inline">\(\mu_X\)</span> and its variance is <span class="math inline">\(\sigma_{\bar{X}}^2=\frac{\sigma_X^2}{n}\)</span>. According to the CLT, when <span class="math inline">\(n\)</span> is large, the distribution of <span class="math inline">\(\bar{X}\)</span> is approximately <span class="math inline">\(N(\mu_X,\sigma_{\bar{X}}^2=\frac{\sigma_X^2}{n})\)</span>.
+<p style="margin-left: 40px">
+<p><span class="math inline">\(\hookrightarrow\)</span>
+The distribution is <em>exactly</em> <span class="math inline">\(N(\mu_X, \frac{\sigma_X^2}{n})\)</span> when the sample is drawn from a population with the normal distribution distribution <span class="math inline">\(N(\mu_X, \sigma_X^2).\)</span> The CLT says that this same result is <em>approximately</em> true when <span class="math inline">\(n\)</span> is large even if <span class="math inline">\(X_1,\dots,X_n\)</span> are not themselves normally distributed.</p>
+<p>We can also standardize <span class="math inline">\(\bar{X}\)</span> so that it has a mean of <span class="math inline">\(0\)</span> and a variance of <span class="math inline">\(1\)</span>. This way we can examine the distribution of the standardized version of <span class="math inline">\(\bar{X}:\)</span> <span class="math inline">\(\dfrac{\bar{X}-\mu_X}{\sigma_{\bar{X}}^2=\frac{\sigma_X^2}{n}}\)</span>.</p>
+<p>We can express this formally as follows:</p>
+<p>Suppose <span class="math inline">\(X_1,\dots,X_n\)</span> are i.i.d. with <span class="math inline">\(\mathbb{E}(X_i)=\mu_X\)</span> and <span class="math inline">\(Var(X_i)=\sigma_X^2\)</span>, where <span class="math inline">\(0&lt;\sigma_X^2&lt;\infty\)</span>. As <span class="math inline">\(n\to\infty\)</span>, the distribution of <span class="math inline">\(\dfrac{\bar{X}-\mu_X}{\dfrac{\sigma_X^2}{n}}\)</span> becomes arbitrarily well approximated by the standard normal distribution.</p>
 </div>
 </div>
 

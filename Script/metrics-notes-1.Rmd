@@ -64,7 +64,7 @@ The OLS estimator extends this idea to the linear regression model.
 $$\\[0.75in]$$
 
 
-## OLS Estimator in Single Regression
+## OLS Estimator in Single Regression {#ols-single}
 
 Consider the linear regression model $Y_i = \beta_0 + \beta_1X_i + u_i,$ and let $b_0$ and $b_1$ be some estimators of $\beta_0$ and $\beta_1$. The value of $Y_i$ is then predicted by the line $b_0+b_1X_i.$
 
@@ -684,7 +684,7 @@ $$
 These ideas carry over to the OLS estimators. Since the OLS estimators are calculated using a random sample, $\widehat{\beta}_0$ and $\widehat{\beta}_1$ are themselves random variables that take on different values from one sample to the next. The probability of these different values is summarized in their sampling distributions.
 
 
-We obtained the expressions for $\widehat{\beta}_0$ and $\widehat{\beta}_1$ in Section 1 above under the OLS discussion. Lets replicate them here for convenience:
+We obtained the expressions for $\widehat{\beta}_0$ and $\widehat{\beta}_1$ in the [OLS estimator in single regression](#ols-single) discussion. Lets replicate them here for convenience:
 \[
 \widehat{\beta}_0=\bar{Y}-\widehat{\beta}_1\bar{X} \ \ \ \ \ , \ \ \ \ \ \widehat{\beta}_1 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} 
 \]
@@ -1037,12 +1037,64 @@ $$\\[0.5in]$$
 
 ## Consistency of OLS
 
-The [Unbiased Estimator](#ue) section establishes that $\widehat{beta}_0$ and $\widehat{\beta}_1$ are unbiased estimators.  
+The [Unbiased Estimator](#ue) section established that $\widehat{beta}_0$ and $\widehat{\beta}_1$ are unbiased estimators. The same set of assumptions - Assumptions 1 through 5 - also implies consistency of OLS. Recall that in the [unbiased estimator](#ue) section we expressed $\widehat{\beta}_1 as
+\[
+\begin{align*}
+\widehat{\beta}_1 
+&= \beta_1 + \frac{\displaystyle\sum_{i=1}^n(X_{i1}-\bar{X}_1)u_i}{\displaystyle\sum_{i=1}^n(X_{i1}-\bar{X}_1)^2} \\[6pt]
+&= \beta_1 + \frac{\dfrac{1}{n}\displaystyle\sum_{i=1}^n(X_{i1}-\bar{X}_1)u_i}{\dfrac{1}{n}\displaystyle\sum_{i=1}^n(X_{i1}-\bar{X}_1)^2}
+\end{align*}
+\]
+When law of large numbers is applied to the second part of this equation, the numerator and denominator converge in probability to the population quantities $Cov(X_1,u)$ and $Var(X_1)$, respectively. So,
+\[\begin{align*}
+plim \ \widehat{\beta}_1 
+&= \beta_1 + \frac{Cov(X_1,u)}{Var(X_1)} \\
+&= \beta_1 \ \ \ \text{because } Var(X_1) > 0 \text{ and } \mathbb{E}(u|X_1)=0 \text{ implies } Cov(X_1,u) = 0
+\end{align*}
+\]
+In general, $\widehat{\beta}_j$ has a probability distribution that represents its possible values in different size $n$ samples. Since $\widehat{\beta}_j$ is unbiased, this distribution has a mean value of $\beta_j$. If this estimator is consistent, then the distribution of $\widehat{\beta}_j$ becomes more and more tightly distributed around $\beta_j$ as the sample size grows. As $n$ tends to infinity, the distribution of $\widehat{\beta}_j$ collapses to a single point $\beta_j$.
 
+
+Just as $\mathbb{E}(u|X_1,\dots,X_n)\neq 0$ causes bias in the OLS estimators, correlation between $u$ and <ins>any</ins> of $X_1,\dots,X_n$ generally causes <ins>all</ins> of the OLS estimators to be *inconsistent*. That is, *if the error is correlated with any of the independent variables, then OLS is biased and inconsistent*. This means, any bias persists as the sample size grows.
+
+
+In simple regression case, the *inconsistency*, or as sometimes also called *asymptotic bias*, in $\widehat{\beta}_1$ is
+\[
+plim \ \widehat{\beta}_1 - \beta_1 = \frac{Cov(X_1,u)}{Var(X_1)}.
+\]
+Since $Var(X_1) > 0$, the inconsistency in $\widehat{\beta}_1$ is positive if $X_1$ and $u$ are positively correlated, and negative if negatively correlated. If the covariance between $X_1$ and $u$ is small relative to $Var(X_1)$, the inconsistency can be negligible. However, we cannot estimate how big $Cov(X_1,u)$ is because $u$ is unobserved.
+
+
+We can nevertheless use this inconsistency approach to derive, for example, the asymptotic version of the omitted variable bias. Suppose the true model $Y=\beta_0+\beta_1X_1+\beta_2X_2+v$ satisfies the first five Gauss-Markov assumptions. Then $v$ has a $0$ mean and is uncorrelated with $X_1$ and $X_2$. From law of large numbers, we also know that $\widehat{\beta}_0,\widehat{\beta}_1,$ and $\widehat{\beta}_2$ are consistent. If we omit $X_2$ from the regression and carry out a simple regression of $Y$ on $X_1$ then $u=\beta_2X_2+v.$ If we let $\widetilde{\beta}_1$ denote the simple regression slope estimator, then
+\[
+plim \ \widetilde{\beta}_1 = \beta_1 + \beta_2\left(\frac{Cov(X_1,X_2)}{Var(X_1)}\right).
+\]
+Thus, for practical purposes, we can view inconsistency as being the same as the bias. The difference is that
+- the inconsistency is expressed in terms of the population variance of $X_1$ and the population covariance between $X_1$ and $X_2$, while
+-the bias is based on their sample counterparts.
+
+
+If $X_1$ and $X_2$ are uncorrelated in the population, then $Cov(X_1,X_2)/Var(X_1)=0$ and $\widetilde{\beta}_1 is a consistent estimator of $\beta_1$.
+<p style="margin-left: 40px">
+$\hookrightarrow$
+*Note*: This does not necessarily mean $\widetilde{\beta}_1$ is unbiased.
+</p>
 
 
 
 
 $$\\[0.75in]$$
 
-## The Central Limit Theorem
+## The Central Limit Theorem (CLT)
+
+This theorem says that, under general conditions, the distribution of $\bar{X}$ is well approximated by a normal distribution when $n$ is large. Recall that the mean of $X$ is $\mu_X$ and its variance is $\sigma_{\bar{X}}^2=\frac{\sigma_X^2}{n}$. According to the CLT, when $n$ is large, the distribution of $\bar{X}$ is approximately $N(\mu_X,\sigma_{\bar{X}}^2=\frac{\sigma_X^2}{n})$.
+<p style="margin-left: 40px">
+$\hookrightarrow$
+The distribution is *exactly* $N(\mu_X, \frac{\sigma_X^2}{n})$ when the sample is drawn from a population with the normal distribution distribution  $N(\mu_X, \sigma_X^2).$ The CLT says that this same result is *approximately* true when $n$ is large even if $X_1,\dots,X_n$ are not themselves normally distributed.
+
+
+We can also standardize $\bar{X}$ so that it has a mean of $0$ and a variance of $1$. This way we can examine the distribution of the standardized version of $\bar{X}:$ $\dfrac{\bar{X}-\mu_X}{\sigma_{\bar{X}}^2=\frac{\sigma_X^2}{n}}$. 
+
+We can express this formally as follows:
+
+Suppose $X_1,\dots,X_n$ are i.i.d. with $\mathbb{E}(X_i)=\mu_X$ and $Var(X_i)=\sigma_X^2$, where $0<\sigma_X^2<\infty$. As $n\to\infty$, the distribution of $\dfrac{\bar{X}-\mu_X}{\dfrac{\sigma_X^2}{n}}$ becomes arbitrarily well approximated by the standard normal distribution.
