@@ -1,0 +1,463 @@
+---
+author: "Emre Usenmez"
+title: "2023-24 Tripos IIA Paper 3"
+subtitle: Supervision 2
+output:
+  bookdown::html_document2:  
+    toc: true
+    toc_float:
+      collapsed: false
+    toc_depth: 6
+    theme: spacelab
+    number_sections: false
+    df_print: paged
+---
+
+<span style="font-size:0.75em;"> Very grateful to Dr Oleg Kitov for the very informative stylized answers to previous iterations of the supervision questions. </span>
+
+<!-- This comment will not be displayed in the output. Below change to CSS style is to ensure the blocktexts are in the same form size as the rest of the text.-->
+
+```{css style settings, echo = FALSE} 
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 14px;
+    border-left: 5px solid #eee;
+}
+```
+
+
+$$\\[0.25in]$$
+ 
+
+### **QUESTION 1**
+
+In order to understand the determinnats of years of schooling among women in the UK, we collected a random sample of 857 individual females aged 28-38 from across the UK and gathered information on a number of background characteristics including their score on an IQ test. The summary statistics are as follows.
+
+```{r echo = FALSE}
+tbl1 <- matrix(c(13.58, 2.20, 9, 18, 32.98, 3.09, 28,38, 0.12,0.32,0,1,10.68,2.85,0,18,101.80,15.01,50,145), ncol=4, byrow=TRUE)
+colnames(tbl1) <- c('Mean', 'Std Dev', 'Min', 'Max')
+rownames(tbl1) <- c('educ', 'age', 'black', 'meduc', 'IQ')
+tbl1 <- as.table(tbl1)
+
+library(kableExtra)
+tbl1 %>%
+  kbl(caption = "Summary statistics for explanatory variables") %>%
+  kable_classic(full_width=FALSE)
+```
+
+Here, $educ$ represents years of schooling, $age$ is recorded in years, $meduc$ is number of years of schooling for the individual's mother, and $IQ$ is the score on an IQ test. $black$ is a dummy variable identifying whether the woman has African origin. Define $leduc$ to be the natural log of years of education.
+
+
+The OLS regression output with $leduc$ as the dependent variable is reported below. For the regression we have $N=857, R^2=0.33.$
+
+
+```{r echo = FALSE}
+tbl2 <- matrix(c(0.0050,0.0003,0.0000,0.1202,0.0361,0.0010,-0.0018,0.0005,0.0010,-0.0314,0.0152,0.039,0.0126,0.0017,0.0000,-0.0569,0.5981,0.924),ncol=3,byrow=TRUE)
+colnames(tbl2) <- c("Coeff","Std err", "p-value")
+rownames(tbl2) <- c("IQ","age", "agesq", "black", "meduc", "constant")
+
+tbl2 %>%
+  kbl(caption = "OLS regression for 'leduc' as the dependent variable") %>%
+  kable_classic(full_width=FALSE)
+```
+
+
+
+
+$$\\[0.25in]$$
+
+#### **(a)** Interpret the coefficient 0.005 on IQ.
+
+> **Answer:** Lets first write down the model specification:
+>
+\[
+leduc_i = \beta_0 + \beta_1IQ_i + \beta_2{age}_i + \beta_3{age}_i^2 + \beta_4{black}_i + \beta_5{meduc}_i + u_i
+\]
+The OLS estimator of $\beta_1$ is the partial effect of IQ holding other factors fixed:
+\[
+\frac{\partial{leduc_i}}{\partial{IQ}} \Bigg\rvert_{age,black,meduc} = \beta_1
+\]
+So, holding age, race, and mother's education constant, a one point increase in IQ increases education by 0.5%.
+
+
+
+***
+$$\\[0.5in]$$
+
+#### **(b)** How would you test if educational attainment is affected by age in this model?
+
+> **Answer**: First, notice that we have two explanatory variables that depend on age. So we want to test $age$ and $agesq$ having no effect on educational attainment against either $age$ or $age^2$, or both, having effect on educational attainment. That is,
+\[
+\mathbb{H}_0: (\beta_2=0)\cap(\beta_3=0) \\
+\mathbb{H}_1: (\beta_2\neq 0)\cup(\beta_3\neq 0)
+\]
+To conduct the test, we would first estimate the restricted model
+\[
+\theta_0 + \theta_1{IQ}_i +\theta_4{black}_i+\theta_5{meduc}_i + v_i
+\]
+and use the $F-test$ statistic that follows a $F_{q,n-k-1} = F_{2,857-5-1} = F_{2, 851}$ distribution:
+\[
+F = \frac{\dfrac{(RSS_{res} - RSS_{unr})}{q}}{\dfrac{RSS_{unr}}{n-k-1}} = \frac{\dfrac{(RSS_{res} - RSS_{unr})}{2}}{\dfrac{RSS_{unr}}{851}} \ \sim \ F_{q, n-k-1} \\[4pt]
+\]
+or,
+\[
+F = \frac{\dfrac{(R^2_{unr} - R^2_{res})}{q}}{\dfrac{1-R^2_{unr}}{n-k-1}} = \frac{\dfrac{(0.33 - R^2_{res})}{2}}{\dfrac{1-0.33}{851}} \ \sim \ F_{q, n-k-1}
+\]
+where, $RSS_{unr}$ and $RSS_{res}$ are the sums of squared residuals from the unrestricted and restricted models, respectively; and $R^2{unr}$ and $R^2_{res}$ are the coefficients of determination of the unrestricted and restricted models, respectively.
+
+
+<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
+
+> ***Why $F$-test?***
+>
+A joint hypothesis is where two or more restrictions are imposed on the regression coefficients. To test a joint hyptohesis, $F$-statistic is used. It may seem possible to use a $t$-statistic to test the restrictions one at a time, but this approach would be unreliable. 
+>
+>
+To see this, suppose that $t_1$ is the $t$-statistic for testing the null hypothesis that $\beta_2$ = 0 in this question and $t_2$ is the $t$-statistic for $\beta_3=0$. Do we then reject the joint null hypothesis $\mathbb{H}_0: (\beta_2=0)\cap(\beta_3=0)$ if either $t_1$ or $t_2$ exceeds 1.96 in absolute value?
+>
+>
+<p style="margin-left: 40px">
+$\hookrightarrow$
+Answering this requires characterizing the joint sampling distribution of $t_1$ and $t_2$. $\widehat{\beta}_2$ and $\widehat{\beta}_3$ have a joint normal distribution due to large sample, so under the joint null hypothesis $t_1$ and $t_2$ have a bivariate normal distribution where each $t$-statistic has a mean of 0 and a variance of 1.
+</p>
+<p style="margin-left: 40px">
+$\hookrightarrow$
+Now consider the special case where $t_1$ and $t_2$ are uncorrelated and thus independent in large samples. $\mathbb{H}_0$ is not rejected only if both $|t|_1 \leq 1.96$ and $|t_2| \leq 1.96$.
+>
+Because the $t_1$ and $t_2$ are independent, 
+\[
+\begin{align*}
+\mathbb{P}(|t_1| \leq 1.96 \text{ and } |t_2|\leq 1.96) 
+&= \mathbb{P}(|t_1|\leq 1.96)\times \mathbb{P}(|t_2\leq 1.96) \\
+&= 0,95^2 = 0.9025 = 90.25%.
+\end{align*}
+\]
+So the probability of rejecting $\mathbb{H}_0$ when it is true is $1-0.95^2$=9.75%.$ which is much higher than $5%$ probability we would expect for rejecting the null when it is true. This means, using $t$-statistics one at a time results in rejecting the null too often. This is because it gives us too many chances; i.e. if we fail to reject using the first $t$-statistic, then we get to try again using the second.
+</p>
+<p style="margin-left: 40px">
+$\hookrightarrow$
+If the regressors are correlated, then the size of this one at a time appraoch, i.e. the probability of rejecting the null when it is true, depends on the magnitude of that correlation.
+</p>
+Since using $t$-statistics one at a time results in null rejection rates that don't match the desired significance level, another approach is needed.
+>
+>
+One approach is called the *Bonferroni method* modifies this $t$-statistics approach so that it uses critical values that ensure that its size equals its significance level. However, this method can have low power. That is, it can frequently fail to reject the null hypothesis when the alternative is true.
+>
+>
+This is why F-test is preferred in testing joint hypothesis. It is more powerful, especially when the regressors are highly correlated. When the joint null hypothesis has two restrictions $(q=2)$ the $F$-statistic combines the two $t$-statistics using the formula
+\[
+F=\frac{1}{2}\left(\frac{t_1^2+t_2^2-2\widehat{\rho}_{t_1,t_2}t_1t_2}{1-\widehat{\rho}_{t_1,t_2}}\right)
+\]
+where $\widehat{\rho}_{t_1,t_2}$ is an estimator of the correlation between the two $t$-statistics.
+>
+> 
+In the general case of $q$ restrictions, and if the error $u_i$ is homoskedastic, the $F$-statistic is expressed as
+\[
+F = \frac{\dfrac{(RSS_{res} - RSS_{unr})}{q}}{\dfrac{RSS_{unr}}{n-k-1}}.
+\]
+This can be thought of as $F$ measuring the relative increase in $RSS$ when moving from unrestricted to restricted model. Also notice that the denominator of $F$, $\dfrac{RSS_{unr}}{n-k-1}$ is the unbiased estimator of $Var(u)=\sigma_u^2$.
+>
+>
+Another way to think of the question $F$-statistic addresses is to ask whether relaxing the $q$ restrictions improves the fit of the regression sufficiently that this improvement is unlikely to be the result of random sampling variation if the null is true. This means there is a relationship between $F$-statistic and $R^2$. A large $F$-statistic should be associated with a substantial increase in the regression $R^2$.
+<p style="margin-left: 40px">
+$\hookrightarrow$
+If the error $u_i$ is homoskedastic, the $F$-statistic can be written in terms of the improvement in the fit of the regression measured either by increase in $R^2$ or decrease in the residual sum of squares.
+</p>
+This $F$-statistic and the one that uses $RSS$s are sometimes referred to as *homoskedasticity-only $F$-statistic* because it is valid only if the error term is homoskedastic.
+>
+>
+This relationship between $F$-statistic and $R^2$ is then expressed as
+\[
+F = \frac{\dfrac{(R^2_{unr} - R^2_{res})}{q}}{\dfrac{1-R^2_{unr}}{n-k-1}}.
+\]
+
+
+</div>
+
+>
+Also notice that if we differentiate ${leduc}_i$ with respect to ${age}_i$
+\[
+\frac{\partial{{leduc}_i}}{\partial{{age}_i}} = \beta_2 + 2\beta_3 age_i
+\]
+then we see that partial effect of age depends on age.
+>
+>
+In addition, since $\widehat{\beta}_2 = 0.1202 > 0$ and $\widehat{\beta}_3 = -0.0018 < 0$, the relationship between natural log of education and age is *concave*.
+>
+>
+We can also calculate the age for which the partial effect of age on log education becomes negative:
+\[
+age_i=\frac{\widehat{\beta}_2}{-2\widehat{\beta}_3} = frac{0.1202}{2\times 0.0018}
+\]
+```{r}
+0.1202/(2*0.0018)
+```
+>
+Thus from the age of 33.38, partial effect of age on education becomes negative.
+
+
+
+***
+$$\\[0.5in]$$
+
+#### **(c)** How would the coefficients and the intercept change if age was instead recorded in months? What would happen to the corresponding $t$-statistics? Why?
+
+> **Answer**: Lets introduce a new variable $agemth$ where ${agemth}_i = 12{age}_i.$ The regression then becomes
+\[
+\begin{align*}
+{leduc}_i 
+&= \gamma_0 + \gamma_1{IQ}_i + \gamma_2{agemth}_i + \gamma_3{agemth}_i^2 + \gamma_4{black}_i + \gamma_5{meduc}_i + u_i \\
+&= \gamma_0 + \gamma_1{IQ}_i + \gamma_212{age}_i + \gamma_312^2{age}_i^2 + \gamma_4{black}_i + \gamma_5{meduc}_i + u_i \\
+&= \gamma_0 + \gamma_1{IQ}_i + 12\gamma_2{age}_i + 144\gamma_3{age}_i^2 + \gamma_4{black}_i + \gamma_5{meduc}_i + u_i \\
+&= \beta_0 + \beta_1{IQ}_i + \beta_2{age}_i + \beta_3{age}_i^2 + \beta_4{black}_i + \beta_5{meduc}_i + u_i \\
+\end{align*}
+\]
+Thus the intercept and the coefficients of other variables that have not been transformed do not change. The coefficients of $age$ and $age^2$ change proportionally where $\gamma_2=\beta_2/12$ and $\gamma_3=\beta_3/144$, since the transformations of $age$ variable do not affect the partial effect of age on natural log of education. 
+>
+>
+The $t$-statistic is obtained by adjusting the distance of the estimator from its hypothesized value by its standard error:
+\[
+t = \frac{\text{estimator - hypothesized value}}{\text{st. err. of estimator}} = \frac{\widehat{\beta}_j-\beta_{j,\mathbb{H}_0}}{se(\widehat{\beta}_j)}
+\]
+where $se(\widehat{\beta}_j)$ is the standard error of $\widehat{\beta}_j$ and is an estimator of the standard deviation of $\beta_j$, $\sigma_{\beta_j}$. That is, $se(\widehat{\beta}_j) = \sqrt{\widehat{\sigma}_{\beta_j}^2}$. The estimator of the variance of $\beta_j$, in turn, is
+\[
+\widehat{Var}(\beta_j) = \widehat{\sigma}_{\beta_j}^2 
+= \frac{\sigma^2}{TSS_j(1-R_j^2)} 
+= \frac{\sigma^2}{\left(\displaystyle\sum_{i=1}^n(X_{ij}-\bar{X}_j)^2\right)(1-R_j^2)}
+\]
+Since $Var(X) = \frac{1}{n}\sum_{i=1}^n(X_{ij}-\bar{X}_j)^2$, this can be rewritten as
+\[
+Var(\beta_j) = \frac{\sigma^2}{nVar(X_j)(1-R_j^2)}
+\]
+Since $\sigma$ is unknown, we replace it with its estimator $\widehat{\sigma}$, which gives us the standard error of $\widehat{\beta}_j.$
+\[
+se(\widehat{\beta}_j) = \sqrt{\frac{\widehat{\sigma}^2}{TSS_j(1-R_j^2)}} = \sqrt{\frac{\sigma^2}{nVar(X_j)(1-R_j^2)}}
+\]
+In this question, the standard error of the estimator $\gamma_2$ is then
+\[
+\begin{align*}
+se(\widehat{\gamma}_2) 
+&= \sqrt{\frac{\widehat{\sigma}^2}{\left(\displaystyle\sum_{i=1}^n({agemth}_i-\overline{agemth}_j)^2\right)(1-R_{agemth}^2)}} \\[4pt]
+&= \sqrt{\frac{\widehat{\sigma}^2}{\left(12^2\displaystyle\sum_{i=1}^n({age}_i-\overline{age}_j)^2\right)(1-R_{age}^2)}} \\[4pt]
+&= \sqrt{\left(\frac{1}{12}\right)^2\widehat{Var}(\widehat{\beta}_2)}
+\end{align*}
+\]
+where $\widehat{\sigma}^2$ is the estimator of error variance, and $R_{agemth}^2$ is the coefficient of determination from regressing $agemth_i$ on all other explanatory variables. Accordingly, $R_{agemth}^2 = R_{age}^2$.
+>
+>
+Plugging this into the $t$-statistic
+\[
+t_{\widehat{\gamma}_2} = \frac{\widehat{\gamma}_2}{se(\widehat{\gamma}_2)} = \frac{\dfrac{\widehat{\beta}_2}{12} }{\frac{1}{12}se(\widehat{\beta}_2)} = t+{\widehat{\beta}_2}.
+\]
+Thus, the $t$-statistic for \widehat{\beta}_2 would not change which would make sense since statistical significance of the explanatory variable should not be impacted by measurement units.
+>
+>
+We can apply the same argument to $\gamma_3$ with $\gamma_3 = \beta_3/144$.
+
+
+
+
+***
+$$\\[0.5in]$$
+
+#### **(d)** How would you test that the true coefficient on mother's education is 1/3 the negative of the true coefficient on black?
+
+> **Answer**: The question is asking us to test the following null and alternative hypothesis:
+\[
+\mathbb{H}_0: \beta_5 = -\frac{1}{3}\beta_4 \ \ \text{ or } \ \ \mathbb{H}_0: 3\beta_5+\beta_4=0
+\mathbb{H}_0: \beta_5 \neq -\frac{1}{3}\beta_4 \ \ \text{ or } \ \ \mathbb{H}_0: 3\beta_5+\beta_4\neq 0
+\]
+What we want is to be able to reparameterize the regression so that our null ends up with an estimator equal to 0. For that reparameterization, we can add and subtract $3\beta_5{black}_i$ since our null is $3\beta_5+\beta_4=0$ and $\beta_5$ is the parameter of ${meduc}_i$ in the original model specification while $\beta_4$ is of ${black}_i$:
+\[
+\begin{align*}
+leduc_i 
+&= \beta_0 + \beta_1{IQ}_i + \beta_2{age}_i + \beta_3{age}_i^2 + \beta_4{black}_i + +3\beta_5{black}_i +\beta_5{meduc}_i - 3\beta_5{black}_i + u_i
+&= \beta_0 + \beta_1{IQ}_i + \beta_2{age}_i + \beta_3{age}_i^2 + (\beta_4+3\beta_5){black}_i +\beta_5(meduc_i - 3{black}_i) + u_i
+\end{align*}
+\]
+We can lump $(meduc_i - 3black_i)$ into a new variable for simplicity, say, $meb_i$. Then we can run regression on the following model:
+\[
+leduc_i = \phi_0 + \phi_1{IQ}_i + \phi_2{age}_i + \phi_3{age}_i^2 + \phi_4{black}_i +\phi_5(meb_i + u_i
+\]
+where ${meb}_i = ({meduc}_i - 3{black}_i)$ and $\phi_4=(\beta_4+3\beta_5)$.
+In this new specification, we would test
+\[
+\mathbb{H}_0: \phi_4=0 \ \ \ \text{ which is the same as } \ \ \beta_5 = -\frac{1}{3}\beta_4 \ \ \text{ in the original regression.}
+\mathbb{H}_1: \phi_4\neq 0
+\]
+
+
+
+
+
+
+$$\\[0.1in]$$
+ 
+
+### **QUESTION 2**
+
+Consider the regression model $Y_i = \beta_0 + \beta_1X_i + U_i$ for an i.i.d. sample with $N=1,000$ observations. Suppose $U\sim i.i.d.(0, \sigma^2)$ and the $X_i$ are i.i.d. for $i=1,2,\dots,1000$, and that $X_i$ is independent of $U_i$. Let $\widehat{\beta}_1$ denote the OLS estimator of $\beta_1$ and consider another estimator of $\beta_1$, $\widetilde{\beta}_1$, constructed in the following way:
+\[
+\widetilde{\beta}_1 = \frac{Y_3+Y_1-2Y_2}{X_3+X_1-2X_2}.
+\]
+You can assume that $X_i$ are continuously distributed and that $(X_3+X_1-2X_2)^{-1}$ has finite expectation.
+
+
+
+$$\\[0.25in]$$
+
+#### **(a)** Is $\widetilde{\beta}_1$ an unbiased estimator of $\beta_1$? Why? 
+
+(Hint: $\mathbb{E}(\frac{A}{B})=\mathbb{E}(A\times \frac{1}{B})$ and also if $A, B$ are independent, what can we say about the random variables $A$ and \frac{1}{B}?)
+
+> **Answer:** This question is about applying the law of iterated expectations to calculate the expectation of coefficient estimator $\widetilde{\beta}_1$ when the regressors are not fixed numbers, but random variables instead.
+<p style="margin-left: 40px">
+$\hookrightarrow$
+*Important*: Notice that we are assuming that the regressors $X_i$ are <ins>not fixed</ins> but that they are <ins>random variables</ins>. That is, $X_i$ are assumed to be random and are drawn from some distribution. This means, <ins>$X_i$ have an expectation and a variance</ins>. Importantly, this also means $\mathbb{E}(X_i)\neq X_i$ but $\mathbb{E}(X_i|X_i=x)=x$, or alternatively $\mathbb{E}(X_i|X_i)=X_i.$ In other words, conditional on $X_i$ taking a realization $x$, the expectation of $X_i$ is $x$.
+</p>
+Unbiasedness requires that the expectation of the estimator is the population parameter. Since $X_1, X_2, X_3$ are not fixed numbers but random variables, we can't take the unconditional expectation of $\widetilde{\beta}_1$. Instead, we need to
+<ul>
+  <li>
+  calculate the conditional expectation $\mathbb{E}(\widetilde{\beta}_1|X_1,X_2,X_3)$ and
+  </li>
+  <li>
+  then utilize the law of iterated expectations.
+  </li>
+</ul>
+In order to calculate the first step, first pluf in the expression for $Y_i$ in the question into the expression for $\widetilde{\beta}_1$ so that we can express it in terms of $X_1,X_2,X_3$ and $U_1,U_2,U_3:$
+\[
+\begin{align*}
+\widetilde{\beta}_1 
+&= \frac{Y_3+Y_1-2Y_2}{X_3+X_1-2X_2} \\[4pt]
+&= \frac{\beta_0 + \beta_1X_3 + U_3 + \beta_0 + \beta_1X_1 + U_1 - 2(\beta_0 + \beta_1X_2 + U_2)}{X_3+X_1-2X_2} \\[4pt]
+& = \frac{\beta_1(X_3+X_1-2X_2) + (U_3+U_1-2U_2)}{X_3+X_1-2X_2} \\[4pt]
+& = \beta_1 + \frac{U_3+U_1-2U_2}{X_3+X_1-2X_2}.
+\end{align*}
+\]
+Now we can calculate the conditional expectation:
+\[
+\begin{align*}
+\mathbb{E}(\widetilde{\beta}_1 | X_1, X_2, X_3)
+&= \mathbb{E}\left(\beta_1 + \frac{U_3-U_1-2U_2}{X_3+X_1-2X_2} | X_1, X_2, X_3 \right) \\[6pt]
+&= \beta_1 + \left(\frac{1}{X_3+X_1-2X_2} \right)\mathbb{E}(U_3+U_1-2U_2 | X_1, X_2, X_3) \\[6pt]
+&= \beta_1 + \left(\frac{1}{X_3+X_1-2X_2} \right)\left(\mathbb{E}(U_3 | X_1, X_2, X_3) + \mathbb{E}(U_1 | X_1, X_2, X_3) - 2\mathbb{E}(U_2 | X_1, X_2, X_3) \right) \\[6pt]
+&= \beta_1.
+\end{align*}
+\]
+The last equality holds because if we eecall from the conditional mean expectation assumption, $\mathbb{E}(u_i|X_1, X_2, X_3) = 0$ for $i=1,2,3.$
+>
+>
+For the second step, we utilize the law of iterated expectations whereby
+\[
+\mathbb{E}\left(\mathbb{E}(\widetilde{\beta}_1 | X_1, X_2, X_3)\right) = \mathbb{E}(\widetilde{\beta}_1) = \beta_1.
+\]
+Since the expectation of the estimator $\widetilde{\beta}_1$ is the parameter $\beta_1$, this estimator is unbiased.
+
+
+
+
+
+***
+$$\\[0.5in]$$
+
+#### **(b)** Can $\widetilde{\beta}_1$ be a better estimator? Why?
+
+> **Answer**: The word *better* means lower variance. To answer this question we will again rely on the law of iterated expectations to first obtain a conditional variance, then unconditional variance. We can then compare that expression ot the OLS variance by Gauss-Markov and see if it is better.
+>
+>
+Lets start with finding the variance:
+\[
+\begin{align*}
+Var(\widetilde{\beta}_1) 
+&= Var\left(\beta_1 + \frac{U_3+U_1-2U_2}{X_3+X_1-2X_2} \right) \\[4pt]
+&= Var\left(\frac{U_3+U_1-2U_2}{X_3+X_1-2X_2}\right) \ \ \text{ , because $\beta_1$ is a constant parameter} \\[4pt]
+&= \mathbb{E}\left[ \left(\frac{U_3+U_1-2U_2}{X_3+X_1-2X_2}\right)^2 \right] - \left[ \mathbb{E}\left(\frac{U_3+U_1-2U_2}{X_3+X_1-2X_2}\right)  \right]^2 \ \ \text{ , since } Var(A) = \mathbb{E}(A^2)-\left(\mathbb{E}(A)\right)^2 \\[4pt]
+&= \mathbb{E}\left[ \left(\frac{U_3+U_1-2U_2}{X_3+X_1-2X_2}\right)^2 \right] - \left[ \left(\frac{1}{X_3+X_1-2X_2}\right)\left(\mathbb{E}(U_3) + \mathbb{E}(U_1) - 2\mathbb{E}(U_2) \right) \right]^2 \\[4pt]
+&= \mathbb{E}\left[ \left(\frac{U_3+U_1-2U_2}{X_3+X_1-2X_2}\right)^2 \right] - 0 \ \ \text{ since } \mathbb{E}(u_i)=0, \ i=1,2,3 \\[4pt]
+&= \mathbb{E}\left(\frac{U_3^2+U_1^2+4U_2^2+2U_3U_1-4U_3U_2-4U_1U_2}{(X_3+X_1-2X_2)^2}\right).
+\end{align*}
+\]
+We can now take the conditional expectation of this:
+\[
+\begin{align*}
+Var(\widetilde{\beta}_1 | X_1, X_2, X_3)
+&= \mathbb{E}\left[ \left(\frac{U_3+U_1-2U_2}{X_3+X_1-2X_2}\right)^2 \bigg{|} X_1, X_2, X_3 \right] \\[4pt]
+&= \mathbb{E}\left(\frac{U_3^2+U_1^2+4U_2^2+2U_3U_1-4U_3U_2-4U_1U_2}{(X_3+X_1-2X_2)^2} \bigg{|} X_1, X_2, X_3\right) \\[4pt]
+&= \mathbb{E}\left(\frac{1}{(X_3+X_1-2X_2)^2} \bigg{|} X_1, X_2, X_3 \right) \left[ \mathbb{E}(U_3^2 | X_1, X_2, X_3) + \mathbb{E}(U_1^2 | X_1, X_2, X_3) + \mathbb{E}(4U_2^2 | X_1, X_2, X_3) + \mathbb{E}(2U_3U_1 | X_1, X_2, X_3) - \mathbb{E}(4U_3U_2 | X_1, X_2, X_3) - \mathbb{E}(4U_1U_2 | X_1, X_2, X_3)  \right] \\[4pt]
+&= \mathbb{E}\left(\frac{1}{(X_3+X_1-2X_2)^2} \bigg{|} X_1, X_2, X_3 \right)\left(\sigma^2 + \sigma^2 + 4\sigma^2 +0-0-0 \right) \ \ \ \ \text{ since } Var(u_i | \vec{X}) = \sigma^2 \ , \ i=1,\dots,n \ \text{and } Cov(u_i,u_j)=\mathbb{E}(u_iu_j)-\mathbb{E}(u_i)\mathbb{E}(u_j) = \mathbb{E}(u_iu_j) = 0 \\[4pt]
+&= \frac{6\sigma^2}{(X_3+X_1-2X_2)^2} \ \ \ \ \text{ since } \mathbb{E}\left(\frac{1}{(X_3+X_1-2X_2)^2} \bigg{|} X_1, X_2, X_3\right) = \frac{1}{(X_3+X_1-2X_2)^2}.
+\end{align*}
+\]
+Now we can utilize the law of iterated expectations to derive the unconditional variance:
+\[
+\begin{align*}
+Var(\widetilde{\beta}_1) 
+&= \mathbb{E}[\mathbb{E}(\widetilde{\beta}_1 | X_1, X_2, X_3)] \\[4pt]
+&= \mathbb{E}\left(  \mathbb{E}\left[ \left(\frac{U_3+U_1-2U_2}{X_3+X_1-2X_2}\right)^2 \bigg{|} X_1, X_2, X_3 \right] \right) \\[4pt]
+&= \mathbb{E}\left( \frac{6\sigma^2}{(X_3+X_1-2X_2)^2}  \right) \\[4pt]
+&= 6\sigma^2\mathbb{E}\left( \frac{1}{(X_3+X_1-2X_2)^2} \right).
+\end{align*}
+\]
+<p style="margin-left: 40px">
+$\hookrightarrow$
+Note that we cannot simplify this any further since $\mathbb{E}\left( \frac{1}{(X_3+X_1-2X_2)^2}  \right) \neq \frac{1}{(X_3+X_1-2X_2)^2}$ unlike $\mathbb{E}\left(\frac{1}{(X_3+X_1-2X_2)^2} \bigg{|} X_1, X_2, X_3\right) = \frac{1}{(X_3+X_1-2X_2)^2}$. This is because $X_i$ are random variables which means $\mathbb{E}(X_i)\neq X_i$ but $\mathbb{E}(X_i|X_i=x)=x$, or alternatively $\mathbb{E}(X_i|X_i)=X_i$, as discussed in part (a).
+</p>
+We can compare this to the variance of $\widehat{\beta}_1:$
+\[
+Var(\widehat{\beta}_1) = \frac{1}{n}\frac{Var\left((X_i-\mu_x)u_i\right)}{\left(Var(X_i)^2\right)}
+\]
+which we know has the lowest variance among all unbiased linear estimators due to Gauss-Markov theorem.
+
+
+
+***
+$$\\[0.5in]$$
+
+#### **(c)** Can you state the general result for estimators of the form $\sum_{i=1}^na_iY_i/\sum_{i=1}^na_iX_i$?
+
+> **Answer**: Consider the generalized estimator 
+\[
+\beta_1^* = \frac{\sum_{i=1}^na_iY_i}{\sum_{i=1}^na_iX_i}
+\]
+where $a_i$ are weights assigned by the estimator to each observation $(Y_i,X_i)$ for $i=1,\dots,n$. 
+>
+>
+Notice that $\widetilde{\beta}_1$ is one case of $\beta_1^*$. In part (b) we derived $Var(\widetilde{\beta})$ as 
+\[
+Var(\widetilde{\beta}_1) = 6\sigma^2\mathbb{E}\left( \frac{1}{(X_3+X_1-2X_2)^2} \right)
+\]
+which can also be generalized to:
+\[
+Var(\beta_1^*) = \left( \sigma^2\sum_{i=1}^n a_i^2 \right)\mathbb{E}\left[ \left( \sum_{i=1}^na_iX_i \right)^2 \right].
+\]
+Consequently, the conditional variance is:
+\[
+Var(\beta_1^* | \vec{X}) = \frac{\sigma^2\displaystyle\sum_{i=1}^na_i^2}{\left(\displaystyle\sum_{i=1}^na_iX_i\right)^2}
+\]
+where the conditional variance of $\widehat{\beta}_1$ is
+\[
+Var(\widetilde{\beta}_1 | X_1, X_2, X_3) = \frac{6\sigma^2}{(X_3+X_1-2X_2)^2}.
+\]
+
+<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
+
+> ***Why OLS weights are the best?***
+>
+Recall the OLS estimator can be written as
+\[
+\widehat{\beta}_1 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})Y_i}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})X_i} = \frac{\displaystyle\sum_{i=1}^na_i^{OLS}Y_i}{\displaystyle\sum_{i=1}^na_i^{OLS}X_i}
+\]
+where the weights are given by the deviation of the regressor from its mean, $a_i = (X_i - \bar{X})$. The OLS weights are the best in the sense that these are the weights that minimize the variance of the general linear unbiased estimator.
+>
+>
+We can derive the OLS estimators by setting up the estimation problem as minimization of the variance of the general linear unbiased estimator with respect to the weights of individual observations:
+\[
+\underset{a_1,\dots,a_n}{min} Var(\beta_1^*|\vec{X}) = \underset{a_1,\dots,a_n}{min} \left(\frac{\sigma^2\displaystyle\sum_{i=1}^na_i^2}{\left(\displaystyle\sum_{i=1}^na_iX_i\right)^2} \right) \ \ \ \ \text{ s.t. } \sum_{i=1}^na_i=0.
+\]
+<p style="margin-left: 40px">
+$\hookrightarrow$
+*Note:* From part(a) we know that all the weights need to add up to 0 for unbiasedness.
+</p>
+
+</div>

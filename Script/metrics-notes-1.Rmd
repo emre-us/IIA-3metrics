@@ -1,7 +1,7 @@
 ---
 author: "Emre Usenmez"
 title: "2023-24 Tripos IIA Paper 3"
-subtitle: Supervision 0
+subtitle: Notes 1
 output:
   bookdown::html_document2:  
     toc: true
