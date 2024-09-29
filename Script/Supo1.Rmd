@@ -13,6 +13,8 @@ output:
     df_print: paged
 ---
 
+<span style="font-size:0.75em;"> Very grateful to Dr Oleg Kitov for the very informative stylized answers to previous iterations of the supervision questions. </span>
+
 <!-- This comment will not be displayed in the output. Below change to CSS style is to ensure the blocktexts are in the same form size as the rest of the text.-->
 
 ```{css style settings, echo = FALSE} 
