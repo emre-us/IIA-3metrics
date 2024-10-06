@@ -28,7 +28,7 @@ text-align: center;
 ```
 
 
-<span style="font-size:0.75em;">The discussions in here are based on Hansen, B E (2022) *Probability and Statistics for Economists* Princeton University Press; Stock, J H and Watson M W (2020) *Introduction to Econometrics* (4th Global ed) Pearson; Wooldridge, J M (2020) *Introductory Econometrics: A Modern Approach* (7th ed) Cengage; Hansen, B E (2022) *Econometrics* Princeton University Press.
+<span style="font-size:0.75em;">The discussions in here are based on Hansen, B E (2022) *Probability and Statistics for Economists* Princeton University Press; Stock, J H and Watson M W (2020) *Introduction to Econometrics* (4th Global ed) Pearson; Wooldridge, J M (2020) *Introductory Econometrics: A Modern Approach* (7th ed) Cengage; Hansen, B E (2022) *Econometrics* Princeton University Press; Gujarati (2022), D N *Essentials of Econometrics* (5th ed) Sage; Dougherty, C (2016) *Introduction to Econometrics* (5th ed) Oxford Ubiversity Press.
 </span>
 
 $$\\[0.25in]$$
@@ -76,7 +76,7 @@ The prediction mistake for the $i^{th}$ observation is $Y_i-(b_0+b_1X_i)=Y_i-b_0
 
 This is the extension of the sum of squared mistakes in estimating the mean applied to linear regression model. In fact, if there is no regressor $b_1$ then the two are identical except for the notation.
 
-As is the case with $\bar{X}$ being the unique estimator that minimizes $\sum_{i=1}^n(X_i-a)^2$, there is also a unique pair of estimators that minimize $\sum_{i=1}^n(Y_i-b_0-b_1X_i)^2$. The estimators $\widehat{\beta}_0$ and $\widehat{\beta}_1$ that minimize the intercept $\beta_0$ and slope $\beta_1$ are called **o**rdinary **l**east **s**quares (**OLS**) estimators of $\beta_0$ and $\beta_1$.
+As is the case with $\bar{X}$ being the unique estimator that minimizes $\sum_{i=1}^n(X_i-a)^2$, there is also a unique pair of estimators that minimize $\sum_{i=1}^n(Y_i-b_0-b_1X_i)^2$. The estimators $\hat{\beta}_0$ and $\hat{\beta}_1$ that minimize the intercept $\beta_0$ and slope $\beta_1$ are called **o**rdinary **l**east **s**quares (**OLS**) estimators of $\beta_0$ and $\beta_1$.
 
 
 As before, to minimize, we take partial derivatives with respect to $b_0$ and $b_1$ and set them to 0:
@@ -84,37 +84,38 @@ As before, to minimize, we take partial derivatives with respect to $b_0$ and $b
 \frac{\partial}{\partial b_0}\sum_{i=1}^n(Y_i-b_0-b_1X_i)^2 = -2\sum_{i=1}^n(Y_i-b_0-b_1X_i) = 0 \\[4pt]
 \frac{\partial}{\partial b_1}\sum_{i=1}^n(Y_i-b_0-b_1X_i)^2 = -2\sum_{i=1}^n(Y_i-b_0-b_1X_i)X_i = 0
 \]
-Rearranging the terms and dividing by $n$ shows that the OLS estimators $\widehat{\beta}_0$ and $\widehat{\beta}_1$ need to satisfy the following two equations
+Rearranging the terms and dividing by $n$ shows that the OLS estimators $\hat{\beta}_0$ and $\hat{\beta}_1$ need to satisfy the following two equations
 \[
 \begin{align*}
-\bar{Y} - \widehat{\beta}_0 - \widehat{\beta}_1\bar{X} &= 0 \\[4pt]
-\frac{1}{n}\sum_{i=1}^nX_iY_i-\widehat{\beta}_0\bar{X}-\widehat{\beta}_1\frac{1}{n}\sum_{i=1}^nX_i^2 &= 0
+\bar{Y} - \hat{\beta}_0 - \hat{\beta}_1\bar{X} &= 0 \\[4pt]
+\frac{1}{n}\sum_{i=1}^nX_iY_i-\hat{\beta}_0\bar{X}-\hat{\beta}_1\frac{1}{n}\sum_{i=1}^nX_i^2 &= 0
 \end{align*}
 \]
-Solving these for $\widehat{\beta}_0$ and $\widehat{\beta}_1$ gives:
+Solving these for $\hat{\beta}_0$ and $\hat{\beta}_1$ gives:
 \[
-\widehat{\beta}_0=\bar{Y}-\widehat{\beta}_1\bar{X}\\[4pt]
+\hat{\beta}_0=\bar{Y}-\hat{\beta}_1\bar{X}\\[4pt]
 \text{and} \\[4pt]
-\widehat{\beta}_1 = \frac{\dfrac{1}{n}\displaystyle\sum_{i=1}^nX_iY_i-\bar{X}\bar{Y}}{\dfrac{1}{n}\displaystyle\sum_{i=1}^nX_i^2-\bar{X}^2} = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}.
+\hat{\beta}_1 = \frac{\dfrac{1}{n}\displaystyle\sum_{i=1}^nX_iY_i-\bar{X}\bar{Y}}{\dfrac{1}{n}\displaystyle\sum_{i=1}^nX_i^2-\bar{X}^2} = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}.
 \]
-Notice that if we divide the numerator and the denominator of the expression for $\widehat{\beta}_1$ by $n-1$, we can also express it as:
+Notice that if we divide the numerator and the denominator of the expression for $\hat{\beta}_1$ by $n-1$, we can also express it as:
 \[
-\widehat{\beta}_1 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} = \frac{S_{XY}}{S_X^2}.
+\hat{\beta}_1 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} = \frac{S_{XY}}{S_X^2}.
 \]
-So, the OLS predicted values $\widehat{Y}_i$ is:
+So, the OLS predicted values $\hat{Y}_i$ is:
 \[
 \begin{align*}
-\widehat{Y}_i = \widehat{\beta}_0 + \widehat{\beta}_1X_i
-&=\left(\bar{Y}-\widehat{\beta}_1\bar{X}\right) + \widehat{\beta}_1X_i \ , \ \text{for} \ i=1,\dots,n \\[4pt]
+\hat{Y}_i 
+&= \hat{\beta}_0 + \hat{\beta}_1X_i \\[4pt]
+&=\left(\bar{Y}-\hat{\beta}_1\bar{X}\right) + \hat{\beta}_1X_i \ , \ \text{for} \ i=1,\dots,n \\[4pt]
 &=\left(\bar{Y}-\left(\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}\right)\bar{X}\right) + \left(\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}\right)X_i \\[4pt]
 &=\bar{Y}-\frac{S_{XY}}{S_X^2}\bar{X} + \frac{S_{XY}}{S_X^2}X_i
 \end{align*}
 \]
 The difference between $Y_i$ and its predicted value is then the *residual* for the $i^{th}$ observation:
 \[
-\widehat{u}_i=Y_i-\widehat{Y}_i = Y_i - \widehat{\beta}_0-\widehat{\beta}_1X_i \ , \ \text{for} \ i=1,\dots,n.
+\hat{u}_i=Y_i-\hat{Y}_i = Y_i - \hat{\beta}_0-\hat{\beta}_1X_i \ , \ \text{for} \ i=1,\dots,n.
 \]
-The intercept $\widehat{\beta}_0$, slope $\widehat{\beta}_1$, and residual $\widehat{u}_i$ are estimated from a sample of $n$ observations of $X_i$ and $Y_i$. These are estimates of the *unknown* true population intercept $\beta_0$, slope $\beta_1$, and error term $u_i$.
+The intercept $\hat{\beta}_0$, slope $\hat{\beta}_1$, and residual $\hat{u}_i$ are estimated from a sample of $n$ observations of $X_i$ and $Y_i$. These are estimates of the *unknown* true population intercept $\beta_0$, slope $\beta_1$, and error term $u_i$.
 
 
 $$\\[0.75in]$$
@@ -188,7 +189,7 @@ If we stack all $n$ observations then we get the multiple regression model in ma
 \vec{Y} = \mathbf{X}\vec{\beta}+\vec{u}.
 \]
 
-Now we can take the derivative of the sum of squared prediction mistakes with respect to each element of the coefficient vector and set these derivatives to 0. We can then solve for the estimator $\widehat{\vec{\beta}}.$
+Now we can take the derivative of the sum of squared prediction mistakes with respect to each element of the coefficient vector and set these derivatives to 0. We can then solve for the estimator $\hat{\vec{\beta}}.$
 
 
 Consider the $j^{th}$ regression coefficient $b_j$. The derivative of the sum of squared prediction mistakes with respect to that regression coefficient is:
@@ -197,42 +198,42 @@ Consider the $j^{th}$ regression coefficient $b_j$. The derivative of the sum of
 \]
 Notice that for $j=0, \ X_{0i}=1$ for all $i$. The right hand side of this equality is the $j^{th}$ element of the $k+1$ dimensional vector $-2\vec{X}^T(\vec{Y}-\mathbf{X}\vec{b}).$ Here, $\vec{b}$ is the $k+1$ dimensional vector consisting of $b_0,\dots,b_k$.
 
-There are $k+1$ such derivatives, each corresponding to an element of $\vec{b}$. If we combine all of them, then we get the system of $k+1$ equations that, when set to 0, constitute the first-order conditions for the OLS estimator $\widehat{\vec{\beta}}$. That is, $\widehat{\vec{\beta}}$ solves the system of $k+1$ equations:
+There are $k+1$ such derivatives, each corresponding to an element of $\vec{b}$. If we combine all of them, then we get the system of $k+1$ equations that, when set to 0, constitute the first-order conditions for the OLS estimator $\hat{\vec{\beta}}$. That is, $\hat{\vec{\beta}}$ solves the system of $k+1$ equations:
 \[
-\vec{X}^T(\vec{Y}-\mathbf{X}\widehat{\vec{\beta}}) = \vec{0}_{k+1} \\
+\vec{X}^T(\vec{Y}-\mathbf{X}\hat{\vec{\beta}}) = \vec{0}_{k+1} \\
 \text{or} \\
-\vec{X}^T\vec{Y}=\vec{X}^T\mathbf{X}\widehat{\vec{\beta}}
+\vec{X}^T\vec{Y}=\vec{X}^T\mathbf{X}\hat{\vec{\beta}}
 \]
 Solving this system of equations yields the OLS estimator in matrix form:
 \[
-\widehat{\vec{\beta}}=\left(\vec{X}^T\mathbf{X}\right)^{-1}\vec{X}^T\vec{Y}.
+\hat{\vec{\beta}}=\left(\vec{X}^T\mathbf{X}\right)^{-1}\vec{X}^T\vec{Y}.
 \]
 <p style="margin-left: 40px">
 $\hookrightarrow$
-*Note:* If the matrix $\mathbf{X}$ does not have full column rank then there is not a unique solution to $\vec{X}^T(\vec{Y}-\mathbf{X}\widehat{\vec{\beta}}) = \vec{0}_{k+1}$, and $\widehat{\vec{\beta}}$ cannot be computed.
+*Note:* If the matrix $\mathbf{X}$ does not have full column rank then there is not a unique solution to $\vec{X}^T(\vec{Y}-\mathbf{X}\hat{\vec{\beta}}) = \vec{0}_{k+1}$, and $\hat{\vec{\beta}}$ cannot be computed.
 </p>
 
 
-We can next define the *fitted value* as $\widehat{\vec{Y}} = \mathbf{X}\widehat{\vec{\beta}}$. Since $\vec{Y} = \widehat{\vec{Y}} + \widehat{\vec{u}}$, we have
+We can next define the *fitted value* as $\hat{\vec{Y}} = \mathbf{X}\hat{\vec{\beta}}$. Since $\vec{Y} = \hat{\vec{Y}} + \hat{\vec{u}}$, we have
 \[
-\vec{Y} = \mathbf{X}\widehat{\vec{\beta}}+\widehat{\vec{u}}.
+\vec{Y} = \mathbf{X}\hat{\vec{\beta}}+\hat{\vec{u}}.
 \]
 <p style="margin-left: 40px">
 $\hookrightarrow$
-Sometimes $\widehat{\vec{Y}}$ is called *predicted value* but this is misleading. The fitted value $\widehat{\vec{Y}}$ is a function of the entire sample, including $\vec{Y}$, so it cannot be interpreted as a valid prediction of $\vec{Y}$. It is therefore more accurate to describe $\widehat{\vec{Y}}$ as *fitted* rather than *predicted* value.
+Sometimes $\hat{\vec{Y}}$ is called *predicted value* but this is misleading. The fitted value $\hat{\vec{Y}}$ is a function of the entire sample, including $\vec{Y}$, so it cannot be interpreted as a valid prediction of $\vec{Y}$. It is therefore more accurate to describe $\hat{\vec{Y}}$ as *fitted* rather than *predicted* value.
 </p>
 
 
 Equivalently, the *residual* vector is:
 \[
-\widehat{\vec{u}} = \vec{Y} - \mathbf{X}\widehat{\vec{\beta}}.
+\hat{\vec{u}} = \vec{Y} - \mathbf{X}\hat{\vec{\beta}}.
 \]
 <p style="margin-left: 40px">
 $\hookrightarrow$
-Note that there is a distinction between the <ins>error</ins> $\vec{u}$ and <ins>residual</ins> $\widehat{\vec{u}}$. The error $\vec{u}$ is unobservable, while the residual $\widehat{\vec{u}}$ is an estimator.
+Note that there is a distinction between the <ins>error</ins> $\vec{u}$ and <ins>residual</ins> $\hat{\vec{u}}$. The error $\vec{u}$ is unobservable, while the residual $\hat{\vec{u}}$ is an estimator.
 </p>
 
-Using the residual vector we also have $\mathbf{X}^T\widehat{\vec{u}}=0$ since $\sum_{i=1}^nX_i\widehat{u}_i=0.$
+Using the residual vector we also have $\mathbf{X}^T\hat{\vec{u}}=0$ since $\sum_{i=1}^nX_i\hat{u}_i=0.$
 
 
 
@@ -241,7 +242,7 @@ $$\\[1in]$$
 
 # How Well Does the Regression Line Describe the Data?
 
-OLS can be thought of as decomposing each $\vec{Y}$ into two parts, a fitted value $\widehat{\vec{Y}}$ and a residual $\widehat{\vec{u}}$. The discussion in this section develops an understanding of the extent the regressor accounts for the variation in $\vec{Y}$ and the extent the observations cluster around the regression line. Different textbooks use slightly different terminology ranging from *Goodness of Fit* to *Measures of Fit* and *Prediction Accuracy* for this discussion.
+OLS can be thought of as decomposing each $\vec{Y}$ into two parts, a fitted value $\hat{\vec{Y}}$ and a residual $\hat{\vec{u}}$. The discussion in this section develops an understanding of the extent the regressor accounts for the variation in $\vec{Y}$ and the extent the observations cluster around the regression line. Different textbooks use slightly different terminology ranging from *Goodness of Fit* to *Measures of Fit* and *Prediction Accuracy* for this discussion.
 
 The two key measures are *R-squared* and the *standard error of the regression*. The former measures how well the regression line fits the data, and the latter measures how far $Y_i$ typically is from its predicted value. 
 
@@ -250,30 +251,30 @@ $$\\[0.75in]$$
 
 ## <ins>The R-squared</ins>
 
-Sometimes also referred to as the *coefficient of determination*, the *regression $R^2$* is the ratio of the sample variance of $\vec{Y}$ explained by $\mathbf{X}.$ In other words, $R^2$ is the ratio of the sample variance of $\widehat{\vec{Y}}$ to the sample variance of $\vec{Y}.$
+Sometimes also referred to as the *coefficient of determination*, the *regression $R^2$* is the ratio of the sample variance of $\vec{Y}$ explained by $\mathbf{X}.$ In other words, $R^2$ is the ratio of the sample variance of $\hat{\vec{Y}}$ to the sample variance of $\vec{Y}.$
 
 
 That is,
 \[
-R^2 = \frac{ESS = \displaystyle\sum_{i=1}^n(\widehat{Y}_i-\bar{Y})^2}{TSS = \displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2}
+R^2 = \frac{ESS = \displaystyle\sum_{i=1}^n(\hat{Y}_i-\bar{Y})^2}{TSS = \displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2}
 \]
 where ESS is the abbreviation of explained sum of squares and TSS is of total sum of squares. In matrix notation:
 \[
-R^2 = \frac{\left(\widehat{\vec{Y}}-\vec{\bar{Y}}\right)^2}{\left(\vec{Y}-\vec{\bar{Y}}\right)^2}.
+R^2 = \frac{\left(\hat{\vec{Y}}-\vec{\bar{Y}}\right)^2}{\left(\vec{Y}-\vec{\bar{Y}}\right)^2}.
 \]
 The $R^2$ can also be expressed in terms of the fraction of variance of $\vec{Y}$ that is *not explained* by $\mathbf{X}:$
 \[
-R^2 = 1 - \frac{RSS = \displaystyle\sum_{i=1}^n\widehat{u}_i^2 = \displaystyle\sum_{i=1}^n(Y_i - \widehat{Y}_i)}{TSS = \displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2}
+R^2 = 1 - \frac{RSS = \displaystyle\sum_{i=1}^n\hat{u}_i^2 = \displaystyle\sum_{i=1}^n(Y_i - \hat{Y}_i)}{TSS = \displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2}
 \]
 or in matrix notation:
 \[
-R^2 = 1 - \frac{\widehat{\vec{u}}^2}{\left(\vec{Y}-\vec{\bar{Y}}\right)^2}
+R^2 = 1 - \frac{\hat{\vec{u}}^2}{\left(\vec{Y}-\vec{\bar{Y}}\right)^2}
 \]
 Also note that
 \[
 \begin{align*}
 TSS &= ESS + RSS \\
-\displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2 &= \displaystyle\sum_{i=1}^n(\widehat{Y}_i-\bar{Y})^2 + \displaystyle\sum_{i=1}^n\widehat{u}_i^2
+\displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2 &= \displaystyle\sum_{i=1}^n(\hat{Y}_i-\bar{Y})^2 + \displaystyle\sum_{i=1}^n\hat{u}_i^2
 \end{align*}
 \]
 so ESS cannot be larger than TSS. Accordingly, $R^2$ is between $0$ and $1.$
@@ -301,13 +302,13 @@ $$\\[0.5in]$$
 
 Sometimes also referred to as *standard error of the estimate*, or as *root mean squared error*, the standard error of the regression (SER) is an estimator of the standard deviation of the regression error $\vec{u}.$ Since regression errors $u_1,\dots,u_n$ are unobserved, the SER is computed using their sample counterparts, the OLS residuals $\hat{u}_1, \dots, \hat{u}_n.$ 
 \[
-SER = s_\widehat{\vec{u}} = \sqrt{s_\widehat{\vec{u}}^2}
+SER = s_\hat{\vec{u}} = \sqrt{s_\hat{\vec{u}}^2}
 \]
 where
 \[
-s_\widehat{\vec{u}}^2 = \frac{1}{n-k-1}\sum_{i=1}^n\widehat{u}_i^2 = \frac{SSR}{n-k-1}
+s_\hat{\vec{u}}^2 = \frac{1}{n-k-1}\sum_{i=1}^n\hat{u}_i^2 = \frac{SSR}{n-k-1}
 \]
-The estimate $s_\widehat{u}$ is an estimate of the standard deviation in the unobservables affecting $\vec{Y}$. That is, it estimates the standard deviation in $\vec{Y}$ after the effect of $\mathbf{X}$ has been taken out. 
+The estimate $s_\hat{u}$ is an estimate of the standard deviation in the unobservables affecting $\vec{Y}$. That is, it estimates the standard deviation in $\vec{Y}$ after the effect of $\mathbf{X}$ has been taken out. 
 
 
 
@@ -321,7 +322,7 @@ $$\\[1in]$$
 
 These assumptions discuss the statistical properties of OLS estimating the parameters in an underlying population model. These statistical models have nothing to do with a particular sample, but rather with the property of estimators when random sampling is done repeatedly.
 
-For the multiple regression model $Y_i = \vec{X}_i^T \ \vec{\beta}+u_i, \ i=1,\dots,n$ there are there are two sets of assumptions we consider here. One set of assumptions are assumptions about the explanatory variables $vec{X}_^T$ and the other set is about the error terms
+For the multiple regression model $Y_i = \vec{X}_i^T \ \vec{\beta}+u_i, \ i=1,\dots,n$ there are there are two sets of assumptions we consider here. One set of assumptions are assumptions about the explanatory variables $\vec{X}_^T$ and the other set is about the error terms
 
 
 
@@ -334,19 +335,29 @@ $$\\[0.25in]$$
 
 ### <ins>Assumption 1</ins>: Linear in parameters {#asmptnlinpar .unnumbered}
 
-The population regression model, or what is sometimes called the true model, is linear in parameters. That is, the population regression model can bet written as $Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \dots + \beta_kX_k + u$ where $\beta_0, \beta_1, \beta_2,\dots,\beta_k$ are the unknown parameters (constants), and $u$ is an unobserved random error or disturbance term.
+The population regression model, or what is sometimes called the true model, is linear in parameters. That is, the population regression model can bet written as 
+\[
+Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \dots + \beta_kX_k + u 
+\]
+where $\beta_0, \beta_1, \beta_2,\dots,\beta_k$ are the unknown parameters (constants), and $u$ is an unobserved random error or disturbance term. The key feature in this assumption is that the model is linear in the parameters $\beta_0, \beta_1, \beta_2, \dots, \beta_k.$ Notice that this is different than the *linear conditionally unbiased estimator* discussion above which focused on the estimator $\hat{\beta}_1$. Here, the population model is linear in parameters. So, the following model, for example, would *not* be linear in parameters:
+\[
+Y = \beta_0 + \beta_1^2X_1 + u
+\]
+while the following model would be linear in parameters:
+\[
+Y = \beta_0 + \beta_1X_1^2 + u
+\]
 
+In this class we are mainly concerned with models that are linear in parameters, so this is what is meant by *linear regression'.
 
-The key feature in this assumption is that the model is linear in the parameters $\beta_0, \beta_1, \beta_2, \dots, \beta_k.$ Notice that this is different than the *linear conditionally unbiased estimator* discussion above which focused on the estimator $\widehat{\beta}_1$. Here, the population model is linear in parameters.
-
-In time series, the population regression model would be expressed as $Y_t = \beta_0 + \beta_1X_{t1} + \beta_2X_{t2} + \dots + \beta_kX_{tk} + u$ where $t$ in $X_{tj}$ denotes the time period and $j$ indicates one of the $k$ regressors. In this sense, we can let $\vec{X}_t^T = (X_{t1}, X_{t2}, \dots, X_{tk})$ denote the set of all independent varaibles in the equation at time $t$. Similarly, $\mathbf{X}$ can be thought of as an array with $n$ rows and $k$ columns, so the $t^{th}$ row of $\mathbf{X}$ is $\vec{X}_t^T$
+**Extra**: In time series, the population regression model would be expressed as $Y_t = \beta_0 + \beta_1X_{t1} + \beta_2X_{t2} + \dots + \beta_kX_{tk} + u$ where $t$ in $X_{tj}$ denotes the time period and $j$ indicates one of the $k$ regressors. In this sense, we can let $\vec{X}_t^T = (X_{t1}, X_{t2}, \dots, X_{tk})$ denote the set of all independent varaibles in the equation at time $t$. Similarly, $\mathbf{X}$ can be thought of as an array with $n$ rows and $k$ columns, so the $t^{th}$ row of $\mathbf{X}$ is $\vec{X}_t^T$
 
 
 
 $$\\[0.5in]$$
 
 
-### <ins>Assumption 2</ins>: Random Sampling: $(\vec{X}_i,Y_i)$ are i.i.d. draws from their joint distribution {#asmptnrandsamp .unnumbered}
+### <ins>Assumption 2</ins>: Random Sampling: $(X_1,\dots,X_n,Y_i)$ are i.i.d. draws from their joint distribution {#asmptnrandsamp .unnumbered}
 
 This assumption states that $(X_{1i},X_{2i},\dots,X_{ki},Y_i) \ , \ i=1,\dots,n$ are independently and identically distributed (i.i.d.) random variables. This assumption holds automatically if the data are collected by simple random sampling. As a result, under random sampling, errors for different cross-sectional observations, $u_i$ and $u_j$ are independent for any two observations $i$ and $j$ (also see [exogeneity](#asmptnexogen) assumption). 
 <p style="margin-left: 40px">
@@ -359,47 +370,56 @@ In simple random sampling, $n$ objects are selected from at random from a popula
 
 Because $Y_1,\dots,Y_n$ are randomly drawn from the same population, the marginal distribution of $Y_i$ is the same for each $i=1,\dots,n.$ When $Y_i$ has the same marginal distribution for $i=1,\dots,n$, then $Y_1, \dots, Y_n$ are said to be *identically distributed*.
 
-
 Under simple random sampling knowing the value of $Y_1$ provides no information about $Y_2$. So, the conditional distribution of $Y_2$ given $Y_1$ is the same as the marginal distribution of $Y_2$. In other words, under simple random sampling, $Y_1$ is distributed independently of $Y_2,\dots,Y_n.$
-
 
 When $Y_1,\dots,Y_n$ are drawn from the same distribution and are independently distributed, they are said to be *independently and identically distributed (i.i.d.).
 
+Sometimes we need to write the equation for a particular observation $i$: for a randomly drawn observation from the population, we have $Y_i = \beta+0 + \beta_1X_{i1} + \beta_2X_{i2} +\dots + \beta_kX{ik} + u.$ For example, we can write a CEO salary equation for a particular CEO $i$ as $log({salary}_i) = \beta_0 + \beta_1log({sales}_i)+\beta_2{ceotenure}_i + u_i.$
 
-We can extend this to vectors. The random vectors $\{\vec{Y}_1,\dots,\vec{Y}_n\}$ are i.i.d. if they are mutually independent with identical marginal distributions *F*. A collection of random vectors $\{\vec{Y}_l,\dots,\vec{Y}_n\}$ is a *random sample* from the population $F$ if the $\vec{Y}_i$ are i.i.d. with distribution $F$, i.e. the population distribution.
-
-Sometimes we need to write the equation for a particular observation $i$: for a randomly drawn observation from the population, we have $Y_i = \beta+0 + \beta_1X_{i1} + \beta_2X_{i2} +\dots + \beta_kX{ik} + u.$ For example, we can write a CEO salary equation for a particular CEO $i$ as $log(salary_i) = \beta_0 + \beta_1log(sales_i)+\beta_2ceotenure_i + u_i.$
-
+**Extra:** We can extend this to vectors. The random vectors $\{\vec{Y}_1,\dots,\vec{Y}_n\}$ are i.i.d. if they are mutually independent with identical marginal distributions *F*. A collection of random vectors $\{\vec{Y}_l,\dots,\vec{Y}_n\}$ is a *random sample* from the population $F$ if the $\vec{Y}_i$ are i.i.d. with distribution $F$, i.e. the population distribution.
 
 
 
 $$\\[0.5in]$$
 
 
-### <ins>Assumption 3</ins>: $\vec{X}_i$ and $u_i$ have nonzero finite fourth moment {#asmptn4thmmnt .unnumbered}
+### <ins>Assumption 3</ins>: $X_i$ and $u_i$ have nonzero finite fourth moment {#asmptn4thmmnt .unnumbered}
 
-This assumption is effectively stating that large outliers are unlikely. By stating that $0 < \mathbb{E}(\vec{X}_i^4) < \infty$ and $0 < \mathbb{E}(Y_i^4) < \infty$ it states that $\vec{X}$ and $Y$ have finite kurtosis. If the assumption of finite fourth moments holds then it is unlikely that statistical inferences using OLS will be dominated by a few observations. This assumption is used to derive the properties of OLS regression statistics in large samples.
+This assumption is effectively stating that large outliers are unlikely. By stating that $0 < \mathbb{E}(X_i^4) < \infty$ and $0 < \mathbb{E}(Y_i^4) < \infty$ it states that $X$ and $Y$ have finite kurtosis. If the assumption of finite fourth moments holds then it is unlikely that statistical inferences using OLS will be dominated by a few observations. This assumption is used to derive the properties of OLS regression statistics in large samples.
 
 $$\\[0.5in]$$
 
-### <ins>Assumption 4</ins>: No Perfect Multicollinearity: $\mathbf{X}$ has full column rank {#asmptnpermulticol .unnumbered}
+### <ins>Assumption 4</ins>: No Perfect Multicollinearity {#asmptnpermulticol .unnumbered}
 
 Presence of perfect multicollinearity would make it impossible to calculate the OLS estimator. The regressors are said to exhibit perfect multicollinearity if one of the regressors is a perfect linear function of the other regressors. That is, one regressor can be written as a perfect linear combination of the others. 
 
-
-In matrix notation, perfect multicollinearity means that one column of $\mathbf{X}$ is a perfect linear combination of the other columns of $\mathbf{X}$, therefore $\mathbf{X}$ does not have full column rank. Therefore, stating that $\mathbf{X}$ has rank $k+1$, or that rank is equal to the number of columns of $\mathbf{X}$, is the same as saying that the regressors are not perfectly multicollinear.
-
-
 When perfect multicollinearity occurs, it often reflects a logical mistake in choosing the regressors (perhaps accidentally choosing the same regressor twice), or some previously unrecognized feature of the data set. In general, the solution to perfect multicollinearity is to modify the regressors to eliminate the problem.
-
 
 Also note that imperfect multicollinearity is not a problem for the theory of OLS estimators. Imperfect multicollinearity means that two or more of the regressors are highly correlated, i.e. there is a linear function of the regressors that is highly correlated with another regressor. If the variables in the regression are the ones we meant to include then imperfect multicollinearity implies that it will be difficult to estimate precisely one or more of the partial effects using the data.
 
-So, for example, the model $consumption = \beta_0 + \beta_1income + \beta_2income^2 + u$ does not violate this assumption but the model $log(consumption) = \beta_0 + \beta_1log(income) + \beta_2log(income^2) + u$ does. In the first model $X_2 = income^2$ is not an exact linear function of $X_1=income$. Whereas in the second model, $X_2=log(income^2)=2log(income)$ is an exact linear function of $X_1=log(income)$ since $X_2=2X_1$ in this case.
+So, for example, the model 
+\[
+consumption = \beta_0 + \beta_1income + \beta_2income^2 + u
+\]
+does not violate this assumption but the model 
+\[
+log(consumption) = \beta_0 + \beta_1log(income) + \beta_2log(income^2) + u
+\] 
+does. 
 
+In the first model $X_2 = income^2$ is not an exact linear function of $X_1=income$. Whereas in the second model, $X_2=log(income^2)=2log(income)$ is an exact linear function of $X_1=log(income)$ since $X_2=2X_1$ in this case.
 
 This assumption can also fail if the sample size $n$ is too small in relation to the number of parameters being estimated. Thus, for $k+1$ parameters, this assumption fails if $n < k+1.$
 
+**Extra:** In matrix notation, perfect multicollinearity means that one column of $\mathbf{X}$ is a perfect linear combination of the other columns of $\mathbf{X}$, therefore $\mathbf{X}$ does not have full column rank. Therefore, stating that $\mathbf{X}$ has rank $k+1$, or that rank is equal to the number of columns of $\mathbf{X}$, is the same as saying that the regressors are not perfectly multicollinear.
+
+
+
+$$\\[0.5in]$$
+
+### <ins>Assumption 5</ins>: Fixed Regressors $X_1, X_2, \dots, X_n$ {#fixedregressor}
+
+This effectively means that the $X_1, X_2, \dots, X_n$ are nonstochastic, i.e. its value is a fixed number. Since the regression analysis is conditional upon the given $X$ values, we are assuming $Xs$ are nonstochastic. Also, $X$ being fixed means, by definition, it is uncorrelated with the disturbance term $u$.
 
 
 
@@ -409,11 +429,31 @@ $$\\[0.75in]$$
 
 $$\\[0.25in]$$
 
-### <ins>Assumption 5</ins>: Exogeneity: Zero cobnditional mean $\mathbb{E}\left(u_i | \vec{X}_i^T\right)=0$ {#asmptnexogen .unnumbered}
+### <ins>Assumption 6</ins>: Exogeneity: Zero conditional mean $\mathbb{E}(u_i | X_1, X_2, \dots, X_n)=0$ {#asmptnexogen .unnumbered}
 
-This is the key assumption that makes the OLS estimators unbiased. It states that given $\vec{X}_i^T$, the conditional distribution of $u_i$ has a mean of $0$. This assumption expresses the idea that there may be other factors that impact the dependent variable but these other factors are unrelated to $\vec{X}_i^T$. What is meant by 'unrelated' here is that given a value of $\vec{X}_i^T$, the mean distribution of these other factors is $0$. In other words, this assumption states that the errors are independent of regressors.
+This is the key assumption that makes the OLS estimators unbiased. While the previous assumption states that $X_1,\dots,X_n$ and $u_i$ are uncorrelated, this assumption states that not only they are uncorrelated but also given $X_1,\dots,X_n$, the conditional distribution of $u_i$ has a mean of $0$. This assumption effectively expresses the idea that there may be other factors that impact the dependent variable but these other factors are unrelated to $X_1,\dots,X_n$. What is meant by 'unrelated' here is that given a value of $X_1,\dots,X_n$, the mean distribution of these other factors is $0$. In other words, this assumption states that the errors are independent of regressors. Also notice that this is in the context of, and conditional on, the particular sample values of X. 
 
-To see this, recall the definitions of conditional expectation, covariance, and correlation:
+Therefore the conditional mean assumption $\mathbb{E}(u_i | X_i)=0$ implies that $u_i$ and $X_i$ are uncorrelated, i.e. $Corr(u_i, X_i)=0$.
+<p style="margin-left: 40px">
+$\hookrightarrow$
+Note that the reverse is not necessarily true. Since correlation is a measure of *linear* association, the conditional mean of $u_i$ given $\X_i$ might be nonzero even if $u_i$ and $X_i$ are uncorrelated.
+</p>
+<p style="margin-left: 40px">
+$\hookrightarrow$
+However, if $u_i$ and $X_i$ are correlated, then it must be that $\mathbb{E}(u_i|\X_i) \neq 0.$
+</p>
+<p style="margin-left: 40px">
+$\hookrightarrow$
+For time series, $i$ subscript would be replaced by $t$ subscript to indicate time.
+</p>
+
+It is therefore common to discuss the conditional mean assumption in terms of possible correlation between $u_i$ and $X_i$. If they are correlated, then the conditional mean assumption is violated.
+
+In observational data, $X$ is not necessarily randomly assigned but we hope that it behaves as if it was randomly assigned, meaning $\mathbb{E}(u_i | X_i)=0$. Whether this holds requires careful thought and judgment and we will come back to this issue frequently.
+
+<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
+
+>To see that the errors are independent of regressors, recall the definitions of conditional expectation, covariance, and correlation:
 \[
 \begin{align*}
 \mathbb{E}(Y|X=x) &= \sum_{i=1}^ny_i\mathbb{P}(Y=y_i|X=x_i) \\[6pt]
@@ -425,23 +465,22 @@ where $\mathbb{P}(Y=y|X=x)$ is the conditional probability that $Y$ takes on the
 \[
 \mathbb{P}(Y=y|X=x) = \frac{\mathbb{P}(X=x, Y=y)}{\mathbb{P}(X=x)}.
 \]
-
-
+>
+>
 So if $Cov(X,Y)=0$ then $Corr(X,Y)=0$, and we can typically say $X$ and $Y$ are *uncorrelated*. So, if $X$ and $Y$ are independent with finite variances, then $X$ and $Y$ are uncorrelated.
 <p style="margin-left: 40px">
 $\hookrightarrow$
 *Note:* The reverse is not true. For example, suppose $X\sim U[-1,1]$. This is symmetrically distributed about 0, so $\mathbb{E}(X)=0$. Set $Y=X^2$. Then, $Cov(X,Y)=\mathbb{E}(X^3)-\mathbb{E}(X)\mathbb{E}(X^2) = 0$ since $\mathbb{E}(X^3)=0$. Therefore, $X$ and $Y$ are uncorrelated, yet they are fully dependent. Thus, uncorrelated random variables may be dependent. 
 </p>
-
-
+>
+>
 Now suppose $\mathbb{E}(X)=\mu_X$ and $\mathbb{E}(Y)=\mu_Y$ so that $Cov(X,Y) = \mathbb{E}(XY) - \mu_X\mu_Y.$ To determine $\mathbb{E}(XY)$ we will use the law of iterated expectations:
 \[
 \mathbb{E}(XY) = \mathbb{E}(\mathbb{E}(XY|X)) = \mathbb{E}(\mathbb{E}(Y|X)X) = \mu_Y\mathbb{E}(X)=\mu_Y\mu_X
 \]
 So, $Cov(X,Y) = \mu_X\mu_Y - \mu_X\mu_Y = 0.$
-
-<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
-
+>
+>
 >##### <ins>*Law of Iterated Expectations*</ins> {.unnumbered}
 > 
 >
@@ -459,29 +498,12 @@ The law of iterated expectations can be generalized to multiple random variables
 </div>
 
 
-Therefore the conditional mean assumption $\mathbb{E}(u_i | \vec{X}_i^T)=0$ implies that $u_i$ and $\vec{X}_i^T$ are uncorrelated, i.e. $Corr\left(u_i, \vec{X}_i^T\right)=0$.
-<p style="margin-left: 40px">
-$\hookrightarrow$
-Note that the reverse is not necessarily true. Since correlation is a measure of *linear* association, the conditional mean of $u_i$ given $\vec{X}_i^T$ might be nonzero even if $u_i$ and $\vec{X}_i$ are uncorrelated.
-</p>
-<p style="margin-left: 40px">
-$\hookrightarrow$
-However, if $u_i$ and $\vec{X}_i^T$ are correlated, then it must be that $\mathbb{E}(u_i|\vec{X_i}^T) \neq 0.$
-</p>
-<p style="margin-left: 40px">
-$\hookrightarrow$
-For time series, $i$ subscript would be replaced by $t$ subscript to indicate time.
-</p>
 
-It is therefore common to discuss the conditional mean assumption in terms of possible correlation between $u_i$ and $\vec{X}_i^T$. If they are correlated, then the conditional mean assumption is violated.
-
-
-In observational data, $\vec{X}$ is not necessarily randomly assigned but we hope that it behaves as if it was randomly assigned, meaning $\mathbb{E}(u_i | \vec{X}_i^T)=0$. Whether this holds requires careful thought and judgment and we will come back to this issue frequently.
 
 
 $$\\[0.5in]$$
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
-> Under these five assumptions the OLS estimator is [**unbiased**](#ue), **consistent**, and has a **normal sampling distribution** in large samples. If these three assumptions hold, and the sample size is large, then the methods for inference (hypothesis testing using the t-statistic and construction of 95% confidence intervals as $\pm$ 1.96 standard errors) are justified.
+> Under the above assumptions the OLS estimator is [**unbiased**](#ue), [**consistent**](#consistency), and has a [**normal sampling distribution**](#clt) in large samples. If these three assumptions hold, and the sample size is large, then the methods for inference (hypothesis testing using the t-statistic and construction of 95% confidence intervals as $\pm$ 1.96 standard errors) are justified.
 >
 >
 However, we need stronger assumptions to develop a theory of *efficient* estimation using OLS or to characterize the exact sampling distribution of the OLS estimator.
@@ -498,76 +520,73 @@ However, we need stronger assumptions to develop a theory of *efficient* estimat
 
 $$\\[0.5in]$$
 
-### <ins>Assumption 6</ins>: Homoskedasticity: Constant error variance $Var\left(u_i|\vec{X}_i^T\right)=\sigma_u^2$ {#asmptnskedasticity .unnumbered}
+### <ins>Assumption 7</ins>: Homoskedasticity: Constant error variance $Var(u_i|\X_1,\dots,X_n)=\sigma_u^2$ {#asmptnskedasticity .unnumbered}
 
-This assumption states that the variance in the error term, conditional on the explanatory variables, is the *same* for all combinations of outcomes in the explanatory variables. That is, the error term $u_i$ is *homoskedastic* if the variance of the conditional distribution of $u_i$ given $\vec{X}_i^T$ is constant for $i=1,\dots,n$, and it does not depend on $\vec{X}_i^T$. Otherwise the error term is *heteroskedastic*.
+This assumption states that the variance in the error term, conditional on the explanatory variables, is the *same* for all combinations of outcomes in the explanatory variables. That is, the error term $u_i$ is *homoskedastic* if the variance of the conditional distribution of $u_i$ given $X_1,\dots,X_n$ is constant for $i=1,\dots,n$, and it does not depend on $\X_1,\dots,X_n$. Otherwise the error term is *heteroskedastic*.
 
+Since the $X$ values are assumed to be given, or [nonstochastic](#fixedregressor), the only source of variation in Y is from $u$. Therefore, given $X_i$, the variance of $Y_i$ is the same as that of $u_i$. So, the conditional variances of $u_i$ and $Y_i$ are the same: $\sigma^2$.
 
-The homoskedasticity assumption is distinct from the zero conditional mean assumption $\mathbb{E}(u_i | \vec{X}_i^T)=0$ [discussed above](#exogeneity). That assumption involves the *expected value* of $u_i$ conditional on $\vec{X}_i$, whereas this assumption concerns the *variance* of $u_i$ conditional on $\vec{X}_i^T.$
-
+The homoskedasticity assumption is distinct from the zero conditional mean assumption $\mathbb{E}(u_i | X_1,\dots,X_n)=0$ [discussed above](#exogeneity). That assumption involves the *expected value* of $u_i$ conditional on $X_1,\dots,X_n$, whereas this assumption concerns the *variance* of $u_i$ conditional on $X_1,\dots,X_n$.
 
 If we assume that $u_i$ and $\vec{X}_i^T$ are independent, then the distribution of $u_i$ given $\vec{X}_i^T$ does not depend on $\vec{X}_i^T$. Accordingly, $\mathbb{E}(u_i|\vec{X}_i^T)=\mathbb{E}(u_i)=0$ and $Var(u_i|\vec{X}_i^T)=\sigma_u^2.$
-
 
 This, in turn, means that $\sigma_u^2$ is also the *unconditional expectation* of $u_i^2$ because 
 \[
 \begin{align*}
-\sigma_u^2=Var(u_i|\vec{X}_i^T) 
-&= \mathbb{E}\left(u_i^2|{\vec{X}_i^T}^2\right) - \left(\mathbb{E}(u_i|\vec{X}_i^T)\right)^2 \\
-&= \mathbb{E}\left(u_i^2|{\vec{X}_i^T}^2\right)-0 \ \ \ \text{since } \mathbb{E}(u_i|\vec{X}_i^T)=\mathbb{E}(u_i)=0 \\
-&= \mathbb{E}(u_i^2)=Var(u_i) \ \ \ \text{since $u_i$ and $\vec{X}_i$ are independent, and } \mathbb{E}(u_i)=0.
+\sigma_u^2=Var(u_i|X_i) 
+&= \mathbb{E}\left(u_i^2|X_i\right) - \left(\mathbb{E}(u_i|X_i)\right)^2 \\
+&= \mathbb{E}\left(u_i^2|X_i^2\right)-0 \ \ \ \text{since } \mathbb{E}(u_i|X_i)=\mathbb{E}(u_i)=0 \\
+&= \mathbb{E}(u_i^2)=Var(u_i) \ \ \ \text{since $u_i$ and $X_i$ are independent, and } \mathbb{E}(u_i)=0.
 \end{align*}
 \]
 
 In other words, $\sigma_u^2$ is the *unconditional variance* of $u_i$. Accordingly, $\sigma_u^2$ is often called the *error variance* or *disturbance variance*.
 
-
 It is often useful to also write the exogeneity assumption and this assumption not in terms of the error term but in terms of the conditional mean and conditional variance of $Y_i$:
 \[
-\mathbb{E}(Y_i|\vec{X}_i^T)=\vec{X}_i^T\vec{\beta} \\
-Var(Y_i|\vec{X}_i^T) = \sigma_u^2.
+\mathbb{E}(Y_i|X_i)=\beta_0 + \beta_1X_i + u_i \\
+Var(Y_i|X_i) = \sigma_u^2.
 \]
-That is, the conditional expectation of $Y_i$ given $\vec{X}_i^T$ is linear in $\vec{X}_i^T$, but the variance of $Y_i$ given $\vec{X}_i^T$ is constant.
+That is, the conditional expectation of $Y_i$ given $X_i$ is linear in $\X_i$, but the variance of $Y_i$ given $X_i$ is constant.
 
 
-A point to note is that the nature of skedasticity concerns with the conditional variance and not the unconditional variance. By definition, the unconditional variance $\sigma_u^2$ is a constant and is independent of the regressors $\vec{X}_i^T$. So in discussing the variance as a function of the regressors, it refers to conditional variance.
+A point to note is that the nature of skedasticity concerns with the conditional variance and not the unconditional variance. By definition, the unconditional variance $\sigma_u^2$ is a constant and is independent of the regressors $X_1,\dots,X_n$. So in discussing the variance as a function of the regressors, it refers to conditional variance.
 
 
-When $Var(u_i|\vec{X}_i^T)$ depends on $\vec{X}_i^T$, the error term is said to exhibit heteroskedasticity. Also note that heteroskedasticity is present whenever $Var(Y_i|\vec{X}_i^T)$ is a function of $\vec{X}_i^T$ because $Var(u_i|\vec{X}_i^T)=Var(Y_i|\vec{X}_i^T).$
+When $Var(u_i|X_i)$ depends on $X_i$, the error term is said to exhibit heteroskedasticity. Also note that heteroskedasticity is present whenever $Var(Y_i|X_i)$ is a function of $X_i$ because $Var(u_i|X_i)=Var(Y_i|X_i).$
 
 <p style="margin-left: 40px">
-*Important:* Homoskedasticity assumption plays <ins>no role</ins> in showing that $\widehat{\vec{\beta}}$ are unbiased. That is, the OLS estimators remain unbiased, consistent, and asymptotically normal irrespective of whether the errors are homoskedastic or not.
+*Important:* Homoskedasticity assumption plays <ins>no role</ins> in showing that $\hat{\beta}_i$ is unbiased. That is, the OLS estimators remain unbiased, consistent, and asymptotically normal irrespective of whether the errors are homoskedastic or not.
 <br><br>
 *Note:* The correct way of spelling 'homoskedasticity' and 'heteroskedasticity' is with a 'k', despite some textbooks spelling it with a 'c'. This is because the words derived into English from Greek roots. $\sigma\kappa\epsilon\delta\alpha\nu\nu\upsilon\mu\iota$, means "to scatter" and transliterated into English with 'k', while $\omicron\mu\omicron\iota\omicron\zeta$ means "same" and $\epsilon\tau\epsilon\rho\omicron$ means "other" or "different". <span style="font-size:0.9em;"> (See McCulloch, J Huston (1985) "On heteros*edasticity" Econometrica 53, 483 and Hansen, Bruce E (2022) Econometrics, Princeton University Press, 29-30).</span> 
 </p>
 
 $$\\[0.75in]$$
 
-### <ins>Assumption 7</ins>: Normal errors: Conditional distribution of $u_i$ given $\vec{X}_i$ is normal {#asmptnnormerr.unnumbered}
+### <ins>Assumption 8</ins>: Normal errors: Conditional distribution of $u_i$ given $\X_i$ is normal {#asmptnnormerr.unnumbered}
 
-The distribution of $(u_i|\vec{X}_i^T)$ has a mean $0$ by virtue of [exogeneity assumption](#asmptnexogen), and variance of $Var(u_i|\vec{X}_i^T)$. That is, $(u_i|\vec{X}_i^T) \sim N\left(0, Var(u_i|\vec{X}_i)\right).$ 
-
-
-Since the discussion in [homoskedasticity assumption](#asmptnskedasticity) states that $Var(u_i|\vec{X}_i^T)=\sigma_u^2$, the conditional distribution becomes: $(u_i|\vec{X}_i^T) \sim N(0, \sigma_u^2).$ 
+The distribution of $(u_i|X_i)$ has a mean $0$ by virtue of [exogeneity assumption](#asmptnexogen), and a variance of $Var(u_i|X_i)$. That is, $(u_i|X_i) \sim N\left(0, Var(u_i|X_i)\right).$ 
 
 
-Also, $u_i$ and $\vec{X}_i^T$ are independently distributed since the conditional distribution of $(u_i|\vec{X}_i^T)$ does not depend on $\vec{X}_i^T$. Additionally, due to [random sampling assumption](#asmptnandsamp), $u_i$ is distributed independently of $u_j$ for all $j\neq i$. Therefore, $u_i$ and $\vec{X}_i^T$ are independently distributed and $u_i \sim i.i.d. N(0,\sigma_u^2).$  
+Since the discussion in [homoskedasticity assumption](#asmptnskedasticity) states that $Var(u_i|X_i)=\sigma_u^2$, the conditional distribution becomes: $(u_i|\vec{X}_i^T) \sim N(0, \sigma_u^2).$ 
 
 
-This assumption underpins obtaining the exact sampling distributions of the OLS estimators that are conditional on the regressors in the sample. Specifically, the OLS estimators have normal sampling distributions (see [unbisased estimator](#ue) discussion below) which leads to $t$ and $F$ distributions for $t$ statistics and $F$ statistics. If the error is not normally distributed, the distribution of a $t$ statistic is not exactly $t$, and an $F$ statistic does not have an exact $F$ distribution for any sample size. This assumption can be dropped if the sample size is reasonably large. (See [OLS Asymptotics](#olsasymptot) discussion.)
+Also, $u_i$ and $X_i$ are independently distributed since the conditional distribution of $(u_i|X_i)$ does not depend on $X_i$. Additionally, due to [random sampling assumption](#asmptnandsamp), $u_i$ is distributed independently of $u_j$ for all $j\neq i$. Therefore, $u_i$ and $X_i$ are independently distributed and $u_i \sim i.i.d. N(0,\sigma_u^2).$  
+
+
+This assumption underpins obtaining the exact sampling distributions of the OLS estimators that are conditional on the regressors in the sample. Specifically, the OLS estimators have normal sampling distributions (see [unbisased estimator](#ue) discussion below) which leads to $t$ and $F$ distributions for $t$ statistics and $F$ statistics. If the error is not normally distributed, the distribution of a $t$ statistic is not exactly $t$, and an $F$ statistic does not have an exact $F$ distribution for any sample size. This assumption can be dropped if the sample size is reasonably large. (See the [OLS Asymptotics](#olsasymptot) discussion.)
 
 
 
 $$\\[0.5in]$$
 
-### <ins>Assumption 8</ins>: No Serial Correlation $\mathbb{E}\left(u_i,u_j | \mathbf{X}\right)$ (especially important in time series) {#assmptnnosercorr .unnumbered}
+### <ins>Assumption 9</ins>: No Autocorrelation {#assmptnnosercorr .unnumbered}
 
-This assumption is already a natural consequence of random sampling whereby $u_i$ and $u_j$ are independent for any two observations $i$ and $j$. Under random sampling, the errors for different observations are independent conditional on the explanatory variables in the sample. Therefore, serial correlation is a potential problem mainly for regressions with time series data.
+This assumption states that there is no correlation between two error terms and is already a natural consequence of random sampling whereby $u_i$ and $u_j$ are independent for any two observations $i$ and $j$. Under random sampling, the errors for different observations are independent conditional on the explanatory variables in the sample. Therefore, serial correlation is a potential problem mainly for regressions with time series data.
 
+This assumption states that conditional on $X_1, \dots, X_n$, the errors in two different time periods are not correlated: $Corr(u_i,u_j | X_1, \dots, X_n)=0$, for all $i\neq j$. If we treat $X_1, \dots, X_n$ as [nonrandom](#fixedregressor), then we can ignore the conditioning on $X_1, \dots, X_n$ and the assumption becomes $Corr(u_i,u_j) = 0$ for all $i\neq j$. When considering whether this assumption holds, it is common to focus on this unconditioned version of the assumption because of its simple interpretation.
 
-This assumption states that conditional on $\mathbf{X}$, the errors in two different time periods are not correlated: $Corr(u_i,u_j | \mathbf{X})=0$, for all $i\neq j$. If we treat $\mathbf{X}$ as nonrandom, then we can ignore the conditioning on $mathbf{X}$ and the assumption becomes $Corr(u_i,u_j) = 0$ for all $i\neq j$. When considering whether this assumption holds, it is common to focus on this unconditioned version of the assumption because of its simple interpretation.
-
-
+Since any two error terms are assumed to be uncorrelated, it means that any two $Y$ values will also be uncorrelated: $Cov(Y_i, Y_j) = 0.$ This is because $\beta$s are fixed numbers and $X$ [is assumed to be fixed](#fixedregressor), and since the model is $Y_i = \beta_0 + \beta_1X_i + u_i$, $Y$ only varies when $u$ varies. So if $u$s are uncorrelated, then so are the $Y$s.  
 
 
 
@@ -583,7 +602,7 @@ $$\\[0.25in]$$
 
 ## <ins>U</ins>nbiased <ins>E</ins>stimator (UE) {#ue}
 
-Suppose we are evaluating an estimator many times. We are doing this evaluation over repeated randomly drawn samples. We would hope that, on average, we would get the right answer. So a reasonable property of an estimator is that the mean of its sampling distribution equals the population mean, $\mu_Y$. If that is the case, then the estimator is unbiased. That is, the estimator $\widehat{\mu}_X$ is unbiased if $\mathbb{E}(\widehat{\mu}_x) = \mu_X$, where $\mathbb{E}(\widehat{\mu}_X)$ is the mean of the sampling distribution of $\widehat{\mu}_X.$ Otherwise, $\widehat{\mu}_X$ is biased.
+Suppose we are evaluating an estimator many times. We are doing this evaluation over repeated randomly drawn samples. We would hope that, on average, we would get the right answer. So a reasonable property of an estimator is that the mean of its sampling distribution equals the population mean, $\mu_Y$. If that is the case, then the estimator is unbiased. That is, the estimator $\hat{\mu}_X$ is unbiased if $\mathbb{E}(\hat{\mu}_x) = \mu_X$, where $\mathbb{E}(\hat{\mu}_X)$ is the mean of the sampling distribution of $\hat{\mu}_X.$ Otherwise, $\hat{\mu}_X$ is biased.
 
 
 For example, suppose observations $X_1,\dots,X_n$ are i.i.d., and let $\mu_X$ denote the mean of $X_i$. Note that the mean is the same for all $i=1,\dots,n$ because the observations are i.i.d.. The sample mean, $\bar{X} = \frac{1}{n}(X_1+X_2+\dots+X_n) = \frac{1}{n}\sum_{i=1}^nX_i.$ Then th expectation of the sample mean is:
@@ -599,24 +618,24 @@ The sample mean is not the only unbiased estimator. For example $X_1$, the first
 Some estimators, on the other hand, are biased. For example, $c\bar{X}_n$ with $c\neq 1$ has expectation $c\mu_X$ which is different from $\mu_X$ and therefore is biased.
 
 
-It is also possible for an estimator to be unbiased for a set of distributions while being biased for other sets. For example, the estimator $\widetilde{\mu}_X=0$ is biased when $\mu_X\neq 0$ and unbiased when $\mu_X=0$. This may be a trivial example but it is useful to be clear about the contexts where an estimator is unbiased or biased. 
+It is also possible for an estimator to be unbiased for a set of distributions while being biased for other sets. For example, the estimator $\tilde{\mu}_X=0$ is biased when $\mu_X\neq 0$ and unbiased when $\mu_X=0$. This may be a trivial example but it is useful to be clear about the contexts where an estimator is unbiased or biased. 
 
 <div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
 > <p>***Why variance is biased and why subtract 1 from n for variance bias correction?***</p> {#sampvar}
 <p>
-The expected value of $X$ is the mean so if $\theta = \mathbb{E}(g(X))$ where $g(X)$ is a transformation of the random variable X, and $\theta$ is the expectation of that transformation, then the analog estimator of $\theta$ is the sample mean of $g(X)$. That is, $\widehat{\theta} = \widehat{\mathbb{E}(g(X))} = \frac{1}{n}\sum_{i=1}^n g(X_i).$</p>
+The expected value of $X$ is the mean so if $\theta = \mathbb{E}(g(X))$ where $g(X)$ is a transformation of the random variable X, and $\theta$ is the expectation of that transformation, then the analog estimator of $\theta$ is the sample mean of $g(X)$. That is, $\hat{\theta} = \hat{\mathbb{E}(g(X))} = \frac{1}{n}\sum_{i=1}^n g(X_i).$</p>
 <p>The population variance can then be written as $\sigma^2 = \mathbb{E}\left((X-\mathbb{E}(X))^2\right) = \mathbb{E}(X^2) - (\mathbb{E}(X))^2 = h(\mathbb{E}[g(X)])$ where $h(a,b) = a-b^2$ and $g(X) = (x^2, x).$</p>
 <p>
-The plug-in estimator is then $h(\widehat{\theta}) = h(\widehat{\mathbb{E}(g(X))}) = h\left(\frac{1}{n}\sum_{i=1}^n g(X_i) \right).$
+The plug-in estimator is then $h(\hat{\theta}) = h(\hat{\mathbb{E}(g(X))}) = h\left(\frac{1}{n}\sum_{i=1}^n g(X_i) \right).$
 </p>
 <p style="margin-left: 40px">
 $\hookrightarrow$ 
-*Note:* It is called "plug-in estimator" because we plug-in the estimator $\widehat{\theta}$ into the formula $h(\theta)$.
+*Note:* It is called "plug-in estimator" because we plug-in the estimator $\hat{\theta}$ into the formula $h(\theta)$.
 </p>
 <p>
 Therefore, the plug-in estimator for $\sigma^2$ is:
 $$
-\widehat{\sigma}^2=\frac{1}{n}\displaystyle\sum_{i=1}^n X_i^2 - \left(\frac{1}{n}\displaystyle\sum_{i=1}^n X_i \right)^2 = \frac{1}{n} \displaystyle\sum_{i=1}^n (X_i - \bar{X}_n)^2.
+\hat{\sigma}^2=\frac{1}{n}\displaystyle\sum_{i=1}^n X_i^2 - \left(\frac{1}{n}\displaystyle\sum_{i=1}^n X_i \right)^2 = \frac{1}{n} \displaystyle\sum_{i=1}^n (X_i - \bar{X}_n)^2.
 $$
 We can calculate whether $\hat{\sigma}^2$ is unbiased for $\sigma^2.$ To do that, it would be useful to consider an idealized estimator first.
 </p>
@@ -624,28 +643,28 @@ We can calculate whether $\hat{\sigma}^2$ is unbiased for $\sigma^2.$ To do that
 $\hookrightarrow$
 *Idealized estimator:* 
 <br>
-If we knew the population mean $\mu$ then we'd use the estimator $\widetilde{\sigma}^2 = \dfrac{1}{n}\sum_{i=1}^n(X_i-\mu)^2$, which is the sample average of iid variables $(X_i - \mu)^2$.
-This has the expectation $\mathbb{E}(\widetilde{\sigma}^2) = \mathbb{E}\left((X_i - \mu)^2\right) = \sigma^2$, and therefore $\widetilde{\sigma}^2$ is unbiased for $\sigma^2.$
+If we knew the population mean $\mu$ then we'd use the estimator $\tilde{\sigma}^2 = \dfrac{1}{n}\sum_{i=1}^n(X_i-\mu)^2$, which is the sample average of iid variables $(X_i - \mu)^2$.
+This has the expectation $\mathbb{E}(\tilde{\sigma}^2) = \mathbb{E}\left((X_i - \mu)^2\right) = \sigma^2$, and therefore $\tilde{\sigma}^2$ is unbiased for $\sigma^2.$
 </p>
 <p>
-Now, we will rewrite $\widehat{\sigma}^2$ with an algebraic trick where $g(X) = \left((X-\mu)^2, (X-\mu)\right)$ which would give us
+Now, we will rewrite $\hat{\sigma}^2$ with an algebraic trick where $g(X) = \left((X-\mu)^2, (X-\mu)\right)$ which would give us
 $$
 \begin{align*}
-\widehat{\sigma}^2 &= \frac{1}{n}\displaystyle\sum_{i=1}^n (X_i - \mu)^2 - \left(\frac{1}{n}\displaystyle\sum_{i=1}^n (X_i-\mu) \right)^2 \\[4pt]
-&= \widetilde{\sigma}^2 - \left(\frac{1}{n}\displaystyle\sum_{i=1}^n (X_i-\mu)\right)^2 \\[4pt]
-&= \widetilde{\sigma}^2 - (\bar{X}_n - \mu)^2.
+\hat{\sigma}^2 &= \frac{1}{n}\displaystyle\sum_{i=1}^n (X_i - \mu)^2 - \left(\frac{1}{n}\displaystyle\sum_{i=1}^n (X_i-\mu) \right)^2 \\[4pt]
+&= \tilde{\sigma}^2 - \left(\frac{1}{n}\displaystyle\sum_{i=1}^n (X_i-\mu)\right)^2 \\[4pt]
+&= \tilde{\sigma}^2 - (\bar{X}_n - \mu)^2.
 \end{align*}
 $$
 after some algebraic simplification.
 </p>
 <p>
-This tells us that the sample variance estimator, $\widehat{\sigma}^2$, equals the idalized estimator, $\widetilde{\sigma}^2$, minus an adjustment for estimation of $\mu$. Since that adjustment can't be negative, the sample variance estimator will then always be less than the idealized estimator, unless of course the adjustment itself is zero. This means, $\widehat{\sigma}^2$ is biased towards 0.
+This tells us that the sample variance estimator, $\hat{\sigma}^2$, equals the idalized estimator, $\tilde{\sigma}^2$, minus an adjustment for estimation of $\mu$. Since that adjustment can't be negative, the sample variance estimator will then always be less than the idealized estimator, unless of course the adjustment itself is zero. This means, $\hat{\sigma}^2$ is biased towards 0.
 </p>
 <p>
-We can actually calculate this bias. Recall that $\mathbb{E}(\widetilde{\sigma}^2 = \sigma^2)$ and $\mathbb{E}\left((\bar{X}_n - \mu)^2\right) = \dfrac{\sigma^2}{n}$. So,
+We can actually calculate this bias. Recall that $\mathbb{E}(\tilde{\sigma}^2 = \sigma^2)$ and $\mathbb{E}\left((\bar{X}_n - \mu)^2\right) = \dfrac{\sigma^2}{n}$. So,
 $$
 \begin{align*}
-\mathbb{E}(\widehat{\sigma}^2) &= \mathbb{E}(\widetilde{\sigma}^2) - \mathbb{E}\left((\bar{X}_n - \mu)^2\right) \\[4pt]
+\mathbb{E}(\hat{\sigma}^2) &= \mathbb{E}(\tilde{\sigma}^2) - \mathbb{E}\left((\bar{X}_n - \mu)^2\right) \\[4pt]
 &= \sigma^2 - \frac{\sigma^2}{n} \\[4pt]
 &= \left(1 - \frac{1}{n}\right)\sigma^2
 \end{align*}
@@ -653,19 +672,19 @@ $$
 which is smaller than $\sigma^2$.
 </p>
 <p>
-One intuition for this downward bias is that $\widehat{\sigma}^2 centers the observations $X_i$ at the sample mean $\bar{X}_n$ as opposed to the true mean $\mu$. This implies that the sample-centered variables $X_i - \bar{X}_n$ have less variation than the ideally centered variables $X_i - \mu$.
+One intuition for this downward bias is that $\hat{\sigma}^2 centers the observations $X_i$ at the sample mean $\bar{X}_n$ as opposed to the true mean $\mu$. This implies that the sample-centered variables $X_i - \bar{X}_n$ have less variation than the ideally centered variables $X_i - \mu$.
 </p>
 <p>
 *Correcting the bias:*
 <br>
 Notice that the bias $1 - \dfrac{1}{n} = \dfrac{n-1}{n}$ is proportional, which means this can be corrected by rescaling, i.e. inverting the proportion:
 $$
-s^2 = \frac{n}{n-1}\widehat{\sigma}^2 = \frac{1}{n-1}\displaystyle{\sum_{i=1}^n(X_i - \bar{X}_n)^2}.
+s^2 = \frac{n}{n-1}\hat{\sigma}^2 = \frac{1}{n-1}\displaystyle{\sum_{i=1}^n(X_i - \bar{X}_n)^2}.
 $$
 </p>
 <p style="margin-left: 40px">
 $\hookrightarrow$ 
-*Note:* Notice that $s^2$ is an estimator but it is not written as $\widehat{s}^2$. This is because at the time when hand typesetting was being used, typesetting a notation with a hat was difficult. As a result, $s^2$ was used to denote the estimator of $\sigma^2$, and $b$ was used to denote the estimator of $\beta$, etc. This subsequently became the convention. 
+*Note:* Notice that $s^2$ is an estimator but it is not written as $\hat{s}^2$. This is because at the time when hand typesetting was being used, typesetting a notation with a hat was difficult. As a result, $s^2$ was used to denote the estimator of $\sigma^2$, and $b$ was used to denote the estimator of $\beta$, etc. This subsequently became the convention. 
 </p>
 <p>
 We can show that this is unbiased:
@@ -681,14 +700,14 @@ $$
 </div>
 
 
-These ideas carry over to the OLS estimators. Since the OLS estimators are calculated using a random sample, $\widehat{\beta}_0$ and $\widehat{\beta}_1$ are themselves random variables that take on different values from one sample to the next. The probability of these different values is summarized in their sampling distributions.
+These ideas carry over to the OLS estimators. Since the OLS estimators are calculated using a random sample, $\hat{\beta}_0$ and $\hat{\beta}_1$ are themselves random variables that take on different values from one sample to the next. The probability of these different values is summarized in their sampling distributions.
 
 
-We obtained the expressions for $\widehat{\beta}_0$ and $\widehat{\beta}_1$ in the [OLS estimator in single regression](#ols-single) discussion. Lets replicate them here for convenience:
+We obtained the expressions for $\hat{\beta}_0$ and $\hat{\beta}_1$ in the [OLS estimator in single regression](#ols-single) discussion. Lets replicate them here for convenience:
 \[
-\widehat{\beta}_0=\bar{Y}-\widehat{\beta}_1\bar{X} \ \ \ \ \ , \ \ \ \ \ \widehat{\beta}_1 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} 
+\hat{\beta}_0=\bar{Y}-\hat{\beta}_1\bar{X} \ \ \ \ \ , \ \ \ \ \ \hat{\beta}_1 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} 
 \]
-Let's now rewrite the expression for $\widehat{\beta}_1$ in terms of the regressors and errors. This will be useful in demonstrating the unbiasedness of the OLS estimators. First note that since $Y_i = \beta_0 + \beta_1X_i + u_i$ for a linear regression with one regressor, we have $(Y_i-\bar{Y}) = \beta_1(X_i - \bar{X}) + u_i - \bar{u}$. We can plug this in to the numerator of the expression for $\widehat{\beta}_1:$
+Let's now rewrite the expression for $\hat{\beta}_1$ in terms of the regressors and errors. This will be useful in demonstrating the unbiasedness of the OLS estimators. First note that since $Y_i = \beta_0 + \beta_1X_i + u_i$ for a linear regression with one regressor, we have $(Y_i-\bar{Y}) = \beta_1(X_i - \bar{X}) + u_i - \bar{u}$. We can plug this in to the numerator of the expression for $\hat{\beta}_1:$
 \[
 \begin{align*}
 \sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y}) 
@@ -700,49 +719,49 @@ Let's now rewrite the expression for $\widehat{\beta}_1$ in terms of the regress
 &= \beta_1\sum_{i=1}^n(X_i-\bar{X})^2 + \sum_{i=1}^n(X_i-\bar{X})u_i
 \end{align*}
 \]
-We can now rewrite $\widehat{\beta}_1$ in terms of the regressors and errors with this expression in the numerator:
+We can now rewrite $\hat{\beta}_1$ in terms of the regressors and errors with this expression in the numerator:
 \[
-\widehat{\beta}_1 = \frac{\beta_1\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2 + \sum_{i=1}^n(X_i-\bar{X})u_i}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} = \beta_1 + \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})u_i}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}
+\hat{\beta}_1 = \frac{\beta_1\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2 + \sum_{i=1}^n(X_i-\bar{X})u_i}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} = \beta_1 + \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})u_i}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}
 \]
 
-We can now use this expression to derive the expectation of $\widehat{\beta_1}$:
+We can now use this expression to derive the expectation of $\hat{\beta_1}$:
 \[
 \begin{align*}
-\mathbb{E}\left(\widehat{\beta}_1 | X_1,...,X_n\right) 
+\mathbb{E}\left(\hat{\beta}_1 | X_1,...,X_n\right) 
 &= \beta_1 + \mathbb{E}\left(\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})u_i}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} | X_1,\dots,X_n\right) \\[6pt]
 &= \beta_1 + \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})\mathbb{E}(u_i|X_1,\dots,X_n)}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} \\[6pt]
 &= \beta_1 \ \ \ \ \ \ \text{because }\mathbb{E}(u_i|X_1,\dots,X_n) = \mathbb{E}(u_i|X_i) = 0.
 \end{align*}
 \]
-Notice that $\widehat{\beta}_1$ is unbiased after averaging over all samples $X_1,\dots,X_n$ because it is unbiased given $X_1,\dots,X_n.$ Therefore, the unbiasedness of $\widehat{\beta}_1$ follows from the above derivation and from the law of iterated expectations:
+Notice that $\hat{\beta}_1$ is unbiased after averaging over all samples $X_1,\dots,X_n$ because it is unbiased given $X_1,\dots,X_n.$ Therefore, the unbiasedness of $\hat{\beta}_1$ follows from the above derivation and from the law of iterated expectations:
 \[
-\mathbb{E}(\widehat{\beta}_1) = \mathbb{E}\left(\mathbb{E}(\widehat{\beta}_1 | X_1,\dots,X_n)\right) = \beta_1.
+\mathbb{E}(\hat{\beta}_1) = \mathbb{E}\left(\mathbb{E}(\hat{\beta}_1 | X_1,\dots,X_n)\right) = \beta_1.
 \]
-Similarly, we can show the unbiasedness of $\widehat{\beta}_0$ as follows:
+Similarly, we can show the unbiasedness of $\hat{\beta}_0$ as follows:
 \[
 \begin{align*}
-\mathbb{E}(\widehat{\beta}_0) 
-&= \mathbb{E}(\bar{Y} - \widehat{\beta}_1\bar{X}) \\[4pt]
-&= \frac{1}{n}\sum_{i=1}^n\mathbb{E}(Y_i)-\mathbb{E}(\widehat{\beta}_1)\bar{X} \\[4pt]
+\mathbb{E}(\hat{\beta}_0) 
+&= \mathbb{E}(\bar{Y} - \hat{\beta}_1\bar{X}) \\[4pt]
+&= \frac{1}{n}\sum_{i=1}^n\mathbb{E}(Y_i)-\mathbb{E}(\hat{\beta}_1)\bar{X} \\[4pt]
 &= \frac{1}{n}\sum_{i=1}^n(\beta_0+\beta_1X_i) - \beta_1\bar{X} \\[4pt]
 &= \frac{1}{n}(n\beta_0 + n\beta_1\bar{X})-\beta_1\bar{X} \\[4pt]
 &= \beta_0.
 \end{align*}
 \]
-Thus, $\widehat{\beta}_0$ is an unbiased estimator of $\beta_0.$
+Thus, $\hat{\beta}_0$ is an unbiased estimator of $\beta_0.$
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
->This discussion shows that the central tendency of $\widehat{\beta}_j$ for $j=0,\dots,k$ is the value of population parameter $\beta_j$ for any $j$. That is, the OLS estimators are unbiased estimators of the population parameters.
+>This discussion shows that the central tendency of $\hat{\beta}_j$ for $j=0,\dots,k$ is the value of population parameter $\beta_j$ for any $j$. That is, the OLS estimators are unbiased estimators of the population parameters.
 >
 >
-We can also have a measure of the spread in the sampling distribution of $\widehat{\beta}_j$
+We can also have a measure of the spread in the sampling distribution of $\hat{\beta}_j$
 \[
-Var(\widehat{\beta}_j) = \frac{\sigma_u^2}{TSS_j(1-R_j^2)} = \frac{\sigma_u^2}{\displaystyle\sum_{i=1}^n\widehat{u}_{ij}^2}
+Var(\hat{\beta}_j) = \frac{\sigma_u^2}{TSS_j(1-R_j^2)} = \frac{\sigma_u^2}{\displaystyle\sum_{i=1}^n\hat{u}_{ij}^2}
 \]
 Therefore,
 
 \[
-\widehat{\beta}_j \sim N\left(\beta_j \ , \ \frac{\sigma_u^2}{TSS_j(1-R_j^2)}\right)
+\hat{\beta}_j \sim N\left(\beta_j \ , \ \frac{\sigma_u^2}{TSS_j(1-R_j^2)}\right)
 \]
 
 
@@ -757,24 +776,24 @@ $$\\[0.75in]$$
 
 ## <ins>L</ins>inear conditionally <ins>U</ins>nbiased <ins>E</ins>stimators (LUE) {#lue}
 
-The class of linear conditionally unbiased estimators consists of all estimators of $\beta_1$ that are both linear functions of $Y_1,\dots,Y_n$ and that are unbiased conditional on $X_1,\dots,X_n.$ So, if $\widehat{\beta}_1$ is a linear estimator then it can be written as
+The class of linear conditionally unbiased estimators consists of all estimators of $\beta_1$ that are both linear functions of $Y_1,\dots,Y_n$ and that are unbiased conditional on $X_1,\dots,X_n.$ So, if $\hat{\beta}_1$ is a linear estimator then it can be written as
 \[
-\widehat{\beta}_1 = \sum_{i=1}^nw_iY_i
+\hat{\beta}_1 = \sum_{i=1}^nw_iY_i
 \]
 where the weights $w_1,\dots,w_n$ can depend on $X_1,\dots,X_n$ but not on $Y_1,\dots,Y_n.$
 
-The estimator $\widehat{{\beta}}_1$ is conditionally unbiased if $\mathbb{E}(\widehat{\beta}_1 | X_1,\dots,X_n) = \beta_1$ as discussed above in Section 2.1. So we just need to show that it is linear. For this, we again start with the expression for $\widehat{\beta}_1$ we obtained in Section 1 and reproduced in Section 2.1:
+The estimator $\hat{{\beta}}_1$ is conditionally unbiased if $\mathbb{E}(\hat{\beta}_1 | X_1,\dots,X_n) = \beta_1$ as discussed above in Section 2.1. So we just need to show that it is linear. For this, we again start with the expression for $\hat{\beta}_1$ we obtained in Section 1 and reproduced in Section 2.1:
 \[
 \begin{align*}
-\widehat{\beta}_1 
+\hat{\beta}_1 
 &= \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}
 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})Y_i - \bar{Y}\displaystyle\sum_{i=1}^n(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2} \\[6pt]
 &= \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})Y_i - \bar{Y}n(\bar{X}-\bar{X})}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}
 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})Y_i}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2} \\[6pt]
-&= \sum_{i=1}^n\widehat{w}_iY_i \ \ \ \ \text{where } \widehat{w}_i=\frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}.
+&= \sum_{i=1}^n\hat{w}_iY_i \ \ \ \ \text{where } \hat{w}_i=\frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}.
 \end{align*}
 \]
-Since the weights $\widehat{w}_i, \ i=1,\dots,n$ in this expression for $\widehat{\beta}_1$ depend on $X_1,\dots,X_n$ but not on $Y_1,\dots,Y_n$, the OLS estimator $\widehat{\beta}_1$ is a linear estimator. Since it is also conditionally unbiased, it is linear conditionally unbiased estimator.
+Since the weights $\hat{w}_i, \ i=1,\dots,n$ in this expression for $\hat{\beta}_1$ depend on $X_1,\dots,X_n$ but not on $Y_1,\dots,Y_n$, the OLS estimator $\hat{\beta}_1$ is a linear estimator. Since it is also conditionally unbiased, it is linear conditionally unbiased estimator.
 
 
 
@@ -812,19 +831,19 @@ $$\\[0.5in]$$
 
 ### <ins>MSE</ins>
 
-MSE is a standard measure of accuracy. If $\widehat{\theta}$ is an estimator of $\theta$, then
+MSE is a standard measure of accuracy. If $\hat{\theta}$ is an estimator of $\theta$, then
 \[
-MSE(\widehat{\theta})=\mathbb{E}\left((\widehat{\theta}-\theta)^2\right)
+MSE(\hat{\theta})=\mathbb{E}\left((\hat{\theta}-\theta)^2\right)
 \]
 By expanding the square we find that
 \[
 \begin{align*}
-MSE(\widehat{\theta})=\mathbb{E}\left((\widehat{\theta}-\theta)^2\right)
-&= \mathbb{E}\left(\left(\widehat{\theta}-\mathbb{E}(\widehat{\theta})+\mathbb{E}(\widehat{\theta})-\theta\right)^2\right) \\
-&= \mathbb{E}\left(\left(\widehat{\theta}-\mathbb{E}(\widehat{\theta})\right)^2\right) +
-2 \mathbb{E}\left(\widehat{\theta}-\mathbb{E}(\widehat{\theta})\right)  \left(\mathbb{E}(\widehat{\theta})-\theta\right) + 
-\left(\mathbb{E}(\widehat{\theta})-\theta\right)^2 \\
-&= Var(\widehat{\theta})+\left(bias(\widehat{\theta})\right)^2.
+MSE(\hat{\theta})=\mathbb{E}\left((\hat{\theta}-\theta)^2\right)
+&= \mathbb{E}\left(\left(\hat{\theta}-\mathbb{E}(\hat{\theta})+\mathbb{E}(\hat{\theta})-\theta\right)^2\right) \\
+&= \mathbb{E}\left(\left(\hat{\theta}-\mathbb{E}(\hat{\theta})\right)^2\right) +
+2 \mathbb{E}\left(\hat{\theta}-\mathbb{E}(\hat{\theta})\right)  \left(\mathbb{E}(\hat{\theta})-\theta\right) + 
+\left(\mathbb{E}(\hat{\theta})-\theta\right)^2 \\
+&= Var(\hat{\theta})+\left(bias(\hat{\theta})\right)^2.
 \end{align*}
 \]
 The MSE, therefore, measures how far on average the estimator is away from $\theta$, and is equal to the variance plus the squared bias. So MSE, as a measure of accuracy, combines the variance and bias. This allows us to compare two estimators when one or both are biased.
@@ -841,16 +860,16 @@ $$\\[0.5in]$$
 
 Consider another estimator in which the observations are alternately weighted by $\frac{1}{2}$ and $\frac{3}{2}$:
 \[
-\widetilde{X} = \frac{1}{n}\left(\frac{1}{2}X_1 + \frac{3}{2}X_2 + \frac{1}{2}X_3 + \frac{3}{2}X_4 + \dots + \frac{1}{2}X_{n-1} + \frac{3}{2}X_n \right).
+\tilde{X} = \frac{1}{n}\left(\frac{1}{2}X_1 + \frac{3}{2}X_2 + \frac{1}{2}X_3 + \frac{3}{2}X_4 + \dots + \frac{1}{2}X_{n-1} + \frac{3}{2}X_n \right).
 \]
-The mean of $\widetilde{X}$ is $\mu_X$ so it is unbiased. Its variance is
+The mean of $\tilde{X}$ is $\mu_X$ so it is unbiased. Its variance is
 \[
-Var(\widetilde{X}) = \left(\frac{0.5^2 + 1.5^2}{2}\right)\frac{\sigma^2}{n} = 1.25\frac{\sigma^2}{n}.
+Var(\tilde{X}) = \left(\frac{0.5^2 + 1.5^2}{2}\right)\frac{\sigma^2}{n} = 1.25\frac{\sigma^2}{n}.
 \]
-This shows that $\widetilde{X}$ has 1.25 times higher variance than $\bar{X}$, so $\bar{X}$ is more efficient than $\widetilde{X}.$
+This shows that $\tilde{X}$ has 1.25 times higher variance than $\bar{X}$, so $\bar{X}$ is more efficient than $\tilde{X}.$
 
 
-The estimators $\bar{X},X_1,$ and $\widetilde{X}$ all have a common structure: they are weighted averages of $X_1,\dots,X_n.$ We have seen that both $X_1$ and $\widetilde{X}$ have higher variances than $\bar{X}.$ These reflect a more general result: 
+The estimators $\bar{X},X_1,$ and $\tilde{X}$ all have a common structure: they are weighted averages of $X_1,\dots,X_n.$ We have seen that both $X_1$ and $\tilde{X}$ have higher variances than $\bar{X}.$ These reflect a more general result: 
 
 
 $\bar{X}$ is the *most efficient* estimator of all unbiased estimators that are weighted averages of $X_1,\dots,X_n.$ Thus, $\bar{X}$ is the **Best Linear Unbiased Estimator (BLUE)** of $\mu.$
@@ -862,15 +881,15 @@ Here 'best' refers to *lowest variance*, and 'linear' refers to a *linear functi
 <div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
 > <p>***Why the Sample Mean is BLUE?***</p>
 > 
-This class of estimators is $\widetilde{\mu}=\sum_{i=1}^nw_i\mathbb{E}(X_i)$ where the weights $w_i$ are freely selected. Unbiasedness requires
+This class of estimators is $\tilde{\mu}=\sum_{i=1}^nw_i\mathbb{E}(X_i)$ where the weights $w_i$ are freely selected. Unbiasedness requires
 \[
-\mathbb{E}(\widetilde{\mu})=\mathbb{E}\left(\sum_{i=1}^nw_iX_i\right) = \sum_{i=1}^nw_i\mathbb{E}(X_i) = \sum_{i=1}^nw_i\mu = \mu
+\mathbb{E}(\tilde{\mu})=\mathbb{E}\left(\sum_{i=1}^nw_iX_i\right) = \sum_{i=1}^nw_i\mathbb{E}(X_i) = \sum_{i=1}^nw_i\mu = \mu
 \]
-which holds if and only if $\sum_{i=1}^nw_i=1.$ The variance of $\widehat{\mu}$ is
+which holds if and only if $\sum_{i=1}^nw_i=1.$ The variance of $\hat{\mu}$ is
 \[
-Var(\widetilde{\mu}) = Var\left(\sum_{i=1}^nw_iX_i\right) = \sigma^2\sum_{i=1}^nw_i^2.
+Var(\tilde{\mu}) = Var\left(\sum_{i=1}^nw_iX_i\right) = \sigma^2\sum_{i=1}^nw_i^2.
 \]
-Hence, the best, i.e. minimum variance, estimator is $\widetilde{\mu}=\sum_{i=1}^nw_i\mathbb{E}(X_i)$ with the weights selected to minimize $\sum_{i=1}^nw_i^2$ subject to the restriction $\sum_{i=1}^nw_i=1.$
+Hence, the best, i.e. minimum variance, estimator is $\tilde{\mu}=\sum_{i=1}^nw_i\mathbb{E}(X_i)$ with the weights selected to minimize $\sum_{i=1}^nw_i^2$ subject to the restriction $\sum_{i=1}^nw_i=1.$
 >
 >
 This can be solved by Lagrangian methods. The problem is to minimize
@@ -899,7 +918,7 @@ $$\\[1in]$$
 
 # Gauss-Markov Theorem and Its Assumptions
 
-Gauss-Markov Theorem says that the OLS estimators $\widehat{\beta}_0$ and $\widehat{\beta}_1$ are efficient among all estimators that satisfies the following set of specific assumptions:
+Gauss-Markov Theorem says that the OLS estimators $\hat{\beta}_0$ and $\hat{\beta}_1$ are efficient among all estimators that satisfies the following set of specific assumptions:
 
 
 1. [**Linear in parameters**](#asmptnlinpar): The population model can be written as $Y=\beta_0+\beta_1X_1+\beta_2X_2\dots+\beta_kX_k+u$
@@ -915,9 +934,9 @@ $$\\[0.25in]$$
 <div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
 > **Proof of Gauss-Markov Theorem**
 >
-To demonstrate why OLS are BLUE, we start by recalling from [linear conditionally unbiased estimators](#lue) discussion the expression of a linear estimator is $\widetilde{\beta}_1 = \sum_{i=1}^nw_iY_i.$ We then substitute this into $Y_i=\beta_0+\beta_1X_i+u_i:$
+To demonstrate why OLS are BLUE, we start by recalling from [linear conditionally unbiased estimators](#lue) discussion the expression of a linear estimator is $\tilde{\beta}_1 = \sum_{i=1}^nw_iY_i.$ We then substitute this into $Y_i=\beta_0+\beta_1X_i+u_i:$
 \[\begin{align*}
-\widetilde{\beta}_1 
+\tilde{\beta}_1 
 &= \sum_{i=1}^nw_i(\beta_0+\beta_1X_i+u_i) \\[4pt]
 &= \beta_0\sum_{i=1}^nw_i + \beta_1\sum_{i=1}^nw_iX_i + \sum_{i=1}^nw_iu_i.
 \end{align*}
@@ -925,15 +944,15 @@ To demonstrate why OLS are BLUE, we start by recalling from [linear conditionall
 Next, take conditional expectations of both sides:
 \[
 \begin{align*}
-\mathbb{E}(\widetilde{\beta}_1 | \vec{X}^T = X_1,\dots,X_n) 
+\mathbb{E}(\tilde{\beta}_1 | \vec{X}^T = X_1,\dots,X_n) 
 &= \mathbb{E}\left(\beta_0\sum_{i=1}^nw_i + \beta_1\sum_{i=1}^nw_iX_i + \sum_{i=1}^nw_iu_i | X_1,\dots,X_n\right) \\[4pt]
 &= \beta_0\sum_{i=1}^nw_i + \beta_1\sum_{i=1}^nw_iX_i \ \ \ \text{because by first Gauss-Markov condition } \mathbb{E}\left(\sum_{i=1}^nw_iu_i | \vec{X}^T\right) = \sum_{i=1}^n\mathbb{E}(u_i | \vec{X}^T)=0.
 \end{align*}
 \]
 >
-In the [unbiased estimator](#ue) discussion we established the conditional unbiasedness of $\widehat{\beta}_1.$ Because $\widetilde{\beta}_1$ is conditionally unbiased by assumption - that is $\mathbb{E}(\widetilde{\beta}_1 | X_1,\dots,X_n) = \beta_1$ - we therefore have
+In the [unbiased estimator](#ue) discussion we established the conditional unbiasedness of $\hat{\beta}_1.$ Because $\tilde{\beta}_1$ is conditionally unbiased by assumption - that is $\mathbb{E}(\tilde{\beta}_1 | X_1,\dots,X_n) = \beta_1$ - we therefore have
 \[
-\mathbb{E}(\widetilde{\beta}_1 | \vec{X}^T = X_1,\dots,X_n) = \beta_0\sum_{i=1}^nw_i + \beta_1\sum_{i=1}^nw_iX_i = \beta_1
+\mathbb{E}(\tilde{\beta}_1 | \vec{X}^T = X_1,\dots,X_n) = \beta_0\sum_{i=1}^nw_i + \beta_1\sum_{i=1}^nw_iX_i = \beta_1
 \]
 For this equality to hold for all values of $\beta_0$ and $\beta_1$, it must be the case that:
 \[
@@ -943,42 +962,42 @@ w_iX_i = 1.
 Substituting this back in gives:
 \[
 \begin{align*}
-\widetilde{\beta}_1 
+\tilde{\beta}_1 
 &= \beta_0\sum_{i=1}^nw_i + \beta_1\sum_{i=1}^nw_iX_i + \sum_{i=1}^nw_iu_i \\[4pt]
 &= \beta_1 + \sum_{i=1}^nw_iu_i.
 \end{align*}
 \]
 Thus,
 \[
-Var(\widehat{\beta}_1 | X_1,\dots,X_n) = Var(\sum_{i=1}^nw_iu_i | X_1,\dots,X_n) = \sum_{i=1}^n\sum_{j=1}^nw_iw_jCov(u_iu_j|X_1,\dots,X_n)
+Var(\hat{\beta}_1 | X_1,\dots,X_n) = Var(\sum_{i=1}^nw_iu_i | X_1,\dots,X_n) = \sum_{i=1}^n\sum_{j=1}^nw_iw_jCov(u_iu_j|X_1,\dots,X_n)
 \]
 Applying the second and third Gauss-Markov conditions, the cross terms in the double summation vanish and the expression for the conditional variance simplifies to
 \[
-Var(\widehat{\beta}_1 | X_1,\dots,X_n) = \sigma_u^2\sum_{i=1}^nw_i^2.
+Var(\hat{\beta}_1 | X_1,\dots,X_n) = \sigma_u^2\sum_{i=1}^nw_i^2.
 \]
-Note here that $\widehat{\beta}_1$ is a case where the weights are $w_i = \widehat{w}_i = \frac{(X_i-\bar{X})}{\sum_{j=1}^n(X_j-\bar{X})^2}$ as discussed under [linear conditionally unbiased estimators](#lue). So we just have to show that any other weights would yield a larger variance than the weights of $\widehat{\beta}_1.$
+Note here that $\hat{\beta}_1$ is a case where the weights are $w_i = \hat{w}_i = \frac{(X_i-\bar{X})}{\sum_{j=1}^n(X_j-\bar{X})^2}$ as discussed under [linear conditionally unbiased estimators](#lue). So we just have to show that any other weights would yield a larger variance than the weights of $\hat{\beta}_1.$
 >
-For that, let $w_i=\widehat{w}_i + d_i$ so that
+For that, let $w_i=\hat{w}_i + d_i$ so that
 \[
 \begin{align*}
 \sum_{i=1}^nw_i^2 
-&= \sum_{i=1}^n(\widehat{w}_i+d_i)^2 \\[6pt]
-&= \sum_{i=1}^n\widehat{w}_i^2 + 2\sum_{i=1}^n\widehat{w}_id_i + \sum_{i=1}^nd_i^2 \\[6pt]
-&= \sum_{i=1}^n\widehat{w}_i^2 + 2\left(\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})d_i}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}\right) + \sum_{i=1}^nd_i^2 \\[6pt]
-&= \sum_{i=1}^n\widehat{w}_i^2 + 2\left(\frac{\displaystyle\sum_{i=1}^nd_iX_i-\bar{X}\displaystyle\sum_{i=1}^nd_i}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}\right) + \sum_{i=1}^nd_i^2 \\[6pt]
-&= \sum_{i=1}^n\widehat{w}_i^2 + 2\left(\frac{\left(\displaystyle\sum_{i=1}^nw_iX_i - \displaystyle\sum_{i=1}^n\widehat{w}_iX_i\right)-\bar{X}\left(\displaystyle\sum_{i=1}^nw_i -\displaystyle\sum_{i=1}^n\widehat{w}_i\right)}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}\right) + \sum_{i=1}^nd_i^2 \ \ \ \ \text{since } d_i=w_i-\widehat{w}_i \\[6pt]
-&= \sum_{i=1}^n\widehat{w}_i^2 + 0 + \sum_{i=1}^nd_i^2 \ \ \ \ \text{because of two restrictions } \sum_{i=1}^nw_i=0 \text{ and } \sum_{i=1}^nw_iX_i = 1.
+&= \sum_{i=1}^n(\hat{w}_i+d_i)^2 \\[6pt]
+&= \sum_{i=1}^n\hat{w}_i^2 + 2\sum_{i=1}^n\hat{w}_id_i + \sum_{i=1}^nd_i^2 \\[6pt]
+&= \sum_{i=1}^n\hat{w}_i^2 + 2\left(\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})d_i}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}\right) + \sum_{i=1}^nd_i^2 \\[6pt]
+&= \sum_{i=1}^n\hat{w}_i^2 + 2\left(\frac{\displaystyle\sum_{i=1}^nd_iX_i-\bar{X}\displaystyle\sum_{i=1}^nd_i}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}\right) + \sum_{i=1}^nd_i^2 \\[6pt]
+&= \sum_{i=1}^n\hat{w}_i^2 + 2\left(\frac{\left(\displaystyle\sum_{i=1}^nw_iX_i - \displaystyle\sum_{i=1}^n\hat{w}_iX_i\right)-\bar{X}\left(\displaystyle\sum_{i=1}^nw_i -\displaystyle\sum_{i=1}^n\hat{w}_i\right)}{\displaystyle\sum_{j=1}^n(X_j-\bar{X})^2}\right) + \sum_{i=1}^nd_i^2 \ \ \ \ \text{since } d_i=w_i-\hat{w}_i \\[6pt]
+&= \sum_{i=1}^n\hat{w}_i^2 + 0 + \sum_{i=1}^nd_i^2 \ \ \ \ \text{because of two restrictions } \sum_{i=1}^nw_i=0 \text{ and } \sum_{i=1}^nw_iX_i = 1.
 \end{align*}
 \]
 Thus,
 \[
-\sigma_u^2\sum_{i=1}^nw_i^2 = \sigma_u^2\sum_{i=1}^n\widehat{w}_i^2 + \sigma_u^2+\sum_{i=1}^nd_i^2.
+\sigma_u^2\sum_{i=1}^nw_i^2 = \sigma_u^2\sum_{i=1}^n\hat{w}_i^2 + \sigma_u^2+\sum_{i=1}^nd_i^2.
 \]
 If we then substitute this back into the conditional variance expression
 \[
-Var(\widetilde{\beta}_1 | X_1,\dots, X_n) - Var(\widehat{\beta}_1 | X_1,\dots,X_n) = \sigma_u^2\sum_{i=1}^nd_i^2.
+Var(\tilde{\beta}_1 | X_1,\dots, X_n) - Var(\hat{\beta}_1 | X_1,\dots,X_n) = \sigma_u^2\sum_{i=1}^nd_i^2.
 \]
-Therefore, for any $i=1,\dots,n$, $\widetilde{\beta}_1$ has a greater conditional variance than $\widehat{\beta}_1$ unless $d_1=0$. If $d_i=0$ for all $i$, on the other hand, then $w_i=\widehat{w}_i$ and $\widetilde{\beta}_1 = \widehat{\beta}_1$, which proves that OLS is BLUE. 
+Therefore, for any $i=1,\dots,n$, $\tilde{\beta}_1$ has a greater conditional variance than $\hat{\beta}_1$ unless $d_1=0$. If $d_i=0$ for all $i$, on the other hand, then $w_i=\hat{w}_i$ and $\tilde{\beta}_1 = \hat{\beta}_1$, which proves that OLS is BLUE. 
 
 </div>
 
@@ -1009,7 +1028,7 @@ The property that $\bar{X}$ is near $\mu_X$ with probability increasing to $1$ a
 The law of large numbers says that if $X_1,\dots,X_n$ are i.i.d. with $\mathbb{E}(X_i)=\mu_X$ and if [large outliers are unlikely](#asmptn4thmmnt), that is the variance of $X_i, \sigma_X^2,$ is finite, then $\bar{X}\overset{p}{\to}\mu_Y.$
 
 
-For an estimators of population mean, this means that when the sample size is large the uncertainty about the value of $\mu_X$ arising from random variations in the sample is very small. That is, a desirable property of $\widehat{\mu}_X$ is that the probability that it is within a small interval of the true value $\mu_X$ approaches 1 as the sample size increases. This, a desirable property is $\widehat{\mu}_X$ is consistent for $\mu_X$.
+For an estimators of population mean, this means that when the sample size is large the uncertainty about the value of $\mu_X$ arising from random variations in the sample is very small. That is, a desirable property of $\hat{\mu}_X$ is that the probability that it is within a small interval of the true value $\mu_X$ approaches 1 as the sample size increases. This, a desirable property is $\hat{\mu}_X$ is consistent for $\mu_X$.
 
 
 The discussion in [Unbiased Estimator](#ue) establishes that $\mathbb{E}(\bar{X}_i)=\mu_X$ and therefore $\bar{X}$ is unbiased. The law of large numbers states that $\bar{X}\overset{p}{\to}\mu_X$,i.e. $\bar{X}$ is consistent.
@@ -1018,7 +1037,7 @@ The discussion in [Unbiased Estimator](#ue) establishes that $\mathbb{E}(\bar{X}
 Similarly, [sample variance](#sampvar) $s_X^2$ is a consistent estimator of the population variance $\sigma_X^2$. To see this, first recall the idealized estimator we used in [sample variance](#sampvar) discussion:
 \[
 \begin{align*}
-\widetilde{\sigma}_X^2 
+\tilde{\sigma}_X^2 
 &= \frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2 \\[6pt]
 &= \frac{1}{n}\sum_{i=1}^nX_i^2 - 2\bar{X}\frac{1}{n}\sum_{i=1}^nX_i+\bar{X}^2 \\[6pt]
 &= \frac{1}{n}\sum_{i=1}^nX_i^2 - 2\bar{X}^2 + \bar{X}^2 \\[6pt]
@@ -1031,53 +1050,53 @@ It then follows that
 \[
 s_X^2=\left(\frac{n}{n-1}\right)\left(\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2\right) \overset{p}{\to}\sigma_X^2 \ \ \ \ \text{ since } \frac{n}{n-1}\to1.
 \]
-These ideas carry over to the OLS estimators $\widehat{\beta}_j$.
+These ideas carry over to the OLS estimators $\hat{\beta}_j$.
 
 $$\\[0.5in]$$
 
-## Consistency of OLS
+## Consistency of OLS {#consistency}
 
-The [Unbiased Estimator](#ue) section established that $\widehat{beta}_0$ and $\widehat{\beta}_1$ are unbiased estimators. The same set of assumptions - Assumptions 1 through 5 - also implies consistency of OLS. Recall that in the [unbiased estimator](#ue) section we expressed $\widehat{\beta}_1 as
+The [Unbiased Estimator](#ue) section established that $\hat{beta}_0$ and $\hat{\beta}_1$ are unbiased estimators. The same set of assumptions - Assumptions 1 through 5 - also implies consistency of OLS. Recall that in the [unbiased estimator](#ue) section we expressed $\hat{\beta}_1 as
 \[
 \begin{align*}
-\widehat{\beta}_1 
+\hat{\beta}_1 
 &= \beta_1 + \frac{\displaystyle\sum_{i=1}^n(X_{i1}-\bar{X}_1)u_i}{\displaystyle\sum_{i=1}^n(X_{i1}-\bar{X}_1)^2} \\[6pt]
 &= \beta_1 + \frac{\dfrac{1}{n}\displaystyle\sum_{i=1}^n(X_{i1}-\bar{X}_1)u_i}{\dfrac{1}{n}\displaystyle\sum_{i=1}^n(X_{i1}-\bar{X}_1)^2}
 \end{align*}
 \]
 When law of large numbers is applied to the second part of this equation, the numerator and denominator converge in probability to the population quantities $Cov(X_1,u)$ and $Var(X_1)$, respectively. So,
 \[\begin{align*}
-plim \ \widehat{\beta}_1 
+plim \ \hat{\beta}_1 
 &= \beta_1 + \frac{Cov(X_1,u)}{Var(X_1)} \\
 &= \beta_1 \ \ \ \text{because } Var(X_1) > 0 \text{ and } \mathbb{E}(u|X_1)=0 \text{ implies } Cov(X_1,u) = 0
 \end{align*}
 \]
-In general, $\widehat{\beta}_j$ has a probability distribution that represents its possible values in different size $n$ samples. Since $\widehat{\beta}_j$ is unbiased, this distribution has a mean value of $\beta_j$. If this estimator is consistent, then the distribution of $\widehat{\beta}_j$ becomes more and more tightly distributed around $\beta_j$ as the sample size grows. As $n$ tends to infinity, the distribution of $\widehat{\beta}_j$ collapses to a single point $\beta_j$.
+In general, $\hat{\beta}_j$ has a probability distribution that represents its possible values in different size $n$ samples. Since $\hat{\beta}_j$ is unbiased, this distribution has a mean value of $\beta_j$. If this estimator is consistent, then the distribution of $\hat{\beta}_j$ becomes more and more tightly distributed around $\beta_j$ as the sample size grows. As $n$ tends to infinity, the distribution of $\hat{\beta}_j$ collapses to a single point $\beta_j$.
 
 
 Just as $\mathbb{E}(u|X_1,\dots,X_n)\neq 0$ causes bias in the OLS estimators, correlation between $u$ and <ins>any</ins> of $X_1,\dots,X_n$ generally causes <ins>all</ins> of the OLS estimators to be *inconsistent*. That is, *if the error is correlated with any of the independent variables, then OLS is biased and inconsistent*. This means, any bias persists as the sample size grows.
 
 
-In simple regression case, the *inconsistency*, or as sometimes also called *asymptotic bias*, in $\widehat{\beta}_1$ is
+In simple regression case, the *inconsistency*, or as sometimes also called *asymptotic bias*, in $\hat{\beta}_1$ is
 \[
-plim \ \widehat{\beta}_1 - \beta_1 = \frac{Cov(X_1,u)}{Var(X_1)}.
+plim \ \hat{\beta}_1 - \beta_1 = \frac{Cov(X_1,u)}{Var(X_1)}.
 \]
-Since $Var(X_1) > 0$, the inconsistency in $\widehat{\beta}_1$ is positive if $X_1$ and $u$ are positively correlated, and negative if negatively correlated. If the covariance between $X_1$ and $u$ is small relative to $Var(X_1)$, the inconsistency can be negligible. However, we cannot estimate how big $Cov(X_1,u)$ is because $u$ is unobserved.
+Since $Var(X_1) > 0$, the inconsistency in $\hat{\beta}_1$ is positive if $X_1$ and $u$ are positively correlated, and negative if negatively correlated. If the covariance between $X_1$ and $u$ is small relative to $Var(X_1)$, the inconsistency can be negligible. However, we cannot estimate how big $Cov(X_1,u)$ is because $u$ is unobserved.
 
 
-We can nevertheless use this inconsistency approach to derive, for example, the asymptotic version of the omitted variable bias. Suppose the true model $Y=\beta_0+\beta_1X_1+\beta_2X_2+v$ satisfies the first five Gauss-Markov assumptions. Then $v$ has a $0$ mean and is uncorrelated with $X_1$ and $X_2$. From law of large numbers, we also know that $\widehat{\beta}_0,\widehat{\beta}_1,$ and $\widehat{\beta}_2$ are consistent. If we omit $X_2$ from the regression and carry out a simple regression of $Y$ on $X_1$ then $u=\beta_2X_2+v.$ If we let $\widetilde{\beta}_1$ denote the simple regression slope estimator, then
+We can nevertheless use this inconsistency approach to derive, for example, the asymptotic version of the omitted variable bias. Suppose the true model $Y=\beta_0+\beta_1X_1+\beta_2X_2+v$ satisfies the first five Gauss-Markov assumptions. Then $v$ has a $0$ mean and is uncorrelated with $X_1$ and $X_2$. From law of large numbers, we also know that $\hat{\beta}_0,\hat{\beta}_1,$ and $\hat{\beta}_2$ are consistent. If we omit $X_2$ from the regression and carry out a simple regression of $Y$ on $X_1$ then $u=\beta_2X_2+v.$ If we let $\tilde{\beta}_1$ denote the simple regression slope estimator, then
 \[
-plim \ \widetilde{\beta}_1 = \beta_1 + \beta_2\left(\frac{Cov(X_1,X_2)}{Var(X_1)}\right).
+plim \ \tilde{\beta}_1 = \beta_1 + \beta_2\left(\frac{Cov(X_1,X_2)}{Var(X_1)}\right).
 \]
 Thus, for practical purposes, we can view inconsistency as being the same as the bias. The difference is that
 - the inconsistency is expressed in terms of the population variance of $X_1$ and the population covariance between $X_1$ and $X_2$, while
 -the bias is based on their sample counterparts.
 
 
-If $X_1$ and $X_2$ are uncorrelated in the population, then $Cov(X_1,X_2)/Var(X_1)=0$ and $\widetilde{\beta}_1 is a consistent estimator of $\beta_1$.
+If $X_1$ and $X_2$ are uncorrelated in the population, then $Cov(X_1,X_2)/Var(X_1)=0$ and $\tilde{\beta}_1 is a consistent estimator of $\beta_1$.
 <p style="margin-left: 40px">
 $\hookrightarrow$
-*Note*: This does not necessarily mean $\widetilde{\beta}_1$ is unbiased.
+*Note*: This does not necessarily mean $\tilde{\beta}_1$ is unbiased.
 </p>
 
 
@@ -1085,7 +1104,7 @@ $\hookrightarrow$
 
 $$\\[0.75in]$$
 
-## The Central Limit Theorem (CLT)
+## The Central Limit Theorem (CLT) {#clt}
 
 This theorem says that, under general conditions, the distribution of $\bar{X}$ is well approximated by a normal distribution when $n$ is large. Recall that the mean of $X$ is $\mu_X$ and its variance is $\sigma_{\bar{X}}^2=\frac{\sigma_X^2}{n}$. According to the CLT, when $n$ is large, the distribution of $\bar{X}$ is approximately $N(\mu_X,\sigma_{\bar{X}}^2=\frac{\sigma_X^2}{n})$.
 <p style="margin-left: 40px">
