@@ -1,6 +1,6 @@
 ---
 author: "Emre Usenmez"
-title: "2023-24 Tripos IIA Paper 3"
+title: "2024-25 Tripos IIA Paper 3"
 subtitle: Notes 1
 output:
   bookdown::html_document2:  
@@ -28,7 +28,7 @@ text-align: center;
 ```
 
 
-<span style="font-size:0.75em;">The discussions in here are based on Hansen, B E (2022) *Probability and Statistics for Economists* Princeton University Press; Stock, J H and Watson M W (2020) *Introduction to Econometrics* (4th Global ed) Pearson; Wooldridge, J M (2020) *Introductory Econometrics: A Modern Approach* (7th ed) Cengage; Hansen, B E (2022) *Econometrics* Princeton University Press; Gujarati (2022), D N *Essentials of Econometrics* (5th ed) Sage; Dougherty, C (2016) *Introduction to Econometrics* (5th ed) Oxford Ubiversity Press.
+<span style="font-size:0.75em;">The discussions in here are based on Hansen, B E (2022) *Probability and Statistics for Economists* Princeton University Press; Stock, J H and Watson M W (2020) *Introduction to Econometrics* (4th Global ed) Pearson; Wooldridge, J M (2020) *Introductory Econometrics: A Modern Approach* (7th ed) Cengage; Hansen, B E (2022) *Econometrics* Princeton University Press; Gujarati , D N (2022) *Essentials of Econometrics* (5th ed) Sage; Dougherty, C (2016) *Introduction to Econometrics* (5th ed) Oxford Ubiversity Press; Gujarati D N and Porter D C (2009) *Basic Econometrics* (5th ed) McGraw Hill International.
 </span>
 
 $$\\[0.25in]$$
@@ -36,16 +36,16 @@ $$\\[0.25in]$$
 We will start our discussion with **O**rdinary **L**east **S**quares (**OLS**). We will discuss what it is and look at how well the regression line describe the data before looking at the set of assumptions that unerpin least squares approach. We will then examine the theoretical justification for using OLS, which is the Gauss-Markov theorem. This theorem states that under a set of conditions known as the **Gauss-Markov conditions**, the OLS estimator is the **B**est **L**inear **U**nbiased **E**stimator (**BLUE**). We will discuss each of these in turn.
 
 
-# OLS
+# LS {#ols}
 
 Consider the problem of finding the estimator $a$ that minimizes
 \[
 \sum_{i=1}^n(X_i-a)^2.
 \]
-This is a measure of the total squared gap between the estimator $b$ and the sample points.
+This is a measure of the total squared gap between the estimator $a$ and the sample points.
 <p style="margin-left: 40px">
 $\hookrightarrow$
-The gap $(X_i - a)$ can be thought of as a prediction mistake since $b$ is an estimator of $\mathbb{E}(X)$ and can be thought of as a prediction of the value of $X_i.$
+The gap $(X_i - a)$ can be thought of as a prediction mistake since $a$ is an estimator of $\mathbb{E}(X)$ and can be thought of as a prediction of the value of $X_i.$
 </p>
 
 
@@ -66,24 +66,71 @@ $$\\[0.75in]$$
 
 ## OLS Estimator in Single Regression {#ols-single}
 
-Consider the linear regression model $Y_i = \beta_0 + \beta_1X_i + u_i,$ and let $b_0$ and $b_1$ be some estimators of $\beta_0$ and $\beta_1$. The value of $Y_i$ is then predicted by the line $b_0+b_1X_i.$
-
-
-The prediction mistake for the $i^{th}$ observation is $Y_i-(b_0+b_1X_i)=Y_i-b_0-b_1X_i.$ The sum of these squared prediction mistakes over all n observations is:
+Consider the linear regression model $Y_i = \beta_0 + \beta_1X_i + u_i.$ This population regression function is not directly observable so it is estimated from the sample regression function: 
 \[
-\sum_{i=1}^n(Y_i-b_0-b_1X_i)^2.
+\begin{align}
+\hat{Y_i} 
+&= \hat{\beta}_0+\hat{\beta}_1X_i+u_i \\
+&= \hat{Y}_i+u_i
+\end{align}
+\]
+where $\hat{Y}_i$ is the estimated conditional mean value of $Y_i$.
+
+The goal is to ensure the estimate $\hat{Y}_i$ is as close to the population $Y_i$ as possible given $n$ pair of observations on $Y$ and $X$. For this, first notice that the *residuals* $\hat{u}_i$ - which are the estimates of the disturbance or error term $u_i$ - can be expressed as the difference between the actual $Y_i$ and the estimated $\hat{Y}_i$: That is, $\hat{u}_i = Y_i - \hat{Y}_i.$ 
+
+To achieve our goal we can then consider minimizing the sum of all residuals: $\sum\hat{u}_i = \sum(Y_i - \hat{Y}_i).$ However, this would not be a good criterion since some estimates will be more than $Y_i$ and some less, and each residual receive the same weighting. The sum of residuals can therefore be very small or even zero despite the residuals widely being scattered around the sample regression function.
+
+One way to avoid this problem is to apply the least squares approach from above and square the residuals before adding them up. This would put more weight to those residuals that are further away from the true value. This way, it is harder to get a small sum of residuals, especially if there are large residuals present since they are now amplified. This approach also has some additional desirable statistical properties. The criterion therefore is:
+
+\[
+\begin{align}
+\sum\hat{u}^2_i
+=& \sum(Y_i-\hat{Y}_i)^2 \\
+=& \sum(Y_i -\hat{\beta}_0 - \hat{\beta}_1X_i)^2
+\end{align}
 \]
 
-This is the extension of the sum of squared mistakes in estimating the mean applied to linear regression model. In fact, if there is no regressor $b_1$ then the two are identical except for the notation.
+In other words, the prediction mistake for the $i^{th}$ observation is $Y_i-(\hat{\beta}_0+\hat{\beta}_1X_i)=Y_i-\hat{\beta}_0-\hat{\beta}_1X_i,$ and the sum of these squared prediction mistakes over all n observations is:
+\[
+\sum_{i=1}^n \hat{u}^2_i = \sum_{i=1}^n(Y_i-\hat{\beta}_0-\hat{\beta}_1X_i)^2.
+\]
+
+Notice that this is the extension of LS in estimating the mean applied to linear regression model. In fact, if there is no regressor $\hat{\beta}_0$ then the two are identical except for the notation. Our goal therefore is to minimize this expression which is a function of $\hat{\beta}_0$ and $\hat{\beta}_1$. 
 
 As is the case with $\bar{X}$ being the unique estimator that minimizes $\sum_{i=1}^n(X_i-a)^2$, there is also a unique pair of estimators that minimize $\sum_{i=1}^n(Y_i-b_0-b_1X_i)^2$. The estimators $\hat{\beta}_0$ and $\hat{\beta}_1$ that minimize the intercept $\beta_0$ and slope $\beta_1$ are called **o**rdinary **l**east **s**quares (**OLS**) estimators of $\beta_0$ and $\beta_1$.
 
 
-As before, to minimize, we take partial derivatives with respect to $b_0$ and $b_1$ and set them to 0:
+As before, to minimize, we take partial derivatives with respect to $\hat{\beta}_0$ and $\hat{\beta}_1$ and set them to 0:
 \[
-\frac{\partial}{\partial b_0}\sum_{i=1}^n(Y_i-b_0-b_1X_i)^2 = -2\sum_{i=1}^n(Y_i-b_0-b_1X_i) = 0 \\[4pt]
-\frac{\partial}{\partial b_1}\sum_{i=1}^n(Y_i-b_0-b_1X_i)^2 = -2\sum_{i=1}^n(Y_i-b_0-b_1X_i)X_i = 0
+\frac{\partial}{\partial \hat{\beta}_0}\sum_{i=1}^n(Y_i-\hat{\beta}_0-\hat{\beta}_1X_i)^2 = -2\sum_{i=1}^n(Y_i-\hat{\beta}_0-\hat{\beta}_1X_i) = -2\sum_{i=1}^n\hat{u}^2_i = 0 \\[4pt]
+\frac{\partial}{\partial \hat{\beta}_1}\sum_{i=1}^n(Y_i-\hat{\beta}_0-\hat{\beta}_1X_i)^2 = -2\sum_{i=1}^n(Y_i-\hat{\beta}_0-\hat{\beta}_1X_i)X_i = \sum_{i=1}^n\hat{u}^2_iX_i = 0
 \]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Rearranging the terms and dividing by $n$ shows that the OLS estimators $\hat{\beta}_0$ and $\hat{\beta}_1$ need to satisfy the following two equations
 \[
 \begin{align*}
@@ -320,9 +367,11 @@ $$\\[1in]$$
 
 # The Least Squares Assumptions
 
-These assumptions discuss the statistical properties of OLS estimating the parameters in an underlying population model. These statistical models have nothing to do with a particular sample, but rather with the property of estimators when random sampling is done repeatedly.
+Had the objective been to estimate $\beta$s only, the [OLS method](#ols) would be sufficient to obtain them. But the objective is not only to obtain $\hat{\beta}$s but also to draw inferences about the true $\beta$s. For example, we'd want to know how close $\hat{\beta}$s are to their corresponding population $\beta$s, or how close the estimate $\hat{Y}_i$ to the true $mathbb{E}(Y|X_i)$.
 
-For the multiple regression model $Y_i = \vec{X}_i^T \ \vec{\beta}+u_i, \ i=1,\dots,n$ there are there are two sets of assumptions we consider here. One set of assumptions are assumptions about the explanatory variables $\vec{X}_^T$ and the other set is about the error terms
+For this not only the functional form of the model, such as $Y_i=\beta_0+\beta_1X_i_u_i$ is needed, but also certain assumptions about the way in which $Y_i$ are generated. This is because $Y_i$ depends on both $X_i$ and $u_i$. So unless we are specific about how $X_i$ and $u_i$ are generated, we cannot make any statistical inference about $Y_i$ as well as the $\beta$s. Therefore, the assumptions made about $X_i$ and $u_i$ are critical for valid interpretation of regression estimates.
+
+These assumptions below discuss the statistical properties of OLS that is estimating the parameters in an underlying population model. These statistical models have nothing to do with a particular sample, but rather with the property of estimators when random sampling is done repeatedly. There are there are two sets of assumptions we consider here. One set of assumptions are assumptions about the explanatory variables and the other set is about the error terms.
 
 
 
@@ -357,7 +406,7 @@ In this class we are mainly concerned with models that are linear in parameters,
 $$\\[0.5in]$$
 
 
-### <ins>Assumption 2</ins>: Random Sampling: $(X_1,\dots,X_n,Y_i)$ are i.i.d. draws from their joint distribution {#asmptnrandsamp .unnumbered}
+### <ins>Assumption 2</ins>: Random Sampling: $(X_i,Y_i)$ are i.i.d. draws from their joint distribution {#asmptnrandsamp .unnumbered}
 
 In statistics the term *random sampling* has a special meaning in that $Y_1, Y_2, \dots, Y_n$ constitutes a random sample size of $n$ if all these $Y$s are drawn independently from the same probability distribution. That is, each $Y_i$ has the same pdf. Sampling, or selection, from the population is also random, which means the values of the observations $Y_1, \dots, Y_n$ are also random since their values of will differ if different members of the population are chosen. Thus, the act of random sampling means that $Y_1,\dots,Y_n$ can be treated as random variables. Before they are sampled they can take on many possible values, but after they are sampled we have a specific value for each observation $Y_1,\dots,Y_n$.
 
@@ -404,9 +453,13 @@ log({salary}_i) = \beta_0 + \beta_1log({sales}_i)+\beta_2{ceotenure}_i + \beta_3
 $$\\[0.5in]$$
 
 
-### <ins>Assumption 3</ins>: $X_i$ and $u_i$ have nonzero finite fourth moment {#asmptn4thmmnt .unnumbered}
+### <ins>Assumption 3</ins>: Large outliers are unlikely: $X_i$ and $u_i$ have nonzero finite fourth moment {#asmptn4thmmnt .unnumbered}
 
-This assumption is effectively stating that large outliers are unlikely. By stating that $0 < \mathbb{E}(X_i^4) < \infty$ and $0 < \mathbb{E}(Y_i^4) < \infty$ it states that $X$ and $Y$ have finite kurtosis. If the assumption of finite fourth moments holds then it is unlikely that statistical inferences using OLS will be dominated by a few observations. This assumption is used to derive the properties of OLS regression statistics in large samples.
+This assumption is effectively stating that large outliers are unlikely. By stating that $0 < \mathbb{E}(X_i^4) < \infty$ and $0 < \mathbb{E}(Y_i^4) < \infty$ it states that $X$ and $Y$ have finite kurtosis. If the assumption of finite fourth moments holds then it is unlikely that statistical inferences using OLS will be dominated by a few observations. This assumption is used to derive the properties of OLS regression statistics in large samples, especially deriving distribution of OLS statistics via large sample approximations.
+
+One source of large outliers is data entry errors, such as entering data in different units such as recording one distance information in meters instead of miles, or recording one height in inches instead of feet, etc. One way to find outliers is to plot the data. If the outlier is due to data entry error, then that entry can be corrected, or, if it is not possible to correct it, then dropped from the data set.
+
+Nevertheless, in many economic research the assumption of finite kurtosis is sensible. Many data have finite range - concert, sports, or class attendance is limited by the physical capacities of halls, stadiums, or classrooms, or test scores range from getting them all incorrect to getting them all correct, etc - they necessarily have a finite kurtosis. More generally, commonly used distributions, such as normal distribution, have four moments. What is ruled out is those distributions that have infinite fourth moments. If distributions have finite fourth moments, then it is unlikely that statistical inferences using OLS will be dominated by a few observations. 
 
 $$\\[0.5in]$$
 
