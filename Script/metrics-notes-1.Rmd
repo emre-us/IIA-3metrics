@@ -35,6 +35,8 @@ $$\\[0.25in]$$
 
 We will start our discussion with **O**rdinary **L**east **S**quares (**OLS**). We will discuss what it is and look at how well the regression line describe the data before looking at the set of assumptions that unerpin least squares approach. We will then examine the theoretical justification for using OLS, which is the Gauss-Markov theorem. This theorem states that under a set of conditions known as the **Gauss-Markov conditions**, the OLS estimator is the **B**est **L**inear **U**nbiased **E**stimator (**BLUE**). We will discuss each of these in turn.
 
+In terms of the notation, $Y$ denotes the dependent variable, or regressand, and $X$s denote the explanatory variables, or regressors, with $k^{th}$ regressor indicated by $X_k$. The subscript $i$ is used to indicate cross-sectional data, and $t$ time series data, and they denote the $i^{th}$ or $t^{th}$ observation or value, and $X_{ki}$ or $X_{kt}$ denote the $i^{th}$ or $t_{th}$ observation on variable $X_k$. 
+
 
 # LS {#ols}
 
@@ -49,7 +51,7 @@ The gap $(X_i - a)$ can be thought of as a prediction mistake since $a$ is an es
 </p>
 
 
-The estimator $b$ that minimizes the sum of squared prediction mistakes is called the *least squares estimator*. To minimize this, we take its derivative and set it to 0:
+The estimator $a$ that minimizes the sum of squared prediction mistakes is called the *least squares estimator*. To minimize this, we take its derivative and set it to 0:
 \[
 \frac{d}{db}\sum_{i=1}^n(X_i-a)^2 = -2\sum_{i=1}^n
 (X_i-a) = -2\sum_{i=1}^nX_i + 2na = 0.
@@ -69,18 +71,18 @@ $$\\[0.75in]$$
 Consider the linear regression model $Y_i = \beta_0 + \beta_1X_i + u_i.$ This population regression function is not directly observable so it is estimated from the sample regression function: 
 \[
 \begin{align}
-\hat{Y_i} 
-&= \hat{\beta}_0+\hat{\beta}_1X_i+u_i \\
-&= \hat{Y}_i+u_i
+Y_i 
+&= \hat{\beta}_0+\hat{\beta}_1X_i + \hat{u}_i\\
+&= \hat{Y}_i+\hat{u}_i
 \end{align}
 \]
 where $\hat{Y}_i$ is the estimated conditional mean value of $Y_i$.
 
-The goal is to ensure the estimate $\hat{Y}_i$ is as close to the population $Y_i$ as possible given $n$ pair of observations on $Y$ and $X$. For this, first notice that the *residuals* $\hat{u}_i$ - which are the estimates of the disturbance or error term $u_i$ - can be expressed as the difference between the actual $Y_i$ and the estimated $\hat{Y}_i$: That is, $\hat{u}_i = Y_i - \hat{Y}_i.$ 
+The goal is to ensure that the estimate $\hat{Y}_i$ is as close to the population $Y_i$ as possible given $n$ pair of observations on $Y$ and $X$. For this, first notice that the *residuals* $\hat{u}_i$ - which are the estimates of the disturbance or error term $u_i$ - can be expressed as the difference between the actual $Y_i$ and the estimated $\hat{Y}_i$: That is, $\hat{u}_i = Y_i - \hat{Y}_i.$ 
 
-To achieve our goal we can then consider minimizing the sum of all residuals: $\sum\hat{u}_i = \sum(Y_i - \hat{Y}_i).$ However, this would not be a good criterion since some estimates will be more than $Y_i$ and some less, and each residual receive the same weighting. The sum of residuals can therefore be very small or even zero despite the residuals widely being scattered around the sample regression function.
+To achieve our goal we can first consider minimizing the sum of all residuals: $\sum\hat{u}_i = \sum(Y_i - \hat{Y}_i).$ However, this would not be a good criterion since some estimates will be more than $Y_i$ and some less, and each residual receive the same weighting. The sum of residuals can therefore be very small or even zero despite the residuals widely being scattered around the sample regression function.
 
-One way to avoid this problem is to apply the least squares approach from above and square the residuals before adding them up. This would put more weight to those residuals that are further away from the true value. This way, it is harder to get a small sum of residuals, especially if there are large residuals present since they are now amplified. This approach also has some additional desirable statistical properties. The criterion therefore is:
+One way to avoid this problem is to apply the least squares approach from above and square the residuals before adding them up. This would put more weight to those residuals that are further away from the true value. A consequence of this would be that it would now be harder to get a small sum of residuals, especially if there are large residuals present since they are now amplified. This approach also has some additional desirable statistical properties. The criterion therefore is:
 
 \[
 \begin{align}
@@ -90,14 +92,14 @@ One way to avoid this problem is to apply the least squares approach from above 
 \end{align}
 \]
 
-In other words, the prediction mistake for the $i^{th}$ observation is $Y_i-(\hat{\beta}_0+\hat{\beta}_1X_i)=Y_i-\hat{\beta}_0-\hat{\beta}_1X_i,$ and the sum of these squared prediction mistakes over all n observations is:
+In other words, the prediction mistake for the $i^{th}$ observation is $Y_i-(\hat{\beta}_0+\hat{\beta}_1X_i)=Y_i-\hat{\beta}_0-\hat{\beta}_1X_i,$ and the sum of the square of these prediction mistakes over all $n$ observations is:
 \[
 \sum_{i=1}^n \hat{u}^2_i = \sum_{i=1}^n(Y_i-\hat{\beta}_0-\hat{\beta}_1X_i)^2.
 \]
 
-Notice that this is the extension of LS in estimating the mean applied to linear regression model. In fact, if there is no regressor $\hat{\beta}_0$ then the two are identical except for the notation. Our goal therefore is to minimize this expression which is a function of $\hat{\beta}_0$ and $\hat{\beta}_1$. 
+Notice that this is the extension of LS in estimating the mean, which is now applied to linear regression model. In fact, if there is no $\hat{\beta}_0$ then the two are identical except for the notation. 
 
-As is the case with $\bar{X}$ being the unique estimator that minimizes $\sum_{i=1}^n(X_i-a)^2$, there is also a unique pair of estimators that minimize $\sum_{i=1}^n(Y_i-b_0-b_1X_i)^2$. The estimators $\hat{\beta}_0$ and $\hat{\beta}_1$ that minimize the intercept $\beta_0$ and slope $\beta_1$ are called **o**rdinary **l**east **s**quares (**OLS**) estimators of $\beta_0$ and $\beta_1$.
+As before, our goal is to minimize this expression which is a function of $\hat{\beta}_0$ and $\hat{\beta}_1$. As is the case with $\bar{X}$ being the unique estimator that minimizes $\sum_{i=1}^n(X_i-a)^2$, there is also a unique pair of estimators that minimize $\sum_{i=1}^n(Y_i-\hat{\beta}_0-\hat{\beta}_1X_i)^2$. The estimators $\hat{\beta}_0$ and $\hat{\beta}_1$ that minimize the intercept $\beta_0$ and slope $\beta_1$ are called **o**rdinary **l**east **s**quares (**OLS**) estimators of $\beta_0$ and $\beta_1$.
 
 
 As before, to minimize, we take partial derivatives with respect to $\hat{\beta}_0$ and $\hat{\beta}_1$ and set them to 0:
@@ -106,32 +108,15 @@ As before, to minimize, we take partial derivatives with respect to $\hat{\beta}
 \frac{\partial}{\partial \hat{\beta}_1}\sum_{i=1}^n(Y_i-\hat{\beta}_0-\hat{\beta}_1X_i)^2 = -2\sum_{i=1}^n(Y_i-\hat{\beta}_0-\hat{\beta}_1X_i)X_i = \sum_{i=1}^n\hat{u}^2_iX_i = 0
 \]
 
+Rearranging the terms would give us
 
+\[
+\sum_{i=1}^nY_i = n\hat{\beta}_0 + \hat{\beta}_1\sum_{i=1}^nX_i \\
+\text{and} \\[4pt]
+\sum_{i=1}^nY_iX_i = \hat{\beta}_0\sum_{i=1}^nX_i + \hat{\beta}_1\sum_{i=1}^nX_i^2.
+\]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Rearranging the terms and dividing by $n$ shows that the OLS estimators $\hat{\beta}_0$ and $\hat{\beta}_1$ need to satisfy the following two equations
+These simultaneous equations are known as *normal equations*. Rearranging the terms and dividing by $n$ shows that the OLS estimators $\hat{\beta}_0$ and $\hat{\beta}_1$ need to satisfy the following two equations
 \[
 \begin{align*}
 \bar{Y} - \hat{\beta}_0 - \hat{\beta}_1\bar{X} &= 0 \\[4pt]
@@ -142,27 +127,150 @@ Solving these for $\hat{\beta}_0$ and $\hat{\beta}_1$ gives:
 \[
 \hat{\beta}_0=\bar{Y}-\hat{\beta}_1\bar{X}\\[4pt]
 \text{and} \\[4pt]
-\hat{\beta}_1 = \frac{\dfrac{1}{n}\displaystyle\sum_{i=1}^nX_iY_i-\bar{X}\bar{Y}}{\dfrac{1}{n}\displaystyle\sum_{i=1}^nX_i^2-\bar{X}^2} = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}.
+\hat{\beta}_1
+= \frac{\dfrac{1}{n}\displaystyle\sum_{i=1}^nX_iY_i-\bar{X}\bar{Y}}{\dfrac{1}{n}\displaystyle\sum_{i=1}^nX_i^2-\bar{X}^2} 
+= \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}.
 \]
-Notice that if we divide the numerator and the denominator of the expression for $\hat{\beta}_1$ by $n-1$, we can also express it as:
+Notice that $\sum(X_i-\bar{X})(Y_i-\bar{Y})$ depends on the values of $Y$, and the values of $Y$ depend on the values of $u$. This means, if the values of the disturbance term had been different in the $n$ observations, we would have obtained different values of $Y$. Which would in turn give us a different values for $\sum(X_i-\bar{X})(Y_i-\bar{Y})$, and therefore for $\hat{\beta}_1$; thus $\hat{\beta}_1$ is random. We can therefore decompose $\hat{\beta}_1$ into its random and nonrandom components:
 \[
-\hat{\beta}_1 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} = \frac{S_{XY}}{S_X^2}.
+\begin{align}
+\hat{\beta}_1
+&= \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} \\[6pt]
+&= \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})\left((\beta_0+\beta_1X_i+u_i)-(\beta_0+\beta_1\bar{X}+\bar{u})\right)}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} \\[6pt]
+&= \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})\left(\beta_1(X_i-\bar{X})+u_i-\bar{u}\right)}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} \\[6pt]
+&= \frac{\displaystyle\sum_{i=1}^n\beta_1(X_i-\bar{X})^2 + \displaystyle\sum_{i=1}^n(X_i - \bar{X})(u_i-\bar{u})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} \\[6pt]
+&= \beta_1 + \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(u_i-\bar{u})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} \\[6pt]
+&= \beta_1 + \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})u_i - \bar{u}\displaystyle\sum_{i=1}^n(X_i-\bar{X})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} \\[6pt]
+&= \beta_1 + \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})u_i - \bar{u}\left(\sum_{i=1}^nX_i-n\bar{X}\right)}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} \\[6pt]
+&= \beta_1 + \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})u_i - \bar{u}\left(n\bar{X}-n\bar{X})\right)}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} \\[6pt]
+&= \beta_1 + \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})u_i}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} \\[6pt]
+&= \beta_1 + \sum_{i=1}^n\left(\frac{(X_i-\bar{X})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}\right)u_i.
+\end{align}
 \]
-So, the OLS predicted values $\hat{Y}_i$ is:
+Therefore, $\hat{\beta}_1$ has two components: a fixed one that is equal to the true value $\beta_1$, and a random one that depends on the values of the disturbance term in the sample. That is, $\hat{\beta}_1$ is equal to the true value $\beta_1$ plus a linear combination of the values of the disturbance term in all the observations in the sample.
+
+At this point we need to provide a clarification on the notation. The numerator $(X_i - \bar{X})$ changes as $i$ changes and is different for each observation. However, the denominator is the sum of squared deviations *for the whole sample* and is not dependent on $i$. In other words, the denominator is $(X_1-\bar{X})^2 + \dots + (X_n-\bar{X})^2$ which is not dependent on $i$. To avoid confusion, we can use a different index, $j$, for the summation in the denominator so that the expression for $\hat{\beta}_1$ becomes:
+\[
+\hat{\beta}_1 = \beta_1 + \sum_{i=1}^n\left(\frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_i-\bar{X})^2}\right)u_i.
+\]
+Separately, notice that before its decomposition into random and nonrandom components, if we divide the numerator and the denominator of the expression for $\hat{\beta}_1$ by $n-1$, we can also express it as:
+\[
+\hat{\beta}_1 = \frac{\frac{1}{n-1}\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\frac{1}{n-1}\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} = \frac{\hat{\sigma}_{XY}}{\hat{\sigma}_X^2}.
+\]
+where the sample variance $\hat{\sigma}^2 = (n-1)^{-1}\sum(Y_i-\bar{Y})^2.$ 
+
+So, the OLS predicted values $\hat{Y}_i$ can be written in the following ways:
 \[
 \begin{align*}
 \hat{Y}_i 
-&= \hat{\beta}_0 + \hat{\beta}_1X_i \\[4pt]
-&=\left(\bar{Y}-\hat{\beta}_1\bar{X}\right) + \hat{\beta}_1X_i \ , \ \text{for} \ i=1,\dots,n \\[4pt]
-&=\left(\bar{Y}-\left(\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}\right)\bar{X}\right) + \left(\frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}\right)X_i \\[4pt]
-&=\bar{Y}-\frac{S_{XY}}{S_X^2}\bar{X} + \frac{S_{XY}}{S_X^2}X_i
+&= \hat{\beta}_0 + \hat{\beta}_1X_i \ , \ \text{for} \ i=1,\dots,n \\[4pt]
+&=\left(\bar{Y}-\hat{\beta}_1\bar{X}\right) + \hat{\beta}_1X_i \\[4pt]
+&= \bar{Y} - \hat{\beta}_1\left(X_i - \bar{X}\right) \\[4pt]
+&= \bar{Y} - \left( \beta_1 + \sum_{i=1}^n\left(\frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_i-\bar{X})^2}\right)u_i \right)\left(X_i - \bar{X}\right) \\[4pt]
+&= \bar{Y} - \left( \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} \right)\left(X_i - \bar{X}\right) \\[4pt]
+&=\bar{Y} - \left( \frac{\hat{\sigma}_{XY}}{\hat{\sigma}_X^2} \right)\left(X_i - \bar{X}\right).
 \end{align*}
 \]
-The difference between $Y_i$ and its predicted value is then the *residual* for the $i^{th}$ observation:
+The difference between $Y_i$ and its predicted value $\hat{Y}_i$ is then the *residual* for the $i^{th}$ observation:
 \[
-\hat{u}_i=Y_i-\hat{Y}_i = Y_i - \hat{\beta}_0-\hat{\beta}_1X_i \ , \ \text{for} \ i=1,\dots,n.
+\begin{align}
+\hat{u}_i
+&= Y_i-\hat{Y}_i \\[4pt]
+&= Y_i - \hat{\beta}_0-\hat{\beta}_1X_i \\[4pt]
+&= Y_i - \left(\bar{Y}-\frac{\hat{\sigma}_{XY}}{\hat{\sigma}_X^2}(X_i - \bar{X})\right) \\[4pt]
+&= Y_i - \bar{Y} + \frac{\hat{\sigma}_{XY}}{\hat{\sigma}_X^2}(X_i - \bar{X})  \ , \ \text{for} \ i=1,\dots,n.
+\end{align}
 \]
 The intercept $\hat{\beta}_0$, slope $\hat{\beta}_1$, and residual $\hat{u}_i$ are estimated from a sample of $n$ observations of $X_i$ and $Y_i$. These are estimates of the *unknown* true population intercept $\beta_0$, slope $\beta_1$, and error term $u_i$.
+
+These OLS estimators are *point estimators*, which means that given the sample, each estimator will provide a single, or point, value of the relevant population parameter. This is in contrast to *interval estimators* which provide a range of possible values.
+
+$$\\[0.5in]$$
+
+### Precision of OLS Estimators: Standard Errors
+
+Given that the OLS estimates are a function of the sample data, they will change as the samples changes. Accordingly, we need a measure of precision of the estimators $\hat{\beta}$s to see how reliable they are. This measure is called the *standard error* of the estimator, which is the standard deviation of the sampling distribution of the estimator. In turn, the sampling distribution of an estimator is a distribution of the set of values of the estimator obtained from all possible samples of the same size from a given population.
+
+To derive the standard error of $\hat{\beta}$ we therefore need to first obtain their variances:
+\[
+\sigma_{\hat{\beta}_1} = \mathbb{E}\left(\left(\hat{\beta}_1 - \mathbb{E}(\hat{\beta_1}\right)^2\right)
+\]
+since $\mathbb{E}(\hat{\beta}_1^2) = \beta_1$ (see the [unbiased estimator](#ue) discussion below), this expression becomes
+\[
+\sigma_{\hat{\beta}_1} = \mathbb{E}\left((\hat{\beta}_1 - \beta_1)^2\right).
+\]
+We can substitute the expression we derived for $\hat{\beta}_1$ after decomposing it its random and nonrandom components:
+\[
+\begin{align}
+\sigma_{\hat{\beta}_1} 
+&= \mathbb{E}\left((\beta_1 + \sum_{i=1}^n\left(\underbrace{\frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_i-\bar{X})^2}}_{a_i}\right)u_i - \beta_1)^2\right) \\[6pt]
+&= \mathbb{E}\left( \left( \sum_{i=1}^na_iu_i \right)^2 \right) \\[6pt]
+&= \mathbb{E}\left( \sum_{i=1}^n a_i^2 u_i^2 + 2\sum_{i=1}^n\sum_{h\neq i} a_i a_h u_i u_h \right) \\[6pt]
+&= \sum_{i=1}^n a_i^2\mathbb{E}\left( u_i^2 \right) + 2\sum_{i=1}^n\sum_{h\neq i} a_i a_h \mathbb{E}\left( u_i u_h \right)
+\end{align}
+\]
+Notice that $\mathbb{E}(u_i^2)=\sigma_u^2$ (see the [homoskedasticity](#assmptnskedasticity) assumption below), and that $\mathbb{E}(u_iu_h)=0$ for $i\neq j$ (see the [no autocorrelation](#assmptnnosercorr) assumption below), so this expression becomes:
+\[
+\begin{align}
+\sigma_{\hat{\beta}_1} 
+&= \sum_{i=1}^n a_i^2\sigma_u^2 \\[6pt]
+&= \sigma_u^2 \sum_{i=1}^n a_i^2 \\[6pt]
+&= \sigma_u^2 \sum_{i=1}^n \left( \frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_i-\bar{X})^2} \right)^2 \\[6pt]
+&= \sigma_u^2 \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}{\left( \displaystyle\sum_{j=1}^n(X_i-\bar{X})^2 \right)^2} \\[6pt]
+&= \frac{\sigma_u^2}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}.
+\end{align}
+\]
+A similar algebraic approach would then give the variance for $\hat{\beta}_0$ as:
+\[
+\sigma_{\hat{\beta}_0} = \sigma_u^2 \frac{\displaystyle\sum_{i=1}^n X_i^2}{n\displaystyle\sum_{i=1}^n (X_i-\bar{X})^2} = \sigma_u^2 \left( \frac{1}{n} + \frac{\bar{X}^2}{\displaystyle\sum_{i=1}^n (X_i-\bar{X})^2} \right).
+\]
+Looking at the expressions for $\sigma_{\hat{\beta}_1}$ and $\sigma_{\hat{\beta}_1}$ we can see that they will be smaller, the larger $\sum(X_i-\bar{X})^2$ is. The size of $\sigma_{\hat{\beta}_1}$ in turn depends both on the number of observations and on the size of the deviations of $X_i$ from its sample mean.
+
+However, because $\sigma_u^2$ is unknown, we cannot calculate the population variances of either $\hat{\beta}_0$ or $\hat{\beta}_1$. In practice, therefore, we derive an estimator of $\sigma_u^2$ from the *residuals*. To derive this recall that $Y_i=\beta_0+\beta_1X_i+u_i$ and that $\bar{Y}=\beta_0+\beta_1\bar{X}+\bar{u}$. Subtracting the latter from the former gives us
+\[
+Y_i-\bar{Y}=\beta_1(X_i-\bar{X})+(u_i-\bar{u}).
+\]
+We can do the same for the estimates whereby we subtract $\bar{Y}=\hat{\beta}_0+\hat{\beta}_1\bar{X}$ from $Y_i=\hat{\beta}_0+\hat{\beta}_1X_i+\hat{u}_i$ and obtain $Y_i-\bar{Y}=\hat{\beta}_1(X_i-\bar{X})+\hat{u}_i,$ or $\hat{u}_i=Y_i-\bar{Y}-\hat{\beta}_1(X_i-\bar{X}).$ Putting these together, we get:
+\[
+\begin{align}
+\hat{u}_i 
+&= Y_i-\bar{Y} - \hat{\beta}_1(X_i-\bar{X}) \\
+&= \beta_1(X_i-\bar{X}) + (u_i-\bar{u}) - \hat{\beta}_1(X_i-\bar{X})
+\end{align}
+\]
+This is for observation $i$. We can square this and sum for all $i$:
+\[
+\sum_{i=1}^n\hat{u}_i^2 = (\hat{\beta}_1 - \beta_1)^2 \sum_{i=1}^n(X_i-\bar{X})^2 + \sum_{i=1}^n(u_i-\bar{u})^2 - 2(\hat{\beta}_1 - \beta_1)\sum_{i=1}^n(X_i-\bar{X})(u_i-\bar{u}).
+\]
+Taking expectations of both sides, we get:
+\[
+\mathbb{E}\left( \sum_{i=1}^n\hat{u}_i^2 \right) = \mathbb{E}\left( (\hat{\beta}_1 - \beta_1)^2 \right) \sum_{i=1}^n(X_i-\bar{X})^2 + \mathbb{E}\left( \sum_{i=1}^n(u_i-\bar{u})^2 \right) - 2\mathbb{E}\left( (\hat{\beta}_1 - \beta_1)\sum_{i=1}^n(X_i-\bar{X})(u_i-\bar{u}) \right).
+\]
+which, after some algebraic simplifications, becomes:
+\[
+\begin{align}
+\mathbb{E}\left( \sum_{i=1}^n\hat{u}_i^2 \right) 
+&= \sigma_u^2 + (n-1)\sigma_u^2 - 2\sigma_u^2 \\
+&= (n-2)\sigma_u^2
+\end{align}
+\]
+Thus, we can estimate $\sigma_u^2$ with the following:
+\[
+\hat{\sigma}_u^2 = \frac{\displaystyle\sum_{i=1}^n\hat{u}_i^2}{n-2}
+\]
+where $\hat{u}_i^2$ is the OLS estimator of the true but unknown $\sigma^2$.
+
+We can now put all of these together to derive the standard errors:
+\[
+\begin{align}
+se(\hat{\beta}_0) &= \sqrt{\hat{\sigma}_u^2 \frac{\displaystyle\sum_{i=1}^n X_i^2}{n\displaystyle\sum_{i=1}^n (X_i-\bar{X})^2}} = \sqrt{\hat{\sigma}_u^2 \left( \frac{1}{n} + \frac{\bar{X}^2}{\displaystyle\sum_{i=1}^n (X_i-\bar{X})^2} \right)} \\[10pt]
+se(\hat{\beta}_1) &= \sqrt{\frac{\hat{\sigma}_u^2}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}}
+\end{align}
+\]
+It is important to emphasize here that the standard error gives only a general guide to the likely accuracy of a regression coefficient. It enables us to obtain some idea of the width of its pdf but not whether our regression estimate comes from the middle of the function, and is therefore accurate, or from the tails, and is therefore relatively inaccurate.
+
+The higher the variance of the disturbance term, $\sigma_u^2$, the higher the sample variance of the residuals, $\hat{\sigma}_u$ is likely to be, and hence the higher will be the standard errors of the coefficients in the regression equation, reflecting the risk that the coefficients are inaccurate. However, it is only a risk. It is possible that, in any particular sample, the effects of the disturbance term in the different observations will cancel each other out and the regression coefficients will be accurate after all. However, there is no way of telling whether that happens in any particular sample.
+
 
 
 $$\\[0.75in]$$
