@@ -1518,7 +1518,7 @@ text-align: center;
 </span></p>
 <p><span class="math display">\[\\[0.25in]\]</span></p>
 <p>We will start our discussion with <strong>O</strong>rdinary <strong>L</strong>east <strong>S</strong>quares (<strong>OLS</strong>). We will discuss what it is and look at how well the regression line describe the data before looking at the set of assumptions that unerpin least squares approach. We will then examine the theoretical justification for using OLS, which is the Gauss-Markov theorem. This theorem states that under a set of conditions known as the <strong>Gauss-Markov conditions</strong>, the OLS estimator is the <strong>B</strong>est <strong>L</strong>inear <strong>U</strong>nbiased <strong>E</strong>stimator (<strong>BLUE</strong>). We will discuss each of these in turn.</p>
-<p>In terms of the notation, <span class="math inline">\(Y\)</span> denotes the dependent variable, or regressand, and <span class="math inline">\(X\)</span>s denote the explanatory variables, or regressors, with <span class="math inline">\(k^{th}\)</span> regressor indicated by <span class="math inline">\(X_k\)</span>. The subscript <span class="math inline">\(i\)</span> is used to indicate cross-sectional data, and <span class="math inline">\(t\)</span> time series data, and they denote the <span class="math inline">\(i^{th}\)</span> or <span class="math inline">\(t^{th}\)</span> observation or value, and <span class="math inline">\(X_{ki}\)</span> or <span class="math inline">\(X_{kt}\)</span> denote the <span class="math inline">\(i^{th}\)</span> or <span class="math inline">\(t_{th}\)</span> observation on variable <span class="math inline">\(X_k\)</span>.</p>
+<p>In terms of the notation, <span class="math inline">\(Y\)</span> denotes the dependent variable, or regressand, and <span class="math inline">\(X\)</span>s denote the explanatory variables, or regressors, with <span class="math inline">\(k^{th}\)</span> regressor indicated by <span class="math inline">\(X_k\)</span>. The subscript <span class="math inline">\(i\)</span> is used to indicate cross-sectional data, and <span class="math inline">\(t\)</span> time series data, and they denote the <span class="math inline">\(i^{th}\)</span> or <span class="math inline">\(t^{th}\)</span> observation or value, and <span class="math inline">\(X_{ki}\)</span> or <span class="math inline">\(X_{kt}\)</span> denote the <span class="math inline">\(i^{th}\)</span> or <span class="math inline">\(t^{th}\)</span> observation on variable <span class="math inline">\(X_k\)</span>.</p>
 <div id="ols" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> LS</h1>
 Consider the problem of finding the estimator <span class="math inline">\(a\)</span> that minimizes
@@ -1590,8 +1590,12 @@ Solving these for <span class="math inline">\(\hat{\beta}_0\)</span> and <span c
 \hat{\beta}_1
 = \frac{\dfrac{1}{n}\displaystyle\sum_{i=1}^nX_iY_i-\bar{X}\bar{Y}}{\dfrac{1}{n}\displaystyle\sum_{i=1}^nX_i^2-\bar{X}^2}
 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}.
-\]</span>
-Notice that <span class="math inline">\(\sum(X_i-\bar{X})(Y_i-\bar{Y})\)</span> depends on the values of <span class="math inline">\(Y\)</span>, and the values of <span class="math inline">\(Y\)</span> depend on the values of <span class="math inline">\(u\)</span>. This means, if the values of the disturbance term had been different in the <span class="math inline">\(n\)</span> observations, we would have obtained different values of <span class="math inline">\(Y\)</span>. Which would in turn give us a different values for <span class="math inline">\(\sum(X_i-\bar{X})(Y_i-\bar{Y})\)</span>, and therefore for <span class="math inline">\(\hat{\beta}_1\)</span>; thus <span class="math inline">\(\hat{\beta}_1\)</span> is random. We can therefore decompose <span class="math inline">\(\hat{\beta}_1\)</span> into its random and nonrandom components:
+\]</span></p>
+<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
+<blockquote>
+<h4 id="decomposition-of-ols-estimators" class="unnumbered"><em>Decomposition of OLS Estimators</em></h4>
+<p>In practice it would not be possible to decompose but the discussion below is useful in analyzing the theoretical properties of <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span>.</p>
+<p>Notice that <span class="math inline">\(\sum(X_i-\bar{X})(Y_i-\bar{Y})\)</span> depends on the values of <span class="math inline">\(Y\)</span>, and the values of <span class="math inline">\(Y\)</span> depend on the values of <span class="math inline">\(u\)</span>. This means, if the values of the disturbance term had been different in the <span class="math inline">\(n\)</span> observations, we would have obtained different values of <span class="math inline">\(Y\)</span>. Which would in turn give us a different values for <span class="math inline">\(\sum(X_i-\bar{X})(Y_i-\bar{Y})\)</span>, and therefore for <span class="math inline">\(\hat{\beta}_1\)</span>; thus <span class="math inline">\(\hat{\beta}_1\)</span> is random. We can therefore decompose <span class="math inline">\(\hat{\beta}_1\)</span> into its random and nonrandom components:
 <span class="math display">\[
 \begin{align}
 \hat{\beta}_1
@@ -1612,14 +1616,21 @@ Therefore, <span class="math inline">\(\hat{\beta}_1\)</span> has two components
 <span class="math display">\[
 \hat{\beta}_1 = \beta_1 + \sum_{i=1}^n\left(\frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_i-\bar{X})^2}\right)u_i.
 \]</span>
-Separately, notice that before its decomposition into random and nonrandom components, if we divide the numerator and the denominator of the expression for <span class="math inline">\(\hat{\beta}_1\)</span> by <span class="math inline">\(n-1\)</span>, we can also express it as:
+A similar approach would then yield the following expression for <span class="math inline">\(\hat{\beta}_0\)</span>:
 <span class="math display">\[
-\hat{\beta}_1 = \frac{\frac{1}{n-1}\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\frac{1}{n-1}\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} = \frac{\hat{\sigma}_{XY}}{\hat{\sigma}_X^2}.
+\hat{\beta}_0 = \beta_0 + \sum_{i=1}^n\left( \frac{1}{n} - \left( \frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_i-\bar{X})^2} \right)\bar{X}  \right)u_i.
+\]</span>
+In practice it would not be possible to decompose <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> since <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are unknown. However, these are useful in analyzing the theoretical properties of <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span>.</p>
+</blockquote>
+</div>
+<p>Notice that if we divide the numerator and the denominator of the expression for <span class="math inline">\(\hat{\beta}_1\)</span> by <span class="math inline">\(n-1\)</span>, we can also express it as:
+<span class="math display">\[
+\hat{\beta}_1 = \frac{\displaystyle\frac{1}{n-1}\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\frac{1}{n-1}\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} = \frac{\hat{\sigma}_{XY}}{\hat{\sigma}_X^2}.
 \]</span>
 where the sample variance <span class="math inline">\(\hat{\sigma}^2 = (n-1)^{-1}\sum(Y_i-\bar{Y})^2.\)</span></p>
 <p>So, the OLS predicted values <span class="math inline">\(\hat{Y}_i\)</span> can be written in the following ways:
 <span class="math display">\[
-\begin{align*}
+\begin{align}
 \hat{Y}_i
 &amp;= \hat{\beta}_0 + \hat{\beta}_1X_i \ , \ \text{for} \ i=1,\dots,n \\[4pt]
 &amp;=\left(\bar{Y}-\hat{\beta}_1\bar{X}\right) + \hat{\beta}_1X_i \\[4pt]
@@ -1627,7 +1638,7 @@ where the sample variance <span class="math inline">\(\hat{\sigma}^2 = (n-1)^{-1
 &amp;= \bar{Y} - \left( \beta_1 + \sum_{i=1}^n\left(\frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_i-\bar{X})^2}\right)u_i \right)\left(X_i - \bar{X}\right) \\[4pt]
 &amp;= \bar{Y} - \left( \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} \right)\left(X_i - \bar{X}\right) \\[4pt]
 &amp;=\bar{Y} - \left( \frac{\hat{\sigma}_{XY}}{\hat{\sigma}_X^2} \right)\left(X_i - \bar{X}\right).
-\end{align*}
+\end{align}
 \]</span>
 The difference between <span class="math inline">\(Y_i\)</span> and its predicted value <span class="math inline">\(\hat{Y}_i\)</span> is then the <em>residual</em> for the <span class="math inline">\(i^{th}\)</span> observation:
 <span class="math display">\[
@@ -1644,19 +1655,19 @@ The intercept <span class="math inline">\(\hat{\beta}_0\)</span>, slope <span cl
 <p><span class="math display">\[\\[0.5in]\]</span></p>
 <div id="precision-of-ols-estimators-standard-errors" class="section level3" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> Precision of OLS Estimators: Standard Errors</h3>
-<p>Given that the OLS estimates are a function of the sample data, they will change as the samples changes. Accordingly, we need a measure of precision of the estimators <span class="math inline">\(\hat{\beta}\)</span>s to see how reliable they are. This measure is called the <em>standard error</em> of the estimator, which is the standard deviation of the sampling distribution of the estimator. In turn, the sampling distribution of an estimator is a distribution of the set of values of the estimator obtained from all possible samples of the same size from a given population.</p>
+<p>Given that the OLS estimates are a function of the sample data, they will change as the samples change. Accordingly, we need a measure of precision of the estimators <span class="math inline">\(\hat{\beta}\)</span>s to see how reliable they are. This measure is called the <em>standard error</em> of the estimator, which is the standard deviation of the sampling distribution of the estimator. In turn, the sampling distribution of an estimator is a distribution of the set of values of the estimator obtained from all possible samples of the same size from a given population.</p>
 <p>To derive the standard error of <span class="math inline">\(\hat{\beta}\)</span> we therefore need to first obtain their variances:
 <span class="math display">\[
-\sigma_{\hat{\beta}_1} = \mathbb{E}\left(\left(\hat{\beta}_1 - \mathbb{E}(\hat{\beta_1}\right)^2\right)
+\sigma_{\hat{\beta}_1}^2 = \mathbb{E}\left(\left(\hat{\beta}_1 - \mathbb{E}(\hat{\beta_1}\right)^2\right)
 \]</span>
 since <span class="math inline">\(\mathbb{E}(\hat{\beta}_1^2) = \beta_1\)</span> (see the <a href="#ue">unbiased estimator</a> discussion below), this expression becomes
 <span class="math display">\[
-\sigma_{\hat{\beta}_1} = \mathbb{E}\left((\hat{\beta}_1 - \beta_1)^2\right).
+\sigma_{\hat{\beta}_1}^2 = \mathbb{E}\left((\hat{\beta}_1 - \beta_1)^2\right).
 \]</span>
 We can substitute the expression we derived for <span class="math inline">\(\hat{\beta}_1\)</span> after decomposing it its random and nonrandom components:
 <span class="math display">\[
 \begin{align}
-\sigma_{\hat{\beta}_1}
+\sigma_{\hat{\beta}_1}^2
 &amp;= \mathbb{E}\left((\beta_1 + \sum_{i=1}^n\left(\underbrace{\frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_i-\bar{X})^2}}_{a_i}\right)u_i - \beta_1)^2\right) \\[6pt]
 &amp;= \mathbb{E}\left( \left( \sum_{i=1}^na_iu_i \right)^2 \right) \\[6pt]
 &amp;= \mathbb{E}\left( \sum_{i=1}^n a_i^2 u_i^2 + 2\sum_{i=1}^n\sum_{h\neq i} a_i a_h u_i u_h \right) \\[6pt]
@@ -1666,7 +1677,7 @@ We can substitute the expression we derived for <span class="math inline">\(\hat
 Notice that <span class="math inline">\(\mathbb{E}(u_i^2)=\sigma_u^2\)</span> (see the <a href="#assmptnskedasticity">homoskedasticity</a> assumption below), and that <span class="math inline">\(\mathbb{E}(u_iu_h)=0\)</span> for <span class="math inline">\(i\neq j\)</span> (see the <a href="#assmptnnosercorr">no autocorrelation</a> assumption below), so this expression becomes:
 <span class="math display">\[
 \begin{align}
-\sigma_{\hat{\beta}_1}
+\sigma_{\hat{\beta}_1}^2
 &amp;= \sum_{i=1}^n a_i^2\sigma_u^2 \\[6pt]
 &amp;= \sigma_u^2 \sum_{i=1}^n a_i^2 \\[6pt]
 &amp;= \sigma_u^2 \sum_{i=1}^n \left( \frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_i-\bar{X})^2} \right)^2 \\[6pt]
@@ -1676,9 +1687,9 @@ Notice that <span class="math inline">\(\mathbb{E}(u_i^2)=\sigma_u^2\)</span> (s
 \]</span>
 A similar algebraic approach would then give the variance for <span class="math inline">\(\hat{\beta}_0\)</span> as:
 <span class="math display">\[
-\sigma_{\hat{\beta}_0} = \sigma_u^2 \frac{\displaystyle\sum_{i=1}^n X_i^2}{n\displaystyle\sum_{i=1}^n (X_i-\bar{X})^2} = \sigma_u^2 \left( \frac{1}{n} + \frac{\bar{X}^2}{\displaystyle\sum_{i=1}^n (X_i-\bar{X})^2} \right).
+\sigma_{\hat{\beta}_0}^2 = \sigma_u^2 \frac{\displaystyle\sum_{i=1}^n X_i^2}{n\displaystyle\sum_{i=1}^n (X_i-\bar{X})^2} = \sigma_u^2 \left( \frac{1}{n} + \frac{\bar{X}^2}{\displaystyle\sum_{i=1}^n (X_i-\bar{X})^2} \right).
 \]</span>
-Looking at the expressions for <span class="math inline">\(\sigma_{\hat{\beta}_1}\)</span> and <span class="math inline">\(\sigma_{\hat{\beta}_1}\)</span> we can see that they will be smaller, the larger <span class="math inline">\(\sum(X_i-\bar{X})^2\)</span> is. The size of <span class="math inline">\(\sigma_{\hat{\beta}_1}\)</span> in turn depends both on the number of observations and on the size of the deviations of <span class="math inline">\(X_i\)</span> from its sample mean.</p>
+Looking at the expressions for <span class="math inline">\(\sigma_{\hat{\beta}_0}^2\)</span> and <span class="math inline">\(\sigma_{\hat{\beta}_1}^2\)</span> we can see that they will be smaller, the larger <span class="math inline">\(\sum(X_i-\bar{X})^2\)</span> is. The sizes of <span class="math inline">\(\sigma_{\hat{\beta}}^2\)</span> s in turn depend both on the number of observations and on the size of the deviations of <span class="math inline">\(X_i\)</span> from its sample mean.</p>
 <p>However, because <span class="math inline">\(\sigma_u^2\)</span> is unknown, we cannot calculate the population variances of either <span class="math inline">\(\hat{\beta}_0\)</span> or <span class="math inline">\(\hat{\beta}_1\)</span>. In practice, therefore, we derive an estimator of <span class="math inline">\(\sigma_u^2\)</span> from the <em>residuals</em>. To derive this recall that <span class="math inline">\(Y_i=\beta_0+\beta_1X_i+u_i\)</span> and that <span class="math inline">\(\bar{Y}=\beta_0+\beta_1\bar{X}+\bar{u}\)</span>. Subtracting the latter from the former gives us
 <span class="math display">\[
 Y_i-\bar{Y}=\beta_1(X_i-\bar{X})+(u_i-\bar{u}).
@@ -1721,16 +1732,108 @@ se(\hat{\beta}_1) &amp;= \sqrt{\frac{\hat{\sigma}_u^2}{\displaystyle\sum_{i=1}^n
 \]</span>
 It is important to emphasize here that the standard error gives only a general guide to the likely accuracy of a regression coefficient. It enables us to obtain some idea of the width of its pdf but not whether our regression estimate comes from the middle of the function, and is therefore accurate, or from the tails, and is therefore relatively inaccurate.</p>
 <p>The higher the variance of the disturbance term, <span class="math inline">\(\sigma_u^2\)</span>, the higher the sample variance of the residuals, <span class="math inline">\(\hat{\sigma}_u\)</span> is likely to be, and hence the higher will be the standard errors of the coefficients in the regression equation, reflecting the risk that the coefficients are inaccurate. However, it is only a risk. It is possible that, in any particular sample, the effects of the disturbance term in the different observations will cancel each other out and the regression coefficients will be accurate after all. However, there is no way of telling whether that happens in any particular sample.</p>
+<p><span class="math display">\[\\[0.5in]\]</span></p>
+</div>
+<div id="summary" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Summary</h3>
+<p>Lets take a pause and briefly recap what we have discussed so far. We considered the linear single regression model <span class="math inline">\(Y_i=\beta_0+\beta_1X_i+u_i\)</span> and said that this population regression function is not directly observable and that we need to estimate it from the sample regression function <span class="math inline">\(Y_i = \hat{Y}_i + u_i\)</span> where <span class="math inline">\(\hat{Y}_i=\hat{\beta}_0+\hat{\beta}_1X_i\)</span>. Our goal is to ensure that the estimated conditional mean value <span class="math inline">\(\hat{Y}_i\)</span> is as close to the population <span class="math inline">\(Y_i\)</span> as possible given <span class="math inline">\(n\)</span> pair of observations on <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>. This means, minimizing the residuals, though, for some additional desirable statistical properties, we would like to minimize instead the sum of squared residuals:
+<span class="math display">\[
+\sum_{i=1}^n \hat{u}^2_i = \sum_{i=1}^n(Y_i-\hat{\beta}_0-\hat{\beta}_1X_i)^2
+\]</span>
+which is a function of <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span>. To minimize, we take their partial derivatives with respect to <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> and set them to 0. This yields:
+<span class="math display">\[
+\begin{align}
+\hat{\beta}_0
+&amp;= \bar{Y}-\hat{\beta}_1\bar{X}\\[4pt]
+\text{and} \\[4pt]
+\hat{\beta}_1
+&amp;= \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}.
+\end{align}
+\]</span>
+These expressions show that <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> are dependent on the values in the sample and thus random, and we additionally discussed in the box how these can be decomposed into random and nonrandom components.</p>
+<p>We then showed that <span class="math inline">\(\hat{\beta}_1\)</span> can also be expressed as <span class="math inline">\(\frac{\hat{\sigma}_{XY}}{\hat{\sigma}_X^2}\)</span> which leads us to be able to write the two components of the regression <span class="math inline">\(Y_i=\hat{Y}_i+\hat{u}_i\)</span> in the following ways:
+<span class="math display">\[
+\begin{align}
+\hat{Y}_i
+&amp;= \hat{\beta}_0 + \hat{\beta}_1X_i \\[4pt]
+&amp;=\left(\bar{Y}-\hat{\beta}_1\bar{X}\right) + \hat{\beta}_1X_i \\[4pt]
+&amp;= \bar{Y} - \hat{\beta}_1\left(X_i - \bar{X}\right) \\[4pt]
+&amp;= \bar{Y} - \left( \beta_1 + \sum_{i=1}^n\left(\frac{(X_i-\bar{X})}{\displaystyle\sum_{j=1}^n(X_i-\bar{X})^2}\right)u_i \right)\left(X_i - \bar{X}\right) \\[4pt]
+&amp;= \bar{Y} - \left( \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2} \right)\left(X_i - \bar{X}\right) \\[4pt]
+&amp;=\bar{Y} - \left( \frac{\hat{\sigma}_{XY}}{\hat{\sigma}_X^2} \right)\left(X_i - \bar{X}\right)  \ , \ \text{for} \ i=1,\dots,n \\[8pt]
+\text{and} \\[8pt]
+\hat{u}_i
+&amp;= Y_i-\hat{Y}_i \\[4pt]
+&amp;= Y_i - \hat{\beta}_0-\hat{\beta}_1X_i \\[4pt]
+&amp;= Y_i - \left(\bar{Y}-\frac{\hat{\sigma}_{XY}}{\hat{\sigma}_X^2}(X_i - \bar{X})\right) \\[4pt]
+&amp;= Y_i - \bar{Y} + \frac{\hat{\sigma}_{XY}}{\hat{\sigma}_X^2}(X_i - \bar{X})  \ , \ \text{for} \ i=1,\dots,n.
+\end{align}
+\]</span>
+Since these OLS estimates are sample-dependent and will change as the samples change, we introduced a measure of precision called <em>standard error</em>, which is the squared root of the variance of each of these estimators, and expressed as:
+<span class="math display">\[
+\begin{align}
+se(\hat{\beta}_0)
+&amp;= \sqrt{\hat{\sigma}_u^2 \frac{\displaystyle\sum_{i=1}^n X_i^2}{n\displaystyle\sum_{i=1}^n (X_i-\bar{X})^2}} = \sqrt{\hat{\sigma}_u^2 \left( \frac{1}{n} + \frac{\bar{X}^2}{\displaystyle\sum_{i=1}^n (X_i-\bar{X})^2} \right)} \\[10pt]
+se(\hat{\beta}_1)
+&amp;= \sqrt{\frac{\hat{\sigma}_u^2}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}} \\[10pt]
+\text{where  } \hat{\sigma}_u^2
+&amp;= \frac{\displaystyle\sum_{i=1}^n\hat{u}_i^2}{n-2}.
+\end{align}
+\]</span>
+The standard errors are also useful in establishing confidence intervals and in testing statistical hypotheses.</p>
 <p><span class="math display">\[\\[0.75in]\]</span></p>
 </div>
 </div>
-<div id="ols-estimator-in-multiple-regression" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> OLS Estimator in Multiple Regression</h2>
-<p>We can extend the above discussion to multiple regression model <span class="math inline">\(Y_i=\beta_0+\beta_1X_{1i}+\beta_2X_{2i}+\dots+\beta_kX_{ki}+u_i\)</span> with <span class="math inline">\(i=1,\dots,n\)</span> whereby the sum of the squared mistakes over n observations is
+<div id="ols-estimators-in-multiple-regression" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> OLS Estimators in Multiple Regression</h2>
+<p>We can extend the above discussion to multiple regression model <span class="math inline">\(Y_i=\beta_0+\beta_1X_{1i}+\beta_2X_{2i}+\dots+\beta_kX_{ki}+u_i\)</span> for <span class="math inline">\(i=1,\dots,n\)</span> where, as before, <span class="math inline">\(u\)</span> is the stochastic disturbance term, <span class="math inline">\(i\)</span> is the <span class="math inline">\(i^{th}\)</span> observation which, in time series, would be <span class="math inline">\(t\)</span> to denote <span class="math inline">\(t^{th}\)</span> observation.</p>
+<p>The population regression line is the relationship that holds, on average, between <span class="math inline">\(Y\)</span> and the <span class="math inline">\(X\)</span>s in the population:
 <span class="math display">\[
-\sum_{i=1}^n(Y_i-b_0-b_1X_{1i}-b_2X_{2i}-\dots-b_kX_{ki})^2.
-\]</span></p>
-<p>This is easier to express and work with in matrix notation so define the following vectors and matrices:
+\mathbb{E}(Y_i | X_{1i}=x_1, X_{2i}=x_2, \dots, X_{ki}=x_k) = \beta_0 + \beta_1x_1 + \beta_2x_2 + \dots + \beta_{ki}x_k.
+\]</span>
+This expression states the conditional mean or expected value of <span class="math inline">\(Y\)</span> conditional upon the given, or fixed, values of <span class="math inline">\(X_{ji}, j=1,\dots,k\)</span>. This means, as in the single regression case, multiple regression analysis is conditional upon the <em>fixed values of the regressors</em>, and it yields the <em>average value of <span class="math inline">\(Y\)</span></em>, or the <em>mean response of <span class="math inline">\(Y\)</span></em> for the given values of the regressors.</p>
+<p>The intercept <span class="math inline">\(\beta_0\)</span> is the expected value of <span class="math inline">\(Y\)</span> when all the <span class="math inline">\(X\)</span>s are equal to 0. The intercept can also be thought of as the coefficient on a regressor <span class="math inline">\(X_0 = 1\)</span> for all <span class="math inline">\(i\)</span>. The coefficients <span class="math inline">\(\beta_1,\dots,\beta_k\)</span> are known as <em>partial regression coefficients</em> or <em>partial slope coefficients</em>. The coefficient <span class="math inline">\(\beta_1\)</span> is the expected difference in <span class="math inline">\(Y_i\)</span> associated with a unit difference in <span class="math inline">\(X_1\)</span>, holding other regressors <span class="math inline">\(X_2,\dots,X_k\)</span> constant. In other words, <span class="math inline">\(\beta_1\)</span> measures the <em>change</em> in <span class="math inline">\(\mathbb{E}(Y)\)</span>, the mean value of <span class="math inline">\(Y\)</span>, per unit change in <span class="math inline">\(X_1\)</span>, holding the values of other <span class="math inline">\(X\)</span>s constant. In other words, it gives the <em>direct effect</em> or <em>net effect</em> on the mean value of <span class="math inline">\(Y\)</span> in response to a change of one uni in <span class="math inline">\(X_1\)</span>, net of any effect that other <span class="math inline">\(X\)</span>s may have on the mean value of <span class="math inline">\(Y\)</span>. The coefficients on the other <span class="math inline">\(X\)</span>s are interpreted similarly.</p>
+<p>As was the case with single regression, we need to estimate the population parameters. The sample regression function is
+<span class="math display">\[
+\begin{align}
+Y_i
+&amp;= \hat{Y}_i + \hat{u}_i \\[4pt]
+&amp;= \hat{\beta}_0 + \hat{\beta}_1X_{1i} + \dots + \hat{\beta}_kX_{ki} + \hat{u}_i.
+\end{align}
+\]</span>
+Our goal is still to get <span class="math inline">\(\hat{Y}_i\)</span> as close to <span class="math inline">\(Y_i\)</span> as possible, which means minimizing the residual sum of squares (RSS) <span class="math inline">\(\sum\hat{u}_i^2\)</span>. The RSS over n observations is
+<span class="math display">\[
+RSS = \sum_{i=1}^n\hat{u}_i^2 = \sum_{i=1}^n(Y_i-\hat{\beta}_0-\hat{\beta}_1X_{1i}-\hat{\beta}_2X_{2i}-\dots-\hat{\beta}_kX_{ki})^2
+\]</span>
+To minimize this expression, we take partial derivatives with respect to each of the coefficients and set it to 0:
+<span class="math display">\[
+\begin{align}
+\frac{\partial}{\partial \hat{\beta}_0}\sum_{i=1}^n\hat{u}_i^2
+&amp;= -2\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1X_i - \dots - \hat{\beta}_kX_{ki}) = -2\sum_{i=1}^n\hat{u}^2_i = 0 \\[4pt]
+\frac{\partial}{\partial \hat{\beta}_1}\sum_{i=1}^n\hat{u}_i^2
+&amp;= -2\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1X_i - \dots - \hat{\beta}_kX_{ki})X_{1i} = -2\sum_{i=1}^n\hat{u}^2_iX_{1i} = 0 \\[4pt]
+&amp;\vdots \\[4pt]
+\frac{\partial}{\partial \hat{\beta}_k}\sum_{i=1}^n\hat{u}_i^2
+&amp;= -2\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1X_i - \dots - \hat{\beta}_kX_{ki})X_{ki} = -2\sum_{i=1}^n\hat{u}^2_iX_{ki} = 0
+\end{align}
+\]</span>
+These yield expressions that are extensions of the simple regression, which, can get unwieldy very quickly. For <span class="math inline">\(k=2\)</span> the expressions are:
+<span class="math display">\[
+\begin{align}
+\hat{\beta}_0
+&amp;= \bar{Y} - \hat{\beta}_1\bar{X}_1 - \hat{\beta}_2\bar{X_2} \\[4pt]
+\text{and} \\[4pt]
+\hat{\beta}_1
+&amp;= \frac{\displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)(Y_i-\bar{Y}) \displaystyle\sum_{i=1}^n(X_{2i} - \bar{X}_2)^2 - \displaystyle\sum_{i=1}^n(X_{2i}-\bar{X}_2)(Y_i - \bar{Y}) \displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)(X_{2i}-\bar{X}_2)}{\displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)^2 \displaystyle\sum_{i=1}^n(X_{2i}-\bar{X}_2)^2 - \left( \displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)(X_{2i}-\bar{X}_2)  \right)^2} \\[4pt]
+\hat{\beta}_2
+&amp;= \frac{\displaystyle\sum_{i=1}^n(X_{2i}-\bar{X}_2)(Y_i-\bar{Y}) \displaystyle\sum_{i=1}^n(X_{1i} - \bar{X}_1)^2 - \displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)(Y_i - \bar{Y}) \displaystyle\sum_{i=1}^n(X_{2i}-\bar{X}_2)(X_{1i}-\bar{X}_1)}{\displaystyle\sum_{i=1}^n(X_{2i}-\bar{X}_2)^2 \displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)^2 - \left( \displaystyle\sum_{i=1}^n(X_{2i}-\bar{X}_2)(X_{1i}-\bar{1}_2)  \right)^2}. \\[4pt]
+\end{align}
+\]</span>
+These are presented here to show how quickly it can become unwieldy even for <span class="math inline">\(k=2\)</span>. For multiple explanatory variables, it is better to use linear algebra instead.</p>
+<div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
+<blockquote>
+<h4 id="multiple-regression-in-linear-algebra">Multiple Regression in Linear Algebra</h4>
+<p>To express in matrix notation define the following vectors and matrices:
 <span class="math display">\[
 \vec{Y} = \begin{pmatrix}
 Y_1 \cr
@@ -1771,10 +1874,8 @@ u_n
 <ul>
 <li><span class="math inline">\(\vec{Y}\)</span> is the <span class="math inline">\(n \times 1\)</span> dimensional vector of n observations on the dependent variable</li>
 <li><span class="math inline">\(\vec{\beta}\)</span> is the <span class="math inline">\((k+1)\times 1\)</span> dimensional vector of the <span class="math inline">\(k+1\)</span> unknown regression coefficients</li>
-<li> is the <span class="math inline">\(n \times (k+1)\)</span> dimensional matrix of <span class="math inline">\(n\)</span> observations on the <span class="math inline">\(k+1\)</span> regressors that include the ‘constant’ regressor for the intercept
-<ul>
+<li> is the <span class="math inline">\(n \times (k+1)\)</span> dimensional matrix of <span class="math inline">\(n\)</span> observations on the <span class="math inline">\(k+1\)</span> regressors that include the ‘constant’ regressor for the intercept</li>
 <li><span class="math inline">\(\vec{X}_i^T=(1 \ \ X_{1i} \ \ \dots \ \ X_{ki})\)</span> is the transpose of the <span class="math inline">\((k+1)\times 1\)</span> dimensional column vector <span class="math inline">\(\vec{\mathbf{X}}_i\)</span>, which is the <span class="math inline">\(i^{th}\)</span> observation of the <span class="math inline">\(k+1\)</span> regressors</li>
-</ul></li>
 <li><span class="math inline">\(\vec{u}\)</span> is the <span class="math inline">\(n\times 1\)</span> dimensional vector of the <span class="math inline">\(n\)</span> error terms.</li>
 </ul>
 The multiple regression model for the <span class="math inline">\(i^{th}\)</span> observation is then written as
@@ -1825,33 +1926,55 @@ Equivalently, the <em>residual</em> vector is:
 <span class="math inline">\(\hookrightarrow\)</span>
 Note that there is a distinction between the <ins>error</ins> <span class="math inline">\(\vec{u}\)</span> and <ins>residual</ins> <span class="math inline">\(\hat{\vec{u}}\)</span>. The error <span class="math inline">\(\vec{u}\)</span> is unobservable, while the residual <span class="math inline">\(\hat{\vec{u}}\)</span> is an estimator.
 </p>
-<p>Using the residual vector we also have <span class="math inline">\(\mathbf{X}^T\hat{\vec{u}}=0\)</span> since <span class="math inline">\(\sum_{i=1}^nX_i\hat{u}_i=0.\)</span></p>
+<p>Using the residual vector we also have <span class="math inline">\(\mathbf{X}^T\hat{\vec{u}}=0\)</span> since <span class="math inline">\(\sum X_i\hat{u}_i=0.\)</span></p>
+</blockquote>
+</div>
+<p>Just as we did for the single regression, we can also derive the standard errors of the estimators. For <span class="math inline">\(k=2\)</span>, we have
+<span class="math display">\[
+\begin{align}
+Var(\hat{\beta}_0)
+= \hat{\sigma}_{\hat{\beta}_0}
+&amp;= \hat{\sigma}_u^2 \left( \frac{1}{n} + \frac{\bar{X}_1^2 \displaystyle\sum_{i=1}^n(X_{2i}-\bar{X}_2)^2 + \bar{X}_2^2 \displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)^2 - 2\bar{X}_1\bar{X}_2\displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)(X_{2i}-\bar{X}_2)}{\displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)^2 \displaystyle\sum_{i=1}^n(X_{2i}-\bar{X}_2)^2 - \left( \displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)(X_{2i}-\bar{X}_2)  \right)^2}    \right) \\[10pt]
+se(\hat{\beta}_0)
+&amp;= \sqrt{Var(\hat{\beta}_0)} = \sqrt{\hat{\sigma}_{\hat{\beta}_0}} \\[10pt]
+Var(\hat{\beta}_1)
+= \hat{\sigma}_{\hat{\beta}_1}
+&amp;= \hat{\sigma}_u^2 \frac{\displaystyle\sum_{i=1}^n(X_{2i}-\bar{X}_2)^2}{\left( \displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)^2  \right) \left( \displaystyle\sum_{i=1}^n(X_{2i}-\bar{X}_2)^2 \right) - \left( \displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)(X_{2i}-\bar{X}_2)  \right)^2} \\[10pt]
+&amp;= \frac{\hat{\sigma}_u^2}{\displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)(1-\rho_{1,2}^2)} \\[10pt]
+se(\hat{\beta}_1)
+&amp;= \sqrt{Var(\hat{\beta}_1)} = \sqrt{\hat{\sigma}_{\hat{\beta}_1}}
+\end{align}
+\]</span>
+where
+<span class="math display">\[
+\begin{align}
+\hat{\sigma}_u^2
+&amp;= \frac{1}{n-k}\displaystyle\sum_{i=1}^n\hat{u}_i^2 \ , \ \\[6pt]
+\displaystyle\sum_{i=1}^n\hat{u}_i^2
+&amp;= \displaystyle\sum_{i=1}^n(Y_i - \bar{Y}) - \hat{\beta}_1\displaystyle\sum_{i=1}^n(Y_i - \bar{Y})(X_{1i}-\bar{X}_1) - \hat{\beta}_2\displaystyle\sum_{i=1}^n(Y_i-\bar{Y})(X_{2i}-\bar{X}_2) \ , \ \\[6pt]
+\text{and the sample covariance between $X_1$ and $X_2$ is: } \\[6pt]
+\rho_{1,2}^2
+&amp;= \frac{\left( \displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)(X_{2i}-\bar{X}_2)  \right)^2}{\displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}) \displaystyle\sum_{i=1}^n(X_{2i}-\bar{X})}.
+\end{align}
+\]</span></p>
 <p><span class="math display">\[\\[1in]\]</span></p>
 </div>
 </div>
 <div id="how-well-does-the-regression-line-describe-the-data" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> How Well Does the Regression Line Describe the Data?</h1>
-<p>OLS can be thought of as decomposing each <span class="math inline">\(\vec{Y}\)</span> into two parts, a fitted value <span class="math inline">\(\hat{\vec{Y}}\)</span> and a residual <span class="math inline">\(\hat{\vec{u}}\)</span>. The discussion in this section develops an understanding of the extent the regressor accounts for the variation in <span class="math inline">\(\vec{Y}\)</span> and the extent the observations cluster around the regression line. Different textbooks use slightly different terminology ranging from <em>Goodness of Fit</em> to <em>Measures of Fit</em> and <em>Prediction Accuracy</em> for this discussion.</p>
+<p>The discussion in this section is aimed to develop an understanding as to the extent the regressor accounts for the variation in <span class="math inline">\(Y\)</span> and the extent the observations cluster around the regression line. Different textbooks use slightly different terminology ranging from <em>Goodness of Fit</em> to <em>Measures of Fit</em> and <em>Prediction Accuracy</em> for this discussion.</p>
 <p>The two key measures are <em>R-squared</em> and the <em>standard error of the regression</em>. The former measures how well the regression line fits the data, and the latter measures how far <span class="math inline">\(Y_i\)</span> typically is from its predicted value.</p>
 <p><span class="math display">\[\\[0.75in]\]</span></p>
 <div id="the-r-squared" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> <ins>The R-squared</ins></h2>
-<p>Sometimes also referred to as the <em>coefficient of determination</em>, the <em>regression <span class="math inline">\(R^2\)</span></em> is the ratio of the sample variance of <span class="math inline">\(\vec{Y}\)</span> explained by <span class="math inline">\(\mathbf{X}.\)</span> In other words, <span class="math inline">\(R^2\)</span> is the ratio of the sample variance of <span class="math inline">\(\hat{\vec{Y}}\)</span> to the sample variance of <span class="math inline">\(\vec{Y}.\)</span></p>
-That is,
+<p>OLS can be thought of as decomposing each <span class="math inline">\(Y_i\)</span> into two parts, a fitted value <span class="math inline">\(\hat{Y}_i\)</span> and a residual <span class="math inline">\(\hat{u}_i\)</span> whereby <span class="math inline">\(Y_i = \hat{Y}_i - \hat{u}_i\)</span>. The <em>regression <span class="math inline">\(R^2\)</span></em>, which is sometimes also referred to as the <em>coefficient of determination</em>, is the ratio of the sample variance of <span class="math inline">\(Y\)</span> explained by <span class="math inline">\(X\)</span>s. In other words, <span class="math inline">\(R^2\)</span> is the proportion of the variation in <span class="math inline">\(Y\)</span> explained by the regression:
 <span class="math display">\[
-R^2 = \frac{ESS = \displaystyle\sum_{i=1}^n(\hat{Y}_i-\bar{Y})^2}{TSS = \displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2}
+R^2 = \frac{ESS}{TSS} = \frac{\displaystyle\sum_{i=1}^n(\hat{Y}_i-\bar{Y})^2}{\displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2}
 \]</span>
-where ESS is the abbreviation of explained sum of squares and TSS is of total sum of squares. In matrix notation:
+where ESS is the explained sum of squares and TSS is the total sum of squares.</p>
+The <span class="math inline">\(R^2\)</span> can also be expressed in terms of the fraction of variance of <span class="math inline">\(Y_i\)</span> that is <em>not explained</em> by <span class="math inline">\(X_i\)</span>
 <span class="math display">\[
-R^2 = \frac{\left(\hat{\vec{Y}}-\vec{\bar{Y}}\right)^2}{\left(\vec{Y}-\vec{\bar{Y}}\right)^2}.
-\]</span>
-The <span class="math inline">\(R^2\)</span> can also be expressed in terms of the fraction of variance of <span class="math inline">\(\vec{Y}\)</span> that is <em>not explained</em> by <span class="math inline">\(\mathbf{X}:\)</span>
-<span class="math display">\[
-R^2 = 1 - \frac{RSS = \displaystyle\sum_{i=1}^n\hat{u}_i^2 = \displaystyle\sum_{i=1}^n(Y_i - \hat{Y}_i)}{TSS = \displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2}
-\]</span>
-or in matrix notation:
-<span class="math display">\[
-R^2 = 1 - \frac{\hat{\vec{u}}^2}{\left(\vec{Y}-\vec{\bar{Y}}\right)^2}
+R^2 = 1 - \frac{RSS}{TSS} = \frac{\displaystyle\sum_{i=1}^n\hat{u}_i^2}{\displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2} = frac{\displaystyle\sum_{i=1}^n(Y_i - \hat{Y}_i)}{\displaystyle\sum_{i=1}^n(Y_i-\bar{Y})^2}.
 \]</span>
 Also note that
 <span class="math display">\[
@@ -1873,20 +1996,33 @@ Note that in some text books TSS is abbreviated as SST, ESS as SSE, and RSS as S
 <span class="math display">\[
 \bar{R}^2 = 1 - \frac{n-1}{n-k-1}\frac{RSS}{TSS}
 \]</span>
-Notice that the adjustment factor <span class="math inline">\(\frac{n-1}{n-k-1}\)</span> is always greater than 1, so <span class="math inline">\(\bar{R}^2\)</span> is always less than <span class="math inline">\(R^2/\)</span>. Also notice that adding a regressor has two opposite effects on <span class="math inline">\(\bar{R}^2.\)</span> On the one hand, the SSR declines, increasing <span class="math inline">\(\bar{R}^2\)</span> as a result. On the other hand, the adjustment factor <span class="math inline">\(\frac{n-1}{n-k-1}\)</span> increases. Finally, notice that <span class="math inline">\(\bar{R}^2\)</span> can be negative.</p>
+Notice that the adjustment factor <span class="math inline">\(\frac{n-1}{n-k-1}\)</span> is always greater than 1, so <span class="math inline">\(\bar{R}^2\)</span> is always less than <span class="math inline">\(R^2\)</span>. Also notice that adding a regressor has two opposite effects on <span class="math inline">\(\bar{R}^2.\)</span> On the one hand, the SSR declines, increasing <span class="math inline">\(\bar{R}^2\)</span> as a result. On the other hand, the adjustment factor <span class="math inline">\(\frac{n-1}{n-k-1}\)</span> increases. Finally, notice that <span class="math inline">\(\bar{R}^2\)</span> can be negative.</p>
+<p><span class="math display">\[\\[0.5in]\]</span></p>
+</div>
+<div id="relationship-between-r-squared-and-variance-of-partial-regression-coefficient" class="section level4 unnumbered">
+<h4><em>Relationship between R-Squared and Variance of Partial Regression Coefficient</em></h4>
+<p>When we derived the variance of <span class="math inline">\(\hat{\beta}_1\)</span> above we said
+<span class="math display">\[
+Var(\hat{\beta}_1) = \frac{\hat{\sigma}_u^2}{\displaystyle\sum_{i=1}^n(X_{1i}-\bar{X}_1)(1-\rho_{1,2}^2)}.
+\]</span>
+we can extend this to <span class="math inline">\(k\)</span> regressors with <span class="math inline">\(R^2\)</span>:
+<span class="math display">\[
+Var(\hat{\beta}_j) = \frac{\hat{\sigma}_u^2}{\displaystyle\sum_{i=1}^n(X_{ji}-\bar{X}_j)(1-R_j^2)}
+\]</span>
+where <span class="math inline">\(\hat{\beta}_j\)</span> is the partial regression coefficient of regressor <span class="math inline">\(X_j\)</span>, and <span class="math inline">\(R_j^2\)</span> is the <span class="math inline">\(R^2\)</span> in the regression of <span class="math inline">\(X_j\)</span> on the remaining regressors. This relationship is particularly useful when discussion multicollinearity.</p>
 <p><span class="math display">\[\\[0.5in]\]</span></p>
 </div>
 <div id="standard-error-of-the-regression" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> <ins>Standard error of the regression</ins></h3>
-<p>Sometimes also referred to as <em>standard error of the estimate</em>, or as <em>root mean squared error</em>, the standard error of the regression (SER) is an estimator of the standard deviation of the regression error <span class="math inline">\(\vec{u}.\)</span> Since regression errors <span class="math inline">\(u_1,\dots,u_n\)</span> are unobserved, the SER is computed using their sample counterparts, the OLS residuals <span class="math inline">\(\hat{u}_1, \dots, \hat{u}_n.\)</span>
+<p>Sometimes also referred to as <em>standard error of the estimate</em>, or as <em>root mean squared error</em>, the standard error of the regression (SER) is an estimator of the standard deviation of the regression error <span class="math inline">\(u_i\)</span> Since regression errors <span class="math inline">\(u_1,\dots,u_n\)</span> are unobserved, the SER is computed using their sample counterparts, the OLS residuals <span class="math inline">\(\hat{u}_1, \dots, \hat{u}_n.\)</span>
 <span class="math display">\[
-SER = s_\hat{\vec{u}} = \sqrt{s_\hat{\vec{u}}^2}
+SER = \hat{\sigma}_\hat{u} = \sqrt{\hat{\sigma}_\hat{u}^2}
 \]</span>
 where
 <span class="math display">\[
-s_\hat{\vec{u}}^2 = \frac{1}{n-k-1}\sum_{i=1}^n\hat{u}_i^2 = \frac{SSR}{n-k-1}
+s_\hat{u}^2 = \frac{1}{n-k-1}\sum_{i=1}^n\hat{u}_i^2 = \frac{RSS}{n-k-1}
 \]</span>
-The estimate <span class="math inline">\(s_\hat{u}\)</span> is an estimate of the standard deviation in the unobservables affecting <span class="math inline">\(\vec{Y}\)</span>. That is, it estimates the standard deviation in <span class="math inline">\(\vec{Y}\)</span> after the effect of <span class="math inline">\(\mathbf{X}\)</span> has been taken out.</p>
+The estimate <span class="math inline">\(\hat{\sigma}_\hat{u}\)</span> is an estimate of the standard deviation in the unobservables affecting <span class="math inline">\(Y\)</span>. That is, it estimates the standard deviation in <span class="math inline">\(Y\)</span> after the effect of <span class="math inline">\(X\)</span> has been taken out.</p>
 <p><span class="math display">\[\\[1in]\]</span></p>
 </div>
 </div>
