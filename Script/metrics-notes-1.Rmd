@@ -699,7 +699,7 @@ In single regression, we can write the population model in terms of the random s
 Y_i = \beta_0 + \beta_1X_i + u_i
 \]
 
-where $u_i$ is the error term or disturbance for observation $i$. For example, we can write a CEO salary equation for a particular CEO $i$ as
+where $u_i$ is the error term or disturbance for observation $i$. Notice this is not the residual $\hat{u}_i$ but disturbance $u_i$. For example, we can write a CEO salary equation for a particular CEO $i$ as
 
 \[
 log(salary_i) = \beta_0 + \beta_1 log(sales_i) + u_i
@@ -730,7 +730,19 @@ log({salary}_i) = \beta_0 + \beta_1log({sales}_i)+\beta_2{ceotenure}_i + \beta_3
 $$\\[0.5in]$$
 
 
-### <ins>Assumption 3</ins>: Large outliers are unlikely: $Y_i$ and $X_i$ have nonzero finite fourth moment {#asmptn4thmmnt .unnumbered}
+### <ins>Assumption 3</ins>: Sample variation in the regressor
+
+This is a very weak assumption that most textbooks omit as not worth mentioning but some other textbooks provide it since this assumption is nevertheless needed. It says that the sample outcomes on $x$, namely ${x_i, i=1,\dots,n}$, are not all the same value. If all the sample values of x_i is the same, then sample variance of $x_i$ is zero, then we would not be able to compute $\hat{\beta}_1$ since both the numerator and denominator of
+\[
+\hat{\beta}_1 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}
+\]
+would equal to 0, since $X_i$ would equal to $\bar{X}$ for all $i$.
+
+
+$$\\[0.5in]$$
+
+
+### <ins>Assumption 4</ins>: Large outliers are unlikely: $Y_i$ and $X_i$ have nonzero finite fourth moment {#asmptn4thmmnt .unnumbered}
 
 This assumption is states that large outliers are unlikely. By stating that $0 < \mathbb{E}(X_i^4) < \infty$ and $0 < \mathbb{E}(Y_i^4) < \infty$ it states that $X$ and $Y$ have finite kurtosis. If the assumption of finite fourth moments holds then it is unlikely that statistical inferences using OLS will be dominated by a few observations. This assumption is used to derive the properties of OLS regression statistics in large samples, especially deriving distribution of OLS statistics via large sample approximations.
 
@@ -740,7 +752,7 @@ Nevertheless, in many economic research the assumption of finite kurtosis is sen
 
 $$\\[0.5in]$$
 
-### <ins>Assumption 4</ins>: No Perfect Multicollinearity {#asmptnpermulticol .unnumbered}
+### <ins>Assumption 5</ins>: No Perfect Multicollinearity {#asmptnpermulticol .unnumbered}
 
 Presence of perfect multicollinearity would make it impossible to calculate the OLS estimator. The regressors are said to exhibit perfect multicollinearity if one of the regressors is a perfect linear function of the other regressors. That is, one regressor can be written as a perfect linear combination of the others. 
 

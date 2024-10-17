@@ -2075,7 +2075,7 @@ Y = \beta_0 + \beta_1X_1^2 + u
 <p><span class="math display">\[
 Y_i = \beta_0 + \beta_1X_i + u_i
 \]</span></p>
-<p>where <span class="math inline">\(u_i\)</span> is the error term or disturbance for observation <span class="math inline">\(i\)</span>. For example, we can write a CEO salary equation for a particular CEO <span class="math inline">\(i\)</span> as</p>
+<p>where <span class="math inline">\(u_i\)</span> is the error term or disturbance for observation <span class="math inline">\(i\)</span>. Notice this is not the residual <span class="math inline">\(\hat{u}_i\)</span> but disturbance <span class="math inline">\(u_i\)</span>. For example, we can write a CEO salary equation for a particular CEO <span class="math inline">\(i\)</span> as</p>
 <p><span class="math display">\[
 log(salary_i) = \beta_0 + \beta_1 log(sales_i) + u_i
 \]</span></p>
@@ -2096,15 +2096,24 @@ log({salary}_i) = \beta_0 + \beta_1log({sales}_i)+\beta_2{ceotenure}_i + \beta_3
 <p><strong>Extra:</strong> We can extend this to vectors. The random vectors <span class="math inline">\(\{\vec{Y}_1,\dots,\vec{Y}_n\}\)</span> are i.i.d. if they are mutually independent with identical marginal distributions <em>F</em>. A collection of random vectors <span class="math inline">\(\{\vec{Y}_l,\dots,\vec{Y}_n\}\)</span> is a <em>random sample</em> from the population <span class="math inline">\(F\)</span> if the <span class="math inline">\(\vec{Y}_i\)</span> are i.i.d. with distribution <span class="math inline">\(F\)</span>, i.e. the population distribution.</p>
 <p><span class="math display">\[\\[0.5in]\]</span></p>
 </div>
+<div id="assumption-3-sample-variation-in-the-regressor" class="section level3" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> <ins>Assumption 3</ins>: Sample variation in the regressor</h3>
+<p>This is a very weak assumption that most textbooks omit as not worth mentioning but some other textbooks provide it since this assumption is nevertheless needed. It says that the sample outcomes on <span class="math inline">\(x\)</span>, namely <span class="math inline">\({x_i, i=1,\dots,n}\)</span>, are not all the same value. If all the sample values of x_i is the same, then sample variance of <span class="math inline">\(x_i\)</span> is zero, then we would not be able to compute <span class="math inline">\(\hat{\beta}_1\)</span> since both the numerator and denominator of
+<span class="math display">\[
+\hat{\beta}_1 = \frac{\displaystyle\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\displaystyle\sum_{i=1}^n(X_i-\bar{X})^2}
+\]</span>
+would equal to 0, since <span class="math inline">\(X_i\)</span> would equal to <span class="math inline">\(\bar{X}\)</span> for all <span class="math inline">\(i\)</span>.</p>
+<p><span class="math display">\[\\[0.5in]\]</span></p>
+</div>
 <div id="asmptn4thmmnt" class="section level3 unnumbered">
-<h3><ins>Assumption 3</ins>: Large outliers are unlikely: <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_i\)</span> have nonzero finite fourth moment</h3>
+<h3><ins>Assumption 4</ins>: Large outliers are unlikely: <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_i\)</span> have nonzero finite fourth moment</h3>
 <p>This assumption is states that large outliers are unlikely. By stating that <span class="math inline">\(0 &lt; \mathbb{E}(X_i^4) &lt; \infty\)</span> and <span class="math inline">\(0 &lt; \mathbb{E}(Y_i^4) &lt; \infty\)</span> it states that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have finite kurtosis. If the assumption of finite fourth moments holds then it is unlikely that statistical inferences using OLS will be dominated by a few observations. This assumption is used to derive the properties of OLS regression statistics in large samples, especially deriving distribution of OLS statistics via large sample approximations.</p>
 <p>One source of large outliers is data entry errors, such as entering data in different units such as recording one distance information in meters instead of miles, or recording one height in inches instead of feet, etc. One way to find outliers is to plot the data. If the outlier is due to data entry error, then that entry can be corrected, or, if it is not possible to correct it, then dropped from the data set.</p>
 <p>Nevertheless, in many economic research the assumption of finite kurtosis is sensible. Many data have finite range. Consider, for example, that concert, sports, or class attendance is limited by the physical capacities of halls, stadiums, or classrooms, or test scores range from getting them all incorrect to getting them all correct, etc. So, they necessarily have a finite kurtosis. More generally, commonly used distributions, such as normal distribution, have four moments. What is ruled out with this assumption are those distributions that have infinite fourth moments. If distributions have finite fourth moments, then it is unlikely that statistical inferences using OLS will be dominated by a few observations.</p>
 <p><span class="math display">\[\\[0.5in]\]</span></p>
 </div>
 <div id="asmptnpermulticol" class="section level3 unnumbered">
-<h3><ins>Assumption 4</ins>: No Perfect Multicollinearity</h3>
+<h3><ins>Assumption 5</ins>: No Perfect Multicollinearity</h3>
 <p>Presence of perfect multicollinearity would make it impossible to calculate the OLS estimator. The regressors are said to exhibit perfect multicollinearity if one of the regressors is a perfect linear function of the other regressors. That is, one regressor can be written as a perfect linear combination of the others.</p>
 <p>When perfect multicollinearity occurs, it often reflects a logical mistake in choosing the regressors (perhaps accidentally choosing the same regressor twice), or some previously unrecognized feature of the data set. In general, the solution to perfect multicollinearity is to modify the regressors to eliminate the problem.</p>
 <p>Also note that imperfect multicollinearity is not a problem for the theory of OLS estimators. Imperfect multicollinearity means that two or more of the regressors are highly correlated, i.e. there is a linear function of the regressors that is highly correlated with another regressor. If the variables in the regression are the ones we meant to include then imperfect multicollinearity implies that it will be difficult to estimate precisely one or more of the partial effects using the data.</p>
