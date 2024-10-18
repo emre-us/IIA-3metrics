@@ -673,7 +673,7 @@ This assumption is very restrictive and we cannot generalize the analysis to cas
 
 The assumption of $X$s being fixed is helpful for three reasons. 
 - it helps to simplify the analysis and develops an understanding of complexities of regression analysis gradually. 
-- in experimental situations it may be somewhat realistic to assume that $X$ values are fixed. For example, one may be testing different levels of intervention on the same thing, such as varying levels of fertilizers in different parcels of the same land, to see its impact. If the experimenter uses the same level of $X$ to the $i^{th}$ parcel in all repetitions of the experiment, then the value of $X_i$ does not change from one sample to the next. However, note that, in modern protocols for experiments, level of $X$ would be assigned via computerized random number generator to avoid any experimenter's bias creeping in, which would mean that the level of $X$ is random and [Assumption 2b](#asmptnrandsamp) would hold. It may also be the case that sometimes $X$ is fixed for a specific purpose such as when trying to ascertain the average annual salary $(Y)$ with various levels of education $(X)$. In this case, $X$ can be considered fixed, or nonrandom.
+- in experimental situations it may be somewhat realistic to assume that $X$ values are fixed. For example, one may be testing different levels of intervention on the same thing, such as varying levels of fertilizers in different parcels of the same land, to see its impact. If the experimenter uses the same level of $X$ to the $i^{th}$ parcel in all repetitions of the experiment, then the value of $X_i$ does not change from one sample to the next. However, note that, in modern protocols for experiments, level of $X$ would be assigned via computerized random number generator to avoid any experimenter's bias creeping in, which would mean that the level of $X$ is random and [Assumption 2b](#asmptnrandsamp) would hold (also see [exogeneity](#asmptnexogen) assumption). It may also be the case that sometimes $X$ is fixed for a specific purpose such as when trying to ascertain the average annual salary $(Y)$ with various levels of education $(X)$. In this case, $X$ can be considered fixed, or nonrandom.
 - the statistical results of linear regression based on fixed $X$s are still valid even if the $X$ variables are random, if certain conditions are met, including the condition that regressor $X$ and the error term $u_i$ are independent.
 
 
@@ -787,16 +787,24 @@ $$\\[0.25in]$$
 
 ### <ins>Assumption 6</ins>: Exogeneity: Zero conditional mean $\mathbb{E}(u_i | X_1, X_2, \dots, X_n)=0$ {#asmptnexogen .unnumbered}
 
-This is the key assumption that makes the OLS estimators unbiased. While the previous assumption states that $X_1,\dots,X_n$ and $u_i$ are uncorrelated, this assumption states that not only they are uncorrelated but also given $X_1,\dots,X_n$, the conditional distribution of $u_i$ has a mean of $0$. This assumption effectively expresses the idea that there may be other factors that impact the dependent variable but these other factors are unrelated to $X_1,\dots,X_n$. What is meant by 'unrelated' here is that given a value of $X_1,\dots,X_n$, the mean distribution of these other factors is $0$. In other words, this assumption states that the errors are independent of regressors. Also notice that this is in the context of, and conditional on, the particular sample values of X. 
+This is the key assumption that makes the OLS estimators [unbiased](#ue). This assumption effectively expresses the idea that there may be other factors that impact the dependent variable but these other factors are unrelated to $X_1,\dots,X_n$. What is meant by 'unrelated' here is that given a value of $X_1,\dots,X_n$, the mean distribution of these other factors is $0$, thus the conditional distribution of $u_i$ has a mean of $0$. In other words, this assumption states that the errors are independent of regressors. Also notice that this is in the context of, and conditional on, the particular sample values of X.
 
-Therefore the conditional mean assumption $\mathbb{E}(u_i | X_i)=0$ implies that $u_i$ and $X_i$ are uncorrelated, i.e. $Corr(u_i, X_i)=0$.
+So for example, in a randomized controlled experiment lets say subjects are randomly assigned to treatment group $(X=1)$ or the control group $(X=0)$. When the random assignment is done using no information about the subject, $X$ is distributed independently of the subject's personal characteristics, including those that determine Y. Because of this random assignment, the conditional mean of $u$ given $X$ is 0.
 <p style="margin-left: 40px">
 $\hookrightarrow$
-Note that the reverse is not necessarily true. Since correlation is a measure of *linear* association, the conditional mean of $u_i$ given $\X_i$ might be nonzero even if $u_i$ and $X_i$ are uncorrelated.
+Note that since regression analysis models the conditional mean, $X$ does not need to be distributed independently of all the other factors comprising $u$. It is just that the mean of $u$ cannot be related to $X$; i.e. $\mathbb{E}(u_i | X_i)=0.$
+</p>
+
+In observational data $X$ is not randomly assigned in an experiment. Instead, the best the can be hoped for is that $X$ is *as if* randomly assigned, in that $\mathbb{E}(u_i | X_i)=0.$ Whether this assumption holds in a given empirical application with observational data requires careful thought and judgment and we will come back to this issue frequently.
+
+Also notice that the conditional mean assumption $\mathbb{E}(u_i | X_i)=0$ implies that $u_i$ and $X_i$ are uncorrelated, i.e. $Corr(u_i, X_i)=0$ (see the box below).
+<p style="margin-left: 40px">
+$\hookrightarrow$
+Note that the reverse is not necessarily true. Since correlation is a measure of *linear* association, the conditional mean of $u_i$ given $X_i$ might be nonzero even if $u_i$ and $X_i$ are uncorrelated.
 </p>
 <p style="margin-left: 40px">
 $\hookrightarrow$
-However, if $u_i$ and $X_i$ are correlated, then it must be that $\mathbb{E}(u_i|\X_i) \neq 0.$
+However, if $u_i$ and $X_i$ are correlated, then it must be that $\mathbb{E}(u_i|X_i) \neq 0.$
 </p>
 <p style="margin-left: 40px">
 $\hookrightarrow$
@@ -804,8 +812,6 @@ For time series, $i$ subscript would be replaced by $t$ subscript to indicate ti
 </p>
 
 It is therefore common to discuss the conditional mean assumption in terms of possible correlation between $u_i$ and $X_i$. If they are correlated, then the conditional mean assumption is violated.
-
-In observational data, $X$ is not necessarily randomly assigned but we hope that it behaves as if it was randomly assigned, meaning $\mathbb{E}(u_i | X_i)=0$. Whether this holds requires careful thought and judgment and we will come back to this issue frequently.
 
 <div style="background-color:rgba(237, 231, 225, 1); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
 
@@ -853,13 +859,33 @@ The law of iterated expectations can be generalized to multiple random variables
 
 </div>
 
+Another thing to note is that this exogeneity assumption implies that there is no specification bias or specification error in the model. That is, the regression model is correctly specified. Specification error can happen if an important explanatory variable is omitted, or an unnecessary variable is included, or a wrong functional form with respect to the relationship between $Y$ and $X$ variables is chosen. The assumption that the disturbance term has zero expectation implies that this is not the case and the model is correctly specified.
+
+In practice, it can be reasonable to also assume that this exogeneity assumption is satisfied automatically if an intercept is included in the regression equation. This is because the role of the intercept is to pick up any systematic but constant tendency in $Y$ that is not accounted for by the explanatory variables in the regression equation. 
+
+To see this, suppose the regression model is $Y_i = \beta_0 + \beta_1X_i + u_i$, and $\mathbb{E}(u_i|X_i)=\mu_u \neq 0$ for all $i$. Now define a new variable $v_i$ where $v_i = u_i - \mu_u$. We can then rewrite the regression equation as:
+\[
+\begin{align}
+Y_i 
+&= \beta_0 + \beta_1X_i + u_i \\
+&= \beta_0 + \beta_1X_i + v_i + \mu_u \\
+&= \beta_0^* + \beta_1X_i + v_i
+\end{align}
+\]
+where $\beta_0^* = \beta_0 + \mu_u.$ The disturbance term in the re-specified model now satisfies the exogeneity assumption becase
+\[
+\mathbb{E}(v_i) = \mathbb{E}(u_i - \mu_u) = \mathbb{E}(u_i) - \mathbb{E}(\mu_u) = \mu_u - \mu_u = 0.
+\]
+The downside of this re-specified model is that the interpretation of the intercept has changed since it absorbed the nonzero component of the error term in addition to whatever had previously been responsible for it. This may not be too problematic, though, when we are not interested in the intercept in the regression model, which is usually the case.
 
 
 
 
 $$\\[0.5in]$$
+
+
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:0px; margin-top:10px; margin-bottom:20px">
-> Under the above assumptions the OLS estimator is [**unbiased**](#ue), [**consistent**](#consistency), and has a [**normal sampling distribution**](#clt) in large samples. If these three assumptions hold, and the sample size is large, then the methods for inference (hypothesis testing using the t-statistic and construction of 95% confidence intervals as $\pm$ 1.96 standard errors) are justified.
+> Under the above assumptions the OLS estimator is [**unbiased**](#ue), [**consistent**](#consistency), and has a [**normal sampling distribution**](#clt) in large samples. If these three assumptions hold, and if the sample size is large, then the methods for inference (hypothesis testing using the t-statistic and construction of 95% confidence intervals as $\pm$ 1.96 standard errors) are justified.
 >
 >
 However, we need stronger assumptions to develop a theory of *efficient* estimation using OLS or to characterize the exact sampling distribution of the OLS estimator.
@@ -876,46 +902,51 @@ However, we need stronger assumptions to develop a theory of *efficient* estimat
 
 $$\\[0.5in]$$
 
-### <ins>Assumption 7</ins>: Homoskedasticity: Constant error variance $Var(u_i|\X_1,\dots,X_n)=\sigma_u^2$ {#asmptnskedasticity .unnumbered}
+### <ins>Assumption 7</ins>: Homoskedasticity: Constant error variance $Var(u_i|X_1,\dots,X_n)=\sigma_u^2$ {#asmptnskedasticity .unnumbered}
 
-This assumption states that the variance in the error term, conditional on the explanatory variables, is the *same* for all combinations of outcomes in the explanatory variables. That is, the error term $u_i$ is *homoskedastic* if the variance of the conditional distribution of $u_i$ given $X_1,\dots,X_n$ is constant for $i=1,\dots,n$, and it does not depend on $\X_1,\dots,X_n$. Otherwise the error term is *heteroskedastic*.
+This assumption states that the variance in the error term, conditional on the explanatory variables, is the *same* for all combinations of outcomes in the explanatory variables. That is, the error term $u_i$ is *homoskedastic* if the variance of the conditional distribution of $u_i$ given $X_1,\dots,X_n$ is constant for $i=1,\dots,n$, and it does not depend on $X_1,\dots,X_n$. Otherwise the error term is *heteroskedastic*. 
 
 Since the $X$ values are assumed to be given, or [nonstochastic](#fixedregressor), the only source of variation in Y is from $u$. Therefore, given $X_i$, the variance of $Y_i$ is the same as that of $u_i$. So, the conditional variances of $u_i$ and $Y_i$ are the same: $\sigma^2$.
 
 The homoskedasticity assumption is distinct from the zero conditional mean assumption $\mathbb{E}(u_i | X_1,\dots,X_n)=0$ [discussed above](#exogeneity). That assumption involves the *expected value* of $u_i$ conditional on $X_1,\dots,X_n$, whereas this assumption concerns the *variance* of $u_i$ conditional on $X_1,\dots,X_n$.
 
-If we assume that $u_i$ and $\vec{X}_i^T$ are independent, then the distribution of $u_i$ given $\vec{X}_i^T$ does not depend on $\vec{X}_i^T$. Accordingly, $\mathbb{E}(u_i|\vec{X}_i^T)=\mathbb{E}(u_i)=0$ and $Var(u_i|\vec{X}_i^T)=\sigma_u^2.$
-
-This, in turn, means that $\sigma_u^2$ is also the *unconditional expectation* of $u_i^2$ because 
+This assumption means that $\sigma_u^2$ is also the *unconditional expectation* of $u_i^2$ because 
 \[
 \begin{align*}
 \sigma_u^2=Var(u_i|X_i) 
-&= \mathbb{E}\left(u_i^2|X_i\right) - \left(\mathbb{E}(u_i|X_i)\right)^2 \\
-&= \mathbb{E}\left(u_i^2|X_i^2\right)-0 \ \ \ \text{since } \mathbb{E}(u_i|X_i)=\mathbb{E}(u_i)=0 \\
+&= \mathbb{E}\left(u_i^2|X_i\right) - \left[\mathbb{E}(u_i|X_i)\right]^2 \\
+&= \mathbb{E}\left(u_i^2|X_i\right)-0 \ \ \ \text{since } \mathbb{E}(u_i|X_i)=\mathbb{E}(u_i)=0 \\
 &= \mathbb{E}(u_i^2)=Var(u_i) \ \ \ \text{since $u_i$ and $X_i$ are independent, and } \mathbb{E}(u_i)=0.
 \end{align*}
 \]
 
-In other words, $\sigma_u^2$ is the *unconditional variance* of $u_i$. Accordingly, $\sigma_u^2$ is often called the *error variance* or *disturbance variance*.
+In other words, $\sigma_u^2$ is the *unconditional variance* of $u_i$. Accordingly, $\sigma_u^2$ is often called the *error variance* or *disturbance variance*. Of course $\sigma_u^2$ is unknown and one of the tasks of regression analysis is to estimate the variance of the disturbance term.
 
-It is often useful to also write the exogeneity assumption and this assumption not in terms of the error term but in terms of the conditional mean and conditional variance of $Y_i$:
+p style="margin-left: 40px">
+$\hookrightarrow$
+Note that here we are thinking about the potential distribution of the disturbance term before the sample is actually generated. Once we have generated the sample, the disturbance term will turn out to be greater in some observations, and smaller in others, but there should not be any reason for it to be more erratic in some observations than in others.
+</p>
+
+It is often useful to also write the exogeneity assumption and this homoskedasticity assumption not in terms of the error term but in terms of the conditional mean and conditional variance of $Y_i$:
 \[
-\mathbb{E}(Y_i|X_i)=\beta_0 + \beta_1X_i + u_i \\
+\mathbb{E}(Y_i|X_i)=\beta_0 + \beta_1X_i \\
 Var(Y_i|X_i) = \sigma_u^2.
 \]
-That is, the conditional expectation of $Y_i$ given $X_i$ is linear in $\X_i$, but the variance of $Y_i$ given $X_i$ is constant.
+That is, the conditional expectation of $Y_i$ given $X_i$ is linear in $X_i$, but the variance of $Y_i$ given $X_i$ is constant.
 
 
 A point to note is that the nature of skedasticity concerns with the conditional variance and not the unconditional variance. By definition, the unconditional variance $\sigma_u^2$ is a constant and is independent of the regressors $X_1,\dots,X_n$. So in discussing the variance as a function of the regressors, it refers to conditional variance.
 
-
-When $Var(u_i|X_i)$ depends on $X_i$, the error term is said to exhibit heteroskedasticity. Also note that heteroskedasticity is present whenever $Var(Y_i|X_i)$ is a function of $X_i$ because $Var(u_i|X_i)=Var(Y_i|X_i).$
+When $Var(u_i|X_i)$ depends on $X_i$, the error term is said to exhibit heteroskedasticity. Also note that heteroskedasticity is present whenever $Var(Y_i|X_i)$ is a function of $X_i$ because $Var(u_i|X_i)=Var(Y_i|X_i).$ If heteroskedasticity is present, the OLS regression coefficients, the $\beta$s, will be inefficient.
 
 <p style="margin-left: 40px">
 *Important:* Homoskedasticity assumption plays <ins>no role</ins> in showing that $\hat{\beta}_i$ is unbiased. That is, the OLS estimators remain unbiased, consistent, and asymptotically normal irrespective of whether the errors are homoskedastic or not.
 <br><br>
 *Note:* The correct way of spelling 'homoskedasticity' and 'heteroskedasticity' is with a 'k', despite some textbooks spelling it with a 'c'. This is because the words derived into English from Greek roots. $\sigma\kappa\epsilon\delta\alpha\nu\nu\upsilon\mu\iota$, means "to scatter" and transliterated into English with 'k', while $\omicron\mu\omicron\iota\omicron\zeta$ means "same" and $\epsilon\tau\epsilon\rho\omicron$ means "other" or "different". <span style="font-size:0.9em;"> (See McCulloch, J Huston (1985) "On heteros*edasticity" Econometrica 53, 483 and Hansen, Bruce E (2022) Econometrics, Princeton University Press, 29-30).</span> 
 </p>
+
+
+**Extra:** In matrix notation, if we assume that $u_i$ and $\vec{X}_i^T$ are independent, then the distribution of $u_i$ given $\vec{X}_i^T$ does not depend on $\vec{X}_i^T$. Accordingly, $\mathbb{E}(u_i|\vec{X}_i^T)=\mathbb{E}(u_i)=0$ and $Var(u_i|\vec{X}_i^T)=\sigma_u^2.$ 
 
 $$\\[0.75in]$$
 
